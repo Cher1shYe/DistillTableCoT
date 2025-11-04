@@ -7,3 +7,14 @@ sacrebleu
 rouge_score
 evaluate
 scikit-learn
+
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch>=2.0.0
+transformers>=4.30.0
+accelerate>=0.20.0
+datasets>=2.10.0
+peft>=0.4.0
+bitsandbytes>=0.40.0
+pyyaml>=6.0
+tqdm>=4.60.0
+numpy>=1.21.0

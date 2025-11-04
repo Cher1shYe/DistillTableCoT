@@ -98,3 +98,21 @@ python3 evaluate.py --task_name wikitableqa
 python3 evaluate.py --task_name tabfact
 python3 evaluate.py --task_name fetaqa
 ```
+
+### 4. 训练 QWEN
+
+在 `configs/` 相关文件中调整好训练参数，使用 `scripts/train_distill.py` 完成模型加载、训练、输出任务：
+
+```bash
+# 训练Qwen3-1.7B模型
+python scripts/train_distill.py --config configs/qwen3-1.7b.yaml
+
+# 训练Qwen3-4B模型  
+python scripts/train_distill.py --config configs/qwen3-4b.yaml
+
+# 自定义数据路径
+python scripts/train_distill.py --config configs/qwen2.5-1.7b.yaml \
+--data_paths ./outputs/predictions/fetaqa_predictions.json ./outputs/predictions/tabfact_predictions.json
+```
+
+输出结果保存在 `outputs/models/` 下
