@@ -9,14 +9,22 @@ import ast       # 导入 ast 库用于安全地解析字符串
 
 from configs import TASK_CONFIGS
 
-def evaluate_predictions(task_name, output_dir="outputs"):
+def evaluate_predictions(task_name,k_shot=0, output_dir="outputs"):
     """
     从文件中加载已处理的预测和参考，并根据任务配置计算评估指标。
     """
     if task_name not in TASK_CONFIGS:
         print(f"错误: 任务 '{task_name}' 未在 TASK_CONFIGS 中定义。")
         return
-
+    
+    # 构建文件路径（包含 k_shot 信息）
+    predictions_path = os.path.join(output_dir, task_name, f"predictions_k{str(k_shot).zfill(2)}.json")
+    
+    if not os.path.exists(predictions_path):
+        print(f"错误: 找不到预测文件: {predictions_path}")
+        print(f"请先运行 k_shot={k_shot} 的推理")
+        return
+    
     print(f"--- 开始评估任务: {task_name} ---")
 
     # 1. 加载配置文件和预测结果
