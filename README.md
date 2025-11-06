@@ -1,3 +1,33 @@
+# 基本改动
+添加了
+- `ExamplePool`文件夹：存储example_pool的构建逻辑`example_pool.py`，以及一个调用示例池方法来构建示例池的脚本`build_ep.py`
+- `ep_instances`文件夹：存储生成的基本示例池。
+- `run_k_shot_experiments.py`：一个测试k_shot功能的样例脚本。
+修改了 
+- `run_evaluate`：为evaluate函数添加了一个新参数k_shot，用于相关的shot评测。
+- `run_inference`：添加了生成k_shot_prompt的哈桑农户
+
+## 如何运行
+### 1. 构建示例池：
+   ```bash
+    python build_example_pool.py --task wikitableqa --num_examples 50 --pool_dir ep_instances
+   ```
+### 2. 对比实验
+```bash
+# Zero-shot 基线
+python run_inference.py --task wikitableqa --num_samples 20 --k_shot 0
+
+# One-shot 实验  
+python run_inference.py --task wikitableqa --num_samples 20 --k_shot 1
+
+# 评估对比
+python run_evaluate.py --task wikitableqa
+```
+
+
+
+---
+
 # DistillTableCoT
 Distill Chain-of-Thought (CoT) from LLMs into a small language model for table reasoning(particularly TableQA) and inference.
 
