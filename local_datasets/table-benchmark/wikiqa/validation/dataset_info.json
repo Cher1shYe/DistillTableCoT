@@ -1,0 +1,82 @@
+{
+  "builder_name": "parquet",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "wikiqa",
+  "dataset_size": 49014945,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/table-benchmark/wikiqa@89772ac10d906bc00b38e2eaff9033948e5853a1/data/train-00000-of-00001.parquet": {
+      "num_bytes": 10429859,
+      "checksum": null
+    },
+    "hf://datasets/table-benchmark/wikiqa@89772ac10d906bc00b38e2eaff9033948e5853a1/data/test-00000-of-00001.parquet": {
+      "num_bytes": 2334453,
+      "checksum": null
+    },
+    "hf://datasets/table-benchmark/wikiqa@89772ac10d906bc00b38e2eaff9033948e5853a1/data/validation-00000-of-00001.parquet": {
+      "num_bytes": 1339152,
+      "checksum": null
+    }
+  },
+  "download_size": 14103464,
+  "features": {
+    "original_dataset_id": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "dataset_name": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "table": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "table_title": {
+      "dtype": "null",
+      "_type": "Value"
+    },
+    "text": {
+      "dtype": "null",
+      "_type": "Value"
+    },
+    "question": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "answer": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 63118409,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 30432065,
+      "num_examples": 11321,
+      "dataset_name": "wikiqa"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 11437772,
+      "num_examples": 4344,
+      "dataset_name": "wikiqa"
+    },
+    "validation": {
+      "name": "validation",
+      "num_bytes": 7145108,
+      "num_examples": 2831,
+      "dataset_name": "wikiqa"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

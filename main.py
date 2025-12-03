@@ -1,9 +1,9 @@
 # table_llm_eval/main.py
 
 import argparse
-from DistillTableCoT.configs import TASK_CONFIGS
-from DistillTableCoT.run_inference import run_generation
-from DistillTableCoT.run_evaluate import run_evaluation
+from configs import TASK_CONFIGS
+from run_inference import run_generation
+from run_evaluate import run_evaluation
 
 def main():
     parser = argparse.ArgumentParser(description="运行大语言模型在表格理解任务上的评估流程。")

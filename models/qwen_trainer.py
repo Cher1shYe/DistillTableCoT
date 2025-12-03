@@ -109,7 +109,12 @@ class QwenDistillTrainer:
             dataloader_num_workers=0,
             disable_tqdm=False,
             report_to=None,  # 禁用wandb等记录
-            seed=self.config['training']['seed']
+            seed=self.config['training']['seed'],
+
+            gradient_checkpointing=True,       # 梯度检查点 (时间换空间)
+            optim="adafactor",
+
+            max_steps=100
         )
 
         print("=== TrainingArguments 参数类型检查 ===")

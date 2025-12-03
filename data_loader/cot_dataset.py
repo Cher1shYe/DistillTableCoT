@@ -67,21 +67,21 @@ class CoTDataset(Dataset):
     
     def _standardize_item(self, item: Dict, source_file: str) -> Dict:
         """标准化数据项格式"""
-        # 提取思维链和答案
-        prediction = item.get('prediction', '')
-        processed_prediction = item.get('processed_prediction', '')
-        reference = item.get('reference', '')
+        # # 提取思维链和答案
+        # prediction = item.get('prediction', '')
+        # processed_prediction = item.get('processed_prediction', '')
+        # reference = item.get('reference', '')
         
-        # 从prediction中提取思维链和最终答案
-        if 'Final Answer:' in prediction:
-            # 分离思维链和最终答案
-            parts = prediction.split('Final Answer:')
-            cot = parts[0].strip()
-            final_answer = parts[1].strip() if len(parts) > 1 else processed_prediction
-        else:
-            # 如果没有明确分隔，使用processed_prediction作为答案
-            cot = prediction
-            final_answer = processed_prediction or reference
+        # # 从prediction中提取思维链和最终答案
+        # if 'Final Answer:' in prediction:
+        #     # 分离思维链和最终答案
+        #     parts = prediction.split('Final Answer:')
+        #     cot = parts[0].strip()
+        #     final_answer = parts[1].strip() if len(parts) > 1 else processed_prediction
+        # else:
+        #     # 如果没有明确分隔，使用processed_prediction作为答案
+        #     cot = prediction
+        #     final_answer = processed_prediction or reference
 
         # to_return = {
         #     'id': item.get('id', ''),
@@ -100,11 +100,12 @@ class CoTDataset(Dataset):
             'id': item.get('id', ''),
             'original_dataset_id': item.get('original_dataset_id', ''),
             'prompt': item.get('prompt', ''),
-            'question': self._extract_question(item.get('prompt', '')),
-            'table': self._extract_table(item.get('prompt', '')),
-            'cot': cot,
-            'answer': final_answer,
-            'reference': reference,
+            'prediction': item.get('prediction', ''),
+            # 'question': self._extract_question(item.get('prompt', '')),
+            # 'table': self._extract_table(item.get('prompt', '')),
+            # 'cot': cot,
+            # 'answer': final_answer,
+            # 'reference': reference,
             'source_file': source_file
         }
     
@@ -156,10 +157,11 @@ class CoTDataset(Dataset):
         """返回单个训练样本 - 修复版本"""
         item = self.data[idx]
         
-        input_text = f"问题：{item['question']}\n表格：{item['table']}\n推理："
+        # input_text = f"问题：{item['question']}\n表格：{item['table']}\n推理："
+        input_text = item['prompt']
         
         # 构建目标文本（模型要生成的内容）
-        target_text = f"{item['cot']} 答案：{item['answer']}"
+        target_text = item['prediction']
         
         # 合并为完整序列：输入 + 目标
         full_text = input_text + target_text
@@ -171,11 +173,20 @@ class CoTDataset(Dataset):
         encoding = self.tokenizer(
             full_text,
             max_length=fixed_max_length,  # 总长度限制
-            padding='max_length',  # 不在这里填充，由DataCollator统一处理
+            padding='max_length', 
             truncation=True,
             return_tensors="pt"
         )
-        print(idx)
+
+        # padded_input_encoding = self.tokenizer(
+        #     input_text,
+        #     max_length=fixed_max_length,
+        #     padding='max_length',
+        #     truncation=True,
+        #     return_tensors="pt"
+        # )
+
+        # print(idx)
         # 计算输入文本的长度（用于创建标签掩码）
         input_encoding = self.tokenizer(
             input_text,
@@ -196,33 +207,43 @@ class CoTDataset(Dataset):
         pad_mask = encoding['attention_mask'].squeeze(0) == 0
         labels[pad_mask] = -100
 
-        # 验证数据格式
-        assert encoding['input_ids'].shape[1] == fixed_max_length, "input_ids长度不正确"
-        assert labels.shape[0] == fixed_max_length, "labels长度不正确"
-        assert encoding['attention_mask'].shape[1] == fixed_max_length, "attention_mask长度不正确"
+        # # 验证数据格式
+        # assert encoding['input_ids'].shape[1] == fixed_max_length, "input_ids长度不正确"
+        # assert labels.shape[0] == fixed_max_length, "labels长度不正确"
+        # assert encoding['attention_mask'].shape[1] == fixed_max_length, "attention_mask长度不正确"
         
-        # 调试：检查长度是否一致
-        if idx in [5542, 1762, 3954, 5968]:  # 打印出错批次的索引
-            print(f"调试样本 {idx}:")
-            print(f"  input_ids长度: {len(encoding['input_ids'].squeeze(0))}")
-            print(f"  labels长度: {len(labels)}")
-            print(f"  input_ids类型: {type(encoding['input_ids'])}")
-            print(f"  labels类型: {type(labels)}")
-            # 检查labels中是否有嵌套
-            if isinstance(labels[0], list):
-                print("  ❌ labels是嵌套列表！")
-            else:
-                print("  ✅ labels是1D列表")
+        # # 调试：检查长度是否一致
+        # if idx in [5542, 1762, 3954, 5968]:  # 打印出错批次的索引
+        #     print(f"调试样本 {idx}:")
+        #     print(f"  input_ids长度: {len(encoding['input_ids'].squeeze(0))}")
+        #     print(f"  labels长度: {len(labels)}")
+        #     print(f"  input_ids类型: {type(encoding['input_ids'])}")
+        #     print(f"  labels类型: {type(labels)}")
+        #     # 检查labels中是否有嵌套
+        #     if isinstance(labels[0], list):
+        #         print("  ❌ labels是嵌套列表！")
+        #     else:
+        #         print("  ✅ labels是1D列表")
+
+        # print(f"input:\n{input_text}\ntarget:\n{target_text}")
         
         # to_return = {
         #     'input_ids': encoding['input_ids'].squeeze(0),
         #     'attention_mask': encoding['attention_mask'].squeeze(0),
         #     'labels': labels,
-        #     'question': item['question'],
-        #     'answer': item['answer'],
-        #     'cot': item['cot']
+        #     # 'question': item['question'],
+        #     # 'answer': item['answer'],
+        #     # 'cot': item['cot']
         # }
+
+        # print("to_return:")
         # print(to_return)
+        # print(f"input_ids: (length {len(encoding['input_ids'].squeeze(0))})")
+        # print(encoding['input_ids'].squeeze(0).tolist())
+        # print(f"labels: (length {len(labels)})")
+        # print(labels.tolist())
+        # print(f"attention_mask: (length {len(encoding['attention_mask'].squeeze(0))})")
+        # print(encoding['attention_mask'].squeeze(0).tolist())
 
         return {
             'input_ids': encoding['input_ids'].squeeze(0),

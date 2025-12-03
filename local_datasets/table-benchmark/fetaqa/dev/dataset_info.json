@@ -1,0 +1,82 @@
+{
+  "builder_name": "parquet",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "fetaqa",
+  "dataset_size": 16334700,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/table-benchmark/fetaqa@8935aa2865b6a18f3bef8f15502ea1d93fcdaeac/data/train-00000-of-00001.parquet": {
+      "num_bytes": 5499211,
+      "checksum": null
+    },
+    "hf://datasets/table-benchmark/fetaqa@8935aa2865b6a18f3bef8f15502ea1d93fcdaeac/data/dev-00000-of-00001.parquet": {
+      "num_bytes": 701025,
+      "checksum": null
+    },
+    "hf://datasets/table-benchmark/fetaqa@8935aa2865b6a18f3bef8f15502ea1d93fcdaeac/data/test-00000-of-00001.parquet": {
+      "num_bytes": 1405973,
+      "checksum": null
+    }
+  },
+  "download_size": 7606209,
+  "features": {
+    "original_dataset_id": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "dataset_name": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "table": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "table_title": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "text": {
+      "dtype": "null",
+      "_type": "Value"
+    },
+    "question": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "answer": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 23940909,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 11921048,
+      "num_examples": 7326,
+      "dataset_name": "fetaqa"
+    },
+    "dev": {
+      "name": "dev",
+      "num_bytes": 1447431,
+      "num_examples": 1001,
+      "dataset_name": "fetaqa"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 2966221,
+      "num_examples": 2003,
+      "dataset_name": "fetaqa"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "builder_name": "parquet",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "tabfact",
+  "dataset_size": 126434626,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/table-benchmark/tabfact@3c4093ff6af427c8fc6bfac50353d6aba5539a3f/data/train-00000-of-00001.parquet": {
+      "num_bytes": 11429255,
+      "checksum": null
+    },
+    "hf://datasets/table-benchmark/tabfact@3c4093ff6af427c8fc6bfac50353d6aba5539a3f/data/validation-00000-of-00001.parquet": {
+      "num_bytes": 1493852,
+      "checksum": null
+    },
+    "hf://datasets/table-benchmark/tabfact@3c4093ff6af427c8fc6bfac50353d6aba5539a3f/data/test-00000-of-00001.parquet": {
+      "num_bytes": 1465180,
+      "checksum": null
+    }
+  },
+  "download_size": 14388287,
+  "features": {
+    "original_dataset_id": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "dataset_name": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "table": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "table_title": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "text": {
+      "dtype": "null",
+      "_type": "Value"
+    },
+    "question": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "answer": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 140822913,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 99278022,
+      "num_examples": 92283,
+      "dataset_name": "tabfact"
+    },
+    "validation": {
+      "name": "validation",
+      "num_bytes": 13754858,
+      "num_examples": 12792,
+      "dataset_name": "tabfact"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 13401746,
+      "num_examples": 12779,
+      "dataset_name": "tabfact"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

@@ -1,5 +1,3 @@
-# DistillTableCoT
-Distill Chain-of-Thought (CoT) from LLMs into a small language model for table reasoning(particularly TableQA) and inference.
 
 ## 支持的任务
 
@@ -99,9 +97,9 @@ python3 evaluate.py --task_name tabfact
 python3 evaluate.py --task_name fetaqa
 ```
 
-### 4. 训练 QWEN
+### 4. 训练模型
 
-在 `configs/` 相关文件中调整好训练参数，使用 `scripts/train_distill.py` 完成模型加载、训练、输出任务：
+设置好 `configs/` 下的配置文件，使用 `train_distill.py` 训练模型：
 
 ```bash
 # 训练Qwen3-1.7B模型
@@ -109,10 +107,16 @@ python scripts/train_distill.py --config configs/qwen3-1.7b.yaml
 
 # 训练Qwen3-4B模型  
 python scripts/train_distill.py --config configs/qwen3-4b.yaml
-
-# 自定义数据路径
-python scripts/train_distill.py --config configs/qwen2.5-1.7b.yaml \
---data_paths ./outputs/predictions/fetaqa_predictions.json ./outputs/predictions/tabfact_predictions.json
 ```
 
-输出结果保存在 `outputs/models/` 下
+输出模型保存在 `outputs/models/` 中。
+
+### 5. 测试模型
+
+在 Hugging Face 访问通畅的情况下，使用 `test_model.py` 输出之前三个评估任务的结果。`model_path` 指定调用模型路径，`out_name` 制定输出预测结果文件名，保存在 `outputs/<task_name>/` 中：
+
+```bash
+python test_model.py --task_name <task_name> --num_samples <num_samples> --model_path <model_path> --out_name <out_name>
+```
+
+如果网络受阻可以用 `test_model_local_dataset.py` 代替 `test_model.py` 读取本地数据集（在 `local_datasets/` 中）。

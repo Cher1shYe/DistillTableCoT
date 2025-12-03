@@ -39,8 +39,7 @@ def generate_predictions(task_name, num_samples, output_dir="outputs"):
         prompt = config["prompt_template"].format(
             table=table_str,
             question=sample.get('question', ''),
-            statement=sample.get('statement', ''),
-            table_title=sample.get('table_title', '')
+            statement=sample.get('statement', '')
         )
 
         # 调用 API 获取预测

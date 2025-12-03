@@ -124,14 +124,12 @@ def extract_fetaqa_final_answer(prediction_text):
         # 移除可能的 Markdown 标记
         return re.sub(r'[*_`]', '', final_answer)
 
-    # 如果因为某种原因模型没有遵循指令，我们回退到之前的“温和清理”逻辑
-    # (这里可以调用之前的 clean_freeform_answer 函数，或者直接返回原始文本的清理版)
     # 为了简单，我们直接返回清理过的原始文本
     return re.sub(r'[*_`]', '', text).strip()
 TASK_CONFIGS = {
     "wikitableqa": {
         "dataset_name": "table-benchmark/wikiqa",
-        "dataset_split": "train",
+        "dataset_split": "test",
         "prompt_template": "Read the table below and answer the question.\n\nTable:\n{table}\n\nQuestion: {question}\nAnswer:",
         "input_fields": ["question", "table"],
         "target_field": "answer",
@@ -143,7 +141,7 @@ TASK_CONFIGS = {
     },
     "tabfact": {
         "dataset_name": "table-benchmark/tabfact",
-        "dataset_split": "train",
+        "dataset_split": "test",
         "prompt_template": "Read the table below and determine if the statement is entailed or refuted.\n\nTable:\n{table}\n\nStatement: {question}\nIs the statement entailed or refuted? Answer with your reasoning, and state whether the content is correct or incorrect with only Entailed or Refuted.\nAnswer:.\nAnswer:",
         "input_fields": ["question", "table"],
         "target_field": "answer",
@@ -155,9 +153,9 @@ TASK_CONFIGS = {
     },
     "fetaqa": {
         "dataset_name": "table-benchmark/fetaqa",
-        "dataset_split": "train",
+        "dataset_split": "test",
         "prompt_template": "Read the table below and provide a detailed, free-form answer to the question.First, think step by step to lay out your reasoning. After your reasoning, use one sentence to provide a final, concise answer prefixed with 'Final Answer:'.\n\nTable:\n{table}\n\nQuestion: {question}\nDetailed Answer:",
-        "input_fields": ["question", "table", "table_title"],
+        "input_fields": ["question", "table"],
         "target_field": "answer",
         "metrics": ["rouge", "sacrebleu"],
         "postprocess_func": lambda pred, label: (

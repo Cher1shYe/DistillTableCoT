@@ -6,7 +6,7 @@ import sys
 # 添加项目根目录到路径
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from utils.config_loader import load_config
+from utils_train.config_loader import load_config
 from models.qwen_trainer import QwenDistillTrainer
 
 def main():
