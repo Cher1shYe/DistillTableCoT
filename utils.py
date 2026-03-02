@@ -37,7 +37,7 @@ def call_deepseek_api(prompt):
             model="deepseek-chat",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.0,
-            max_tokens=500
+            max_tokens=1000
         )
         return response.choices[0].message.content
     except Exception as e:
