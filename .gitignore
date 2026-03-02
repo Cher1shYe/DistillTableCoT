@@ -1,1 +1,9 @@
 outputs/models/
+origin/
+
+# 排除 Python 字节码缓存
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
