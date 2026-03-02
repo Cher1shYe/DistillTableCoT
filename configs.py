@@ -16,14 +16,34 @@ def extract_wiki_final_answer(prediction_text):
     """
     # 清理函数，用于最后净化答案
     def clean_answer(answer_str):
+        if not answer_str:
+            return ""
+        # 1. 移除 LaTeX 相关的剩余符号
+        answer_str = re.sub(r'\\text\{|\}|\\boxed\{', '', answer_str)
         # 移除所有 Markdown 标记 (*, _, `)
         answer_str = re.sub(r'[*_`]', '', answer_str)
         # 移除首尾的非字母数字字符 (比如冒号、句号、空格、换行符)
+
+        parts = re.split(r'\s*\(|\s*,', answer_str, 1) # 按 '(' 或 ',' 分割
+        answer_str = parts[0]
+
         answer_str = re.sub(r'^[^\w\d]+|[^\w\d]+$', '', answer_str)
+
+        answer_str = answer_str.strip()
+        if answer_str.endswith(','):
+             answer_str = answer_str[:-1]
+
         return answer_str.strip()
-    
+
     text = prediction_text.strip()
 
+    # 首先查找所有 "Answer:" 的匹配
+    answer_matches = list(re.finditer(r'\bAnswer:\s*(.+?)(?:\.|\n|$)', text, re.IGNORECASE | re.DOTALL))
+    if answer_matches:
+        # 如果找到了，取最后一个匹配项
+        last_match = answer_matches[-1]
+        answer = last_match.group(1)
+        return clean_answer(answer)
     # 1. 尝试用正则表达式匹配常见的答案指示词
     #    - re.IGNORECASE: 忽略大小写
     #    - re.DOTALL: 让 . 能匹配换行符
@@ -32,7 +52,7 @@ def extract_wiki_final_answer(prediction_text):
     #    - \**\s*: 匹配粗体标记和空格
     #    - (.+): 捕获我们想要的答案
     match = re.search(
-        r'(?:the final answer is|the answer is|so the answer is|answer:)\**\s*(.+)',
+        r'(?:the final answer is|the answer is|so the answer is|answer:|Answer:)\**\s*(.+)',
         text,
         re.IGNORECASE | re.DOTALL
     )
@@ -42,24 +62,27 @@ def extract_wiki_final_answer(prediction_text):
         answer = match.group(1)
         return clean_answer(answer)
 
-    # 阅读prediction结果发现可能出现无指示词情况，此时直接对** **中的结果进行提取即可
+    # 2. 阅读prediction结果发现可能出现无指示词情况，此时直接对** **中的结果进行提取即可
     bold_matches = re.findall(r'\*\*(.*?)\*\*', text)
     if len(bold_matches) == 1:
         return clean_answer(bold_matches[0])
-    
-    # 3. 如果以上匹配都失败，尝试一个更简单的回退逻辑：取最后一个冒号 ":" 后面的内容。
+    # 3. 提取 LaTeX \boxed{...} (R1 模型最爱用) ---
+    boxed_matches = re.findall(r'\\boxed\{(.*?)\}', text, re.DOTALL)
+    if boxed_matches:
+        return clean_answer(boxed_matches[-1])
+    # 4. 如果以上匹配都失败，尝试一个更简单的回退逻辑：取最后一个冒号 ":" 后面的内容。
     if ":" in text:
         parts = text.rsplit(":", 1)
         if len(parts) > 1 and parts[1].strip():
             return clean_answer(parts[1])
     
-    # 4. 如果还是失败，取最后一行非空文本
+    # 5. 如果还是失败，取最后一行非空文本
     lines = [line.strip() for line in text.strip().split('\n') if line.strip()]
     if lines:
         last_line = lines[-1] 
         return clean_answer(last_line)
 
-    # 5. 如果以上全部失败，返回原始文本的清理版
+    # 6. 如果以上全部失败，返回原始文本的清理版
     return clean_answer(text)
 def extract_fact_final_answer(prediction_text):
     """
@@ -129,8 +152,8 @@ def extract_fetaqa_final_answer(prediction_text):
 TASK_CONFIGS = {
     "wikitableqa": {
         "dataset_name": "table-benchmark/wikiqa",
-        "dataset_split": "test",
-        "prompt_template": "Read the table below and answer the question.\n\nTable:\n{table}\n\nQuestion: {question}\nAnswer:",
+        "dataset_split": "train",
+        "prompt_template": "Read the table below, and answer it with your reasoning. After your reasoning, give a precise answer with:'Answer:' prefix.\n\nTable:\n{table}\n\nQuestion: {question}\nAnswer:",
         "input_fields": ["question", "table"],
         "target_field": "answer",
         "metrics": ["exact_match"],
@@ -141,7 +164,7 @@ TASK_CONFIGS = {
     },
     "tabfact": {
         "dataset_name": "table-benchmark/tabfact",
-        "dataset_split": "test",
+        "dataset_split": "train",
         "prompt_template": "Read the table below and determine if the statement is entailed or refuted.\n\nTable:\n{table}\n\nStatement: {question}\nIs the statement entailed or refuted? Answer with your reasoning, and state whether the content is correct or incorrect with only Entailed or Refuted.\nAnswer:.\nAnswer:",
         "input_fields": ["question", "table"],
         "target_field": "answer",
@@ -153,9 +176,9 @@ TASK_CONFIGS = {
     },
     "fetaqa": {
         "dataset_name": "table-benchmark/fetaqa",
-        "dataset_split": "test",
+        "dataset_split": "train",
         "prompt_template": "Read the table below and provide a detailed, free-form answer to the question.First, think step by step to lay out your reasoning. After your reasoning, use one sentence to provide a final, concise answer prefixed with 'Final Answer:'.\n\nTable:\n{table}\n\nQuestion: {question}\nDetailed Answer:",
-        "input_fields": ["question", "table"],
+        "input_fields": ["question", "table", "table_title"],
         "target_field": "answer",
         "metrics": ["rouge", "sacrebleu"],
         "postprocess_func": lambda pred, label: (
