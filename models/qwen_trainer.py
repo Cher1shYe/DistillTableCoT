@@ -25,9 +25,19 @@ class QwenDistillTrainer:
         """初始化模型和tokenizer"""
         print("Initializing model and tokenizer...")
         
+        # local or remote
+        if 'local_path' in self.config['model'] and os.path.exists(self.config['model']['local_path']):
+            model_path = self.config['model']['local_path']
+            tokenizer_path = self.config['model']['local_path']
+            print(f"Loading local model: {model_path}")
+        else:
+            model_path = self.config['model']['model_name']
+            tokenizer_path = self.config['model']['tokenizer_name']
+            print(f"Loading remote model: {tokenizer_path}")
+
         # 加载tokenizer
         self.tokenizer = AutoTokenizer.from_pretrained(
-            self.config['model']['tokenizer_name'],
+            tokenizer_path,
             trust_remote_code=True
         )
         
@@ -38,7 +48,7 @@ class QwenDistillTrainer:
         torch_dtype = getattr(torch, self.config['model'].get('torch_dtype', 'float16'))
         
         self.model = AutoModelForCausalLM.from_pretrained(
-            self.config['model']['model_name'],
+            model_path,
             # torch_dtype=torch_dtype,
             trust_remote_code=True,
             device_map="auto",
@@ -81,7 +91,17 @@ class QwenDistillTrainer:
         
         if self.train_dataset is None:
             self.prepare_data()
+
+        use_bf16 = self.config['training'].get('bf16', False)
+        use_fp16 = self.config['training'].get('fp16', False)
+
+        # 逻辑互斥：如果开启了 bf16，必须强制关闭 fp16，否则 Trainer 会报错
+        if use_bf16:
+            use_fp16 = False
         
+        lr_value = self.config['training']['learning_rate']
+        if isinstance(lr_value, str):
+            lr_value = float(lr_value.strip())          # "3e-5" 或 "0.00003" → 3e-5
         # 训练参数
         training_args = TrainingArguments(
             output_dir=self.config['training']['output_dir'],
@@ -89,7 +109,7 @@ class QwenDistillTrainer:
             per_device_train_batch_size=self.config['training']['batch_size'],
             per_device_eval_batch_size=self.config['training']['eval_batch_size'],
             gradient_accumulation_steps=self.config['training']['gradient_accumulation_steps'],
-            learning_rate=self.config['training']['learning_rate'],
+            learning_rate=lr_value,
             warmup_ratio=self.config['training'].get('warmup_ratio', 0.1),
             logging_dir=os.path.join(self.config['training']['output_dir'], 'logs'),
             logging_steps=self.config['training']['logging_steps'],
@@ -101,14 +121,18 @@ class QwenDistillTrainer:
             load_best_model_at_end=True,
             metric_for_best_model="eval_loss",
             greater_is_better=False,
-            fp16=self.config['training']['fp16'],
-            # fp16=False,
-            bf16=False,
+
+
+            # --- 修复bug ---
+            fp16=use_fp16,  # 使用处理后的变量
+            bf16=use_bf16,  # 使用处理后的变量
+
+
             dataloader_pin_memory=False,
             remove_unused_columns=False,
             dataloader_num_workers=0,
             disable_tqdm=False,
-            report_to=None,  # 禁用wandb等记录
+            report_to="none",  # 禁用wandb等记录
             seed=self.config['training']['seed'],
 
             gradient_checkpointing=True,       # 梯度检查点 (时间换空间)
@@ -119,6 +143,7 @@ class QwenDistillTrainer:
 
         print("=== TrainingArguments 参数类型检查 ===")
         print(f"learning_rate 值: {training_args.learning_rate}")
+        print(f"lr_value 类型: {type(lr_value).__name__}")
         print(f"learning_rate 类型: {type(training_args.learning_rate).__name__}")
         print(f"num_train_epochs: {training_args.num_train_epochs}")
         print(f"per_device_train_batch_size: {training_args.per_device_train_batch_size}")
@@ -162,7 +187,7 @@ class QwenDistillTrainer:
             train_dataset=self.train_dataset,
             eval_dataset=self.val_dataset,
             # data_collator=data_collator,
-            tokenizer=self.tokenizer,
+            processing_class=self.tokenizer,
         )
         
         self.is_model_available()
