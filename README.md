@@ -113,10 +113,10 @@ python scripts/train_distill.py --config configs/qwen3-4b.yaml
 
 ### 5. 测试模型
 
-在 Hugging Face 访问通畅的情况下，使用 `test_model.py` 输出之前三个评估任务的结果。`model_path` 指定调用模型路径，`out_name` 制定输出预测结果文件名，保存在 `outputs/<task_name>/` 中：
+在 Hugging Face 访问通畅的情况下，使用 `test_model.py` 输出之前三个评估任务的结果。`model_path` 指定调用模型路径，`split` 用来指定测试用的数据集分块，`out_name` 制定输出预测结果文件名，保存在 `outputs/<task_name>/` 中：
 
 ```bash
-python test_model.py --task_name <task_name> --num_samples <num_samples> --model_path <model_path> --out_name <out_name>
+python test_model.py --task_name <task_name> --num_samples <num_samples> --model_path <model_path> --out_name <out_name> --split 
 ```
 
 如果网络受阻可以用 `test_model_local_dataset.py` 代替 `test_model.py` 读取本地数据集（在 `local_datasets/` 中）。

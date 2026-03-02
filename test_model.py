@@ -29,7 +29,7 @@ def call_local_model(prompt, model_path, max_length=1024, temperature=0.7):
             # 加载模型
             call_local_model.model = AutoModelForCausalLM.from_pretrained(
                 model_path,
-                torch_dtype=torch.float16,
+                dtype=torch.bfloat16,
                 device_map="auto",
                 trust_remote_code=True,
                 # return_dict=False
@@ -84,12 +84,13 @@ def call_local_model(prompt, model_path, max_length=1024, temperature=0.7):
         generation_config = {
             'input_ids': input_ids,
             'attention_mask': attention_mask,
-            'max_new_tokens': max_length,  # 🔥 使用max_new_tokens而不是max_length
-            'temperature': 0.7,
+            'max_new_tokens': max_length,
+            'temperature': 0.6,             # 稍微调低一点，增加确定性
             'do_sample': True,
-            # 'pad_token_id': call_local_model.tokenizer.pad_token_id,
-            # 'eos_token_id': call_local_model.tokenizer.eos_token_id,
-            # 'return_dict_in_generate': True,  # 🔥 强制返回字典
+            'top_p': 0.95,                  # 限制长尾 Token
+            'repetition_penalty': 1.15,      # 🔥 核心：加入重复惩罚
+            'pad_token_id': call_local_model.tokenizer.pad_token_id,
+            'eos_token_id': call_local_model.tokenizer.eos_token_id,
         }
         
         
@@ -120,7 +121,7 @@ def call_local_model(prompt, model_path, max_length=1024, temperature=0.7):
         # 解码输出（只取新生成的部分）
         #if isinstance(outputs, tuple):
             # print("⚠️  generate返回元组")
-        generated_tokens = outputs[0][input_len:]
+        generated_tokens = outputs[0][input_ids.shape[-1]:] 
         response = call_local_model.tokenizer.decode(generated_tokens, skip_special_tokens=True)
         
         return response.strip()
@@ -129,7 +130,7 @@ def call_local_model(prompt, model_path, max_length=1024, temperature=0.7):
         print(f"❌ 本地模型调用失败: {e}")
         return f"模型错误: {str(e)}"
 
-def generate_predictions(task_name, num_samples, model_path, output_dir="outputs"):
+def generate_predictions(task_name, num_samples, model_path, split="test", output_dir="outputs"):
     """
     针对指定任务运行推理，并将结果保存到 JSON 文件。
     """
@@ -142,7 +143,7 @@ def generate_predictions(task_name, num_samples, model_path, output_dir="outputs
     # 1. 加载配置和数据
     config = TASK_CONFIGS[task_name]
     try:
-        dataset = load_dataset(config["dataset_name"], split=config["dataset_split"])
+        dataset = load_dataset(config["dataset_name"], split=split)
     except Exception as e:
         print(f"数据集加载失败: {e}")
         return
@@ -210,6 +211,12 @@ if __name__ == "__main__":
         help="要运行的任务名称。"
     )
     parser.add_argument(
+        "--split", 
+        type=str, 
+        default="test",
+        help="指定推理使用的数据切片 (例如: test, validation, train)"
+    )
+    parser.add_argument(
         "--num_samples", 
         type=int, 
         default=5,
@@ -223,4 +230,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     
-    generate_predictions(task_name=args.task_name, num_samples=args.num_samples, model_path=args.model_path)
+    generate_predictions(task_name=args.task_name, num_samples=args.num_samples, model_path=args.model_path, split=args.split)
