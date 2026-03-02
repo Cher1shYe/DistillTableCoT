@@ -25,9 +25,19 @@ class QwenDistillTrainer:
         """初始化模型和tokenizer"""
         print("Initializing model and tokenizer...")
         
+        # local or remote
+        if 'local_path' in self.config['model'] and os.path.exists(self.config['model']['local_path']):
+            model_path = self.config['model']['local_path']
+            tokenizer_path = self.config['model']['local_path']
+            print(f"Loading local model: {model_path}")
+        else:
+            model_path = self.config['model']['model_name']
+            tokenizer_path = self.config['model']['tokenizer_name']
+            print(f"Loading remote model: {tokenizer_path}")
+
         # 加载tokenizer
         self.tokenizer = AutoTokenizer.from_pretrained(
-            self.config['model']['tokenizer_name'],
+            tokenizer_path,
             trust_remote_code=True
         )
         
@@ -38,7 +48,7 @@ class QwenDistillTrainer:
         torch_dtype = getattr(torch, self.config['model'].get('torch_dtype', 'float16'))
         
         self.model = AutoModelForCausalLM.from_pretrained(
-            self.config['model']['model_name'],
+            model_path,
             # torch_dtype=torch_dtype,
             trust_remote_code=True,
             device_map="auto",
@@ -162,7 +172,7 @@ class QwenDistillTrainer:
             train_dataset=self.train_dataset,
             eval_dataset=self.val_dataset,
             # data_collator=data_collator,
-            tokenizer=self.tokenizer,
+            processing_class=self.tokenizer,
         )
         
         self.is_model_available()

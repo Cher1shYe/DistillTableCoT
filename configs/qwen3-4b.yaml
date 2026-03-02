@@ -3,8 +3,10 @@ _base_: "train_base.yaml"
 model:
   model_name: "Qwen/Qwen3-4B" 
   tokenizer_name: "Qwen/Qwen3-4B"
+  local_path: "./origin/Qwen3-4B_origin"
 
 training:
-  batch_size: 2
-  learning_rate: 2e-5
+  batch_size: 1
+  learning_rate: 0.00002
   gradient_accumulation_steps: 4
+  output_dir: "./outputs/models/Qwen3-4B_new/"
