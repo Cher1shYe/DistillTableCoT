@@ -22,12 +22,16 @@ def call_local_model(prompt, model_path, max_length=1024, temperature=0.7):
         # 加载模型和tokenizer（单例模式，避免重复加载）
         if not hasattr(call_local_model, 'model'):
             print(f"🔍 加载本地模型: {model_path}")
+
+            import os
+            print("目录中的文件:", os.listdir(model_path))
             
             # 加载tokenizer
             call_local_model.tokenizer = AutoTokenizer.from_pretrained(
                 model_path,
                 trust_remote_code=True
             )
+            
             if call_local_model.tokenizer.pad_token is None:
                 call_local_model.tokenizer.pad_token = call_local_model.tokenizer.eos_token
             
@@ -39,17 +43,17 @@ def call_local_model(prompt, model_path, max_length=1024, temperature=0.7):
                 trust_remote_code=True,
                 # return_dict=False
             )
-
-            # # 验证加载的是模型实例
-            # if isinstance(call_local_model.model, dict):
-            #     print("❌ 错误：加载的是配置字典，不是模型")
-            #     # 尝试重新加载
-            #     call_local_model.model = AutoModelForCausalLM.from_pretrained(
-            #         model_path,
-            #         torch_dtype=torch.float16,
-            #         device_map="auto",
-            #         trust_remote_code=True
-            #     )
+            
+            # 验证加载的是模型实例
+            if isinstance(call_local_model.model, dict):
+                print("❌ 错误：加载的是配置字典，不是模型")
+                # 尝试重新加载
+                call_local_model.model = AutoModelForCausalLM.from_pretrained(
+                    model_path,
+                    torch_dtype=torch.float16,
+                    device_map="auto",
+                    trust_remote_code=True
+                )
             
             call_local_model.model_path = model_path
             print(f"✅ 模型加载完成，类型: {type(call_local_model.model)}")
