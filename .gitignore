@@ -1,2 +1,7 @@
 outputs/models/
 origin/
+# 排除pycache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
