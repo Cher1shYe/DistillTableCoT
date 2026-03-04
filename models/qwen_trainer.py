@@ -45,19 +45,17 @@ class QwenDistillTrainer:
             self.tokenizer.pad_token = self.tokenizer.eos_token
         
         # 加载模型
-        torch_dtype = getattr(torch, self.config['model'].get('torch_dtype', 'float16'))
+        torch_dtype = getattr(torch, self.config['model'].get('torch_dtype', 'bfloat16'))
         
         self.model = AutoModelForCausalLM.from_pretrained(
             model_path,
-            # torch_dtype=torch_dtype,
             trust_remote_code=True,
-            device_map="auto",
-
-            torch_dtype='float32'
+            torch_dtype=torch_dtype,
         )
         
-        print(f"Model loaded: {self.config['model']['model_name']}")
-        print(f"Model device: {self.model.device}")
+        print(f"✅ Model loaded: {self.config['model']['model_name']}")
+        print(f"✅ Model dtype: {self.model.dtype}")
+        print(f"✅ Model device: {self.model.device}")
         
     def prepare_data(self):
         """准备训练数据"""
@@ -130,15 +128,12 @@ class QwenDistillTrainer:
 
             dataloader_pin_memory=False,
             remove_unused_columns=False,
-            dataloader_num_workers=0,
-            disable_tqdm=False,
-            report_to="none",  # 禁用wandb等记录
-            seed=self.config['training']['seed'],
-
-            gradient_checkpointing=True,       # 梯度检查点 (时间换空间)
-            optim="adafactor",
-
-            max_steps=100
+            dataloader_num_workers=self.config['training'].get('num_workers', 4),
+            report_to=self.config['training'].get('report_to', "none"), 
+            seed=self.config['training'].get('seed', 42),
+            gradient_checkpointing=self.config['training'].get('gradient_checkpointing', True),
+            optim=self.config['training'].get('optim', "adamw_torch"), # 推荐 adamw_torch
+            max_steps=self.config['training'].get('max_steps', -1) # -1 表示按 epoch 走
         )
 
         print("=== TrainingArguments 参数类型检查 ===")
