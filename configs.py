@@ -24,15 +24,19 @@ def extract_wiki_final_answer(prediction_text):
         answer_str = re.sub(r'[*_`]', '', answer_str)
         # 移除首尾的非字母数字字符 (比如冒号、句号、空格、换行符)
 
-        parts = re.split(r'\s*\(|\s*,', answer_str, 1) # 按 '(' 或 ',' 分割
+        # WikiTableQA 答案包含逗号（如列表），绝对不能按逗号 split。
+        # 通常只需要移除括号内的备注，例如 "100 (estimated)" -> "100"
+        parts = re.split(r'\s*\(', answer_str, 1) 
         answer_str = parts[0]
 
         answer_str = re.sub(r'^[^\w\d]+|[^\w\d]+$', '', answer_str)
 
+        # 5. 移除首尾标点和空白
+        # 移除句尾的句号，但要小心缩写（不过 WikiTableQA 主要是短语，移除末尾句号通常是安全的）
         answer_str = answer_str.strip()
-        if answer_str.endswith(','):
-             answer_str = answer_str[:-1]
-
+        if answer_str.endswith('.'):
+            answer_str = answer_str[:-1]
+            
         return answer_str.strip()
 
     text = prediction_text.strip()
@@ -135,20 +139,38 @@ def extract_fetaqa_final_answer(prediction_text):
     """
     专门从 FETAQA 的输出中提取 "Final Answer:" 后面的内容。
     """
-    text = prediction_text.strip()
-    
+    if not prediction_text:
+        return ""
+    text = re.sub(r'\*\*', '', prediction_text)
     # 优先寻找 "Final Answer:" 标记
     # re.IGNORECASE: 忽略大小写, re.DOTALL: . 匹配换行
-    match = re.search(r'Final Answer:\s*(.+)', text, re.IGNORECASE | re.DOTALL)
+    stop_pattern = r'(?:\n\s*\n|Final\s*Answer:|Answer:|Check:|---|$)'
     
-    if match:
-        # 如果找到，返回标记后面的所有内容，并清理
-        final_answer = match.group(1).strip()
-        # 移除可能的 Markdown 标记
-        return re.sub(r'[*_`]', '', final_answer)
+    pattern = r'Final Answer:\s*([\s\S]*?)(?=' + stop_pattern + r')'
+    # 搜索匹配
+    matches = re.findall(pattern, text, re.IGNORECASE)
 
-    # 为了简单，我们直接返回清理过的原始文本
-    return re.sub(r'[*_`]', '', text).strip()
+    if matches:
+        # FETAQA 的特点是长句回答。
+        # 在复读机模式下，通常会有多个匹配项。
+        # 我们优先取第一个非空的、长度合理的匹配项。
+        # 往往第一个 Final Answer 是最准确的，后面的可能是幻觉循环。
+        for match in matches:
+            cleaned_candidate = match.strip()
+            # 简单的过滤器：答案至少应该有几个字符，且不纯是标点
+            if len(cleaned_candidate) > 1:
+                # 再次清理可能残留的 markdown 符号
+                return re.sub(r'[*_`]', '', cleaned_candidate).strip()
+
+    # 如果没找到 "Final Answer:" 标记（或者只有空的），
+    # 尝试回退策略：直接取最后一行（适用于某些只有结果没有标记的情况）
+    lines = text.strip().split('\n')
+    if lines:
+        return re.sub(r'[*_`]', '', lines[-1]).strip()
+        
+    return ""
+
+# 给大模型用的configs
 TASK_CONFIGS = {
     "wikitableqa": {
         "dataset_name": "table-benchmark/wikiqa",
@@ -178,6 +200,45 @@ TASK_CONFIGS = {
         "dataset_name": "table-benchmark/fetaqa",
         "dataset_split": "train",
         "prompt_template": "Read the table below and provide a detailed, free-form answer to the question.First, think step by step to lay out your reasoning. After your reasoning, use one sentence to provide a final, concise answer prefixed with 'Final Answer:'.\n\nTable:\n{table}\n\nQuestion: {question}\nDetailed Answer:",
+        "input_fields": ["question", "table", "table_title"],
+        "target_field": "answer",
+        "metrics": ["rouge", "sacrebleu"],
+        "postprocess_func": lambda pred, label: (
+            extract_fetaqa_final_answer(pred), 
+            label.strip()
+        ),
+    }
+}
+# 给小模型用的configs
+TASK_TEST_CONFIGS = {
+    "wikitableqa": {
+        "dataset_name": "table-benchmark/wikiqa",
+        "dataset_split": "train",
+        "prompt_template": "Read the table below, and answer it with your reasoning. After your reasoning, give a precise answer with:'Answer:' prefix.\n\nTable:\n{table}\n\nQuestion: {question}",
+        "input_fields": ["question", "table"],
+        "target_field": "answer",
+        "metrics": ["exact_match"],
+        "postprocess_func": lambda pred, label: (
+            extract_wiki_final_answer(pred), 
+            label.strip()
+        ),
+    },
+    "tabfact": {
+        "dataset_name": "table-benchmark/tabfact",
+        "dataset_split": "train",
+        "prompt_template": "Read the table below and determine if the statement is entailed or refuted.\n\nTable:\n{table}\n\nStatement: {question}\nIs the statement entailed or refuted? Answer with your reasoning, and state whether the content is correct or incorrect with only Entailed or Refuted.",
+        "input_fields": ["question", "table"],
+        "target_field": "answer",
+        "metrics": ["accuracy"],
+        "postprocess_func": lambda pred, label: (
+            extract_fact_final_answer(pred), 
+            label.strip()
+        ),
+    },
+    "fetaqa": {
+        "dataset_name": "table-benchmark/fetaqa",
+        "dataset_split": "train",
+        "prompt_template": "Read the table below and provide a detailed, free-form answer to the question.First, think step by step to lay out your reasoning. After your reasoning, use one sentence to provide a final, concise answer prefixed with 'Final Answer:'.\n\nTable:\n{table}\n\nQuestion: {question}",
         "input_fields": ["question", "table", "table_title"],
         "target_field": "answer",
         "metrics": ["rouge", "sacrebleu"],
