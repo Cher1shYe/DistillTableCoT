@@ -12,7 +12,7 @@ from models.qwen_trainer import QwenDistillTrainer
 def main():
     parser = argparse.ArgumentParser(description="Qwen小模型蒸馏训练脚本")
     parser.add_argument("--config", type=str, required=True,
-                       help="配置文件路径，如 configs/qwen2.5-1.7b.yaml")
+                       help="配置文件路径，如 configs/qwen3-1.7b.yaml")
     parser.add_argument("--output_dir", type=str, default=None,
                        help="自定义输出目录")
     parser.add_argument("--data_paths", nargs="+", default=None,
