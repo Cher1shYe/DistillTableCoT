@@ -6,7 +6,6 @@ model:
   device_map: "auto"
   low_cpu_mem_usage: true
   trust_remote_code: true  # Qwen3 需此，如果 transformers <4.51.0 会 error
-  enable_thinking: true  # Model card 默认：启用 thinking mode for reasoning-heavy tasks like table QA
 
 training:
   output_dir: "./outputs/models"
@@ -16,12 +15,12 @@ training:
   learning_rate: 0.00002
   warmup_ratio: 0.1
   max_input_length: 1024
-  max_target_length: 512
+  max_target_length: 2048
   logging_steps: 50
   eval_steps: 500
   save_steps: 500
   save_total_limit: 3
-  gradient_accumulation_steps: 1
+  gradient_accumulation_steps: 16
   bf16: true
   seed: 42
 
@@ -45,7 +44,7 @@ distillation:
 
 # 生成配置（推理时使用）
 generation:
-  max_new_tokens: 32768  # Model card 推荐，默认输出长度
+  max_new_tokens: 2048  # Model card 推荐32768，但评估阶段token过长会影响效率，这里使用2048确保收敛
   temperature: 0.6  # Thinking mode
   top_p: 0.95
   top_k: 20

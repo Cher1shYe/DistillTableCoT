@@ -11,8 +11,6 @@ model:
   trust_remote_code: true  # Qwen3 需此，如果 transformers <4.51.0 会 error
   enable_thinking: true  # Model card 默认：启用 thinking mode for reasoning-heavy tasks like table QA
 
-  local_path: "./origin/Qwen3-4B_origin"
-
 training:
   batch_size: 1
   learning_rate: 0.00002
