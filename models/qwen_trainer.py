@@ -9,7 +9,7 @@ from transformers import (
 )
 from typing import Dict, Any, List
 import os
-from data_loader.cot_dataset import CoTDataset, DataCollatorForCoT
+from data_loader.cot_dataset import CoTDataset
 
 class QwenDistillTrainer:
     """Qwen模型蒸馏训练器"""
@@ -40,24 +40,34 @@ class QwenDistillTrainer:
             tokenizer_path,
             trust_remote_code=True
         )
+        # Qwen 的 tokenizer 包含:
+        # 151643 -> <|endoftext|>
+        # 151645 -> <|im_end|> (通常作为 eos_token)
         
         if self.tokenizer.pad_token is None:
-            self.tokenizer.pad_token = self.tokenizer.eos_token
+            # 优先尝试使用 <|endoftext|> 作为 pad_token，它通常在 Qwen 词表中存在但很少用到
+            if "<|endoftext|>" in self.tokenizer.get_vocab():
+                self.tokenizer.pad_token = "<|endoftext|>"
+                print(f"Using <|endoftext|> (id: {self.tokenizer.pad_token_id}) as pad_token.")
+            else:
+                # 如果没有，就回退使用 eos_token 作为 pad_token
+                # 只要 attention_mask 设置正确，这完全没有问题
+                self.tokenizer.pad_token = self.tokenizer.eos_token
+                print(f"Using eos_token (id: {self.tokenizer.pad_token_id}) as pad_token.")
+        need_resize_embeddings = False
         
         # 加载模型
-        torch_dtype = getattr(torch, self.config['model'].get('torch_dtype', 'float16'))
+        torch_dtype = getattr(torch, self.config['model'].get('torch_dtype', 'bfloat16'))
         
         self.model = AutoModelForCausalLM.from_pretrained(
             model_path,
-            # torch_dtype=torch_dtype,
             trust_remote_code=True,
-            device_map="auto",
-
-            torch_dtype='float32'
+            torch_dtype=torch_dtype,
         )
         
-        print(f"Model loaded: {self.config['model']['model_name']}")
-        print(f"Model device: {self.model.device}")
+        print(f"✅ Model loaded: {self.config['model']['model_name']}")
+        print(f"✅ Model dtype: {self.model.dtype}")
+        print(f"✅ Model device: {self.model.device}")
         
     def prepare_data(self):
         """准备训练数据"""
@@ -128,17 +138,14 @@ class QwenDistillTrainer:
             bf16=use_bf16,  # 使用处理后的变量
 
 
-            dataloader_pin_memory=False,
+            dataloader_pin_memory=True,
             remove_unused_columns=False,
-            dataloader_num_workers=0,
-            disable_tqdm=False,
-            report_to="none",  # 禁用wandb等记录
-            seed=self.config['training']['seed'],
-
-            gradient_checkpointing=True,       # 梯度检查点 (时间换空间)
-            optim="adafactor",
-
-            max_steps=100
+            dataloader_num_workers=self.config['training'].get('num_workers', 4),
+            report_to=self.config['training'].get('report_to', "none"), 
+            seed=self.config['training'].get('seed', 42),
+            gradient_checkpointing=self.config['training'].get('gradient_checkpointing', True),
+            optim=self.config['training'].get('optim', "adamw_torch"), # 推荐 adamw_torch
+            max_steps=self.config['training'].get('max_steps', -1) # -1 表示按 epoch 走
         )
 
         print("=== TrainingArguments 参数类型检查 ===")
@@ -168,17 +175,12 @@ class QwenDistillTrainer:
         
         # 数据整理器
 
-        # from data_loader.cot_dataset import DataCollatorForCoT
-    
-        # data_collator = DataCollatorForCoT(tokenizer=self.tokenizer)
-
-        # from transformers import DataCollatorWithPadding
-        # data_collator = DataCollatorWithPadding(
-        #     tokenizer=self.tokenizer,
-        #     padding='longest',
-        #     max_length=None,
-        #     pad_to_multiple_of=8,
-        # )
+        data_collator = DataCollatorForSeq2Seq(
+            tokenizer=self.tokenizer,
+            model=self.model,
+            padding="longest",
+            label_pad_token_id=-100  # 确保 padding 部分不参与 loss 计算
+        )
         
         # 创建Trainer
         trainer = Trainer(
@@ -186,7 +188,7 @@ class QwenDistillTrainer:
             args=training_args,
             train_dataset=self.train_dataset,
             eval_dataset=self.val_dataset,
-            # data_collator=data_collator,
+            data_collator=data_collator,
             processing_class=self.tokenizer,
         )
         
@@ -209,39 +211,19 @@ class QwenDistillTrainer:
     
     def simplest_test(self):
         """最简单的测试"""
-        # 只测试数据加载，不训练
         sample = self.train_dataset[0]
-        print(f"样本形状检查:")
-        for key in ['input_ids', 'attention_mask', 'labels']:
-            value = sample[key]
-            print(f"{key}: 形状={value.shape}, 维度={value.dim()}")
-
-        self.model.eval()  # 关闭 Dropout 等训练专用层
-
-        # device = "cuda" if torch.cuda.is_available() else "cpu"
-        # print(f"使用设备: {device}")
-
-        # self.model = self.model.to(device)
+        self.model.eval()
         
-        # 测试单个样本前向传播
+        # ✅ 获取模型所在的设备 (比如 cuda:0)
+        device = self.model.device
+        print(f"将测试数据推送到设备: {device}")
+        
+        # ✅ 把所有的 tensor 加上 .to(device)
         inputs = {
-            'input_ids': sample['input_ids'].unsqueeze(0).long(),
-            'attention_mask': sample['attention_mask'].unsqueeze(0).long(),
-            'labels': sample['labels'].unsqueeze(0).long()
+            'input_ids': sample['input_ids'].unsqueeze(0).long().to(device),
+            'attention_mask': sample['attention_mask'].unsqueeze(0).long().to(device),
+            'labels': sample['labels'].unsqueeze(0).long().to(device)
         }
-
-        print("inputs is:\n")
-        print(inputs)
-
-        # print(f"模型设备: {next(self.model.parameters()).device}")
-        # print(f"输入数据设备: {inputs['input_ids'].device}")
-        
-        # print(f"input_ids 形状: {inputs['input_ids'].shape}")  # 应为 (1, seq_len)
-
-        # print(f"可用显存: {torch.cuda.memory_reserved() / 1024**2:.2f} MB")
-
-        # print(f"模型权重类型: {next(self.model.parameters()).dtype}")
-        # print(f"输入数据类型: {inputs['input_ids'].dtype}")
 
         with torch.no_grad():
             outputs = self.model(**inputs)
