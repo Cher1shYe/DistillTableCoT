@@ -5,3 +5,12 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# 排除各个版本的outputs模型
+
+outputs/models_qwen3-1.7b_v1
+outputs/models_qwen3-1.7b_v2
+outputs/models_qwen3-1.7b_v3
+outputs/models_qwen3-4b_v1
+outputs/models_qwen3-4b_v2
+outputs/models_qwen3-4b_v3
