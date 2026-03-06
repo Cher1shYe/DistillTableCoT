@@ -169,8 +169,6 @@ def extract_fetaqa_final_answer(prediction_text):
         return re.sub(r'[*_`]', '', lines[-1]).strip()
         
     return ""
-
-# 给大模型用的configs
 TASK_CONFIGS = {
     "wikitableqa": {
         "dataset_name": "table-benchmark/wikiqa",
