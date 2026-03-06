@@ -2,6 +2,7 @@ import json
 import os
 from glob import glob
 from typing import List, Dict, Any
+import re
 import torch
 from torch.utils.data import Dataset
 from transformers import AutoTokenizer
@@ -10,11 +11,11 @@ class CoTDataset(Dataset):
     """思维链数据集加载器"""
     
     def __init__(self, data_paths: List[str], tokenizer: Any, 
-                 max_input_length: int = 1024, max_target_length: int = 512,
+                 max_input_length: int = 1024, max_target_length: int = 1024,
                  split: str = "train"):
         self.tokenizer = tokenizer
-        self.max_input_length = max_input_length
-        self.max_target_length = max_target_length
+        # 总最大长度 = prompt最大长度 + 答案最大长度
+        self.max_length = max_input_length + max_target_length
         self.split = split
         
         # 加载所有数据
@@ -49,8 +50,7 @@ class CoTDataset(Dataset):
                     if isinstance(data, list):
                         # 直接是列表格式
                         for item in data:
-                            standardized_item = self._standardize_item(item, os.path.basename(file_path))
-                            all_data.append(standardized_item)
+                            all_data.append(self._standardize_item(item, file_path))
                     else:
                         # 可能是包含predictions字段的字典格式
                         data_list = data.get('predictions', [])
@@ -66,47 +66,41 @@ class CoTDataset(Dataset):
         return all_data
     
     def _standardize_item(self, item: Dict, source_file: str) -> Dict:
-        """标准化数据项格式"""
-        # # 提取思维链和答案
-        # prediction = item.get('prediction', '')
-        # processed_prediction = item.get('processed_prediction', '')
-        # reference = item.get('reference', '')
+        """解析 Teacher 的预测结果，拆分出推理过程和最终答案"""
+        prediction = item.get('prediction', '')
         
-        # # 从prediction中提取思维链和最终答案
-        # if 'Final Answer:' in prediction:
-        #     # 分离思维链和最终答案
-        #     parts = prediction.split('Final Answer:')
-        #     cot = parts[0].strip()
-        #     final_answer = parts[1].strip() if len(parts) > 1 else processed_prediction
-        # else:
-        #     # 如果没有明确分隔，使用processed_prediction作为答案
-        #     cot = prediction
-        #     final_answer = processed_prediction or reference
+        # 优化后的正则：
+        # \**\s* 兼容前面的 Markdown 加粗符号 (比如 **Answer:)
+        # (?:...) 匹配你提供的各种可能的答案前缀
+        # \s*\**\s* 兼容后面的冒号、空格和 Markdown 符号 (比如 Answer:** )
+        # (.+) 贪婪匹配后面所有的内容，作为最终答案
+        pattern = r'\**\s*(?:the final answer is|the answer is|so the answer is|final answer:|answer:)\s*\**\s*(.+)'
+        
+        match = re.search(pattern, prediction, re.IGNORECASE | re.DOTALL)
+        
+        if match:
+            # match.start() 拿到的是 "Answer:" 这个词开始的索引位置
+            # 因此，索引位置之前的【所有内容】，都是它的思考过程 (CoT)
+            reasoning = prediction[:match.start()].strip()
+            
+            # match.group(1) 拿到的则是剥离了 "Answer:" 前缀后，纯粹的答案结果
+            final_answer = match.group(1).strip()
+            
+            # 安全校验：如果模型直接输出了 "Answer: xxx" 而没有前面的推理过程
+            # 那就不加 <think> 标签，避免生成空的 <think>\n</think>
+            if reasoning:
+                assistant_content = f"<think>\n{reasoning}\n</think>\n{final_answer}"
+            else:
+                assistant_content = final_answer
+        else:
+            # 如果正则完全没有命中（极其罕见的异常格式），把全部文本作为答案
+            assistant_content = prediction
 
-        # to_return = {
-        #     'id': item.get('id', ''),
-        #     'original_dataset_id': item.get('original_dataset_id', ''),
-        #     'prompt': item.get('prompt', ''),
-        #     'question': self._extract_question(item.get('prompt', '')),
-        #     'table': self._extract_table(item.get('prompt', '')),
-        #     'cot': cot,
-        #     'answer': final_answer,
-        #     'reference': reference,
-        #     'source_file': source_file
-        # }
-        # print(to_return)
-        
         return {
             'id': item.get('id', ''),
             'original_dataset_id': item.get('original_dataset_id', ''),
             'prompt': item.get('prompt', ''),
-            'prediction': item.get('prediction', ''),
-            # 'question': self._extract_question(item.get('prompt', '')),
-            # 'table': self._extract_table(item.get('prompt', '')),
-            # 'cot': cot,
-            # 'answer': final_answer,
-            # 'reference': reference,
-            'source_file': source_file
+            'assistant_content': assistant_content
         }
     
     def _extract_question(self, prompt: str) -> str:
@@ -129,10 +123,7 @@ class CoTDataset(Dataset):
     
     def _split_data(self, data: List[Dict], split: str) -> List[Dict]:
         """数据集划分"""
-        if not data:
-            return []
-            
-        # 固定随机种子确保可重复性
+        if not data: return []
         import random
         random.seed(42)
         random.shuffle(data)
@@ -154,265 +145,58 @@ class CoTDataset(Dataset):
         return len(self.data)
     
     def __getitem__(self, idx):
-        """返回单个训练样本 - 修复版本"""
         item = self.data[idx]
         
-        # input_text = f"问题：{item['question']}\n表格：{item['table']}\n推理："
-        input_text = item['prompt']
-        
-        # 构建目标文本（模型要生成的内容）
-        target_text = item['prediction']
-        
-        # 合并为完整序列：输入 + 目标
-        full_text = input_text + target_text
+        # 1. 组装对话体 (Messages)
+        prompt_messages = [
+            {"role": "user", "content": item['prompt']}
+        ]
+        full_messages = [
+            {"role": "user", "content": item['prompt']},
+            {"role": "assistant", "content": item['assistant_content']}
+        ]
 
-        # 使用固定的最大长度
-        fixed_max_length = 1024  # 统一填充到这个长度
-        
-        # Tokenize完整序列
-        encoding = self.tokenizer(
-            full_text,
-            max_length=fixed_max_length,  # 总长度限制
-            padding='max_length', 
-            truncation=True,
-            return_tensors="pt"
+        # 2. 使用 apply_chat_template 渲染文本
+        # 渲染 Prompt 部分 (add_generation_prompt=True 会加上 "<|im_start|>assistant\n")
+        prompt_text = self.tokenizer.apply_chat_template(
+            prompt_messages, tokenize=False, add_generation_prompt=True
+        )
+        # 渲染完整的 对话 (开启 enable_thinking=True 激活 Qwen3 的专属模版逻辑)
+        full_text = self.tokenizer.apply_chat_template(
+            full_messages, tokenize=False, enable_thinking=True
         )
 
-        # padded_input_encoding = self.tokenizer(
-        #     input_text,
-        #     max_length=fixed_max_length,
-        #     padding='max_length',
-        #     truncation=True,
-        #     return_tensors="pt"
-        # )
+        # 3. 进行分词 (注意：不加 padding！返回普通的 1D List)
+        # 先对 prompt 切词，获取其准确的 Token 长度
+        prompt_tokens = self.tokenizer(prompt_text, add_special_tokens=False)
+        prompt_len = len(prompt_tokens["input_ids"])
 
-        # print(idx)
-        # 计算输入文本的长度（用于创建标签掩码）
-        input_encoding = self.tokenizer(
-            input_text,
-            add_special_tokens=False,
-            max_length=fixed_max_length,
-            padding=False,
-            truncation=True,
-            return_tensors="pt"
+        # 再对完整的文本切词
+        full_tokens = self.tokenizer(
+            full_text, 
+            add_special_tokens=False, 
+            truncation=True, 
+            max_length=self.max_length
         )
-        input_len = min(input_encoding['input_ids'].shape[1], fixed_max_length)
         
-        # 创建标签：输入部分设为-100（忽略损失），目标部分保留
-        labels = encoding['input_ids'].clone().squeeze(0)
-        labels[:input_len] = -100
-        # labels[:input_len] = -100  # 输入部分不计算损失
+        input_ids = full_tokens["input_ids"]
+        attention_mask = full_tokens["attention_mask"]
 
-        # 确保填充位置的标签为-100
-        pad_mask = encoding['attention_mask'].squeeze(0) == 0
-        labels[pad_mask] = -100
-
-        # # 验证数据格式
-        # assert encoding['input_ids'].shape[1] == fixed_max_length, "input_ids长度不正确"
-        # assert labels.shape[0] == fixed_max_length, "labels长度不正确"
-        # assert encoding['attention_mask'].shape[1] == fixed_max_length, "attention_mask长度不正确"
+        # 4. 构造 Labels (将 Prompt 部分全部替换为 -100)
+        labels = input_ids.copy()
         
-        # # 调试：检查长度是否一致
-        # if idx in [5542, 1762, 3954, 5968]:  # 打印出错批次的索引
-        #     print(f"调试样本 {idx}:")
-        #     print(f"  input_ids长度: {len(encoding['input_ids'].squeeze(0))}")
-        #     print(f"  labels长度: {len(labels)}")
-        #     print(f"  input_ids类型: {type(encoding['input_ids'])}")
-        #     print(f"  labels类型: {type(labels)}")
-        #     # 检查labels中是否有嵌套
-        #     if isinstance(labels[0], list):
-        #         print("  ❌ labels是嵌套列表！")
-        #     else:
-        #         print("  ✅ labels是1D列表")
-
-        # print(f"input:\n{input_text}\ntarget:\n{target_text}")
+        # 如果 prompt 长度超过了截断后的总长度（极端情况），做个安全限制
+        actual_prompt_len = min(prompt_len, len(labels))
         
-        # to_return = {
-        #     'input_ids': encoding['input_ids'].squeeze(0),
-        #     'attention_mask': encoding['attention_mask'].squeeze(0),
-        #     'labels': labels,
-        #     # 'question': item['question'],
-        #     # 'answer': item['answer'],
-        #     # 'cot': item['cot']
-        # }
-
-        # print("to_return:")
-        # print(to_return)
-        # print(f"input_ids: (length {len(encoding['input_ids'].squeeze(0))})")
-        # print(encoding['input_ids'].squeeze(0).tolist())
-        # print(f"labels: (length {len(labels)})")
-        # print(labels.tolist())
-        # print(f"attention_mask: (length {len(encoding['attention_mask'].squeeze(0))})")
-        # print(encoding['attention_mask'].squeeze(0).tolist())
+        # 将 input_ids 中属于 User 提问的部分，在 labels 里设为 -100
+        for i in range(actual_prompt_len):
+            labels[i] = -100
 
         return {
-            'input_ids': encoding['input_ids'].squeeze(0),
-            'attention_mask': encoding['attention_mask'].squeeze(0),
-            'labels': labels,
-            # 'question': item['question'],
-            # 'answer': item['answer'],
-            # 'cot': item['cot']
+            "input_ids": input_ids,
+            "attention_mask": attention_mask,
+            "labels": labels
         }
 
-# class DataCollatorForCoT:
-#     """思维链数据整理器"""
-    
-#     def __init__(self, tokenizer):
-#         self.tokenizer = tokenizer
-#         self.tokenizer.pad_token = self.tokenizer.eos_token
-    
-#     def __call__(self, batch):
-#         """处理批次数据"""
-#         # 提取所有字段
-#         input_ids = [item['input_ids'] for item in batch]
-#         attention_mask = [item['attention_mask'] for item in batch]
-#         labels = [item['labels'] for item in batch]
-#         questions = [item['question'] for item in batch]
-#         answers = [item['answer'] for item in batch]
-#         cots = [item.get('cot', '') for item in batch]
-        
-#         # 统一填充到相同长度
-#         padded_batch = self.tokenizer.pad(
-#             {
-#                 'input_ids': input_ids,
-#                 'attention_mask': attention_mask,
-#                 'labels': labels  # 重要：labels也参与填充
-#             },
-#             padding=True,
-#             return_tensors="pt"
-#         )
-        
-#         # 确保填充后的labels中，填充位置设为-100
-#         padded_batch['labels'][padded_batch['labels'] == self.tokenizer.pad_token_id] = -100
-        
-#         # 添加元数据
-#         padded_batch['questions'] = questions
-#         padded_batch['answers'] = answers
-#         padded_batch['cots'] = cots
-
-#         return padded_batch
-
-class DataCollatorForCoT:
-    """思维链数据整理器 - 修复版本"""
-    
-    def __init__(self, tokenizer):
-        self.tokenizer = tokenizer
-        if self.tokenizer.pad_token is None:
-            self.tokenizer.pad_token = self.tokenizer.eos_token
-    
-    def __call__(self, batch):
-        """处理批次数据 - 修复版本"""
-        print(f"🔧 DataCollator处理批次，样本数: {len(batch)}")
-        
-        # 提取所有字段
-        input_ids = [item['input_ids'] for item in batch]
-        attention_mask = [item['attention_mask'] for item in batch]
-        labels = [item['labels'] for item in batch]
-        
-        # === 关键修复1：检查数据类型 ===
-        print("数据类型检查:")
-        for i, (inp, lbl) in enumerate(zip(input_ids, labels)):
-            print(f"  样本 {i}: input_ids类型={type(inp).__name__}, labels类型={type(lbl).__name__}")
-            
-            # 确保是列表类型
-            if not isinstance(inp, list):
-                print(f"  ⚠️ 样本 {i} input_ids不是列表，尝试转换")
-                input_ids[i] = inp.tolist() if hasattr(inp, 'tolist') else list(inp)
-            if not isinstance(lbl, list):
-                print(f"  ⚠️ 样本 {i} labels不是列表，尝试转换")
-                labels[i] = lbl.tolist() if hasattr(lbl, 'tolist') else list(lbl)
-        
-        # === 关键修复2：检查长度一致性 ===
-        print("长度检查:")
-        for i, (inp, lbl) in enumerate(zip(input_ids, labels)):
-            inp_len = len(inp)
-            lbl_len = len(lbl)
-            print(f"  样本 {i}: input_ids长度={inp_len}, labels长度={lbl_len}")
-            
-            if inp_len != lbl_len:
-                print(f"  ⚠️ 样本 {i} 长度不一致，进行对齐")
-                # 对齐到较短的长度
-                min_len = min(inp_len, lbl_len)
-                input_ids[i] = inp[:min_len]
-                labels[i] = lbl[:min_len]
-        
-        # === 关键修复3：安全填充 ===
-        try:
-            print("尝试使用tokenizer.pad进行填充...")
-            padded_batch = self.tokenizer.pad(
-                {
-                    'input_ids': input_ids,
-                    'attention_mask': attention_mask,
-                    'labels': labels
-                },
-                padding=True,
-                return_tensors="pt"
-            )
-            print("✅ tokenizer.pad成功")
-        except Exception as e:
-            print(f"❌ tokenizer.pad失败: {e}")
-            print("使用手动填充回退...")
-            padded_batch = self._manual_pad(input_ids, attention_mask, labels)
-        
-        # === 关键修复4：确保填充位置labels设为-100 ===
-        # 找到填充位置（attention_mask为0的位置）
-        pad_mask = padded_batch['attention_mask'] == 0
-        padded_batch['labels'][pad_mask] = -100
-        
-        # 添加元数据
-        padded_batch['questions'] = [item.get('question', '') for item in batch]
-        padded_batch['answers'] = [item.get('answer', '') for item in batch]
-        padded_batch['cots'] = [item.get('cot', '') for item in batch]
-        
-        print(f"✅ 批次处理完成: input_ids形状={padded_batch['input_ids'].shape}")
-        return padded_batch
-    
-    def _manual_pad(self, input_ids, attention_mask, labels):
-        """手动填充回退方案"""
-        print("使用手动填充...")
-        
-        # 找到最大长度
-        max_len = max(
-            max(len(seq) for seq in input_ids),
-            max(len(seq) for seq in attention_mask),
-            max(len(seq) for seq in labels)
-        )
-        
-        print(f"手动填充到最大长度: {max_len}")
-        
-        # 手动填充
-        padded_input_ids = []
-        padded_attention_mask = []
-        padded_labels = []
-        
-        for i, (inp, attn, lbl) in enumerate(zip(input_ids, attention_mask, labels)):
-            # 填充input_ids
-            if len(inp) < max_len:
-                padded_inp = inp + [self.tokenizer.pad_token_id] * (max_len - len(inp))
-            else:
-                padded_inp = inp[:max_len]
-            padded_input_ids.append(padded_inp)
-            
-            # 填充attention_mask
-            if len(attn) < max_len:
-                padded_attn = attn + [0] * (max_len - len(attn))
-            else:
-                padded_attn = attn[:max_len]
-            padded_attention_mask.append(padded_attn)
-            
-            # 填充labels（填充位置设为-100）
-            if len(lbl) < max_len:
-                padded_lbl = lbl + [-100] * (max_len - len(lbl))
-            else:
-                padded_lbl = lbl[:max_len]
-            padded_labels.append(padded_lbl)
-            
-            print(f"  样本 {i}: 原始长度={len(inp)}, 填充后长度={len(padded_inp)}")
-        
-        # 转换为张量
-        import torch
-        return {
-            'input_ids': torch.tensor(padded_input_ids, dtype=torch.long),
-            'attention_mask': torch.tensor(padded_attention_mask, dtype=torch.long),
-            'labels': torch.tensor(padded_labels, dtype=torch.long)
-        }
+# 不使用原来的 DataCollatorForCoT 类
+# 在 qwen_trainer.py 中直接使用官方的 DataCollatorForSeq2Seq。
