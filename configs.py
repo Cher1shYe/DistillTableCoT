@@ -167,47 +167,219 @@ def extract_fetaqa_final_answer(prediction_text):
     lines = text.strip().split('\n')
     if lines:
         return re.sub(r'[*_`]', '', lines[-1]).strip()
+
         
     return ""
+
+def extract_hitab_final_answer(prediction_text, reference_label):
+    """
+    专门为 HiTab 定制的结果提取：
+    1. 拿取“最后一个” answer 后的内容，解决多重前缀嵌套问题。
+    2. 探测 Reference 格式，智能处理单字符串大小写、多字符串列表分割。
+    3. 修复小数点截断。
+    4. 智能识别百分比，自动进行 /100 转换。
+    """
+    text = prediction_text.strip()
+    
+    # === 1. 安全提取大模型的原始回答 (获取最后一个 answer 之后的内容) ===
+    # 使用 split 切割所有的 trigger 词，确保我们只拿最后一段，完美避开 " \n Answer:" 这种嵌套
+    pattern = re.compile(
+        r'(?:the final answer is|the answer is|so the answer is|final answer:|answer:)\**\s*', 
+        re.IGNORECASE
+    )
+    splits = pattern.split(text)
+    
+    if len(splits) > 1:
+        ans_raw = splits[-1].strip()
+    else:
+        # 兜底：如果没有 trigger 词，取最后一行
+        lines = [line.strip() for line in text.strip().split('\n') if line.strip()]
+        ans_raw = lines[-1] if lines else text.strip()
+
+    # 去除 Markdown 和句尾的句号（保留中间的小数点）
+    ans_raw = re.sub(r'[*_`]', '', ans_raw)
+    if ans_raw.endswith('.'):
+        ans_raw = ans_raw[:-1]
+    ans_raw = ans_raw.strip()
+
+    # === 2. 智能迎合 Reference 的格式 ===
+    ref_str = str(reference_label).strip()
+    
+    if ref_str.startswith('[') and ref_str.endswith(']'):
+        try:
+            ref_list = ast.literal_eval(ref_str)
+        except:
+            ref_list = None
+            
+        if isinstance(ref_list, list) and len(ref_list) > 0:
+            ref_val_first = ref_list[0]
+            
+            # --- 场景 A: 答案是字符串 (对应你的 Case 1 和 Case 2) ---
+            if isinstance(ref_val_first, str):
+                ans_clean = ans_raw.lower().replace("'", "")
+                
+                # 多字符串列表：如 ['ethiopia', 'somalia', ...]
+                if len(ref_list) > 1:
+                    # 兼容逗号、分号或换行符分割，并去除两端空白
+                    parts = [p.strip() for p in re.split(r',|\n|;', ans_clean) if p.strip()]
+                    # 清理部分大模型喜欢在最后一个词前加的 "and " 
+                    parts = [re.sub(r'^and\s+', '', p) for p in parts]
+                    return str(parts)
+                
+                # 单字符串：如 ['flora']
+                else:
+                    return f"['{ans_clean}']"
+                    
+            # --- 场景 B: 答案是数字类型 ---
+            elif isinstance(ref_val_first, (int, float)):
+                # 抹除千位分隔符逗号
+                ans_raw_clean = re.sub(r'(?<=\d),(?=\d)', '', ans_raw)
+                # 提取出文本里的所有数字（含小数和负数）
+                numbers_str = re.findall(r'-?\d+(?:\.\d+)?', ans_raw_clean)
+                
+                if numbers_str:
+                    formatted_nums = []
+                    for i, num_str in enumerate(numbers_str):
+                        val = float(num_str) if '.' in num_str else int(num_str)
+                        
+                        # 百分比转换逻辑
+                        if '%' in ans_raw and isinstance(ref_val_first, float) and abs(ref_val_first) <= 1.0:
+                            val = float(num_str) / 100.0
+                            
+                        # 补全 .0 逻辑
+                        elif i < len(ref_list) and isinstance(ref_list[i], float) and str(ref_list[i]).endswith('.0') and '.' not in num_str:
+                            val = float(num_str)
+                            
+                        formatted_nums.append(val)
+                    
+                    # 截取跟 reference 相同数量的数字
+                    formatted_nums = formatted_nums[:len(ref_list)]
+                    return str(formatted_nums)
+                    
+    # 如果 Reference 解析失败，兜底加上方括号返回
+    return f"[{ans_raw}]" if ref_str.startswith('[') else ans_raw.strip()
+
+AGENT_SYSTEM_PROMPT = """You are an expert data analyst interacting with a SQLite database.
+Act based on the input provided:
+
+1. IF NO FEEDBACK (First Turn): Reason BRIEFLY in <think>...</think> (MAX 3 SENTENCES), output a SQLite query in ```sql ... ```, and STOP.
+2. IF ERROR FEEDBACK: Reflect BRIEFLY on the error in <think>...</think> (MAX 3 SENTENCES), then output a corrected SQLite query.
+3. IF SUCCESS FEEDBACK: Based on the result, output EXACTLY "Final Answer: <answer>".
+
+Crucial Notes for SQLite:
+- NEVER output "Final Answer:" without seeing a successful query result first!
+- Keep your <think> process extremely concise and direct. Do not write essays.
+"""
+
+# 初版提示词和configs
+# TASK_CONFIGS = {
+#     "wikitableqa": {
+#         "dataset_name": "table-benchmark/wikiqa",
+#         "dataset_split": "train",
+#         "prompt_template": "Read the table below, and answer it with your reasoning. After your reasoning, give a precise answer with:'Answer:' prefix.\n\nTable:\n{table}\n\nQuestion: {question}\nAnswer:",
+#         "input_fields": ["question", "table"],
+#         "target_field": "answer",
+#         "metrics": ["exact_match"],
+#         "postprocess_func": lambda pred, label: (
+#             extract_wiki_final_answer(pred), 
+#             label.strip()
+#         ),
+#     },
+#     "tabfact": {
+#         "dataset_name": "table-benchmark/tabfact",
+#         "dataset_split": "train",
+#         "prompt_template": "Read the table below and determine if the statement is entailed or refuted.\n\nTable:\n{table}\n\nStatement: {question}\nIs the statement entailed or refuted? Answer with your reasoning, and state whether the content is correct or incorrect with only Entailed or Refuted.\nAnswer:",
+#         "input_fields": ["question", "table"],
+#         "target_field": "answer",
+#         "metrics": ["accuracy"],
+#         "postprocess_func": lambda pred, label: (
+#             extract_fact_final_answer(pred), 
+#             label.strip()
+#         ),
+#     },
+#     "fetaqa": {
+#         "dataset_name": "table-benchmark/fetaqa",
+#         "dataset_split": "train",
+#         "prompt_template": "Read the table below and provide a detailed, free-form answer to the question.First, think step by step to lay out your reasoning. After your reasoning, use one sentence to provide a final, concise answer prefixed with 'Final Answer:'.\n\nTable:\n{table}\n\nQuestion: {question}\nDetailed Answer:",
+#         "input_fields": ["question", "table", "table_title"],
+#         "target_field": "answer",
+#         "metrics": ["rouge", "sacrebleu"],
+#         "postprocess_func": lambda pred, label: (
+#             extract_fetaqa_final_answer(pred), 
+#             label.strip()
+#         ),
+#     },
+#     "hitab": {
+#         "dataset_name": "kasnerz/hitab",
+#         "dataset_split": "train",
+#         "prompt_template": "Read the table below, and answer it with your reasoning. After your reasoning, give a precise answer with:'Answer:' prefix.\n\nTable:\n{table}\n\nQuestion: {question}\nAnswer:",
+#         "input_fields": ["question", "table"],
+#         "target_field": "answer",        
+#         "metrics": ["exact_match"],
+#         # 【修改这里】：传入 extract_hitab_final_answer，并确保同时传递 pred 和 label
+#         "postprocess_func": lambda pred, label: (
+#             extract_hitab_final_answer(pred, label), 
+#             label.strip()
+#         ),
+#     }
+# }
 TASK_CONFIGS = {
     "wikitableqa": {
         "dataset_name": "table-benchmark/wikiqa",
         "dataset_split": "train",
-        "prompt_template": "Read the table below, and answer it with your reasoning. After your reasoning, give a precise answer with:'Answer:' prefix.\n\nTable:\n{table}\n\nQuestion: {question}\nAnswer:",
+        "system_prompt": AGENT_SYSTEM_PROMPT + "\n\nTask Requirement: For WikiTableQA, the final answer should be a precise entity, number, or short phrase based on the query result.",
+        "user_prompt_template": "Table:\n{table}\n\nQuestion: {question}\n\nRequirement: You MUST use 'Final Answer: <your precise answer>' to output your final result.",
         "input_fields": ["question", "table"],
         "target_field": "answer",
         "metrics": ["exact_match"],
         "postprocess_func": lambda pred, label: (
-            extract_wiki_final_answer(pred), 
+            extract_wiki_final_answer(pred) if pred else "", 
             label.strip()
         ),
     },
     "tabfact": {
         "dataset_name": "table-benchmark/tabfact",
         "dataset_split": "train",
-        "prompt_template": "Read the table below and determine if the statement is entailed or refuted.\n\nTable:\n{table}\n\nStatement: {question}\nIs the statement entailed or refuted? Answer with your reasoning, and state whether the content is correct or incorrect with only Entailed or Refuted.\nAnswer:.\nAnswer:",
+        "system_prompt": AGENT_SYSTEM_PROMPT + "\n\nTask Requirement: For TabFact, you need to verify if the statement is Entailed or Refuted by the database.",
+        "user_prompt_template": "Table:\n{table}\n\nStatement to verify: {question}\n\nRequirement: You MUST use exactly 'Final Answer: Entailed' or 'Final Answer: Refuted'.",
         "input_fields": ["question", "table"],
         "target_field": "answer",
         "metrics": ["accuracy"],
         "postprocess_func": lambda pred, label: (
-            extract_fact_final_answer(pred), 
+            extract_fact_final_answer(pred) if pred else "", 
             label.strip()
         ),
     },
     "fetaqa": {
         "dataset_name": "table-benchmark/fetaqa",
         "dataset_split": "train",
-        "prompt_template": "Read the table below and provide a detailed, free-form answer to the question.First, think step by step to lay out your reasoning. After your reasoning, use one sentence to provide a final, concise answer prefixed with 'Final Answer:'.\n\nTable:\n{table}\n\nQuestion: {question}\nDetailed Answer:",
+        "system_prompt": AGENT_SYSTEM_PROMPT + "\n\nTask Requirement: For FeTaQA, provide a detailed, free-form answer in a single coherent sentence based on the query result.",
+        "user_prompt_template": "Table:\n{table}\n\nQuestion: {question}\n\nRequirement: You MUST use 'Final Answer: <your detailed sentence>' to output your final result.",
         "input_fields": ["question", "table", "table_title"],
         "target_field": "answer",
         "metrics": ["rouge", "sacrebleu"],
         "postprocess_func": lambda pred, label: (
-            extract_fetaqa_final_answer(pred), 
+            extract_fetaqa_final_answer(pred) if pred else "", 
+            label.strip()
+        ),
+    },
+    "hitab": {
+        "dataset_name": "kasnerz/hitab",
+        "dataset_split": "train",
+        "system_prompt": AGENT_SYSTEM_PROMPT + "\n\nTask Requirement: For HiTab, the final answer should be a precise number, entity, or short phrase based on the query result.",
+        "user_prompt_template": "Table:\n{table}\n\nQuestion: {question}\n\nRequirement: You MUST use 'Final Answer: <your precise answer>' to output your final result.",
+        "input_fields": ["question", "table"],
+        "target_field": "answer",        
+        "metrics": ["exact_match"],
+        "postprocess_func": lambda pred, label: (
+            extract_hitab_final_answer(pred, label) if pred else "", 
             label.strip()
         ),
     }
 }
-# 给小模型用的configs
+
+
+# 初版给小模型用的configs
 TASK_TEST_CONFIGS = {
     "wikitableqa": {
         "dataset_name": "table-benchmark/wikiqa",
@@ -242,6 +414,18 @@ TASK_TEST_CONFIGS = {
         "metrics": ["rouge", "sacrebleu"],
         "postprocess_func": lambda pred, label: (
             extract_fetaqa_final_answer(pred), 
+            label.strip()
+        ),
+    },
+        "hitab": {
+        "dataset_name": "kasnerz/hitab",  # HF上最通用的 HiTab 源
+        "dataset_split": "train",         # 下载训练集来看看
+        "prompt_template": "Read the table below, and answer it with your reasoning. After your reasoning, give a precise answer with:'Answer:' prefix.\n\nTable:\n{table}\n\nQuestion: {question}",
+        "input_fields": ["question", "table"],
+        "target_field": "answer",         
+        "metrics": ["exact_match"],
+        "postprocess_func": lambda pred, label: (
+            extract_hitab_final_answer(pred, label), 
             label.strip()
         ),
     }

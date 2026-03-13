@@ -1,0 +1,35 @@
+{
+  "id": "sales_001",
+  "table_info": {
+    "name": "sales_records",
+    "schema": [
+      {"column": "sale_id", "type": "integer", "description": "销售记录ID"},
+      {"column": "product_name", "type": "text", "description": "产品名称"},
+      {"column": "sale_amount", "type": "float", "description": "销售金额"},
+      {"column": "sale_date", "type": "date", "description": "销售日期"},
+      {"column": "salesperson", "type": "text", "description": "销售人员姓名"}
+    ],
+    "sample_rows": [
+      [1001, "笔记本电脑", 8999.00, "2024-01-15", "张三"],
+      [1002, "鼠标", 129.00, "2024-01-16", "李四"]
+    ]
+  },
+  "question": "2024年1月，张三的销售总额是多少？",
+  "trajectory": [
+    {
+      "turn": 1,
+      "reasoning": "<think>需要计算销售总额，目标列是sale_amount，使用SUM()聚合。筛选条件有两个：1) 销售员为'张三'，对应salesperson列；2) 时间为2024年1月，对应sale_date列。尝试直接匹配年月。</think>",
+      "sql": "SELECT SUM(sale_amount) FROM sales_records WHERE salesperson = '张三' AND sale_date = '2024-01';",
+      "execution_status": "error",
+      "execution_feedback": "Execution Error: Data type mismatch or no records returned. 'sale_date' format is YYYY-MM-DD."
+    },
+    {
+      "turn": 2,
+      "reasoning": "<think>执行报错。检查发现sale_date是精确到日的date类型，不能直接等于'2024-01'。需要使用strftime提取年月格式进行匹配，即 strftime('%Y-%m', sale_date) = '2024-01'。</think>",
+      "sql": "SELECT SUM(sale_amount) FROM sales_records WHERE salesperson = '张三' AND strftime('%Y-%m', sale_date) = '2024-01';",
+      "execution_status": "success",
+      "execution_feedback": "[[8999.00]]"
+    }
+  ],
+  "final_answer": "8999.00"
+}
