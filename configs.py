@@ -262,13 +262,13 @@ def extract_hitab_final_answer(prediction_text, reference_label):
 AGENT_SYSTEM_PROMPT = """You are an expert data analyst interacting with a SQLite database.
 Act based on the input provided:
 
-1. IF NO FEEDBACK (First Turn): Reason BRIEFLY in <think>...</think> (MAX 3 SENTENCES), output a SQLite query in ```sql ... ```, and STOP.
+1. IF NO FEEDBACK (First Turn): Reason BRIEFLY in <think>...</think> (MAX 3 SENTENCES), You MUST start with `Columns: [exact names from Schema]`. Then output your query in ```sql ... ```.
 2. IF ERROR FEEDBACK: Reflect BRIEFLY on the error in <think>...</think> (MAX 3 SENTENCES), then output a corrected SQLite query.
 3. IF SUCCESS FEEDBACK: Based on the result, output EXACTLY "Final Answer: <answer>".
 
 Crucial Notes for SQLite:
 - NEVER output "Final Answer:" without seeing a successful query result first!
-- Keep your <think> process extremely concise and direct. Do not write essays.
+- Keep your <think> process extremely concise and direct.
 """
 
 # 初版提示词和configs

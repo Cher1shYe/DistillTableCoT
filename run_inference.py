@@ -6,7 +6,7 @@ import re
 import argparse
 from datasets import load_dataset
 from configs import TASK_CONFIGS
-from utils import format_table, call_deepseek_api, table_to_sqlite, _build_sqlite, execute_sql
+from utils import format_table, call_deepseek_api, table_to_sqlite, execute_sql
 
 def generate_predictions(task_name, num_samples, output_dir="outputs"):
     """
