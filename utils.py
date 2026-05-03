@@ -17,6 +17,56 @@ except Exception as e:
     print(f"API 客户端初始化失败: {e}")
     client = None
 
+def _apply_date_conversion(cells):
+    """
+    统一的清洗与日期转换：逐格转换
+    支持：空值 -> None, 符号数字 -> 数值, 日期 -> datetime, 其他 -> 原字符串
+    返回列表，方便后续转DataFrame处理
+    """
+    result = []
+    for val in cells:
+        if val is None:
+            result.append(None)
+            continue
+            
+        val_str = str(val).strip()
+        
+        # 1. 拦截致命陷阱：处理空字符串和无意义空值 (存入 DataFrame 时变 None)
+        if not val_str or val_str.lower() in ['none', 'null', 'n/a', '-', '--']:
+            result.append(None)
+            continue
+            
+        # 2. 清洗带有货币、逗号、百分号的数字 (例如 "$1,200.50" -> 1200.5)
+        # 这样存进 SQLite 才是 REAL/INTEGER 类型，而不是 TEXT
+        if re.match(r'^-?\$?\s*\d{1,3}(,\d{3})*(\.\d+)?\s*%?$', val_str):
+            clean_str = re.sub(r'[$,\s]', '', val_str)
+            is_percent = False
+            if clean_str.endswith('%'):
+                clean_str = clean_str[:-1]
+                is_percent = True
+            try:
+                num = float(clean_str)
+                if is_percent: num /= 100.0
+                result.append(int(num) if num.is_integer() else num)
+                continue
+            except:
+                pass
+
+        # 3. 保留你的原生设计：尝试解析日期并转为 datetime 对象
+        parsed = parse_date_string(val_str)
+        if parsed:
+            try:
+                dt = datetime.strptime(parsed, "%Y-%m-%d")
+                result.append(dt)
+                continue
+            except Exception:
+                pass
+                
+        # 4. 兜底逻辑：原样返回字符串
+        result.append(val_str)
+        
+    return result
+
 def _parse_table_universal(table_data, max_rows=None, task_name=None):
     """
     统一解析入口：将任何格式的表格数据解析为标准的 (headers: list[str], data_rows: list[list[str]])
@@ -113,17 +163,23 @@ def _parse_table_universal(table_data, max_rows=None, task_name=None):
 
 def _clean_headers_for_sql(headers):
     """
-    将人类可读的表头转换为 SQL 安全的列名，并返回映射关系。
-    返回: clean_headers: list[str]
+    将人类可读的表头转换为 SQL 安全的列名，避开保留字。
     """
     clean_headers = []
     seen = set()
+    # 增加一个 SQLite 保留字黑名单
+    RESERVED_WORDS = {"CASE", "GROUP", "ORDER", "BY", "SELECT", "WHERE", "TABLE", "INDEX", "PRAGMA", "JOIN", "ON", "IN", "AS", "DEFAULT"}
+    
     for i, h in enumerate(headers):
         h = str(h).strip().replace('\n', ' ').replace('"', '').replace("'", "")
-        # 把 " - " 替换为 "_"，使其成为合法 SQL 标识符
         h = h.replace(' - ', '_').replace(' ', '_')
         if not h:
             h = f"col_{i}"
+            
+        # 【新增防御】：如果是保留字，强行加个 _col 后缀
+        if h.upper() in RESERVED_WORDS:
+            h = f"{h}_col"
+            
         orig_h = h
         counter = 1
         while h in seen:
@@ -132,16 +188,6 @@ def _clean_headers_for_sql(headers):
         seen.add(h)
         clean_headers.append(h)
     return clean_headers
-
-
-def _apply_date_conversion(cells):
-    """统一的日期转换：逐格转换，转换失败保留原值"""
-    result = []
-    for val in cells:
-        val_str = str(val).strip()
-        parsed = parse_date_string(val_str)
-        result.append(parsed if parsed else val_str)
-    return result
 
 
 def format_table(table_data, max_rows=None, task_name=None):
@@ -154,7 +200,9 @@ def format_table(table_data, max_rows=None, task_name=None):
     md += "|" + "|".join(["---"] * len(headers)) + "|\n"
     for row in data_rows:
         cells = _apply_date_conversion(row)
-        md += "| " + " | ".join(cells) + " |\n"
+        # 如果是datetime对象则转成字符串，否则原值
+        cells_str = [c.strftime("%Y-%m-%d") if isinstance(c, datetime) else str(c) for c in cells]
+        md += "| " + " | ".join(cells_str) + " |\n"
     return md
 
 
@@ -164,14 +212,25 @@ def table_to_sqlite(table_data, max_rows=None, task_name=None, table_name="my_ta
     if not headers:
         return None, ""
 
-    # ✅ 日期转换：与 Markdown 完全一致，逐格转换
-    converted_rows = [_apply_date_conversion(row) for row in data_rows]
-
     # SQL 安全列名
     clean_headers = _clean_headers_for_sql(headers)
 
+    # 所有行做日期转换，返回datetime或原字符串
+    converted_rows = [_apply_date_conversion(row) for row in data_rows]
+
+    # MODIFIED: 把转换后的列表转DataFrame
     df = pd.DataFrame(converted_rows, columns=clean_headers)
+
+    # MODIFIED: 尝试把datetime列推断并转换成datetime64[ns]
+    # 简单规则：列中如果包含至少一个 datetime 类型元素就转换
+    for col in df.columns:
+        if df[col].apply(lambda x: isinstance(x, datetime)).any():
+            df[col] = pd.to_datetime(df[col], errors='coerce')  # 转成时间类型，没有时间则NaT
+
+    # 内存数据库连接
     conn = sqlite3.connect(':memory:')
+
+    # MODIFIED: to_sql写入数据库（默认会把datetime转成ISO字符串保存）
     df.to_sql(table_name, conn, index=False, if_exists='replace')
 
     cursor = conn.cursor()
@@ -179,13 +238,14 @@ def table_to_sqlite(table_data, max_rows=None, task_name=None, table_name="my_ta
     schema = cursor.fetchone()[0]
 
     return conn, schema
+
+
 def execute_sql(conn, sql_query):
     """
     在给定的 sqlite 连接上执行 SQL，并返回 (是否成功, 结果字符串)
     不依赖 SQLAlchemy，完全使用原生 sqlite3 游标执行。
     """
     try:
-        # [关键点]: 这里调用的是 conn.cursor()
         cursor = conn.cursor()
         cursor.execute(sql_query)
         
@@ -207,6 +267,7 @@ def execute_sql(conn, sql_query):
     except Exception as e:
         # 捕获真实的 SQL 语法错误
         return False, f"SQL Error: {str(e)}"
+
 
 # 时间安全解析函数（原封不动）
 def parse_date_string(date_str):

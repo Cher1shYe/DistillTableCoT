@@ -72,7 +72,7 @@ def generate_predictions(task_name, num_samples, output_dir="outputs"):
     # 3. 保存结果到文件
     task_output_dir = os.path.join(output_dir, task_name)
     os.makedirs(task_output_dir, exist_ok=True)
-    output_path = os.path.join(task_output_dir, "predictions_v2.json")
+    output_path = os.path.join(task_output_dir, "predictions_v4.json")
     
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(results_to_save, f, ensure_ascii=False, indent=4)
@@ -106,7 +106,7 @@ def generate_agent_predictions(task_name, num_samples, max_turns=5, output_dir="
 
     for i, sample in enumerate(tqdm.tqdm(dataset, desc=f"Agent reasoning for {task_name}")):
         raw_table = sample.get('table') or sample.get('table_content') or sample.get('table_text')
-        conn, schema_str = table_to_sqlite(raw_table, task_name=task_name)
+        conn, schema_str= table_to_sqlite(raw_table, task_name=task_name)
         if conn is None:
             # 如果表格解析失败，记录并跳过
             continue
@@ -188,7 +188,7 @@ def generate_agent_predictions(task_name, num_samples, max_turns=5, output_dir="
     # 保存逻辑...
     task_output_dir = os.path.join(output_dir, task_name)
     os.makedirs(task_output_dir, exist_ok=True)
-    output_path = os.path.join(task_output_dir, "predictions_v2.json")
+    output_path = os.path.join(task_output_dir, "predictions_v4.json")
     
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(results_to_save, f, ensure_ascii=False, indent=4)
