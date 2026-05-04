@@ -21,9 +21,9 @@ data:
 training:
   output_dir: "./outputs/models/Qwen3-1.7B-agent/"
   num_epochs: 3
-  batch_size: 2
+  batch_size: 4
   eval_batch_size: 8
-  gradient_accumulation_steps: 8
+  gradient_accumulation_steps: 4
   learning_rate: 2e-5
   max_input_length: 2048
   max_target_length: 1024
@@ -35,3 +35,8 @@ training:
   fp16: false
   gradient_checkpointing: true
   report_to: "tensorboard"
+  use_lora: true
+  lora_r: 64
+  lora_alpha: 16
+  lora_dropout: 0.1
+  lora_target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]

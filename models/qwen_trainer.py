@@ -7,6 +7,7 @@ from transformers import (
     Trainer,
     DataCollatorForSeq2Seq
 )
+from peft import LoraConfig, get_peft_model, TaskType
 from typing import Dict, Any, List
 import os
 from data_loader.cot_dataset import CoTDataset
@@ -67,6 +68,20 @@ class QwenDistillTrainer:
             low_cpu_mem_usage=self.config['model'].get('low_cpu_mem_usage', True),
             attn_implementation="sdpa"
         )
+        
+        # 增加 LoRA 支持 (业界标准微调 Baseline)
+        if self.config['training'].get('use_lora', False):
+            print("🚀 Configuring LoRA for the model...")
+            lora_config = LoraConfig(
+                task_type=TaskType.CAUSAL_LM,
+                r=self.config['training'].get('lora_r', 64),
+                lora_alpha=self.config['training'].get('lora_alpha', 16),
+                lora_dropout=self.config['training'].get('lora_dropout', 0.1),
+                target_modules=self.config['training'].get('lora_target_modules', ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]),
+                bias="none"
+            )
+            self.model = get_peft_model(self.model, lora_config)
+            self.model.print_trainable_parameters()
         
         print(f"✅ Model loaded: {self.config['model']['model_name']}")
         print(f"✅ Model dtype: {self.model.dtype}")
