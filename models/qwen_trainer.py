@@ -64,7 +64,8 @@ class QwenDistillTrainer:
             trust_remote_code=True,
             torch_dtype=torch_dtype,
             device_map=self.config['model'].get('device_map', 'auto'),
-            low_cpu_mem_usage=self.config['model'].get('low_cpu_mem_usage', True)
+            low_cpu_mem_usage=self.config['model'].get('low_cpu_mem_usage', True),
+            attn_implementation="flash_attention_2"
         )
         
         print(f"✅ Model loaded: {self.config['model']['model_name']}")
