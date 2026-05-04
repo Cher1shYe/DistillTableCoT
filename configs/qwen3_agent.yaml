@@ -22,7 +22,7 @@ training:
   output_dir: "./outputs/models/Qwen3-1.7B-agent/"
   num_epochs: 3
   batch_size: 2
-  eval_batch_size: 16
+  eval_batch_size: 4
   gradient_accumulation_steps: 8
   learning_rate: 2e-5
   max_input_length: 2048
@@ -30,6 +30,7 @@ training:
   logging_steps: 10
   eval_steps: 500
   save_steps: 500
+  optim: "paged_adamw_8bit"
   save_total_limit: 3
   bf16: true
   fp16: false
