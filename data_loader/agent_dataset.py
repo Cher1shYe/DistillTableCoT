@@ -211,11 +211,11 @@ class AgentDataset(Dataset):
         # === 2. 使用 apply_chat_template 渲染 ===
         # Prompt 部分 (add_generation_prompt=True 会追加 "<|im_start|>assistant\n")
         prompt_text = self.tokenizer.apply_chat_template(
-            prompt_messages, tokenize=False, add_generation_prompt=True
+            prompt_messages, tokenize=False, add_generation_prompt=True, enable_thinking=True
         )
         # 完整对话
         full_text = self.tokenizer.apply_chat_template(
-            full_messages, tokenize=False, add_generation_prompt=False
+            full_messages, tokenize=False, add_generation_prompt=False, enable_thinking=True
         )
 
         # === 3. Tokenize ===

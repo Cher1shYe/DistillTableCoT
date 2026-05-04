@@ -13,8 +13,10 @@ model:
 data:
   dataset_type: "agent"  # 开启多轮纠错数据集加载模式（使用 AgentDataset）
   data_paths:
-    - "outputs/wikitableqa/predictions_v2.json"  # 纠错轨迹数据
-    # - "outputs/hitab/predictions_v4.json"       # 可以合并多个任务的数据
+    - "outputs/wikitableqa/predictions_v2.json"
+    - "outputs/hitab/predictions_v2.json"
+    - "outputs/tabfact/predictions_v2.json"
+    - "outputs/fetaqa/predictions_v2.json"
 
 training:
   output_dir: "./outputs/models/Qwen3-1.7B-agent/"
