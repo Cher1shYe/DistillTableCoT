@@ -67,6 +67,116 @@ def _apply_date_conversion(cells):
         
     return result
 
+def _flatten_hitab_hierarchy(rows, headers, left_root, start_row):
+    """
+    利用 HiTab 的 left_root 树结构，将层次化的分组标题行展平为显式的分组列。
+    
+    原理：HiTab 层次化表格中，分组标题行（如 "immigrant women"、"2016"）的数据列全为空/None。
+    它们的作用是标识下方子行的分组归属。本函数将这些标题行移除，并把它们的信息
+    向下传播为新增的 group_level_N 列，从而让 SQL 能够直接查询层级关系。
+    
+    例如：
+        原始:   "2016" | None | None          →  移除
+                "all industries" | 374685 | 120824   →  保留, 并新增 group_level_0="2016"
+    
+    展平后 SQL 可以查询: WHERE group_level_0 = '2016' AND category = 'all industries'
+    """
+    if not left_root or 'children' not in left_root:
+        return rows, headers
+    
+    # 1. 利用树结构确定每个数据行的层级路径
+    # 1. 统一遍历树：确定每行的层级路径 + 是否为纯分组标题行（数据列全空）
+    row_paths = {}    # data_idx -> [ancestor_label_1, ancestor_label_2, ...]
+    group_rows = set() # 需要移除的纯分组标题行
+    max_depth = 0
+    
+    def walk_tree(node, path):
+        """
+        path: 从根到当前节点父亲的标签列表（不包含自身）
+        """
+        nonlocal max_depth
+        ri = node.get("row_index", -1)
+        children = node.get("children", [])
+        
+        if ri < 0:
+            # 根节点
+            for child in children:
+                walk_tree(child, path)
+            return
+        
+        data_idx = ri - start_row
+        
+        # 获取当前行的标签（第一列文本）
+        label = ""
+        if 0 <= data_idx < len(rows) and len(rows[data_idx]) > 0:
+            label = str(rows[data_idx][0]).strip()
+        
+        if children:
+            # 中间节点（有子节点）
+            # 检查此行数据列是否全空
+            data_cells = rows[data_idx][1:] if 0 <= data_idx < len(rows) and len(rows[data_idx]) > 1 else []
+            is_empty = all(
+                str(v).strip() in ('', 'None', 'none', 'percent')
+                for v in data_cells
+            )
+            
+            if is_empty:
+                # 纯分组标题行：移除，将标签向下传播
+                group_rows.add(data_idx)
+            else:
+                # 有数据的中间节点：保留，赋予父级路径
+                row_paths[data_idx] = list(path)
+                max_depth = max(max_depth, len(path))
+            
+            # 向子节点传播时，将自身标签追加到路径
+            child_path = path + [label]
+            for child in children:
+                walk_tree(child, child_path)
+        else:
+            # 叶子节点（真正的数据行）
+            row_paths[data_idx] = list(path)
+            max_depth = max(max_depth, len(path))
+    
+    walk_tree(left_root, [])
+    
+    # 如果没有发现任何层级结构（max_depth == 0），直接返回原始数据
+    if max_depth == 0:
+        return rows, headers
+    
+    # 2. 补充清理：移除不在树中但数据列全为空的"孤儿分组标题行"
+    #    这些行不在 left_root 树中（walk_tree 未覆盖），但在原始表格里充当了
+    #    更高层级的分区标记（如 "immigrant women"、"canadian-born women"）
+    for data_idx in range(len(rows)):
+        if data_idx in group_rows or data_idx in row_paths:
+            continue  # 已经被处理过的行跳过
+        
+        # 检查数据列（排除第一列的行标签）是否全为空
+        data_cells = rows[data_idx][1:] if len(rows[data_idx]) > 1 else []
+        is_empty = all(
+            str(v).strip() in ('', 'None', 'none', 'percent')
+            for v in data_cells
+        )
+        if is_empty and data_cells:
+            group_rows.add(data_idx)
+    
+    # 3. 构建展平后的新行：新增 group_level 列 + 保留原始数据列
+    group_headers = [f"group_level_{i}" for i in range(max_depth)]
+    new_headers = group_headers + headers
+    
+    new_rows = []
+    for data_idx in range(len(rows)):
+        if data_idx in group_rows:
+            continue  # 跳过所有分组标题行（包括树内的和孤儿的）
+        
+        path = row_paths.get(data_idx, [])
+        padded_path = path + [""] * (max_depth - len(path))
+        
+        new_row = padded_path + list(rows[data_idx])
+        new_rows.append(new_row)
+    
+    return new_rows, new_headers
+
+
 def _parse_table_universal(table_data, max_rows=None, task_name=None):
     """
     统一解析入口：将任何格式的表格数据解析为标准的 (headers: list[str], data_rows: list[list[str]])
@@ -136,8 +246,12 @@ def _parse_table_universal(table_data, max_rows=None, task_name=None):
                 h = str(header_rows[r][c]).strip()
                 if h and h not in h_list:
                     h_list.append(h)
-            # ✅ 统一用 " - " 拼接（对人类友好）
             headers.append(" - ".join(h_list) if h_list else f"Col_{c}")
+
+        # === 层次化表格展平：将分组标题行的信息传播为显式列 ===
+        left_root = parsed_data.get("left_root", {})
+        rows, headers = _flatten_hitab_hierarchy(rows, headers, left_root, start_row)
+
         return headers, rows
 
     # 情况 B: WikiTableQA
@@ -168,11 +282,15 @@ def _clean_headers_for_sql(headers):
     clean_headers = []
     seen = set()
     # 增加一个 SQLite 保留字黑名单
-    RESERVED_WORDS = {"CASE", "GROUP", "ORDER", "BY", "SELECT", "WHERE", "TABLE", "INDEX", "PRAGMA", "JOIN", "ON", "IN", "AS", "DEFAULT"}
+    RESERVED_WORDS = {"CASE", "GROUP", "ORDER", "BY", "SELECT", "WHERE", "TABLE", "INDEX", "PRAGMA", "JOIN", "ON", "IN", "AS", "DEFAULT", "FROM", "TO", "AND", "OR", "NOT", "IS", "NULL", "LIKE", "LIMIT", "OFFSET", "HAVING"}
     
     for i, h in enumerate(headers):
         h = str(h).strip().replace('\n', ' ').replace('"', '').replace("'", "")
-        h = h.replace(' - ', '_').replace(' ', '_')
+        # Replace non-alphanumeric characters with underscore
+        h = re.sub(r'[^\w\s]', '_', h)
+        h = re.sub(r'\s+', '_', h)
+        # Reduce multiple underscores to a single one
+        h = re.sub(r'_+', '_', h).strip('_')
         if not h:
             h = f"col_{i}"
             
@@ -214,6 +332,16 @@ def table_to_sqlite(table_data, max_rows=None, task_name=None, table_name="my_ta
 
     # SQL 安全列名
     clean_headers = _clean_headers_for_sql(headers)
+    
+    # 自动剔除底部的总结行（Totals），防止聚合计算出错
+    # 注意：HiTab 展平后 "total" 可能是有效数据行（如某个分组下的合计），不能删
+    if task_name != "hitab":
+        filtered_rows = []
+        for row in data_rows:
+            if row and len(row) > 0 and str(row[0]).strip().lower() in ["total", "totals"]:
+                continue
+            filtered_rows.append(row)
+        data_rows = filtered_rows
 
     # 所有行做日期转换，返回datetime或原字符串
     converted_rows = [_apply_date_conversion(row) for row in data_rows]

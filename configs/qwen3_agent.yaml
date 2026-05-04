@@ -1,0 +1,35 @@
+# Qwen3 Agent 纠错蒸馏训练配置
+# 用法: python3 scripts/train_distill.py --config configs/qwen3_agent.yaml
+
+# 继承基础配置
+_base_: "train_base.yaml"
+
+model:
+  model_name: "Qwen/Qwen3-1.7B"
+  tokenizer_name: "Qwen/Qwen3-1.7B"
+  local_path: "./origin/Qwen3-1.7B_origin"  # 如果有本地模型的话
+  torch_dtype: "bfloat16"
+
+data:
+  dataset_type: "agent"  # 开启多轮纠错数据集加载模式（使用 AgentDataset）
+  data_paths:
+    - "outputs/wikitableqa/predictions_v2.json"  # 纠错轨迹数据
+    # - "outputs/hitab/predictions_v4.json"       # 可以合并多个任务的数据
+
+training:
+  output_dir: "./outputs/models/Qwen3-1.7B-agent/"
+  num_epochs: 3
+  batch_size: 1
+  eval_batch_size: 1
+  gradient_accumulation_steps: 8
+  learning_rate: 2e-5
+  max_input_length: 2048
+  max_target_length: 1024
+  logging_steps: 10
+  eval_steps: 100
+  save_steps: 100
+  save_total_limit: 3
+  bf16: true
+  fp16: false
+  gradient_checkpointing: true
+  report_to: "tensorboard"

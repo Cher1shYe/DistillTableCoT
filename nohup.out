@@ -1,0 +1,52 @@
+/Users/yebohou/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+--- 开始为任务生成预测: hitab ---
+Agent reasoning for hitab:   0%|          | 0/1000 [00:00<?, ?it/s]Agent reasoning for hitab:   0%|          | 1/1000 [00:06<1:50:30,  6.64s/it]Agent reasoning for hitab:   0%|          | 2/1000 [00:13<1:50:32,  6.65s/it]Agent reasoning for hitab:   0%|          | 3/1000 [00:17<1:34:24,  5.68s/it]Agent reasoning for hitab:   0%|          | 4/1000 [00:33<2:41:59,  9.76s/it]Agent reasoning for hitab:   0%|          | 5/1000 [1:53:49<679:02:49, 2456.85s/it]Agent reasoning for hitab:   1%|          | 6/1000 [1:53:56<448:23:33, 1623.96s/it]Agent reasoning for hitab:   1%|          | 7/1000 [1:53:58<301:39:56, 1093.65s/it]Agent reasoning for hitab:   1%|          | 8/1000 [1:54:03<205:51:12, 747.05s/it] Agent reasoning for hitab:   1%|          | 9/1000 [1:54:08<141:46:31, 515.03s/it]Agent reasoning for hitab:   1%|          | 10/1000 [5:04:03<1065:19:20, 3873.90s/it]Agent reasoning for hitab:   1%|          | 11/1000 [5:04:08<738:58:17, 2689.89s/it] Agent reasoning for hitab:   1%|          | 12/1000 [5:04:13<514:01:33, 1872.97s/it]Agent reasoning for hitab:   1%|▏         | 13/1000 [5:04:17<358:19:44, 1306.97s/it]Agent reasoning for hitab:   1%|▏         | 14/1000 [7:56:23<1104:05:21, 4031.16s/it]Agent reasoning for hitab:   1%|▏         | 14/1000 [9:06:48<641:51:03, 2343.47s/it] 
+Traceback (most recent call last):
+  File "/Users/yebohou/zju/SRTP/DTC/DistillTableCoT/run_inference.py", line 220, in <module>
+    generate_agent_predictions(task_name=args.task_name, num_samples=args.num_samples)
+  File "/Users/yebohou/zju/SRTP/DTC/DistillTableCoT/run_inference.py", line 152, in generate_agent_predictions
+    response = call_deepseek_api(messages)
+  File "/Users/yebohou/zju/SRTP/DTC/DistillTableCoT/utils.py", line 440, in call_deepseek_api
+    response = client.chat.completions.create(
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/openai/_utils/_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/openai/resources/chat/completions/completions.py", line 1156, in create
+    return self._post(
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/openai/_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/openai/_base_client.py", line 982, in request
+    response = self._client.send(
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpx/_client.py", line 928, in send
+    raise exc
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpx/_client.py", line 922, in send
+    response.read()
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpx/_models.py", line 881, in read
+    self._content = b"".join(self.iter_bytes())
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpx/_models.py", line 897, in iter_bytes
+    for raw_bytes in self.iter_raw():
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpx/_models.py", line 951, in iter_raw
+    for raw_stream_bytes in self.stream:
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpx/_client.py", line 153, in __iter__
+    for chunk in self._stream:
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpx/_transports/default.py", line 127, in __iter__
+    for part in self._httpcore_stream:
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpcore/_sync/connection_pool.py", line 407, in __iter__
+    raise exc from None
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpcore/_sync/connection_pool.py", line 403, in __iter__
+    for part in self._stream:
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpcore/_sync/http11.py", line 342, in __iter__
+    raise exc
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpcore/_sync/http11.py", line 334, in __iter__
+    for chunk in self._connection._receive_response_body(**kwargs):
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpcore/_sync/http11.py", line 203, in _receive_response_body
+    event = self._receive_event(timeout=timeout)
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpcore/_sync/http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+  File "/Users/yebohou/Library/Python/3.9/lib/python/site-packages/httpcore/_backends/sync.py", line 128, in read
+    return self._sock.recv(max_bytes)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1226, in recv
+    return self.read(buflen)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1101, in read
+    return self._sslobj.read(len)
+KeyboardInterrupt

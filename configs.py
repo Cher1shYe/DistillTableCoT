@@ -1,6 +1,7 @@
 # configs.py
 import nltk
 import re
+import ast
 # 确保 NLTK 的 punkt 分词器已下载
 try:
     nltk.data.find('tokenizers/punkt')
@@ -216,7 +217,7 @@ def extract_hitab_final_answer(prediction_text, reference_label):
             
             # --- 场景 A: 答案是字符串 (对应你的 Case 1 和 Case 2) ---
             if isinstance(ref_val_first, str):
-                ans_clean = ans_raw.lower().replace("'", "")
+                ans_clean = ans_raw.lower()
                 
                 # 多字符串列表：如 ['ethiopia', 'somalia', ...]
                 if len(ref_list) > 1:
@@ -269,6 +270,7 @@ Act based on the input provided:
 Crucial Notes for SQLite:
 - NEVER output "Final Answer:" without seeing a successful query result first!
 - Keep your <think> process extremely concise and direct.
+- Do NOT use DISTINCT for counting unless the question explicitly asks for unique items.
 """
 
 # 初版提示词和configs

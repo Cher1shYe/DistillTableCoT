@@ -73,8 +73,18 @@ class QwenDistillTrainer:
         """准备训练数据"""
         print("Preparing training data...")
         
+        dataset_type = self.config['data'].get('dataset_type', 'cot')
+        
+        if dataset_type == 'agent':
+            print("=> Using AgentDataset for Multi-Turn Agent Training")
+            from data_loader.agent_dataset import AgentDataset
+            DatasetClass = AgentDataset
+        else:
+            print("=> Using CoTDataset for Single-Turn CoT Training")
+            DatasetClass = CoTDataset
+        
         # 训练集
-        self.train_dataset = CoTDataset(
+        self.train_dataset = DatasetClass(
             data_paths=self.config['data']['data_paths'],
             tokenizer=self.tokenizer,
             max_input_length=self.config['training']['max_input_length'],
@@ -83,7 +93,7 @@ class QwenDistillTrainer:
         )
         
         # 验证集
-        self.val_dataset = CoTDataset(
+        self.val_dataset = DatasetClass(
             data_paths=self.config['data']['data_paths'],
             tokenizer=self.tokenizer,
             max_input_length=self.config['training']['max_input_length'],

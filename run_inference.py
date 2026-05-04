@@ -110,7 +110,7 @@ def generate_agent_predictions(task_name, num_samples, max_turns=5, output_dir="
         if conn is None:
             # 如果表格解析失败，记录并跳过
             continue
-        table_str = format_table(sample.get('table'), task_name=task_name)
+        table_str = format_table(raw_table, task_name=task_name)
         question = sample.get('question') or sample.get('statement', '')
         
     # 基础 User Prompt 包含 Table 内容和数据库 Schema，让模型知道列名

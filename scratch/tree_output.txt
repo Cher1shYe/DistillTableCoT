@@ -1,0 +1,40 @@
+ID 0: in eastern ontario, what percent of french-language workers have worked in the restaurant and food s
+  Answer: [52.1]
+  Tree depth: 2, Has empty rows: False
+
+ID 1: in eastern ontario, what percent of other agri-food workers have worked in the restaurant and food s
+  Answer: [60.6]
+  Tree depth: 2, Has empty rows: False
+
+ID 2: in northern ontario, what proportion of workers who have worked in the restaurant and food services 
+  Answer: [55.0]
+  Tree depth: 2, Has empty rows: False
+
+ID 3: in northern ontario, what proportion of workers who have worked in the restaurant and food services 
+  Answer: [58.1]
+  Tree depth: 2, Has empty rows: False
+
+ID 4: among the black canadian-born population aged 25 to 59, which group of people had a higher education
+  Answer: ['women']
+  Tree depth: 2, Has empty rows: True
+
+ID 5: how many percent of university graduates among second-generation black women who originated from jam
+  Answer: [15.5]
+  Tree depth: 2, Has empty rows: True
+
+ID 6: what is the difference between black women with university degree only who originated from haitian a
+  Answer: [18.8]
+  Tree depth: 2, Has empty rows: True
+
+ID 7: in 2016, which region of ancestry had a higher percentage of second-generation black women with a un
+  Answer: ['africa']
+  Tree depth: 2, Has empty rows: True
+
+ID 8: how many percent of second-generation women with african ancestry had a university degree in 2016?
+  Answer: [50.8]
+  Tree depth: 2, Has empty rows: True
+
+ID 9: how many percent of second-generation women with caribbean and latin american ancestry had a univers
+  Answer: [34.8]
+  Tree depth: 2, Has empty rows: True
+

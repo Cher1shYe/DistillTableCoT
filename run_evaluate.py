@@ -76,12 +76,44 @@ def evaluate_predictions(task_name, output_dir="outputs", pred_file="predictions
         # --- 根据指标名称选择不同的评估策略 ---
         
         if metric_name == "exact_match":
-            # 适用于 wikitableqa
-            
-            predictions_for_em = [str(p) for p in processed_preds]
-            references_for_em = [str(ref).strip("[]'\"") for ref in raw_references]
-            score = metric.compute(predictions=predictions_for_em, references=references_for_em)
-            results[metric_name] = score
+            if task_name == "hitab":
+                import ast
+                correct = 0
+                total = len(processed_preds)
+                for p, r in zip(processed_preds, raw_references):
+                    p_str = str(p).strip()
+                    r_str = str(r).strip()
+                    match = False
+                    if p_str == r_str:
+                        match = True
+                    else:
+                        try:
+                            p_val = ast.literal_eval(p_str)
+                            r_val = ast.literal_eval(r_str)
+                            if p_val == r_val:
+                                match = True
+                            else:
+                                p_list = p_val if isinstance(p_val, list) else [p_val]
+                                r_list = r_val if isinstance(r_val, list) else [r_val]
+                                if len(p_list) == len(r_list):
+                                    list_match = True
+                                    for p_i, r_i in zip(p_list, r_list):
+                                        if float(p_i) != float(r_i):
+                                            list_match = False
+                                            break
+                                    if list_match:
+                                        match = True
+                        except:
+                            pass
+                    if match:
+                        correct += 1
+                results[metric_name] = {"exact_match": correct / total if total > 0 else 0.0}
+            else:
+                # 适用于 wikitableqa
+                predictions_for_em = [str(p) for p in processed_preds]
+                references_for_em = [str(ref).strip("[]'\"") for ref in raw_references]
+                score = metric.compute(predictions=predictions_for_em, references=references_for_em)
+                results[metric_name] = score
 
         elif metric_name == "accuracy":
             # 增加 str() 强转，防止 p 或 r 是 None 或非字符串导致 .lower() 报错

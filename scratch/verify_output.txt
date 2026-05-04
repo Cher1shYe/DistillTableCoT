@@ -1,0 +1,36 @@
+API 客户端初始化失败: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
+Found 'lone parent' at HF idx 408
+Q: what was the proportion of homlessness support sector workers that were female lone parents?
+A: [13.2]
+
+Raw grid:
+  Row 0: ['', 'all workers', '', 'homelessness support sector', '', 'social workers', '', 'social and community service workers', '']
+  Row 1: ['', 'count', 'percentage', 'count', 'percentage', 'count', 'percentage', 'count', 'percentage']
+  Row 2: ['total - census family status', '19,956,250', '100.0', '6,305', '100.0', '62,235', '100.0', '155,625', '100.0']
+  Row 3: ['married or common-law couple', '13,812,910', '69.2', '3,535', '56.1', '42,200', '67.8', '95,890', '61.6']
+  Row 4: ['with children', '9,151,300', '45.9', '2,140', '33.9', '27,960', '44.9', '61,975', '39.8']
+  Row 5: ['without children', '4,661,610', '23.4', '1,400', '22.2', '14,240', '22.9', '33,910', '21.8']
+  Row 6: ['lone parent', '1,995,250', '10.0', '915', '14.5', '7,070', '11.4', '22,330', '14.3']
+  Row 7: ['female lone parent', '1,208,105', '6.1', '830', '13.2', '6,455', '10.4', '19,360', '12.4']
+  Row 8: ['male lone parent', '787,150', '3.9', '85', '1.3', '605', '1.0', '2,965', '1.9']
+  Row 9: ['multiple census-family household', '876,270', '4.4', '230', '3.6', '1,825', '2.9', '6,470', '4.2']
+  Row 10: ['non-census family household', '3,271,825', '16.4', '1,625', '25.8', '11,140', '17.9', '30,940', '19.9']
+  Row 11: ['one person household', '2,290,860', '11.5', '1,075', '17.0', '8,825', '14.2', '20,925', '13.4']
+
+After flattening (10 rows):
+Headers: ['group_level_0', 'group_level_1', 'Col_0', 'all workers - count', 'all workers - percentage', 'homelessness support sector - count', 'homelessness support sector - percentage', 'social workers - count', 'social workers - percentage', 'social and community service workers - count', 'social and community service workers - percentage']
+  ['', '', 'total - census family status', '19,956,250', '100.0', '6,305', '100.0', '62,235', '100.0', '155,625', '100.0']
+  ['total - census family status', '', 'married or common-law couple', '13,812,910', '69.2', '3,535', '56.1', '42,200', '67.8', '95,890', '61.6']
+  ['total - census family status', 'married or common-law couple', 'with children', '9,151,300', '45.9', '2,140', '33.9', '27,960', '44.9', '61,975', '39.8']
+  ['total - census family status', 'married or common-law couple', 'without children', '4,661,610', '23.4', '1,400', '22.2', '14,240', '22.9', '33,910', '21.8']
+  ['total - census family status', '', 'lone parent', '1,995,250', '10.0', '915', '14.5', '7,070', '11.4', '22,330', '14.3']
+  ['total - census family status', 'lone parent', 'female lone parent', '1,208,105', '6.1', '830', '13.2', '6,455', '10.4', '19,360', '12.4']
+  ['total - census family status', 'lone parent', 'male lone parent', '787,150', '3.9', '85', '1.3', '605', '1.0', '2,965', '1.9']
+  ['total - census family status', '', 'multiple census-family household', '876,270', '4.4', '230', '3.6', '1,825', '2.9', '6,470', '4.2']
+  ['total - census family status', '', 'non-census family household', '3,271,825', '16.4', '1,625', '25.8', '11,140', '17.9', '30,940', '19.9']
+  ['total - census family status', 'non-census family household', 'one person household', '2,290,860', '11.5', '1,075', '17.0', '8,825', '14.2', '20,925', '13.4']
+
+Traceback (most recent call last):
+  File "/Users/yebohou/zju/SRTP/DTC/DistillTableCoT/scratch/verify_flatten.py", line 54, in <module>
+    cursor.execute(f"SELECT * FROM my_table WHERE \"2016\" = {answer_val}")
+sqlite3.OperationalError: unrecognized token: "["
