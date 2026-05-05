@@ -162,6 +162,8 @@ def main():
                         help="数据切片 (test/validation/train)")
     parser.add_argument("--max_new_tokens", type=int, default=1024,
                         help="生成的最大新 token 数")
+    parser.add_argument("--num_samples", type=int, default=1,
+                        help="测试的数据条数")
     args = parser.parse_args()
 
     # 默认提示词模式
@@ -186,26 +188,40 @@ def main():
 
     print(f"📚 加载数据集 {dataset_name} [{args.split}] ...")
     dataset = load_dataset(dataset_name, split=args.split)
-    sample = dataset[0]
+    
+    # 获取目标字段，用于提取参考答案
+    target_field = cfg_dict[args.task]["target_field"]
+    
+    num_to_test = min(args.num_samples, len(dataset))
+    test_dataset = dataset.select(range(num_to_test))
 
-    messages, _ = build_messages(args.task, args.prompt_mode, sample)
+    for i, sample in enumerate(test_dataset):
+        print(f"\n" + "=" * 60)
+        print(f"  测试样本 {i + 1} / {num_to_test}  (ID: {sample.get('id', 'N/A')})")
+        print("=" * 60)
+        
+        messages, _ = build_messages(args.task, args.prompt_mode, sample)
+        
+        print("Formatted Input Messages:")
+        print("-" * 30)
+        for msg in messages:
+            print(f"[{msg['role'].upper()}]:\n{msg['content']}\n")
+        
+        # 提取真实答案
+        ground_truth = sample.get(target_field, "N/A")
+        print("-" * 30)
+        print(f"GROUND TRUTH ({target_field}):\n{ground_truth}")
+        print("-" * 30 + "\n")
 
-    print("\n" + "=" * 50)
-    print("Formatted Input Messages:")
-    print("=" * 50)
-    for msg in messages:
-        print(f"[{msg['role'].upper()}]:\n{msg['content']}\n")
-    print("=" * 50 + "\n")
+        # 3. 生成
+        print("Generating answer... (this may take a few seconds)")
+        response = generate(model, tokenizer, messages, max_new_tokens=args.max_new_tokens)
 
-    # 3. 生成
-    print("Generating answer... (this may take a few seconds)")
-    response = generate(model, tokenizer, messages, max_new_tokens=args.max_new_tokens)
-
-    print("\n" + "=" * 50)
-    print(f"Model Response ({args.model_type.upper()} MODEL, {args.prompt_mode.upper()} PROMPT):")
-    print("=" * 50)
-    print(response)
-    print("=" * 50 + "\n")
+        print("\n" + "=" * 50)
+        print(f"Model Response ({args.model_type.upper()} MODEL, {args.prompt_mode.upper()} PROMPT):")
+        print("=" * 50)
+        print(response)
+        print("=" * 50 + "\n")
 
 
 if __name__ == "__main__":
