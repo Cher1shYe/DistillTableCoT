@@ -1,0 +1,39 @@
+# Qwen3 简单 CoT 蒸馏训练配置 (单轮 user -> assistant with <think>)
+# 用法: python3 scripts/train_distill.py --config configs/qwen3_cot.yaml
+
+# 继承基础配置
+_base_: "train_base.yaml"
+
+model:
+  model_name: "Qwen/Qwen3-1.7B"
+  tokenizer_name: "Qwen/Qwen3-1.7B"
+  local_path: "./origin/Qwen3-1.7B_origin"
+  torch_dtype: "bfloat16"
+
+data:
+  dataset_type: "cot"  # 单轮 CoT 蒸馏 (使用 CoTDataset)
+  data_paths:
+    - "outputs/wikitableqa/predictions_v1.json"
+    - "outputs/hitab/predictions_v1.json"
+    - "outputs/tabfact/predictions_v1.json"
+    - "outputs/fetaqa/predictions_v1.json"
+
+training:
+  output_dir: "./outputs/models/Qwen3-1.7B-cot/"
+  num_epochs: 3
+  batch_size: 2
+  eval_batch_size: 4
+  gradient_accumulation_steps: 8
+  learning_rate: 2e-5
+  max_input_length: 2048
+  max_target_length: 1024
+  logging_steps: 10
+  eval_steps: 500
+  save_steps: 500
+  optim: "paged_adamw_8bit"
+  save_total_limit: 3
+  bf16: true
+  fp16: false
+  gradient_checkpointing: true
+  report_to: "tensorboard"
+  use_lora: false

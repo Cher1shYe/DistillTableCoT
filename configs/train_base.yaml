@@ -8,28 +8,34 @@ model:
   trust_remote_code: true  # Qwen3 需此，如果 transformers <4.51.0 会 error
 
 training:
-  output_dir: "./outputs/models"
-  num_epochs: 4
-  batch_size: 1
-  eval_batch_size: 1
+  output_dir: "./outputs/models/Qwen3-1.7B-base/"
+  num_epochs: 3
+  batch_size: 2
+  eval_batch_size: 4
   learning_rate: 0.00002
   warmup_ratio: 0.1
-  max_input_length: 1024
-  max_target_length: 2048
-  logging_steps: 50
+  max_input_length: 2048
+  max_target_length: 1024
+  logging_steps: 10
   eval_steps: 500
   save_steps: 500
   save_total_limit: 3
-  gradient_accumulation_steps: 16
+  gradient_accumulation_steps: 8
+  optim: "paged_adamw_8bit"
+  gradient_checkpointing: true
+  report_to: "tensorboard"
   bf16: true
+  fp16: false
+  use_lora: false
   seed: 42
 
 # 数据配置
 data:
   data_paths:
-    - "./outputs/fetaqa/predictions.json"
-    - "./outputs/tabfact/predictions.json" 
-    - "./outputs/wikitableqa/predictions.json"
+    - "./outputs/wikitableqa/predictions_v1.json"
+    - "./outputs/hitab/predictions_v1.json"
+    - "./outputs/tabfact/predictions_v1.json"
+    - "./outputs/fetaqa/predictions_v1.json"
   train_ratio: 0.8
   val_ratio: 0.1
   test_ratio: 0.1
