@@ -48,6 +48,9 @@ class CoTDataset(Dataset):
                     with open(file_path, 'r', encoding='utf-8') as f:
                         data = json.load(f)
 
+                    # FeTaQA uses free-form sentences → use ROUGE-L; others use exact match.
+                    rouge_threshold = 0.3 if 'fetaqa' in file_path.lower() else None
+
                     # 处理数据格式
                     if isinstance(data, list):
                         # 直接是列表格式
@@ -55,7 +58,7 @@ class CoTDataset(Dataset):
                             if self.only_correct:
                                 pred = item.get('processed_prediction', '')
                                 ref = item.get('reference', '')
-                                if not is_match(pred, ref):
+                                if not is_match(pred, ref, rouge_threshold=rouge_threshold):
                                     continue
                             all_data.append(self._standardize_item(item, file_path))
                     else:
@@ -66,7 +69,7 @@ class CoTDataset(Dataset):
                             if self.only_correct:
                                 pred = item.get('processed_prediction', '')
                                 ref = item.get('reference', '')
-                                if not is_match(pred, ref):
+                                if not is_match(pred, ref, rouge_threshold=rouge_threshold):
                                     continue
                             standardized_item = self._standardize_item(item, os.path.basename(file_path))
                             all_data.append(standardized_item)

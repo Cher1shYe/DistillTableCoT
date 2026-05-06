@@ -187,12 +187,15 @@ class AgentDataset(Dataset):
 
                     data_list = data if isinstance(data, list) else data.get('predictions', [])
 
+                    # FeTaQA uses free-form sentences → use ROUGE-L; others use exact match.
+                    rouge_threshold = 0.3 if 'fetaqa' in file_path.lower() else None
+
                     for item in data_list:
                         # 可选：跳过最终答案错误的样本（避免让小模型学到错误推理）
                         if self.only_correct:
                             pred = item.get('processed_prediction', '')
                             ref = item.get('reference', '')
-                            if not is_match(pred, ref):
+                            if not is_match(pred, ref, rouge_threshold=rouge_threshold):
                                 continue
 
                         task_id = item.get('id', 'unknown')
