@@ -1,0 +1,40 @@
+# Qwen3 Mixed (SQL-first + CoT fallback) 蒸馏训练配置
+# 对应 v5 数据：每个样本先尝试 SQL Agent，失败则回退 CoT
+# 用法: python3 scripts/train_distill.py --config configs/qwen3_mixed.yaml
+
+_base_: "train_base.yaml"
+
+model:
+  model_name: "Qwen/Qwen3-1.7B"
+  tokenizer_name: "Qwen/Qwen3-1.7B"
+  local_path: "./origin/Qwen3-1.7B_origin"
+  torch_dtype: "bfloat16"
+
+data:
+  dataset_type: "agent"   # AgentDataset 同时处理 SQL turns 和 CoT fallback turns
+  data_paths:
+    - "outputs/wikitableqa/predictions_v5.json"
+    - "outputs/hitab/predictions_v5.json"
+    - "outputs/tabfact/predictions_v5.json"
+    - "outputs/fetaqa/predictions_v5.json"
+  only_correct: false     # v5 数据少，建议 false；若要 RFT 过滤则改 true
+
+training:
+  output_dir: "./outputs/models/Qwen3-1.7B-mixed/"
+  num_epochs: 5           # v5 数据量小 (~1500)，适当多跑几轮
+  batch_size: 2
+  eval_batch_size: 4
+  gradient_accumulation_steps: 8
+  learning_rate: 2e-5
+  max_input_length: 2048
+  max_target_length: 512  # v5 每轮回复较短（SQL query 或 Final Answer）
+  logging_steps: 10
+  eval_steps: 200         # 数据少所以 eval 更频繁
+  save_steps: 200
+  optim: "paged_adamw_8bit"
+  save_total_limit: 3
+  bf16: true
+  fp16: false
+  gradient_checkpointing: true
+  report_to: "tensorboard"
+  use_lora: false

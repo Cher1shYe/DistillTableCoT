@@ -110,10 +110,48 @@ def evaluate_predictions(task_name, output_dir="outputs", pred_file="predictions
                 results[metric_name] = {"exact_match": correct / total if total > 0 else 0.0}
             else:
                 # 适用于 wikitableqa
-                predictions_for_em = [str(p) for p in processed_preds]
-                references_for_em = [str(ref).strip("[]'\"") for ref in raw_references]
-                score = metric.compute(predictions=predictions_for_em, references=references_for_em)
-                results[metric_name] = score
+                import re
+
+                def normalize_string(s):
+                    if not s: return ""
+                    s = str(s).lower().strip()
+                    # 移除数字中的逗号
+                    s = re.sub(r'(?<=\d),(?=\d)', '', s)
+                    # 移除冠词
+                    s = re.sub(r'\b(a|an|the)\b', ' ', s)
+                    # 移除大部分标点（保留连字符和内部空格）
+                    s = re.sub(r'[^\w\s-]', ' ', s)
+                    # 移除末尾句号
+                    if s.endswith('.'): s = s[:-1]
+                    return " ".join(s.split())
+
+                correct = 0
+                total = len(processed_preds)
+                for p, r in zip(processed_preds, raw_references):
+                    # p 是字符串，r 是列表 (或列表的字符串表示)
+                    p_norm = normalize_string(p)
+                    
+                    # 处理 r 可能被存成字符串 "['ans']" 的情况
+                    if isinstance(r, str) and r.startswith('[') and r.endswith(']'):
+                        try:
+                            r_list = ast.literal_eval(r)
+                        except:
+                            r_list = [r.strip("[]'\"")]
+                    elif isinstance(r, list):
+                        r_list = r
+                    else:
+                        r_list = [str(r)]
+                    
+                    r_norms = [normalize_string(x) for x in r_list]
+                    
+                    if p_norm in r_norms:
+                        correct += 1
+                    elif p_norm == ", ".join(r_norms) or p_norm == ",".join(r_norms):
+                        correct += 1
+                    elif all(ref in p_norm for ref in r_norms) and len(r_norms) > 1:
+                        correct += 1
+                
+                results[metric_name] = {"exact_match": correct / total if total > 0 else 0.0}
 
         elif metric_name == "accuracy":
             # 增加 str() 强转，防止 p 或 r 是 None 或非字符串导致 .lower() 报错

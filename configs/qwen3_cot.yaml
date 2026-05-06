@@ -17,6 +17,7 @@ data:
     - "outputs/hitab/predictions_v1.json"
     - "outputs/tabfact/predictions_v1.json"
     - "outputs/fetaqa/predictions_v1.json"
+  only_correct: false   # 改为 true 可开启 RFT 过滤 (仅保留答案正确的样本)
 
 training:
   output_dir: "./outputs/models/Qwen3-1.7B-cot/"

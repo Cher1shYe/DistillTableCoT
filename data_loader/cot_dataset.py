@@ -6,17 +6,19 @@ import re
 import torch
 from torch.utils.data import Dataset
 from transformers import AutoTokenizer
+from utils_train.eval_utils import is_match
 
 class CoTDataset(Dataset):
     """思维链数据集加载器"""
     
     def __init__(self, data_paths: List[str], tokenizer: Any, 
                  max_input_length: int = 1024, max_target_length: int = 1024,
-                 split: str = "train"):
+                 split: str = "train", only_correct: bool = False):
         self.tokenizer = tokenizer
         # 总最大长度 = prompt最大长度 + 答案最大长度
         self.max_length = max_input_length + max_target_length
         self.split = split
+        self.only_correct = only_correct
         
         # 加载所有数据
         self.data = self._load_data(data_paths)
@@ -24,7 +26,7 @@ class CoTDataset(Dataset):
         # 数据集划分
         self.data = self._split_data(self.data, split)
         
-        print(f"Loaded {len(self.data)} samples for {split} split")
+        print(f"Loaded {len(self.data)} samples for {split} split (only_correct={only_correct})")
     
     def _load_data(self, data_paths: List[str]) -> List[Dict]:
         """加载所有预测文件数据"""
@@ -50,12 +52,22 @@ class CoTDataset(Dataset):
                     if isinstance(data, list):
                         # 直接是列表格式
                         for item in data:
+                            if self.only_correct:
+                                pred = item.get('processed_prediction', '')
+                                ref = item.get('reference', '')
+                                if not is_match(pred, ref):
+                                    continue
                             all_data.append(self._standardize_item(item, file_path))
                     else:
                         # 可能是包含predictions字段的字典格式
                         data_list = data.get('predictions', [])
                         print(f"格式2: predictions字段，包含 {len(data_list)} 条数据")
                         for item in data_list:
+                            if self.only_correct:
+                                pred = item.get('processed_prediction', '')
+                                ref = item.get('reference', '')
+                                if not is_match(pred, ref):
+                                    continue
                             standardized_item = self._standardize_item(item, os.path.basename(file_path))
                             all_data.append(standardized_item)
                             
@@ -66,35 +78,45 @@ class CoTDataset(Dataset):
         return all_data
     
     def _standardize_item(self, item: Dict, source_file: str) -> Dict:
-        """解析 Teacher 的预测结果，拆分出推理过程和最终答案"""
+        """解析 Teacher 的预测结果，拆分出推理过程和最终答案
+
+        v1 格式：{reasoning}\n**Answer:** {answer}
+        The answer marker always appears at the END of the prediction — but the reasoning
+        text can itself contain phrases like "the answer is X" as a passing reference.
+        We therefore take the LAST regex match, not the first.
+        """
         prediction = item.get('prediction', '')
-        
-        # 优化后的正则：
-        # \**\s* 兼容前面的 Markdown 加粗符号 (比如 **Answer:)
-        # (?:...) 匹配你提供的各种可能的答案前缀
-        # \s*\**\s* 兼容后面的冒号、空格和 Markdown 符号 (比如 Answer:** )
-        # (.+) 贪婪匹配后面所有的内容，作为最终答案
-        pattern = r'\**\s*(?:the final answer is|the answer is|so the answer is|final answer:|answer:)\s*\**\s*(.+)'
-        
-        match = re.search(pattern, prediction, re.IGNORECASE | re.DOTALL)
-        
-        if match:
-            # match.start() 拿到的是 "Answer:" 这个词开始的索引位置
-            # 因此，索引位置之前的【所有内容】，都是它的思考过程 (CoT)
+        # processed_prediction is extracted by the inference pipeline and is the reliable
+        # ground-truth answer; used as an anchor when the regex misses.
+        processed_prediction = item.get('processed_prediction', '').strip()
+
+        # Use ([^\n]+) — not (.+) with DOTALL — so each marker captures only its own line.
+        # With DOTALL, greedy (.+) swallows the rest of the string and finditer returns a
+        # single match; ([^\n]+) lets finditer find every marker so we can take the last.
+        pattern = r'\**\s*(?:the final answer is|the answer is|so the answer is|final answer:|answer:)\s*\**\s*([^\n]+)'
+
+        # Use the LAST match: reasoning may casually say "the answer is X" before the real
+        # conclusion line, which is always the final occurrence.
+        matches = list(re.finditer(pattern, prediction, re.IGNORECASE))
+
+        if matches:
+            match = matches[-1]
             reasoning = prediction[:match.start()].strip()
-            
-            # match.group(1) 拿到的则是剥离了 "Answer:" 前缀后，纯粹的答案结果
             final_answer = match.group(1).strip()
-            
-            # 安全校验：如果模型直接输出了 "Answer: xxx" 而没有前面的推理过程
-            # 那就不加 <think> 标签，避免生成空的 <think>\n</think>
-            if reasoning:
-                assistant_content = f"<think>\n{reasoning}\n</think>\n{final_answer}"
-            else:
-                assistant_content = final_answer
+        elif processed_prediction and processed_prediction in prediction:
+            # No marker found; use processed_prediction as the answer boundary.
+            idx = prediction.rfind(processed_prediction)
+            reasoning = prediction[:idx].strip()
+            final_answer = processed_prediction
         else:
-            # 如果正则完全没有命中（极其罕见的异常格式），把全部文本作为答案
-            assistant_content = prediction
+            # Last resort: no structure recoverable.
+            reasoning = ''
+            final_answer = processed_prediction or prediction
+
+        if reasoning:
+            assistant_content = f"<think>\n{reasoning}\n</think>\n{final_answer}"
+        else:
+            assistant_content = final_answer
 
         return {
             'id': item.get('id', ''),
@@ -157,13 +179,16 @@ class CoTDataset(Dataset):
         ]
 
         # 2. 使用 apply_chat_template 渲染文本
-        # 渲染 Prompt 部分 (add_generation_prompt=True 会加上 "<|im_start|>assistant\n")
+        # assistant_content already contains explicit <think>...</think> tags produced by
+        # _standardize_item.  Do NOT pass enable_thinking=True here: Qwen3's template with
+        # that flag prepends an extra "<think>\n" token to every assistant turn, which would
+        # (a) double the opening tag and (b) make prompt_len miscount the boundary by those
+        # extra tokens — both leading to corrupted labels.
         prompt_text = self.tokenizer.apply_chat_template(
             prompt_messages, tokenize=False, add_generation_prompt=True
         )
-        # 渲染完整的 对话 (开启 enable_thinking=True 激活 Qwen3 的专属模版逻辑)
         full_text = self.tokenizer.apply_chat_template(
-            full_messages, tokenize=False, enable_thinking=True
+            full_messages, tokenize=False
         )
 
         # 3. 进行分词 (注意：不加 padding！返回普通的 1D List)

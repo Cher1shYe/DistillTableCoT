@@ -42,28 +42,27 @@ def extract_wiki_final_answer(prediction_text):
 
     text = prediction_text.strip()
 
-    # 首先查找所有 "Answer:" 的匹配
+    # 首先查找 "Final Answer:" (Agent 模式最常用)
+    final_answer_match = re.search(r'Final Answer:\s*(.*)', text, re.IGNORECASE)
+    if final_answer_match:
+        return clean_answer(final_answer_match.group(1))
+
+    # 其次查找所有 "Answer:" 的匹配
     answer_matches = list(re.finditer(r'\bAnswer:\s*(.+?)(?:\.|\n|$)', text, re.IGNORECASE | re.DOTALL))
     if answer_matches:
         # 如果找到了，取最后一个匹配项
         last_match = answer_matches[-1]
         answer = last_match.group(1)
         return clean_answer(answer)
-    # 1. 尝试用正则表达式匹配常见的答案指示词
-    #    - re.IGNORECASE: 忽略大小写
-    #    - re.DOTALL: 让 . 能匹配换行符
-    #    - (?:...): 非捕获组，只用于匹配，不作为结果
-    #    - \s*: 匹配任意数量的空格
-    #    - \**\s*: 匹配粗体标记和空格
-    #    - (.+): 捕获我们想要的答案
+
+    # 尝试用正则表达式匹配常见的答案指示词
     match = re.search(
-        r'(?:the final answer is|the answer is|so the answer is|answer:|Answer:)\**\s*(.+)',
+        r'(?:the final answer is|the answer is|so the answer is)\**\s*(.+)',
         text,
         re.IGNORECASE | re.DOTALL
     )
     
     if match:
-        # 如果匹配成功，获取第一个捕获组的内容并对数据进行清洗
         answer = match.group(1)
         return clean_answer(answer)
 
@@ -260,18 +259,21 @@ def extract_hitab_final_answer(prediction_text, reference_label):
     # 如果 Reference 解析失败，兜底加上方括号返回
     return f"[{ans_raw}]" if ref_str.startswith('[') else ans_raw.strip()
 
-AGENT_SYSTEM_PROMPT = """You are an expert data analyst interacting with a SQLite database.
-Act based on the input provided:
+AGENT_SYSTEM_PROMPT = """You are a data analyst using a SQLite database.
 
-1. IF NO FEEDBACK (First Turn): Reason BRIEFLY in <think>...</think> (MAX 3 SENTENCES), You MUST start with `Columns: [exact names from Schema]`. Then output your query in ```sql ... ```.
-2. IF ERROR FEEDBACK: Reflect BRIEFLY on the error in <think>...</think> (MAX 3 SENTENCES), then output a corrected SQLite query.
-3. IF SUCCESS FEEDBACK: Based on the result, output EXACTLY "Final Answer: <answer>".
+Steps:
+1. First turn: Think step-by-step about the SQL logic needed, then write one ```sql ... ``` query.
+2. After feedback: Check the SQL result. If the result is non-empty then actually answers the question. If wrong or empty, write a new ```sql ... ```. If correct, output exactly 'Final Answer: <answer>'.
 
-Crucial Notes for SQLite:
-- NEVER output "Final Answer:" without seeing a successful query result first!
-- Keep your <think> process extremely concise and direct.
-- Do NOT use DISTINCT for counting unless the question explicitly asks for unique items.
+Rules:
+- Keep the original table's units/format in the final answer.
+- For entities (like cities or names), prefer the full text as it appears in the table cell.
+- When counting ("how many"), do not use DISTINCT unless the question specifically asks for "unique" or "different" items.
+- Never output 'Final Answer:' without a valid non-empty SQL result.
 """
+
+# 多次SQL查询仍返回空/失败时使用的简单 CoT 回退提示
+COT_SYSTEM_PROMPT = "You read tables and answer questions. Think step-by-step then output exactly 'Final Answer: <answer>'."
 
 # 初版提示词和configs
 # TASK_CONFIGS = {
@@ -329,52 +331,56 @@ TASK_CONFIGS = {
     "wikitableqa": {
         "dataset_name": "table-benchmark/wikiqa",
         "dataset_split": "train",
-        "system_prompt": AGENT_SYSTEM_PROMPT + "\n\nTask Requirement: For WikiTableQA, the final answer should be a precise entity, number, or short phrase based on the query result.",
-        "user_prompt_template": "Table:\n{table}\n\nQuestion: {question}\n\nRequirement: You MUST use 'Final Answer: <your precise answer>' to output your final result.",
+        "system_prompt": AGENT_SYSTEM_PROMPT + "\nTask: Final answer is a precise entity, number, or short phrase.",
+        "user_prompt_template": "Table:\n{table}\n\nQuestion: {question}\n\nOutput 'Final Answer: <precise answer>'.",
+        "cot_user_prompt_template": "Table:\n{table}\n\nQuestion: {question}\n\nAnswer with a precise entity, number, or short phrase. End with 'Final Answer: <answer>'.",
         "input_fields": ["question", "table"],
         "target_field": "answer",
         "metrics": ["exact_match"],
         "postprocess_func": lambda pred, label: (
-            extract_wiki_final_answer(pred) if pred else "", 
+            extract_wiki_final_answer(pred) if pred else "",
             label.strip()
         ),
     },
     "tabfact": {
         "dataset_name": "table-benchmark/tabfact",
         "dataset_split": "train",
-        "system_prompt": AGENT_SYSTEM_PROMPT + "\n\nTask Requirement: For TabFact, you need to verify if the statement is Entailed or Refuted by the database.",
-        "user_prompt_template": "Table:\n{table}\n\nStatement to verify: {question}\n\nRequirement: You MUST use exactly 'Final Answer: Entailed' or 'Final Answer: Refuted'.",
+        "system_prompt": AGENT_SYSTEM_PROMPT + "\nTask: Verify whether the statement is Entailed or Refuted by the table.",
+        "user_prompt_template": "Table:\n{table}\n\nStatement: {question}\n\nOutput exactly 'Final Answer: Entailed' or 'Final Answer: Refuted'.",
+        "cot_user_prompt_template": "Table:\n{table}\n\nStatement: {question}\n\nDecide if the statement is supported. End with exactly 'Final Answer: Entailed' or 'Final Answer: Refuted'.",
         "input_fields": ["question", "table"],
         "target_field": "answer",
         "metrics": ["accuracy"],
         "postprocess_func": lambda pred, label: (
-            extract_fact_final_answer(pred) if pred else "", 
+            extract_fact_final_answer(pred) if pred else "",
             label.strip()
         ),
     },
     "fetaqa": {
         "dataset_name": "table-benchmark/fetaqa",
         "dataset_split": "train",
-        "system_prompt": AGENT_SYSTEM_PROMPT + "\n\nTask Requirement: For FeTaQA, provide a detailed, free-form answer in a single coherent sentence based on the query result.",
-        "user_prompt_template": "Table:\n{table}\n\nQuestion: {question}\n\nRequirement: You MUST use 'Final Answer: <your detailed sentence>' to output your final result.",
+        "system_prompt": AGENT_SYSTEM_PROMPT + "\nTask: Final answer is one coherent sentence based on the query result.",
+        "user_prompt_template": "Table:\n{table}\n\nQuestion: {question}\n\nOutput 'Final Answer: <one-sentence answer>'.",
+        "cot_user_prompt_template": "Table:\n{table}\n\nQuestion: {question}\n\nAnswer in one sentence. End with 'Final Answer: <sentence>'.",
         "input_fields": ["question", "table", "table_title"],
         "target_field": "answer",
         "metrics": ["rouge", "sacrebleu"],
         "postprocess_func": lambda pred, label: (
-            extract_fetaqa_final_answer(pred) if pred else "", 
+            extract_fetaqa_final_answer(pred) if pred else "",
             label.strip()
         ),
     },
     "hitab": {
         "dataset_name": "kasnerz/hitab",
         "dataset_split": "train",
-        "system_prompt": AGENT_SYSTEM_PROMPT + "\n\nTask Requirement: For HiTab, the final answer should be a precise number, entity, or short phrase based on the query result.",
-        "user_prompt_template": "Table:\n{table}\n\nQuestion: {question}\n\nRequirement: You MUST use 'Final Answer: <your precise answer>' to output your final result.",
+        "system_prompt": AGENT_SYSTEM_PROMPT + "\nTask: Final answer is a precise number, entity, or short phrase.",
+        "user_prompt_template": "Table:\n{table}\n\nQuestion: {question}\n\nOutput 'Final Answer: <precise answer>'.",
+        "cot_user_prompt_template": "Table:\n{table}\n\nQuestion: {question}\n\nAnswer with a precise number, entity, or short phrase. End with 'Final Answer: <answer>'.",
         "input_fields": ["question", "table"],
-        "target_field": "answer",        
+        "target_field": "answer",
         "metrics": ["exact_match"],
         "postprocess_func": lambda pred, label: (
-            extract_hitab_final_answer(pred, label) if pred else "", 
+            extract_hitab_final_answer(pred, label) if pred else "",
             label.strip()
         ),
     }

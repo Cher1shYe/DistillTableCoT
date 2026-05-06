@@ -107,7 +107,8 @@ class QwenDistillTrainer:
             tokenizer=self.tokenizer,
             max_input_length=self.config['training']['max_input_length'],
             max_target_length=self.config['training']['max_target_length'],
-            split="train"
+            split="train",
+            only_correct=self.config['data'].get('only_correct', False)
         )
         
         # 验证集
@@ -116,7 +117,8 @@ class QwenDistillTrainer:
             tokenizer=self.tokenizer,
             max_input_length=self.config['training']['max_input_length'],
             max_target_length=self.config['training']['max_target_length'],
-            split="val"
+            split="val",
+            only_correct=self.config['data'].get('only_correct', False)
         )
         
         print(f"Train samples: {len(self.train_dataset)}")
