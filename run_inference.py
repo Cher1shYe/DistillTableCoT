@@ -72,7 +72,7 @@ def generate_predictions(task_name, num_samples, output_dir="outputs"):
     # 3. 保存结果到文件
     task_output_dir = os.path.join(output_dir, task_name)
     os.makedirs(task_output_dir, exist_ok=True)
-    output_path = os.path.join(task_output_dir, "predictions_v5.json")
+    output_path = os.path.join(task_output_dir, "predictions_v2.json")
     
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(results_to_save, f, ensure_ascii=False, indent=4)
@@ -195,7 +195,7 @@ def generate_agent_predictions(task_name, num_samples, max_turns=5, max_empty=2,
     # 保存逻辑...
     task_output_dir = os.path.join(output_dir, task_name)
     os.makedirs(task_output_dir, exist_ok=True)
-    output_path = os.path.join(task_output_dir, "predictions_v5.json")
+    output_path = os.path.join(task_output_dir, "predictions_v2.json")
     
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(results_to_save, f, ensure_ascii=False, indent=4)
