@@ -70,7 +70,7 @@ def build_messages_and_prompt(task, prompt_mode, sample):
              适合基础数据训练的小模型 以及 未微调的 base 模型）
     返回: (messages, prompt_for_save, config)
     """
-    table_str = format_table(sample.get('table') or sample.get('table_text'))
+    table_str = format_table(sample.get('table') or sample.get('table_text'), task_name=task)
 
     if prompt_mode == "agent":
         config = TASK_CONFIGS[task]
@@ -141,7 +141,7 @@ def generate(model, tokenizer, messages, max_new_tokens=1024):
         outputs = model.generate(**generation_config)
 
     generated_tokens = outputs[0][input_ids.shape[-1]:]
-    response = tokenizer.decode(generated_tokens, skip_special_tokens=False)
+    response = tokenizer.decode(generated_tokens, skip_special_tokens=True)
     return response.strip()
 
 

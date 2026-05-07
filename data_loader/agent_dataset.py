@@ -10,28 +10,26 @@ from utils_train.eval_utils import is_match
 # Import COT_SYSTEM_PROMPT from configs so the string stays in one place.
 # Guarded import: utils_train tests may run without the full project on PYTHONPATH.
 try:
-    from configs import COT_SYSTEM_PROMPT as _COT_SYSTEM_PROMPT
+    from configs import COT_SYSTEM_PROMPT as _COT_SYSTEM_PROMPT, AGENT_SYSTEM_PROMPT as _AGENT_SYSTEM_PROMPT
     COT_SYSTEM_PROMPT = _COT_SYSTEM_PROMPT
+    AGENT_SYSTEM_PROMPT = _AGENT_SYSTEM_PROMPT
 except ImportError:
     COT_SYSTEM_PROMPT = (
         "You read tables and answer questions. "
         "Think step-by-step then output exactly 'Final Answer: <answer>'."
     )
+    AGENT_SYSTEM_PROMPT = """You are a data analyst using a SQLite database.
 
+Steps:
+1. First turn: In your thinking, first perform "Table Positioning" by identifying and listing the relevant column names. Then, think step-by-step about the SQL logic and write one ```sql ... ``` query.
+2. After feedback: Check the SQL result. If the result is non-empty then actually answers the question. If wrong or empty, write a new ```sql ... ```. If correct, output exactly 'Final Answer: <answer>'.
 
-# 推理时使用的 System Prompt（与 configs.py 中 AGENT_SYSTEM_PROMPT 保持一致）
-# 训练时必须注入相同的 System Prompt，否则模型推理时的行为分布会与训练时不一致
-AGENT_SYSTEM_PROMPT = """You are an expert data analyst interacting with a SQLite database.
-Act based on the input provided:
-
-1. IF NO FEEDBACK (First Turn): Reason BRIEFLY in <think>...</think> (MAX 3 SENTENCES), You MUST start with `Columns: [exact names from Schema]`. Then output your query in ```sql ... ```.
-2. IF ERROR FEEDBACK: Reflect BRIEFLY on the error in <think>...</think> (MAX 3 SENTENCES), then output a corrected SQLite query.
-3. IF SUCCESS FEEDBACK: Based on the result, output EXACTLY "Final Answer: <answer>".
-
-Crucial Notes for SQLite:
-- NEVER output "Final Answer:" without seeing a successful query result first!
-- Keep your <think> process extremely concise and direct.
-- Do NOT use DISTINCT for counting unless the question explicitly asks for unique items.
+Rules:
+- During positioning, clearly state which columns are relevant to the question to ensure accuracy.
+- Keep the original table's units/format in the final answer.
+- For entities (like cities or names), prefer the full text as it appears in the table cell.
+- When counting ("how many"), do not use DISTINCT unless the question specifically asks for "unique" or "different" items.
+- Never output 'Final Answer:' without a valid non-empty SQL result.
 """
 
 

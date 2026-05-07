@@ -79,7 +79,7 @@ def generate_predictions(task_name, num_samples, output_dir="outputs"):
         
     print(f"\n成功! {len(results_to_save)} 个预测结果已保存至: {output_path}")
 
-def generate_agent_predictions(task_name, num_samples, max_turns=5, max_empty=2, output_dir="outputs"):
+def generate_agent_predictions(task_name, num_samples, max_turns=5, max_empty=2, output_dir="outputs", fallback_to_cot=True):
     """
     Agent 推理：优先用 SQL 多轮查询；若 SQL 多次返回空值或无 Final Answer，回退到简单 CoT。
     """
@@ -164,7 +164,7 @@ def generate_agent_predictions(task_name, num_samples, max_turns=5, max_empty=2,
             conn.close()
 
         # --- 回退：表格解析失败、无 Final Answer、或多次空值 → 简单 CoT ---
-        if not final_prediction or "Final Answer:" not in final_prediction:
+        if fallback_to_cot and (not final_prediction or "Final Answer:" not in final_prediction):
             mode = "CoT"
             cot_prompt = config["cot_user_prompt_template"].format(
                 table=table_str,
@@ -217,11 +217,20 @@ if __name__ == "__main__":
         help="要运行的任务名称。"
     )
     parser.add_argument(
-        "--num_samples", 
-        type=int, 
+        "--num_samples",
+        type=int,
         default=5,
         help="要处理的样本数量。"
     )
+    parser.add_argument(
+        "--pure_sql",
+        action="store_true",
+        help="纯 SQL 模式：SQL Agent 失败时不回退到 CoT，直接保留当前输出。"
+    )
     args = parser.parse_args()
-    
-    generate_agent_predictions(task_name=args.task_name, num_samples=args.num_samples)
+
+    generate_agent_predictions(
+        task_name=args.task_name,
+        num_samples=args.num_samples,
+        fallback_to_cot=not args.pure_sql,
+    )

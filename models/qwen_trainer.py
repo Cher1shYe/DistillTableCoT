@@ -55,8 +55,6 @@ class QwenDistillTrainer:
                 # 只要 attention_mask 设置正确，这完全没有问题
                 self.tokenizer.pad_token = self.tokenizer.eos_token
                 print(f"Using eos_token (id: {self.tokenizer.pad_token_id}) as pad_token.")
-        need_resize_embeddings = False
-        
         # 加载模型
         torch_dtype = getattr(torch, self.config['model'].get('torch_dtype', 'bfloat16'))
         
@@ -265,14 +263,15 @@ class QwenDistillTrainer:
             print("❌ 模型为None")
             return False
 
-        # 检查是否是有效的transformers模型
+        # 检查是否是有效的transformers模型（兼容 LoRA PeftModel）
         try:
             from transformers import PreTrainedModel
-            if not isinstance(self.model, PreTrainedModel):
-                print("❌ 模型不是有效的PreTrainedModel")
+            from torch import nn
+            if not isinstance(self.model, (PreTrainedModel, nn.Module)):
+                print("❌ 模型不是有效的 nn.Module")
                 return False
         except:
-            print("❌ 无法导入PreTrainedModel")
+            print("❌ 无法导入 PreTrainedModel")
             return False
 
         # 检查模型参数
