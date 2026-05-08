@@ -17,20 +17,20 @@ data:
     - "outputs/hitab/predictions_v5.json"
     - "outputs/tabfact/predictions_v5.json"
     - "outputs/fetaqa/predictions_v5.json"
-  only_correct: false     # v5 数据少，建议 false；若要 RFT 过滤则改 true
+  only_correct: false     # 改为 true 可开启 RFT 过滤
 
 training:
   output_dir: "./outputs/models/Qwen3-1.7B-mixed/"
-  num_epochs: 5           # v5 数据量小 (~1500)，适当多跑几轮
+  num_epochs: 3
   batch_size: 2
   eval_batch_size: 4
   gradient_accumulation_steps: 8
   learning_rate: 2e-5
   max_input_length: 2048
-  max_target_length: 512  # v5 每轮回复较短（SQL query 或 Final Answer）
+  max_target_length: 1024
   logging_steps: 10
-  eval_steps: 200         # 数据少所以 eval 更频繁
-  save_steps: 200
+  eval_steps: 500
+  save_steps: 500
   optim: "paged_adamw_8bit"
   save_total_limit: 3
   bf16: true

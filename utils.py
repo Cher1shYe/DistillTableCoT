@@ -7,7 +7,7 @@ import pandas as pd
 from datetime import datetime
 from openai import OpenAI
 
-# --- API 客户端初始化 (保持原样) ---
+# --- API 客户端初始化 ---
 try:
     client = OpenAI(
         api_key=os.environ.get("DEEPSEEK_API_KEY"),
@@ -16,6 +16,23 @@ try:
 except Exception as e:
     print(f"API 客户端初始化失败: {e}")
     client = None
+
+try:
+    _gpt4o_client = OpenAI(
+        api_key=os.environ.get("OPENAI_API_KEY"),
+    )
+except Exception as e:
+    print(f"GPT-4o 客户端初始化失败: {e}")
+    _gpt4o_client = None
+
+try:
+    _qwen72b_client = OpenAI(
+        api_key=os.environ.get("DASHSCOPE_API_KEY"),
+        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+    )
+except Exception as e:
+    print(f"Qwen72B 客户端初始化失败: {e}")
+    _qwen72b_client = None
 
 def _apply_date_conversion(cells):
     """
@@ -458,6 +475,48 @@ def call_deepseek_api(prompt_or_messages):
             messages=messages,
             temperature=0.0, # Agent 任务通常需要高确定性
             max_tokens=1500
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        return f"[API_ERROR: {e}]"
+
+
+def call_gpt4o_api(prompt_or_messages):
+    """调用 GPT-4o API（需设置环境变量 OPENAI_API_KEY）"""
+    if _gpt4o_client is None:
+        return "[API_CLIENT_NOT_INITIALIZED: set OPENAI_API_KEY]"
+    messages = (
+        [{"role": "user", "content": prompt_or_messages}]
+        if isinstance(prompt_or_messages, str)
+        else prompt_or_messages
+    )
+    try:
+        response = _gpt4o_client.chat.completions.create(
+            model="gpt-4o",
+            messages=messages,
+            temperature=0.0,
+            max_tokens=1500,
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        return f"[API_ERROR: {e}]"
+
+
+def call_qwen72b_api(prompt_or_messages):
+    """调用 Qwen2.5-72B-Instruct API（需设置环境变量 DASHSCOPE_API_KEY）"""
+    if _qwen72b_client is None:
+        return "[API_CLIENT_NOT_INITIALIZED: set DASHSCOPE_API_KEY]"
+    messages = (
+        [{"role": "user", "content": prompt_or_messages}]
+        if isinstance(prompt_or_messages, str)
+        else prompt_or_messages
+    )
+    try:
+        response = _qwen72b_client.chat.completions.create(
+            model="qwen2.5-72b-instruct",
+            messages=messages,
+            temperature=0.0,
+            max_tokens=1500,
         )
         return response.choices[0].message.content
     except Exception as e:

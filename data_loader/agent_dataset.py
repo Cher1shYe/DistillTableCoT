@@ -95,6 +95,12 @@ def _format_target_response(response: str) -> str:
     """
     response = response.strip()
 
+    # Strip unclosed <think> tags: if the response has <think> but no </think>, the model
+    # output was truncated mid-thought.  Remove the dangling tag so the code below can
+    # re-wrap the content correctly without producing double-nested <think><think> blocks.
+    if '<think>' in response and '</think>' not in response:
+        response = response.replace('<think>', '').strip()
+
     # If the response already contains properly closed <think>...</think>, leave it alone.
     if re.search(r'<think>.*?</think>', response, re.DOTALL):
         return response

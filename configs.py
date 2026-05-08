@@ -9,6 +9,19 @@ except LookupError:
     nltk.download('punkt')
 
 
+def strip_think_block(text):
+    """
+    移除模型输出中的 <think>...</think> 块。
+    """
+    if not text:
+        return ""
+    # 移除 <think> 和 </think> 之间的所有内容
+    text = re.sub(r'<think>.*?</think>', '', text, flags=re.DOTALL)
+    # 如果模型没写完 </think>，也尝试移除 <think> 及其后的内容
+    text = re.sub(r'<think>.*', '', text, flags=re.DOTALL)
+    return text.strip()
+
+
 def extract_wiki_final_answer(prediction_text):
     """
     该函数主要通过查找模型输出的特殊语句来清洗结果，此方法对大模型输出具有局限性

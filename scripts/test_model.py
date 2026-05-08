@@ -10,7 +10,7 @@ from datasets import load_dataset
 
 # 添加根目录到 path 以便引入自定义模块
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from configs import TASK_TEST_CONFIGS, TASK_CONFIGS, COT_SYSTEM_PROMPT
+from configs import TASK_TEST_CONFIGS, TASK_CONFIGS, COT_SYSTEM_PROMPT, strip_think_block
 from utils import format_table
 
 
@@ -369,7 +369,14 @@ def main():
         # 后处理 & 参考答案
         reference_label = sample[target_field]
         try:
-            processed_prediction, _ = postprocess_func(prediction, reference_label)
+            # single 模式下模型输出 <think>...</think>\n{answer}，需先剥掉 think 块
+            # 否则 postprocess 函数会在 think 块内误匹配 "the answer is X" 等短语
+            if args.inference_mode == "single":
+                stripped = strip_think_block(prediction).strip()
+                pred_for_postprocess = stripped if stripped else prediction
+            else:
+                pred_for_postprocess = prediction
+            processed_prediction, _ = postprocess_func(pred_for_postprocess, reference_label)
         except Exception as e:
             print(f"⚠️ 后处理失败 (sample {i}): {e}")
             processed_prediction = prediction

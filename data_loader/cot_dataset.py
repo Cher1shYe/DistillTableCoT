@@ -117,9 +117,9 @@ class CoTDataset(Dataset):
             final_answer = processed_prediction or prediction
 
         if reasoning:
-            assistant_content = f"<think>\n{reasoning}\n</think>\n{final_answer}"
+            assistant_content = f"<think>\n{reasoning}\n</think>\nFinal Answer: {final_answer}"
         else:
-            assistant_content = final_answer
+            assistant_content = f"Final Answer: {final_answer}"
 
         return {
             'id': item.get('id', ''),
