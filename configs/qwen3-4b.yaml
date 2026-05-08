@@ -12,7 +12,7 @@ model:
   enable_thinking: true  # Model card 默认：启用 thinking mode for reasoning-heavy tasks like table QA
 
 training:
-  batch_size: 1
+  batch_size: 2
   learning_rate: 0.00002
   gradient_accumulation_steps: 4
   output_dir: "./outputs/models/Qwen3-4B_new/"
