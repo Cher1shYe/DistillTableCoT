@@ -34,10 +34,10 @@ from test_model import (
 # 支持的 baseline 模型配置
 # ---------------------------------------------------------------------------
 BASELINE_MODELS = {
-    "qwen3-7b": {
-        "hf_name":    "Qwen/Qwen3-7B",
-        "local_path": "./origin/Qwen3-7B",
-        "description": "Qwen3-7B (同系列更大模型，对比蒸馏压缩效率)",
+    "qwen3-8b": {
+        "hf_name":    "Qwen/Qwen3-8B",
+        "local_path": "./origin/Qwen3-8B",
+        "description": "Qwen3-8B (同系列更大模型，对比蒸馏压缩效率)",
     },
     "llama3-8b": {
         "hf_name":    "meta-llama/Llama-3.1-8B-Instruct",
