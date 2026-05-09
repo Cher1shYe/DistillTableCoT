@@ -40,9 +40,9 @@ BASELINE_MODELS = {
         "description": "Qwen3-8B (同系列更大模型，对比蒸馏压缩效率)",
     },
     "llama3-8b": {
-        "hf_name":    "meta-llama/Llama-3.1-8B-Instruct",
-        "local_path": "./origin/Llama-3.1-8B-Instruct",
-        "description": "Llama-3.1-8B-Instruct (跨架构对照)",
+        "hf_name":    "NousResearch/Meta-Llama-3-8B-Instruct",
+        "local_path": "./origin/Meta-Llama-3-8B-Instruct",
+        "description": "Llama-3-8B-Instruct (NousResearch version, avoids gated access)",
     },
 }
 
