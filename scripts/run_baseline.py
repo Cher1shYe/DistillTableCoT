@@ -152,7 +152,7 @@ def main():
     # 4. 保存结果
     task_output_dir = os.path.join(args.output_dir, args.task)
     os.makedirs(task_output_dir, exist_ok=True)
-    out_name    = f"predictions_baseline_{args.model}.json"
+    out_name    = f"predictions_baseline_{args.model}_{args.task}.json"
     output_path = os.path.join(task_output_dir, out_name)
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=4)
