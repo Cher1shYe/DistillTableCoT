@@ -1,0 +1,242 @@
+[
+  {
+    "task": "wikitableqa",
+    "kind": "student",
+    "variant": "agent",
+    "file": "predictions_qwen3_1.7b_agent_wikitableqa.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.4
+    }
+  },
+  {
+    "task": "wikitableqa",
+    "kind": "student",
+    "variant": "basic",
+    "file": "predictions_qwen3_1.7b_basic_model_v0.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.36
+    }
+  },
+  {
+    "task": "wikitableqa",
+    "kind": "student",
+    "variant": "cot",
+    "file": "predictions_qwen3_1.7b_cot_wikitableqa.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.53
+    }
+  },
+  {
+    "task": "wikitableqa",
+    "kind": "student",
+    "variant": "mixed",
+    "file": "predictions_qwen3_1.7b_mixed_wikitableqa.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.59
+    }
+  },
+  {
+    "task": "wikitableqa",
+    "kind": "teacher",
+    "variant": "deepseek_mixed_agent",
+    "file": "predictions_teacher_deepseek_mixed_agent.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.83
+    }
+  },
+  {
+    "task": "tabfact",
+    "kind": "student",
+    "variant": "agent",
+    "file": "predictions_qwen3_1.7b_agent_tabfact.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "accuracy": 0.74
+    }
+  },
+  {
+    "task": "tabfact",
+    "kind": "student",
+    "variant": "basic",
+    "file": "predictions_qwen3_1.7b_basic_model_v0.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "accuracy": 0.7
+    }
+  },
+  {
+    "task": "tabfact",
+    "kind": "student",
+    "variant": "cot",
+    "file": "predictions_qwen3_1.7b_cot_tabfact.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "accuracy": 0.73
+    }
+  },
+  {
+    "task": "tabfact",
+    "kind": "student",
+    "variant": "mixed",
+    "file": "predictions_qwen3_1.7b_mixed_tabfact.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "accuracy": 0.79
+    }
+  },
+  {
+    "task": "tabfact",
+    "kind": "teacher",
+    "variant": "deepseek_mixed_agent",
+    "file": "predictions_teacher_deepseek_mixed_agent.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "accuracy": 0.89
+    }
+  },
+  {
+    "task": "fetaqa",
+    "kind": "student",
+    "variant": "agent",
+    "file": "predictions_qwen3_1.7b_agent_fetaqa.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "rouge1": 0.1898,
+      "rouge2": 0.1283,
+      "rougeL": 0.16,
+      "rougeLsum": 0.1611,
+      "sacrebleu": 4.64
+    }
+  },
+  {
+    "task": "fetaqa",
+    "kind": "student",
+    "variant": "basic",
+    "file": "predictions_qwen3_1.7b_basic_model_v0.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "rouge1": 0.4419,
+      "rouge2": 0.2316,
+      "rougeL": 0.3514,
+      "rougeLsum": 0.3577,
+      "sacrebleu": 14.3
+    }
+  },
+  {
+    "task": "fetaqa",
+    "kind": "student",
+    "variant": "cot",
+    "file": "predictions_qwen3_1.7b_cot_fetaqa.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "rouge1": 0.5664,
+      "rouge2": 0.349,
+      "rougeL": 0.4705,
+      "rougeLsum": 0.4739,
+      "sacrebleu": 23.52
+    }
+  },
+  {
+    "task": "fetaqa",
+    "kind": "student",
+    "variant": "mixed",
+    "file": "predictions_qwen3_1.7b_mixed_fetaqa.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "rouge1": 0.5652,
+      "rouge2": 0.3494,
+      "rougeL": 0.4618,
+      "rougeLsum": 0.4611,
+      "sacrebleu": 19.95
+    }
+  },
+  {
+    "task": "fetaqa",
+    "kind": "teacher",
+    "variant": "deepseek_mixed_agent",
+    "file": "predictions_teacher_deepseek_mixed_agent.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "rouge1": 0.5967,
+      "rouge2": 0.3857,
+      "rougeL": 0.4891,
+      "rougeLsum": 0.488,
+      "sacrebleu": 28.24
+    }
+  },
+  {
+    "task": "hitab",
+    "kind": "student",
+    "variant": "agent",
+    "file": "predictions_qwen3_1.7b_agent_hitab.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.49
+    }
+  },
+  {
+    "task": "hitab",
+    "kind": "student",
+    "variant": "basic",
+    "file": "predictions_qwen3_1.7b_basic_model_v0.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.02
+    }
+  },
+  {
+    "task": "hitab",
+    "kind": "student",
+    "variant": "cot",
+    "file": "predictions_qwen3_1.7b_cot_hitab.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.07
+    }
+  },
+  {
+    "task": "hitab",
+    "kind": "student",
+    "variant": "mixed",
+    "file": "predictions_qwen3_1.7b_mixed_hitab.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.69
+    }
+  },
+  {
+    "task": "hitab",
+    "kind": "teacher",
+    "variant": "deepseek_mixed_agent",
+    "file": "predictions_teacher_deepseek_mixed_agent.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.73
+    }
+  }
+]
