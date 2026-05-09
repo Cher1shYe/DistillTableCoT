@@ -660,7 +660,7 @@
         "task": "tabfact",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:  \nThe relevant columns are `title` and `original_air_date`. We need to compare the air dates of two episodes: \"sweet dreams\" and \"the witchfinder\". The statement says \"the sweet dream episode happen later in the series than the witchfinder\". Since both titles have the same name, we check their air dates.\n\nFrom the table:  \n- \"sweet dreams\" aired on 2009-11-28  \n- \"the witchfinder\" aired on 2009-12-05  \n\n2009-11-28 is earlier than 2009-12-05, so the condition is false → Entailed means it should be true, so the statement is refuted.\n\nBut the previous SQL returned \"Entailed\" because the comparison was done in reverse? Let me double-check:  \nThe SQL says:  \n```sql\nWHEN (SELECT original_air_date FROM my_table WHERE title = 'sweet dreams') > \n     (SELECT original_air_date FROM my_table WHERE title = 'the witchfinder')\n```\nThat would only return true if 2009-11-28 > 2009-12-05, which it isn't. So the result should be \"Refuted\", but the feedback said \"Entailed\". That suggests the query might have a typo or the actual data shows different dates? Wait—the table shows \"sweet dreams\" as \"sweet dreams\" (with space) and \"the witchfinder\" (without space). The SQL used exact match? Let me check:  \nIn the table, \"sweet dreams\" is stored as \"sweet dreams\" (space), and \"the witchfinder\" is stored as \"the witchfinder\" (without space). So the query will match correctly.  \n\nLet’s run the query again carefully:\n\n```sql\nSELECT \n    CASE \n        WHEN (SELECT original_air_date FROM my_table WHERE title = 'sweet dreams') > \n             (SELECT original_air_date FROM my_table WHERE title = 'the witchfinder')\n        THEN 'Entailed'\n        ELSE 'Refuted'\n    END AS result;\n```\n\nResult:  \n- Sweet dreams air date: 2009-11-28  \n- Witchfinder air date: 2009-12-05  \n- 2009-11-28 < 2009-12-05 → condition false → returns 'Refuted'.\n\nSo the previous feedback saying \"Entailed\" was incorrect. I’ll fix that.\n</think>\n\n```sql\nSELECT \n    CASE \n        WHEN (SELECT original_air_date FROM my_table WHERE title = 'sweet dreams') > \n             (SELECT original_air_date FROM my_table WHERE title = 'the witchfinder')\n        THEN 'Entailed'\n        ELSE 'Refuted'\n    END AS result;\n```",
-        "processed_prediction": "Refuted",
+        "processed_prediction": "Entailed",
         "reference": "Entailed",
         "turn_details": [
             {
@@ -2230,7 +2230,7 @@
         "task": "tabfact",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:  \nThe relevant columns are `nationality` and we need to count how many rows have a nationality that is **not** Slovakia. The statement says “except for slovakia, all other country be from north america”. This means every row should have nationality not equal to 'slovakia'. So we check if there is exactly one row where nationality is 'slovakia'.\n\nFrom the data, there is only one Slovakian player (Ladislav Scurko). All others are from North America (United States, Canada). So the statement is **Entailed**.\n\nNow the SQL confirms this.\n</think>\n\n```sql\nSELECT \n  CASE \n    WHEN (SELECT COUNT(*) FROM my_table WHERE nationality = 'slovakia') = 1 \n     THEN 'Entailed' \n     ELSE 'Refuted' \n  END AS result;\n```",
-        "processed_prediction": "Refuted",
+        "processed_prediction": "Entailed",
         "reference": "Entailed",
         "turn_details": [
             {
@@ -2871,7 +2871,7 @@
         "task": "tabfact",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\nRelevant columns:\n- `location_attendance` – contains the venue name and its associated game number (e.g., \"target center 18478\").\n- `game` – the numeric game identifier.\n\nWe need to compare the game numbers for the two locations:\n- Target Center: `target center 18478` → game = 80\n- FedExForum: `fedexforum 15908` → game = 79\n\nThe statement says: \"the game at the target center take place after the game at the fedexforum\".  \nGame 80 is after game 79, so the statement is **Entailed**.\n\nLet’s verify with SQL:\n</think>\n\n```sql\nSELECT \n  CASE \n    WHEN (SELECT game FROM my_table WHERE location_attendance LIKE '%target center%') >\n         (SELECT game FROM my_table WHERE location_attendance LIKE '%fedexforum%')\n    THEN 'Entailed'\n    ELSE 'Refuted'\n  END AS result;\n```",
-        "processed_prediction": "Refuted",
+        "processed_prediction": "Entailed",
         "reference": "Entailed",
         "turn_details": [
             {
@@ -3010,7 +3010,7 @@
         "task": "tabfact",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:  \nThe relevant columns are `location_attendance` (which contains venue name and attendance number) and we need to find the highest attendance value.  \n\nThe previous SQL only found the maximum numeric part of the attendance, but the question asks to verify whether the highest attendance occurred at the Target Center.  \n\nWe need to check both:  \n1. The maximum attendance value from the table.  \n2. Whether that attendance was recorded at the Target Center (the venue name after \"us airways center\").\n\nFrom the table, the Target Center appears in rows 75, 76, 77, 78, 79, 80, 81, 82 — all with attendance 18422. That is the highest attendance (18422) across all rows.  \n\nSo the statement \"the highest attendance be at the target center\" is **Entailed**.\n</think>\n\n```sql\nSELECT \n  CASE \n    WHEN MAX(CAST(SUBSTR(location_attendance, INSTR(location_attendance, ' ') + 1) AS INTEGER)) = \n         (SELECT CAST(SUBSTR(location_attendance, INSTR(location_attendance, ' ') + 1) AS INTEGER) \n          FROM my_table WHERE team = 'target center')\n    THEN 'Entailed'\n    ELSE 'Refuted'\n  END AS result;\n```",
-        "processed_prediction": "Refuted",
+        "processed_prediction": "Entailed",
         "reference": "Refuted",
         "turn_details": [
             {

@@ -5,7 +5,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s first identify the relevant columns:  \n- `sub_groups_of_the_agri_food_industry` — contains the sector name.  \n- `eastern_ontario_french_language_workers` — the percentage for French-language workers in that region.\n\nThe question asks for the percent of French-language workers in the **restaurant and food services sector** in **eastern Ontario**. The row where `sub_groups_of_the_agri_food_industry` equals `'food service'` gives the value 52.1.\n</think>\n\n```sql\nSELECT eastern_ontario_french_language_workers \nFROM my_table \nWHERE sub_groups_of_the_agri_food_industry = 'food service';\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[52.1]",
         "reference": "[52.1]",
         "turn_details": [
             {
@@ -41,7 +41,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\nThe question asks:  \n\"In eastern ontario, what percent of other agri-food workers have worked in the restaurant and food services sector?\"\n\nRelevant columns:\n- `group_level_0` → we need the row where `sub_groups_of_the_agri_food_industry` = 'food service' (since \"restaurant and food services\" corresponds to this sub-group).\n- `eastern_ontario_other_workers` → percentage of eastern ontario other workers in that sector.\n- The denominator is total other agri-food workers across all regions:  \n  `eastern_ontario_other_workers + northern_ontario_other_workers + northern_ontario_french_language_workers + eastern_ontario_french_language_workers`.\n\nSo we compute:  \n`(eastern_ontario_other_workers / total_other_workers) * 100`\n</think>\n\n```sql\nSELECT \n    ROUND(\n        100.0 * \n        (CAST(eastern_ontario_other_workers AS REAL) /\n         (CAST(eastern_ontario_other_workers AS REAL) +\n          CAST(northern_ontario_other_workers AS REAL) +\n          CAST(northern_ontario_french_language_workers AS REAL) +\n          CAST(eastern_ontario_french_language_workers AS REAL))),\n        1\n    ) AS percent\nFROM my_table\nWHERE sub_groups_of_the_agri_food_industry = 'food service';\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[100]",
         "reference": "[60.6]",
         "turn_details": [
             {
@@ -98,7 +98,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:  \nThe question asks: \"in northern ontario, what proportion of workers who have worked in the restaurant and food services sector was other agri-food workers?\"  \n\nRelevant columns:  \n- `sub_groups_of_the_agri_food_industry` → to filter for \"food service\" (the restaurant and food services sector).  \n- `northern_ontario_other_workers` → total workers in that sub-group in northern Ontario.  \n\nWe need the proportion of \"other agri-food workers\" among those in food service. That means:  \n`(northern_ontario_other_workers) / (food_service_total)` where `food_service_total` is the sum of all workers in food service across both Ontario regions.\n\nLet’s compute:\n</think>\n\n```sql\nSELECT \n    CAST(northern_ontario_other_workers * 100.0 AS REAL) / \n    (SELECT SUM(eastern_ontario_other_workers + northern_ontario_other_workers) \n     FROM my_table \n     WHERE sub_groups_of_the_agri_food_industry = 'food service') AS proportion\nFROM my_table\nWHERE sub_groups_of_the_agri_food_industry = 'food service';\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[Let’s compute:]",
         "reference": "[58.1]",
         "turn_details": [
             {
@@ -181,7 +181,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:  \nThe question asks for the difference between:  \n- Black women with university degree only who originated from Haiti  \n- Black men with university degree only who originated from Haiti  \n\nRelevant columns:  \n- `region_or_country_of_ancestry` → filter for 'haiti'  \n- `women_university_degree_only` → women's percentage  \n- `men_university_degree_only` → men's percentage  \n\nWe need to subtract the two values directly.\n</think>\n\n```sql\nSELECT \n    CAST(women_university_degree_only AS REAL) - CAST(men_university_degree_only AS REAL) AS difference\nFROM my_table\nWHERE region_or_country_of_ancestry = 'haiti';\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[- menuniversitydegreeonly → men's percentage]",
         "reference": "[18.8]",
         "turn_details": [
             {
@@ -217,7 +217,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\n- The question asks about **second-generation black women with a university degree** — this corresponds to the column `women_university_degree_only`.\n- It compares two regions: **Africa** and **other regions**.\n- Relevant columns: `region_or_country_of_ancestry`, `women_university_degree_only`.\n\nFrom the table:\n- Africa: 50.8%\n- Other regions: 19.1%\n\nSo Africa has a higher percentage.\n</think>\n\n```sql\nSELECT \n  CASE \n    WHEN (SELECT women_university_degree_only FROM my_table WHERE region_or_country_of_ancestry = 'africa') >\n         (SELECT women_university_degree_only FROM my_table WHERE region_or_country_of_ancestry = 'other regions')\n    THEN 'africa'\n    ELSE 'other regions'\n  END AS higher_percentage_region;\n```",
-        "processed_prediction": "['']",
+        "processed_prediction": "['so africa has a higher percentage']",
         "reference": "['africa']",
         "turn_details": [
             {
@@ -253,7 +253,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet me first identify the relevant columns.\n\n**Table Positioning:**\n- The question asks about \"second-generation women with African ancestry\" → this corresponds to `group_level_0 = 'country of ancestry'` and `region_or_country_of_ancestry = 'africa'`.\n- It asks for \"percent of second-generation women with African ancestry had a university degree\" → the column is `women_university_degree_only`.\n\nThe previous SQL returned no results because the WHERE clause might be incorrect. Let me re-check: The row for Africa under country of ancestry exists. I'll select the value directly.\n</think>\n\n```sql\nSELECT women_university_degree_only \nFROM my_table \nWHERE group_level_0 = 'country of ancestry' \n  AND region_or_country_of_ancestry = 'africa'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[0]",
         "reference": "[50.8]",
         "turn_details": [
             {
@@ -347,7 +347,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\nRelevant columns:\n- `group_level_0` – must be `'country of ancestry'`\n- `region_or_country_of_ancestry` – must be `'caribbean and latin america'`\n- `men_non_university_or_university_postsecondary_diploma` – the percentage we need\n\nThe previous query failed because the `region_or_country_of_ancestry` value in the table includes `\"caribbean and latin america\"` but with an extra space? Actually, looking at the Markdown, it says `caribbean and latin america` – that matches. But the SQL returned empty. Let me check the exact values stored in the table.\n\nFrom the table:\n- `caribbean and latin america` appears in the row where `group_level_0 = 'region of ancestry'`.\n\nSo the correct condition is `group_level_0 = 'country of ancestry'` and `region_or_country_of_ancestry = 'caribbean and latin america'`.\n</think>\n\n```sql\nSELECT men_non_university_or_university_postsecondary_diploma \nFROM my_table \nWHERE group_level_0 = 'country of ancestry' \n  AND region_or_country_of_ancestry = 'caribbean and latin america'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[0]",
         "reference": "[18.4]",
         "turn_details": [
             {
@@ -378,7 +378,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nFirst, I need to identify the relevant columns. The question asks about \"french-language workers\" vs \"other workers\" among \"no certificate, diploma or degree\" in Manitoba's agricultural region 7. The relevant columns are:\n\n- `education` (to filter for \"no certificate, diploma or degree\")\n- `agricultural_region_7_manitoba_french_language_workers` (french-language percent)\n- `agricultural_region_7_manitoba_other_workers` (other percent)\n\nThe question compares these two percentages directly. Since the table shows percentages, higher value means more likely. I'll compute the difference or just compare them.\n</think>\n\n```sql\nSELECT \n    'no certificate, diploma or degree' AS education_type,\n    agricultural_region_7_manitoba_french_language_workers AS french_percent,\n    agricultural_region_7_manitoba_other_workers AS other_percent\nFROM my_table\nWHERE education = 'no certificate, diploma or degree'\nORDER BY french_percent DESC;\n```",
-        "processed_prediction": "['']",
+        "processed_prediction": "['- agriculturalregion7manitobaotherworkers (other percent)']",
         "reference": "['french-language workers']",
         "turn_details": [
             {
@@ -399,7 +399,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\nThe question asks:  \n> \"which type of workers in manitoba's agricultural region 7 were less likely to have a college certificate or diploma, french-language workers or other workers?\"\n\nRelevant columns:  \n- `education` – contains the qualification type (e.g., \"certificate or college diploma\")  \n- `agricultural_region_7_manitoba_other_workers` – percentage of French-language workers with other qualifications  \n- `agricultural_region_7_manitoba_french_language_workers` – percentage of French-language workers with that specific qualification  \n\nWe need to compare the percentages for \"other workers\" and \"french-language\" among those with \"certificate or college diploma\". The lower percentage means more likely to have that qualification, so we want the higher percentage to indicate less likelihood.\n\nFrom the previous query, the result shows:  \n- Other: 15.2%  \n- French-language: 0.0%  \n\nSo French-language workers had 0% of that type, meaning they were less likely to have a college certificate or diploma compared to other workers.\n\nFinal Answer: French-language\n</think>",
-        "processed_prediction": "['french-language\n</think>']",
+        "processed_prediction": "['french-language']",
         "reference": "['french-language workers']",
         "turn_details": [
             {
@@ -451,7 +451,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\nThe relevant columns are:\n- `group_level_0` — contains the education levels (e.g., \"secondary school diploma\")\n- `education` — specifies the education type (e.g., \"secondary school diploma\")\n- `agricultural_region_7_alberta_french_language_workers` — percentage of French-language workers with that education\n- `agricultural_region_7_alberta_other_workers` — percentage of other workers with that education\n\nWe need to compare the percentages for French-language vs. other workers among Albertan agricultural region 7 workers who have a secondary school diploma.\n\nFrom the previous query, we got:\n- French-language: 50.6%\n- Other workers: 39.5%\n\nSince 50.6% > 39.5%, French-language workers are more likely.\n</think>\n\n```sql\nSELECT \n  'French-language workers' AS category,\n  agricultural_region_7_alberta_french_language_workers AS percent_french,\n  'Other workers' AS category,\n  agricultural_region_7_alberta_other_workers AS percent_other\nFROM my_table\nWHERE education = 'secondary school diploma';\n```",
-        "processed_prediction": "['']",
+        "processed_prediction": "['since 50.6% > 39.5%, french-language workers are more likely']",
         "reference": "['french-language workers']",
         "turn_details": [
             {
@@ -487,7 +487,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:  \nThe relevant columns are `behaviour` (to filter for \"sedentary time\") and `beta` (to find the largest value). The question asks for the **largest beta coefficient** among all rows where `behaviour = 'sedentary time'`.\n\nNow, step-by-step SQL logic:  \n- Filter rows where `behaviour = 'sedentary time'`.  \n- Order by `beta` descending.  \n- Limit to 1 row to get the maximum.\n</think>\n\n```sql\nSELECT behaviour, beta\nFROM my_table\nWHERE behaviour = 'sedentary time'\nORDER BY beta DESC\nLIMIT 1;\n```",
-        "processed_prediction": "['']",
+        "processed_prediction": "['- limit to 1 row to get the maximum']",
         "reference": "['weekend']",
         "turn_details": [
             {
@@ -508,7 +508,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLooking at the table, the relevant columns are `group_level_0` (which contains \"lpa\") and `beta` (the coefficient value). The question asks for the \"largest beta coefficients\" for lpa, so I need to select the maximum beta from the lpa rows.\n</think>\n\n```sql\nSELECT MAX(beta) FROM my_table WHERE group_level_0 = 'lpa';\n```",
-        "processed_prediction": "['']",
+        "processed_prediction": "['looking at the table, the relevant columns are grouplevel0 (which contains \"lpa\") and beta (the coefficient value). the question asks for the \"largest beta coefficients\" for lpa, so i need to select the maximum beta from the lpa rows']",
         "reference": "['weekend']",
         "turn_details": [
             {
@@ -622,7 +622,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\nRelevant columns:\n- `year_and_industry` – contains the growth rate row (`2006-16 annual growth rate (%)a`)\n- `group_level_1` – contains `'all industries'` for that row\n- `total_business_r_d` – this is the percentage value we need\n\nThe question asks for the **annual growth rate** of total business R&D over the past 10 years. The row with `year_and_industry = '2006-16 annual growth rate (%)a'` and `group_level_1 = 'all industries'` gives us that value directly.\n\nNow, let’s write the SQL query.\n</think>\n\n```sql\nSELECT total_business_r_d \nFROM my_table \nWHERE year_and_industry = '2006-16 annual growth rate (%)a' \n  AND group_level_1 = 'all industries'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[Now, let’s write the SQL query]",
         "reference": "[4.2]",
         "turn_details": [
             {
@@ -643,7 +643,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet's first identify the relevant columns. The question asks for the total league goals for Cristian Yanev (the player whose stats are shown). The table includes rows for each season and a \"total\" row for cumulative totals. The relevant columns are `club`, `season`, and `league_goals`.\n\nThe previous SQL summed all league goals for \"cska sofia\" excluding the \"total\" row, but that gave 54. However, we need to check if that total already includes all seasons (the \"total\" row might have a different value). Let's verify.\n</think>\n\n```sql\nSELECT SUM(league_goals) AS total_league_goals\nFROM my_table\nWHERE club = 'cska sofia'\n  AND season != 'total'\nUNION ALL\nSELECT total_goals FROM my_table WHERE club = 'cska sofia' AND season = 'total'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[54.0]",
         "reference": "[54.0]",
         "turn_details": [
             {
@@ -679,7 +679,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\nThe question asks:  \n> in Manitoba’s agricultural region 9, what was the percentage of agricultural workers who were employees?\n\nRelevant columns:\n- `class_of_worker` – contains values like \"employee\", \"unpaid family worker\", etc.\n- `agricultural_region_9_manitoba_french_language_workers` – this is the percentage for French-language workers in that region.\n- The row where `class_of_worker = 'employee'` gives the percentage directly.\n\nThe previous query failed because it used an incorrect column name (`agricultural_region_9_manitoba_french_language_workers` vs `agricultural_region_9_manitoba_french_language_workers` — same, but maybe there was a typo? Let’s recheck.)\n\nActually, the column name is correct: `agricultural_region_9_manitoba_french_language_workers`.\n\nNow, the SQL should select that value where `class_of_worker = 'employee'`.\n</think>\n\n```sql\nSELECT \"agricultural_region_9_manitoba_french_language_workers\"\nFROM my_table\nWHERE \"group_level_0\" = 'class_of_worker' AND \"class_of_worker\" = 'employee'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[9]",
         "reference": "[74.6]",
         "turn_details": [
             {
@@ -700,7 +700,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nFirst, I need to identify the relevant columns. The question asks for the proportion of employees in \"other agricultural regions\" in Western Canada. From the table, \"agricultural region 7 manitoba - other workers\", \"agricultural region 8 manitoba - other workers\", \"agricultural region 9 manitoba - other workers\", \"agricultural region 8b saskatchewan - other workers\", and \"agricultural region 7 alberta - other workers\" all fall under \"other\" regions. The \"employee\" class has these values summed up. Also, I need the total employees across all regions to compute the proportion.\n\nThe previous SQL computed total_other_employees and total_employees, but the division gave 102%, which is impossible because proportions should be ≤ 100%. Likely the issue is that the total_employees might include other classes? Let me check: The table has rows for \"did not work in 2010\" (which sums to 100%?), but the employee rows sum to more than 100%. Actually, the \"did not work\" row sums to 100% (0+0+0+0+0+0+0+0+0+0+0+0=0?), but that seems off. Wait, the first row is \"class of worker\" with value 0 for all except the first column. That might be a header row. The actual employee rows start after \"did not work in 2010\". So the total_employees might be the sum of all employee rows (including those from other provinces?) No, the table only has one region per province. The \"employee\" class rows are for each region. So total_employees should be the sum of all five \"employee\" rows. But the previous query got 102% because maybe the total_other_employees includes some of the same regions? Let me recompute.\n\nLet me list the numbers:\n\n- agricultural_region_7_manitoba_other_workers = 39.5\n- agricultural_region_8_manitoba_other_workers = 46.9\n- agricultural_region_9_manitoba_other_workers = 77\n- agricultural_region_8b_saskatchewan_other_workers = 25\n- agricultural_region_7_alberta_other_workers = 27.2\n\nSum: 39.5 + 46.9 = 86.4; 86.4 + 77 = 163.4; 163.4 + 25 = 188.4; 188.4 + 27.2 = 215.6\n\nTotal_employees: sum of all five \"employee\" rows:\n\n- 46.7 (Manitoba French) + 39.5 (Manitoba Other) + 41.4 (Alberta French) + 32.3 (Alberta Other) + 20.8 (Saskatchewan French) = 46.7+39.5=86.2+41.4=127.6+32.3=159.9+20.8=180.7\n\nWait, but there's also Saskatchewan French? Let me check the schema: The \"employee\" rows have six columns: agricultural_region_7_manitoba_french_language_workers, agricultural_region_7_manitoba_other_workers, agricultural_region_8_manitoba_french_language_workers, agricultural_region_8_manitoba_other_workers, agricultural_region_9_manitoba_french_language_workers, agricultural_region_9_manitoba_other_workers, agricultural_region_8b_saskatchewan_french_language_workers, agricultural_region_8b_saskatchewan_other_workers, agricultural_region_7_alberta_french_language_workers, agricultural_region_7_alberta_other_workers. So the five \"employee\" rows are for Manitoba French, Manitoba Other, Alberta French, Alberta Other, Saskatchewan French? Or wait: The table has ten columns, but the rows have varying counts. Actually, looking at the markdown: There are 12 columns for the 10 agricultural regions. The rows have \"class of worker\" followed by multiple columns. For \"employee\", there are 9 columns? Let me count: \"agricultural region 7 manitoba - french-language workers\" (column 1), \"agricultural region 7 manitoba - other workers\" (column 2), \"agricultural region 8 manitoba - french-language workers\" (column 3), \"agricultural region 8 manitoba - other workers\" (column 4), \"agricultural region 9 manitoba - french-language workers\" (column 5), \"agricultural region",
-        "processed_prediction": "[7]",
+        "processed_prediction": "[]",
         "reference": "[32.3]",
         "turn_details": [
             {
@@ -736,7 +736,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\n- The question asks about **French-language workers** vs **other language groups**.\n- Relevant columns: `class_of_worker` (to filter for \"self-employed, non-incorporated\") and the corresponding regional percentages.\n- The rows we need are those where `class_of_worker` = `'self-employed, non-incorporated'`.\n- We need to compare the French-language percentages (`french_percentage`) with the other-language percentages (`other_percentage`) across all three regions.\n\nFrom the SQL result:\n- Manitoba: French=31.1, Other=33.4 → Other > French\n- Saskatchewan: French=40.0, Other=41.0 → Other > French\n- Alberta: French=39.0, Other=46.9 → Other > French\n\nAll show that French-language workers were less likely to be self-employed, non-incorporated compared to others.\n\nNow the SQL already gives the comparison — we just need to phrase it clearly.\n</think>\n\n```sql\nSELECT region, french_percentage, other_percentage\nFROM (\n    SELECT 'Manitoba' AS region, agricultural_region_7_manitoba_french_language_workers AS french_percentage, agricultural_region_7_manitoba_other_workers AS other_percentage\n    FROM my_table\n    WHERE class_of_worker = 'self-employed, non-incorporated'\n    UNION ALL\n    SELECT 'Saskatchewan', agricultural_region_8b_saskatchewan_french_language_workers, agricultural_region_8b_saskatchewan_other_workers\n    FROM my_table\n    WHERE class_of_worker = 'self-employed, non-incorporated'\n    UNION ALL\n    SELECT 'Alberta', agricultural_region_7_alberta_french_language_workers, agricultural_region_7_alberta_other_workers\n    FROM my_table\n    WHERE class_of_worker = 'self-employed, non-incorporated'\n) t\nORDER BY region;\n```",
-        "processed_prediction": "['']",
+        "processed_prediction": "['- alberta: french=39.0, other=46.9 → other > french']",
         "reference": "['french-language workers']",
         "turn_details": [
             {
@@ -896,7 +896,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\n- The question asks about **family class immigrants** → we need the `immigrant_class_family` column.\n- It asks for **top three prominent industries** → we need the `Col_0` values (industry names).\n- The rows where `group_level_1 = 'industry'` contain the industry data.\n- We must exclude the `total` row and `knowledge-based industries` because those are summary rows.\n- The order should be descending by the percentage value (`immigrant_class_family`).\n\nNow, the SQL query:\n</think>\n\n```sql\nSELECT Col_0, immigrant_class_family\nFROM my_table\nWHERE group_level_1 = 'industry'\n  AND Col_0 != 'total'\n  AND Col_0 != 'knowledge-based industries'\nORDER BY CAST(immigrant_class_family AS REAL) DESC\nLIMIT 3;\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "['now', 'the sql query:']",
         "reference": "['lessors of real estate', 'services to buildings and dwellings', 'child day-care services']",
         "turn_details": [
             {
@@ -932,7 +932,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\n- The relevant columns are `Col_0` (industry name) and `immigrant_class_refugees` (percent distribution).\n- We need rows where `group_level_1 = 'industry'` and `Col_0` is not 'total'.\n- We want the top 3 industries based on refugee percentage (descending order).\n\nThe previous SQL already did that, but the result shows the top three are:\n1. all other industries (21)\n2. services to buildings and dwellings (14.8)\n3. lessors of real estate (11.5)\n\nThat matches the question: \"top three industries among self-employed refugees\" — but note the question says \"self-employed refugees\" and the table has \"refugees\" column. However, the data includes percentages across various classes, and \"lessors of real estate\" is indeed a self-employed business type. The answer is correct.\n\nFinal Answer: all other industries, services to buildings and dwellings, lessors of real estate\n</think>",
-        "processed_prediction": "['all other industries', 'services to buildings and dwellings', 'lessors of real estate', '</think>']",
+        "processed_prediction": "['all other industries', 'services to buildings and dwellings', 'lessors of real estate']",
         "reference": "['lessors of real estate', 'services to buildings and dwellings', 'specialty trade contractors']",
         "turn_details": [
             {
@@ -958,7 +958,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLooking at the table, the question asks for the club Lodge played for in 1985-86. The relevant columns are `club` and `season`. From the result, two clubs have season '1985-86': stockport county and southport. However, the question implies a single answer, likely meaning one club. Since both are possible, I need to check if there's an indicator of which one is the primary or if the question expects one. Given the context of \"Lodge\" (a player name not explicitly in the table), but the table shows multiple players across seasons, the most straightforward interpretation is that the question refers to a specific player whose only season in 1985-86 was with stockport county. But the previous SQL returned both. To be safe, I'll check if the question might have a typo or expects a different approach.\n\nWait, the previous SQL returned both rows. The question says \"which club did lodge play for in 1985-86?\" — the table has two rows for 1985-86. Possibly the question assumes a single club, but the data shows two. Let me re-read the task: \"Final answer is a precise number, entity, or short phrase.\" It might be that the question expects the club name(s) listed. But \"which club\" usually implies one. Perhaps the table is for a single player? The \"career total\" row shows total stats, but individual rows are per season/club. The question might be misphrased. Alternatively, maybe \"Lodge\" is a player name, and the table is his career. In that case, the answer could be that he played for stockport county in 1985-86. But I need to verify.\n\nLet me write a query to get all distinct clubs for 1985-86.\n</think>\n\n```sql\nSELECT DISTINCT club FROM my_table WHERE season = '1985-86';\n```",
-        "processed_prediction": "['']",
+        "processed_prediction": "['let me write a query to get all distinct clubs for 1985-86']",
         "reference": "['stockport county']",
         "turn_details": [
             {
@@ -1015,7 +1015,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\nThe question asks: *which group of people is least likely to have engaged in health risk behaviours such as binge drinking and drug use in the 12 months preceding the sspps?*\n\nRelevant columns:\n- `health_risk_behaviours` – contains the specific behaviour (here \"binge drinking in the past 12 months\").\n- `heterosexual_percent`, `gay_or_lesbian_percent`, `bisexual_percent`, `total_sexual_minority_percent` – these are the percentages for each group.\n\nWe need the group with the lowest percentage for this specific health risk behaviour.\n\nFrom the previous query, we already got the row where `health_risk_behaviours = 'binge drinking in the past 12 months'`, and the order by `h_pct ASC` gives the smallest value first.\n\nThat row shows:\n- heterosexual: 44.1\n- gay/lesbian: 52.7\n- bisexual: 55.3\n- total sexual minority: 53.0\n\nSo the least likely is **heterosexual** with 44.1%.\n\nNow the SQL result is correct, so the final answer is:\n\nFinal Answer: heterosexual\n</think>",
-        "processed_prediction": "['heterosexual\n</think>']",
+        "processed_prediction": "['heterosexual']",
         "reference": "['heterosexual']",
         "turn_details": [
             {
@@ -1108,7 +1108,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\nThe question asks:  \n> *how many percent of bisexual canadians have reported that they have used non-prescribed drugs in the past 12 months?*\n\nRelevant columns:\n- `group_level_0` — should be `'None'` to get overall percentages.\n- `health_risk_behaviours` — should be `'non-prescribed drug use in the past 12 months'`.\n- The row for `bisexual` has `bisexual_percent` as the value we need.\n\nNow, let’s write the SQL query.\n</think>\n\n```sql\nSELECT bisexual_percent \nFROM my_table \nWHERE group_level_0 = 'None' \n  AND health_risk_behaviours = 'non-prescribed drug use in the past 12 months'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[Now, let’s write the SQL query]",
         "reference": "[14.0]",
         "turn_details": [
             {
@@ -1150,7 +1150,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\nThe question asks for the percentage of bisexual Canadians who had experienced abuse or violence in their lifetime and used drugs/alcohol to cope.  \nRelevant columns:  \n- `health_risk_behaviours` → contains the category name.  \n- `group_level_0` → indicates \"None\" for all rows, but the row we need has `group_level_0 = 'None'` and `health_risk_behaviours = 'used drugs or alcohol to cope with abuse or violence that occurred in lifetime'`.  \n\nWe need the `bisexual_percent` value for that specific row.\n\nNow, the previous SQL returned no results because the condition might be too strict (e.g., case sensitivity). Let’s check the exact value in the table.\n</think>\n\n```sql\nSELECT health_risk_behaviours, bisexual_percent \nFROM my_table \nWHERE health_risk_behaviours LIKE '%used%'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[0]",
         "reference": "[29.5]",
         "turn_details": [
             {
@@ -1207,7 +1207,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**.\n\nThe question asks:  \n> in fy 2017, how many million dollars did federal agencies obligate to institutions of higher education in support of science and engineering (s&e)?\n\nRelevant columns:\n- `fiscal_year_current_millions` — contains the year value (e.g., '2017').\n- `all_federal_obligations_current_millions` — this is the total federal obligations (including S&E) for that year.\n\nWe need the row where `fiscal_year_current_millions = '2017'`, and retrieve the `all_federal_obligations_current_millions` value.\n</think>\n\n```sql\nSELECT all_federal_obligations_current_millions \nFROM my_table \nWHERE fiscal_year_current_millions = '2017'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[2017.0]",
         "reference": "[32431.0]",
         "turn_details": [
             {
@@ -1243,7 +1243,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLooking at the table, I need to find the row where the fiscal year is 2016 and the group level is None. The question asks for \"federal agencies obligate to institutions of higher education\" — that corresponds to the column \"all federal obligations\". But note that there are two versions: one with \"2016\" and one with \"constant fy 2012\". The \"constant fy 2012\" rows have values like 29881. Since the question says \"in fy 2016\", I should use the 2016 row.\n\nLet me check the actual data: The 2016 row under group_level_0 = 'None' has all_federal_obligations_current_millions = 31647. That matches the value for FY 2016 total obligations.\n</think>\n\n```sql\nSELECT all_federal_obligations_current_millions \nFROM my_table \nWHERE fiscal_year_current_millions = '2016' \n  AND group_level_0 = 'None';\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[2016.0]",
         "reference": "[31647.0]",
         "turn_details": [
             {
@@ -1264,7 +1264,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\nThe relevant columns are:\n- `fiscal_year_current_millions` – to identify 2017 and 2016 rows.\n- `r_d_current_millions` – the funding amount for R&D to universities and colleges.\n\nWe need the increase from 2016 to 2017. The previous year value is in the 2016 row, not in `group_level_0`. Since `group_level_0` contains `None` for most rows, we cannot use that. So we must compare directly between the two rows.\n\n**SQL logic**:  \nSelect the `r_d_current_millions` for 2017 and subtract the `r_d_current_millions` for 2016.\n</think>\n\n```sql\nSELECT \n    CAST(r_d_current_millions AS INTEGER) -\n    (SELECT CAST(r_d_current_millions AS INTEGER) FROM my_table WHERE fiscal_year_current_millions = '2016')\nAS increase_millions;\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[2017.0]",
         "reference": "[29796.0]",
         "turn_details": [
             {
@@ -1331,7 +1331,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:  \nThe relevant columns are `enterprise_size_class` (to identify each class) and `2008_share` and `2014_share` (to find the highest share in each year). The task asks for the class with the highest share in both years — meaning we need to compare the maximum shares from each year separately.\n\n**Step-by-step SQL logic**:  \n- Filter out the row where `enterprise_size_class = 'total'` because it’s a summary row.  \n- For 2008: find the row with the maximum `2008_share`.  \n- For 2014: find the row with the maximum `2014_share`.  \n- Compare these two rows: if the 2008 max share is greater than the 2014 max share, that class is the answer; otherwise, the 2014 max class is the answer.\n</think>\n\n```sql\nWITH class_max_2008 AS (\n    SELECT enterprise_size_class,\n           MAX(2008_share) OVER () AS max_2008\n    FROM my_table\n    WHERE enterprise_size_class != 'total'\n),\nclass_max_2014 AS (\n    SELECT enterprise_size_class,\n           MAX(2014_share) OVER () AS max_2014\n    FROM my_table\n    WHERE enterprise_size_class != 'total'\n)\nSELECT \n    CASE \n        WHEN (SELECT max_2008 FROM class_max_2008) > \n             (SELECT max_2014 FROM class_max_2014) \n        THEN (SELECT enterprise_size_class FROM class_max_2008) \n        ELSE (SELECT enterprise_size_class FROM class_max_2014)\n    END AS highest_sharing_class\nFROM dual;\n```",
-        "processed_prediction": "['']",
+        "processed_prediction": "['- compare these two rows: if the 2008 max share is greater than the 2014 max share, that class is the answer; otherwise, the 2014 max class is the answer']",
         "reference": "['between 1 and 4']",
         "turn_details": [
             {
@@ -1388,7 +1388,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s first identify the relevant column: **variation_of_number** tells us whether the number of enterprises has increased or decreased over time. The question asks for the *only* decreasing size class — meaning the one where the variation is negative.\n\nFrom the query result, we see that `1,000 and above` has a negative variation (-2.3). All other rows have positive variation. So this is the only decreasing class.\n\nFinal Answer: 1,000 and above\n</think>",
-        "processed_prediction": "['1,000 and above\n</think>']",
+        "processed_prediction": "['1,000 and above']",
         "reference": "['1,000 and above']",
         "turn_details": [
             {
@@ -1502,7 +1502,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:\n\nThe relevant columns are:\n- `Col_0` – region name (e.g., \"canada\", \"newfoundland and labrador\")\n- `19_to_49_years_tumours_with_one_or_more_surgical_intervention_percent` – percentage for 19–49 years\n- `50_to_69_years_tumours_with_one_or_more_surgical_intervention_percent` – percentage for 50–69 years\n- `70_years_and_older_tumours_with_one_or_more_surgical_intervention_percent` – percentage for 70+ years\n\nWe need to find which age group has the highest surgical rate. The previous SQL grouped by age group but only returned one row, missing the comparison. Actually, the result shows all three groups, but the question asks for \"which age group\" — meaning a single answer. However, the data shows that Nunavut (70+ years) has 100%, while others have lower percentages. So the answer should be \"70 years and older\".\n\nBut let’s verify: The previous query returned three rows, but the `GROUP BY age_group` might not have been correctly handling ties? Let’s check the actual data. The table includes a row for \"nunavut\" with 100.0% for 70+ years. That is the highest. So the answer is \"70 years and older\".\n\nFinal Answer: 70 years and older\n</think>",
-        "processed_prediction": "['70 years and older\n</think>']",
+        "processed_prediction": "['70 years and older']",
         "reference": "['50 to 69 years']",
         "turn_details": [
             {
@@ -1523,7 +1523,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:  \nThe question asks for the **percentage** of colorectal cancer tumours that received a surgical intervention. The relevant columns are:\n\n- `group_level_0` — should be `'None'` to indicate Canada-wide data.\n- `Col_0` — should be `'canada'`.\n- `tumours_with_one_or_more_surgical_interventions_percentage` — this is the percentage we need.\n\nNow, the previous query failed because `group_level_0` was `'None'` (with a space) instead of just `'None'`. Let’s fix that.\n</think>\n\n```sql\nSELECT tumours_with_one_or_more_surgical_interventions_percentage \nFROM my_table \nWHERE group_level_0 = 'None' AND Col_0 = 'canada'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[0.0]",
         "reference": "[83.0]",
         "turn_details": [
             {
@@ -1710,7 +1710,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLooking at the table, the question asks for the percentage of agricultural land in Quebec that is reported as woodlands and wetlands. The relevant columns are \"Col_0\" (province) and \"woodlands_and_wetlands_percent\". The row for Quebec shows 31.6%.\n</think>\n\n```sql\nSELECT woodlands_and_wetlands_percent \nFROM my_table \nWHERE Col_0 = 'quebec';\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[0]",
         "reference": "[31.6]",
         "turn_details": [
             {
@@ -1746,7 +1746,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s first identify the relevant columns:  \n- `group_level_0` should be `'canada'`  \n- `Col_0` should be `'ontario'`  \n- The question asks for the **percentage** of agricultural land in Ontario that is woodlands and wetlands. That matches the `woodlands_and_wetlands_percent` column.\n</think>\n\n```sql\nSELECT woodlands_and_wetlands_percent \nFROM my_table \nWHERE group_level_0 = 'canada' AND Col_0 = 'ontario'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[0]",
         "reference": "[12.6]",
         "turn_details": [
             {
@@ -1782,7 +1782,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**:  \nThe relevant column is `woodlands_and_wetlands_hectares` (the value we need) and the row where `group_level_0 = 'quebec'`.\n\nFrom the table, the Quebec row shows:\n- `woodlands_and_wetlands_hectares` = 1057417\n\nNow, let’s write the query to retrieve that value.\n</think>\n\n```sql\nSELECT woodlands_and_wetlands_hectares \nFROM my_table \nWHERE group_level_0 = 'quebec';\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[1057417.0]",
         "reference": "[1057417.0]",
         "turn_details": [
             {
@@ -1829,7 +1829,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLooking at the table, the column for woodland and wetland area is \"woodlands_and_wetlands_hectares\". The question asks for Alberta's value, so I need to filter by `group_level_0 = 'alberta'`.\n</think>\n\n```sql\nSELECT woodlands_and_wetlands_hectares \nFROM my_table \nWHERE group_level_0 = 'alberta';\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[0.0]",
         "reference": "[893436.0]",
         "turn_details": [
             {
@@ -1850,7 +1850,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet's start with **Table Positioning**:\n\nThe question asks: \"which age group has the lowest surgical rate?\"  \nRelevant columns:\n- `Col_0` — province/territory name\n- `\"70_years_and_older_tumours_with_one_or_more_surgical_intervention_percent\"` — percentage for 70+ age group\n\nWe need to find the province/territory with the smallest (lowest) percentage value among those that have a valid number (not 'x'). The lowest value is 0.0% for Northwest Territories.\n\nNow, the previous SQL correctly retrieved that row. The result shows Northwest Territories with 0.0%, which is the lowest.\n\nFinal Answer: northwest territories\n</think>",
-        "processed_prediction": "['northwest territories\n</think>']",
+        "processed_prediction": "['northwest territories']",
         "reference": "['70 years and older']",
         "turn_details": [
             {
@@ -1938,7 +1938,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s first identify the relevant columns.\n\n**Table Positioning:**  \n- `group_level_1` = \"mothers\"  \n- `Col_0` = \"with pre-birth-year, birth-year, or post-birth-year roe; and received ei in the birth year\"  \n- The question asks for the percentage of new mothers who took parental leave **according to the roe-based definition** in 2012.  \n- The column `1998` through `2012` contains the percentages for each year.  \n\nThe previous query returned 40.6, but that was for a different row. Actually, the row with `group_level_1 = 'mothers'` and `Col_0 = 'total'` gives the overall percentage for mothers (all conditions). That is 63.8. But the question specifies \"according to the roe-based definition,\" which likely means the first subcategory: \"with pre-birth-year, birth-year, or post-birth-year roe; and received ei in the birth year.\" That row has `1998 = 33.3`, `2000 = 34.4`, `2002 = 38.9`, `2004 = 38.7`, `2006 = 40.4`, `2008 = 39.8`, `2010 = 39.8`, `2012 = 40.6`.  \n\nThe question asks for \"the percentage of new mothers took parental leave, according to the roe-based definition in 2012?\" — this likely means the total percentage for that specific roe condition in 2012.  \n\nSo we need:  \n- `group_level_1 = 'mothers'`  \n- `Col_0 = 'with pre-birth-year, birth-year, or post-birth-year roe; and received ei in the birth year'`  \n- `1998` to `2012` — but the question says \"in 2012\", so just `2012`.\n\nLet’s write the query.\n</think>\n\n```sql\nSELECT \"2012\" FROM my_table \nWHERE group_level_1 = 'mothers' \n  AND Col_0 = 'with pre-birth-year, birth-year, or post-birth-year roe; and received ei in the birth year'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[Let’s write the query]",
         "reference": "[43.4]",
         "turn_details": [
             {
@@ -2068,7 +2068,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLooking at the table, I see that the row with season '2017-18' shows club 'kapaz'. That matches the player's name in the question.\n\nFinal Answer: kapaz\n</think>",
-        "processed_prediction": "['kapaz\n</think>']",
+        "processed_prediction": "['kapaz']",
         "reference": "['kapaz']",
         "turn_details": [
             {
@@ -2089,7 +2089,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLooking at the table, the row where `group_level_0` is `'all farms'` and `farm_size` is `'all farms'` gives the overall percentage. The value is 49.9%.\n</think>\n\n```sql\nSELECT farms_with_woodlands_and_wetlands_percent \nFROM my_table \nWHERE group_level_0 = 'all farms' \n  AND farm_size = 'all farms';\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[0]",
         "reference": "[49.9]",
         "turn_details": [
             {
@@ -2193,7 +2193,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s first identify the relevant columns from the table.\n\n**Table Positioning:**  \nThe table has a row for each film in the Anchorman series. The `role` column contains the person’s name. The film titles appear in columns like `films_anchorman_the_legend_of_ron_burgundy`, etc. The question asks “what were the anchorman series respectively?” — likely meaning list the films and their directors/other roles.\n\nFrom the data, there are three rows:  \n- `films_anchorman_the_legend_of_ron_burgundy` → director = adam mckay  \n- `films_wake_up_ron_burgundy_the_lost_movie` → director = adam mckay  \n- `films_anchorman_2_the_legend_continues` → director = adam mckay  \n\nBut the question might be asking for the series itself. Since the table only shows individual films, the answer should list them by title.\n</think>\n\n```sql\nSELECT role FROM my_table WHERE role LIKE '%anchorman%' ORDER BY role;\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "['- filmsanchorman2thelegendcontinues → director = adam mckay']",
         "reference": "['anchorman: the legend of ron burgundy', 'wake up, ron burgundy: the lost movie', 'anchorman 2: the legend continues']",
         "turn_details": [
             {
@@ -2626,7 +2626,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nFirst, I need to identify the relevant columns. The question asks for the percentage of French-speaking people in Canada in 2011. From the table, the columns are:\n\n- `group_level_1` (which contains 'french')\n- `region` (which contains 'canada')\n- `2011` (the percentage value we need)\n\nThe previous query failed because the column name might be different. Looking at the schema, the column for 2011 is `2011`, not `2011` with quotes. Also, the row where `group_level_1 = 'french'` and `region = 'canada'` exists.\n\nLet me write the corrected query.\n</think>\n\n```sql\nSELECT \"2011\" FROM my_table \nWHERE \"group_level_1\" = 'french' AND \"region\" = 'canada'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[Let me write the corrected query]",
         "reference": "[22.9]",
         "turn_details": [
             {
@@ -2647,7 +2647,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet’s start with **Table Positioning**.\n\nThe question asks for the **low boundary** (i.e., lowest projected value) of **percentage of French-speaking people in Canada** in 2036.  \nRelevant columns:  \n- `group_level_1` = \"french\"  \n- `region` = \"canada\"  \n- `2036_low_immigration` — this gives the low-immigration projection for French-speaking people in Canada.\n\nThe previous query returned empty because the French row might have a different structure? Let me check all French rows:\n\n```sql\nSELECT * FROM my_table WHERE group_level_1 = 'french'\n```\n\nThat returns three rows:  \n- canada: 22.9 (reference), 20.4 (low), 20.9 (high)  \n- quebec: 85.4, 82.4, 83  \n- canada outside quebec: 3.9, 3.2, 3.2  \n\nSo the only Canadian French row exists, and its `2036_low_immigration` is 20.4.\n\nBut the feedback said \"no results\". That must be due to a typo or misinterpretation. Let me re-run the query carefully.\n</think>\n\n```sql\nSELECT \"2036_low_immigration\" \nFROM my_table \nWHERE \"group_level_1\" = 'french' \n  AND \"region\" = 'canada'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[2036]",
         "reference": "[20.2]",
         "turn_details": [
             {
@@ -2668,7 +2668,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nFirst, I'll identify the relevant columns. The question asks for the \"high boundary of percentage of french-speaking people in canada is projected to be in 2036\". The column `2036_high_immigration` contains percentages under high immigration scenarios. For French-speaking people in Canada overall, the row where `group_level_1 = 'french'` and `region = 'canada'` gives the value.\n\nThe previous SQL returned empty because perhaps the region name or group_level_1 might have a different case or extra spaces? Let me check the exact values from the table: for France, the region is 'french', but maybe the schema uses lowercase 'french'? Also, the row for 'total' is not French-specific. The question specifically asks for French-speaking people, so we need the French row.\n</think>\n\n```sql\nSELECT \"2036_high_immigration\"\nFROM my_table\nWHERE \"group_level_1\" = 'french'\n  AND \"region\" = 'canada';\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[1]",
         "reference": "[20.9]",
         "turn_details": [
             {
@@ -2689,7 +2689,7 @@
         "task": "hitab",
         "mode": "SQL",
         "prediction": "<think>\nLet me first identify the relevant columns.\n\n**Table Positioning:**\n- The question asks for the percentage of French-speaking people in Quebec in 2011.\n- Relevant columns: `region`, `group_level_1`, `2011`.\n- We need rows where `region` = 'quebec', `group_level_1` = 'french', and `group_level_0` = 'region'.\n- The value we want is the `2011` column.\n\nNow I'll write the SQL query.\n</think>\n\n```sql\nSELECT \"2011\" FROM my_table \nWHERE region = 'quebec' \n  AND group_level_1 = 'french' \n  AND group_level_0 = 'region'\n```",
-        "processed_prediction": "[]",
+        "processed_prediction": "[Now I'll write the SQL query]",
         "reference": "[85.4]",
         "turn_details": [
             {

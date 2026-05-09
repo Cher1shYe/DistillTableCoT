@@ -53,12 +53,18 @@ def extract_wiki_final_answer(prediction_text):
             
         return answer_str.strip()
 
-    text = prediction_text.strip()
+    # Priority 1: search the full text (including inside <think>) for explicit markers.
+    # Agent-mode models write "Final Answer:" inside the <think> block; CoT models write
+    # the answer after </think>. We must check the original text first.
+    text_original = prediction_text.strip()
 
-    # 首先查找 "Final Answer:" (Agent 模式最常用)
-    final_answer_match = re.search(r'Final Answer:\s*(.*)', text, re.IGNORECASE)
+    final_answer_match = re.search(r'Final Answer:\s*(.*)', text_original, re.IGNORECASE)
     if final_answer_match:
         return clean_answer(final_answer_match.group(1))
+
+    # Priority 2: strip <think> so fallback heuristics don't grab reasoning prose.
+    # After stripping, CoT models leave just the final answer line (e.g. "\n\nSpain").
+    text = strip_think_block(text_original).strip()
 
     # 其次查找所有 "Answer:" 的匹配
     answer_matches = list(re.finditer(r'\bAnswer:\s*(.+?)(?:\.|\n|$)', text, re.IGNORECASE | re.DOTALL))
@@ -187,27 +193,81 @@ def extract_fetaqa_final_answer(prediction_text):
 def extract_hitab_final_answer(prediction_text, reference_label):
     """
     专门为 HiTab 定制的结果提取：
-    1. 拿取“最后一个” answer 后的内容，解决多重前缀嵌套问题。
+    1. 拿取"最后一个" answer 后的内容，解决多重前缀嵌套问题。
     2. 探测 Reference 格式，智能处理单字符串大小写、多字符串列表分割。
     3. 修复小数点截断。
     4. 智能识别百分比，自动进行 /100 转换。
     """
-    text = prediction_text.strip()
-    
-    # === 1. 安全提取大模型的原始回答 (获取最后一个 answer 之后的内容) ===
-    # 使用 split 切割所有的 trigger 词，确保我们只拿最后一段，完美避开 " \n Answer:" 这种嵌套
+    original_text = prediction_text.strip()
+
+    # === 0. Priority: search the full original text (including inside <think>) for markers.
+    # Agent models often write "Final Answer:" inside <think>; stripping first would lose it.
     pattern = re.compile(
-        r'(?:the final answer is|the answer is|so the answer is|final answer:|answer:)\**\s*', 
+        r'(?:the final answer is|the answer is|so the answer is|final answer:|answer:)\**\s*',
         re.IGNORECASE
     )
-    splits = pattern.split(text)
-    
-    if len(splits) > 1:
-        ans_raw = splits[-1].strip()
+    splits_orig = pattern.split(original_text)
+    if len(splits_orig) > 1:
+        # Take the last split — avoids mid-reasoning "the answer is X" false positives
+        ans_raw_candidate = splits_orig[-1].strip()
+        # Reject if the candidate itself contains a think or SQL block opener
+        # (means we're still inside a tag, not at the actual answer)
+        if not re.search(r'<think>|```sql', ans_raw_candidate, re.IGNORECASE):
+            ans_raw = re.sub(r'</think>.*', '', ans_raw_candidate, flags=re.DOTALL).strip()
+            ans_raw = re.sub(r'[*_`]', '', ans_raw)
+            if ans_raw.endswith('.'): ans_raw = ans_raw[:-1]
+            ans_raw = ans_raw.strip()
+            # Skip to formatting stage
+            ref_str = str(reference_label).strip()
+            if ref_str.startswith('[') and ref_str.endswith(']'):
+                try:
+                    ref_list = ast.literal_eval(ref_str)
+                except Exception:
+                    ref_list = None
+                if isinstance(ref_list, list) and ref_list:
+                    ref_val_first = ref_list[0]
+                    if isinstance(ref_val_first, str):
+                        ans_clean = ans_raw.lower()
+                        if len(ref_list) > 1:
+                            parts = [re.sub(r'^and\s+', '', p.strip()) for p in re.split(r',|\n|;', ans_clean) if p.strip()]
+                            return str(parts)
+                        return f"['{ans_clean}']"
+                    elif isinstance(ref_val_first, (int, float)):
+                        ans_raw_clean = re.sub(r'(?<=\d),(?=\d)', '', ans_raw)
+                        numbers_str = re.findall(r'-?\d+(?:\.\d+)?', ans_raw_clean)
+                        if numbers_str:
+                            formatted_nums = []
+                            for i, num_str in enumerate(numbers_str):
+                                val = float(num_str) if '.' in num_str else int(num_str)
+                                if '%' in ans_raw and isinstance(ref_val_first, float) and abs(ref_val_first) <= 1.0:
+                                    val = float(num_str) / 100.0
+                                elif i < len(ref_list) and isinstance(ref_list[i], float) and str(ref_list[i]).endswith('.0') and '.' not in num_str:
+                                    val = float(num_str)
+                                formatted_nums.append(val)
+                            return str(formatted_nums[:len(ref_list)])
+            return f"[{ans_raw}]" if ref_str.startswith('[') else ans_raw.strip()
+
+    # === 1. No explicit marker found. Strip <think> and SQL blocks, then apply heuristics. ===
+    think_match = re.search(r'<think>(.*?)</think>', original_text, re.DOTALL)
+    think_content = think_match.group(1).strip() if think_match else ""
+
+    text = strip_think_block(original_text).strip()
+    text = re.sub(r'```sql.*?```', '', text, flags=re.DOTALL | re.IGNORECASE).strip()
+
+    if text:
+        lines = [line.strip() for line in text.split('\n') if line.strip()]
+        ans_raw = lines[-1] if lines else text
     else:
-        # 兜底：如果没有 trigger 词，取最后一行
-        lines = [line.strip() for line in text.strip().split('\n') if line.strip()]
-        ans_raw = lines[-1] if lines else text.strip()
+        # text empty (model only output SQL with no prose) — look in think block
+        ans_raw = ""
+        if think_content:
+            think_lines = [l.strip() for l in think_content.split('\n') if l.strip()]
+            for line in reversed(think_lines[-5:]):
+                if re.search(r'\d', line) or len(line.split()) <= 6:
+                    ans_raw = line
+                    break
+            if not ans_raw and think_lines:
+                ans_raw = think_lines[-1]
 
     # 去除 Markdown 和句尾的句号（保留中间的小数点）
     ans_raw = re.sub(r'[*_`]', '', ans_raw)

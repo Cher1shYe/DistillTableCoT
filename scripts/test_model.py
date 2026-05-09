@@ -222,8 +222,33 @@ def run_sql_agent(model, tokenizer, task, sample, config,
                 if empty_count >= max_empty:
                     break
         else:
-            last_sql = "None"
+            last_sql = None
             last_feedback = "Error: No SQL code block found. Wrap your query in ```sql ... ```."
+
+    # If the loop ended without a Final Answer but we have a successful SQL result,
+    # add one forced synthesis turn: ask the model to convert the SQL result into an answer.
+    # This stays within the AGENT_SYSTEM_PROMPT distribution the model was trained on.
+    if (not final_prediction
+            and last_sql
+            and last_feedback
+            and "SQL Error" not in str(last_feedback)
+            and "no results" not in str(last_feedback).lower()):
+        force_prompt = (
+            f"{base_user_content}\n\n"
+            f"--- SQL Result ---\n"
+            f"SQL: ```sql\n{last_sql}\n```\n"
+            f"Result:\n{last_feedback}\n\n"
+            f"The SQL result above contains the information needed to answer the question. "
+            f"Do NOT write any more SQL. Output exactly 'Final Answer: <your answer>'."
+        )
+        messages = [
+            {"role": "system", "content": config["system_prompt"]},
+            {"role": "user", "content": force_prompt},
+        ]
+        response = generate(model, tokenizer, messages, max_new_tokens)
+        turn_history.append({"turn": "force", "prompt": force_prompt, "response": response})
+        if "Final Answer:" in response:
+            final_prediction = response
 
     conn.close()
     return final_prediction, turn_history, "SQL"
