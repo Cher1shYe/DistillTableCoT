@@ -40,9 +40,11 @@ def load_model_and_tokenizer(model_type, base_model_name, model_path, is_lora):
     print(f"🔍 加载模型: {load_path}")
     model = AutoModelForCausalLM.from_pretrained(
         load_path,
-        dtype=torch.bfloat16,
+        torch_dtype=torch.bfloat16,
         device_map="auto",
         trust_remote_code=True,
+        # 显式开启 PyTorch 内置的加速 (Scaled Dot Product Attention)
+        attn_implementation="sdpa",
     )
 
     if model_type == "trained" and is_lora:
