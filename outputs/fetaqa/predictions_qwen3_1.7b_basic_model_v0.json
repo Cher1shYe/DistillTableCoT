@@ -1,9 +1,9 @@
 {
     "evaluation_results": {
-        "rouge1": 0.4438,
-        "rouge2": 0.2335,
-        "rougeL": 0.3533,
-        "rougeLsum": 0.3574,
+        "rouge1": 0.4419,
+        "rouge2": 0.233,
+        "rougeL": 0.3531,
+        "rougeLsum": 0.3571,
         "sacrebleu": 14.3
     },
     "predictions": [

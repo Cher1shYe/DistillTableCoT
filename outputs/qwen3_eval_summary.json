@@ -1,6 +1,17 @@
 [
   {
     "task": "wikitableqa",
+    "kind": "baseline",
+    "variant": "qwen3-8b_wikitableqa",
+    "file": "predictions_baseline_qwen3-8b_wikitableqa.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.63
+    }
+  },
+  {
+    "task": "wikitableqa",
     "kind": "student",
     "variant": "agent",
     "file": "predictions_qwen3_1.7b_agent_wikitableqa.json",
@@ -52,6 +63,17 @@
     "changed": 0,
     "metrics": {
       "exact_match": 0.83
+    }
+  },
+  {
+    "task": "tabfact",
+    "kind": "baseline",
+    "variant": "qwen3-8b_tabfact",
+    "file": "predictions_baseline_qwen3-8b_tabfact.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "accuracy": 0.8
     }
   },
   {
@@ -111,16 +133,31 @@
   },
   {
     "task": "fetaqa",
+    "kind": "baseline",
+    "variant": "qwen3-8b_fetaqa",
+    "file": "predictions_baseline_qwen3-8b_fetaqa.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "rouge1": 0.5186,
+      "rouge2": 0.3036,
+      "rougeL": 0.4201,
+      "rougeLsum": 0.4229,
+      "sacrebleu": 20.05
+    }
+  },
+  {
+    "task": "fetaqa",
     "kind": "student",
     "variant": "agent",
     "file": "predictions_qwen3_1.7b_agent_fetaqa.json",
     "n": 100,
     "changed": 0,
     "metrics": {
-      "rouge1": 0.4512,
-      "rouge2": 0.2758,
-      "rougeL": 0.3622,
-      "rougeLsum": 0.3643,
+      "rouge1": 0.4502,
+      "rouge2": 0.2749,
+      "rougeL": 0.3641,
+      "rougeLsum": 0.3637,
       "sacrebleu": 17.92
     }
   },
@@ -132,10 +169,10 @@
     "n": 100,
     "changed": 0,
     "metrics": {
-      "rouge1": 0.4438,
-      "rouge2": 0.2335,
-      "rougeL": 0.3533,
-      "rougeLsum": 0.3574,
+      "rouge1": 0.4419,
+      "rouge2": 0.233,
+      "rougeL": 0.3531,
+      "rougeLsum": 0.3571,
       "sacrebleu": 14.3
     }
   },
@@ -147,10 +184,10 @@
     "n": 100,
     "changed": 0,
     "metrics": {
-      "rouge1": 0.5666,
-      "rouge2": 0.3495,
-      "rougeL": 0.4714,
-      "rougeLsum": 0.4737,
+      "rouge1": 0.5667,
+      "rouge2": 0.3494,
+      "rougeL": 0.4731,
+      "rougeLsum": 0.4732,
       "sacrebleu": 23.52
     }
   },
@@ -163,9 +200,9 @@
     "changed": 0,
     "metrics": {
       "rouge1": 0.5642,
-      "rouge2": 0.3494,
-      "rougeL": 0.4622,
-      "rougeLsum": 0.4614,
+      "rouge2": 0.3481,
+      "rougeL": 0.4632,
+      "rougeLsum": 0.4622,
       "sacrebleu": 19.95
     }
   },
@@ -177,11 +214,22 @@
     "n": 100,
     "changed": 0,
     "metrics": {
-      "rouge1": 0.5969,
-      "rouge2": 0.3874,
-      "rougeL": 0.4881,
-      "rougeLsum": 0.4875,
+      "rouge1": 0.5948,
+      "rouge2": 0.3854,
+      "rougeL": 0.4879,
+      "rougeLsum": 0.4868,
       "sacrebleu": 28.24
+    }
+  },
+  {
+    "task": "hitab",
+    "kind": "baseline",
+    "variant": "qwen3-8b_hitab",
+    "file": "predictions_baseline_qwen3-8b_hitab.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.69
     }
   },
   {

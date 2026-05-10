@@ -256,6 +256,53 @@ def run_sql_agent(model, tokenizer, task, sample, config,
     return final_prediction, turn_history, "SQL"
 
 
+def run_cot_baseline(model, tokenizer, task, sample, max_new_tokens=512):
+    """Standard CoT baseline — same prompt as the v0 untrained 1.7B basic run.
+
+    Uses TASK_TEST_CONFIGS[task]["prompt_template"] with NO system prompt. This is
+    the prompt that produced predictions_qwen3_1.7b_basic_model_v0.json, so a baseline
+    model run with this function gives a clean "same prompt, different model" comparison.
+    Deliberately distinct from run_cot_only (which serves the mixed_agent CoT fallback
+    and must stay aligned with the student's training distribution).
+
+    Returns (prediction, [], "CoT").
+    """
+    test_config = TASK_TEST_CONFIGS[task]
+    table_str = format_table(sample.get('table') or sample.get('table_text'), task_name=task)
+    prompt = test_config["prompt_template"].format(
+        table=table_str,
+        question=sample.get('question', ''),
+        statement=sample.get('statement', ''),
+    )
+    messages = [{"role": "user", "content": prompt}]
+    final_prediction = generate(model, tokenizer, messages, max_new_tokens)
+    return final_prediction, [], "CoT"
+
+
+def run_cot_only(model, tokenizer, task, sample, config, max_new_tokens=512):
+    """Single-turn CoT inference using COT_SYSTEM_PROMPT + cot_user_prompt_template.
+
+    This is the v5 mixed_agent CoT fallback — kept aligned with what the student
+    was trained on (AgentDataset injects v5 CoT-fallback turns under COT_SYSTEM_PROMPT).
+    Do NOT use this as a baseline: it shares the student's training distribution.
+
+    For a fair external CoT baseline, use run_cot_baseline.
+    Returns (prediction, [], "CoT").
+    """
+    raw_table = sample.get('table') or sample.get('table_content') or sample.get('table_text')
+    table_str = format_table(raw_table, task_name=task)
+    question = sample.get('question', '') or sample.get('statement', '')
+    cot_prompt = config["cot_user_prompt_template"].format(
+        table=table_str, question=question, statement=question
+    )
+    cot_messages = [
+        {"role": "system", "content": COT_SYSTEM_PROMPT},
+        {"role": "user", "content": cot_prompt},
+    ]
+    final_prediction = generate(model, tokenizer, cot_messages, max_new_tokens)
+    return final_prediction, [], "CoT"
+
+
 def run_mixed_agent(model, tokenizer, task, sample, config,
                     max_turns=5, max_empty=2, max_new_tokens=512):
     """SQL-first with CoT fallback — mirrors the v5 teacher inference logic.
@@ -271,18 +318,11 @@ def run_mixed_agent(model, tokenizer, task, sample, config,
     )
 
     if not final_prediction or "Final Answer:" not in final_prediction:
-        mode = "CoT"
-        raw_table = sample.get('table') or sample.get('table_content') or sample.get('table_text')
-        table_str = format_table(raw_table, task_name=task)
-        question = sample.get('question', '') or sample.get('statement', '')
-        cot_prompt = config["cot_user_prompt_template"].format(
-            table=table_str, question=question, statement=question
+        cot_prediction, _, _ = run_cot_only(
+            model, tokenizer, task, sample, config, max_new_tokens
         )
-        cot_messages = [
-            {"role": "system", "content": COT_SYSTEM_PROMPT},
-            {"role": "user", "content": cot_prompt},
-        ]
-        final_prediction = generate(model, tokenizer, cot_messages, max_new_tokens)
+        final_prediction = cot_prediction
+        mode = "CoT"
 
     return final_prediction, turn_history, mode
 

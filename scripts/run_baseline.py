@@ -28,6 +28,7 @@ from test_model import (
     generate,
     run_sql_agent,
     run_mixed_agent,
+    run_cot_baseline,
 )
 
 # ---------------------------------------------------------------------------
@@ -81,8 +82,12 @@ def main():
     )
     parser.add_argument(
         "--inference_mode", type=str, default="mixed_agent",
-        choices=["mixed_agent", "sql_agent"],
-        help="推理模式（默认 mixed_agent：SQL 优先 + CoT 回退）",
+        choices=["mixed_agent", "sql_agent", "cot"],
+        help="推理模式：\n"
+             "  mixed_agent — SQL 优先 + CoT 回退（与学生 mixed 对照）\n"
+             "  sql_agent   — 纯 SQL 多轮循环（与学生 agent 对照）\n"
+             "  cot         — 单轮标准 CoT，用 TASK_TEST_CONFIGS 的 prompt_template、"
+             "无 system prompt（与未训练 1.7B basic v0 同 prompt，模型轴对照最干净）",
     )
     parser.add_argument("--split",          type=str, default="train")
     parser.add_argument("--num_samples",    type=int, default=100)
@@ -120,6 +125,13 @@ def main():
             )
             if not prediction and turn_history:
                 prediction = turn_history[-1]["response"]
+        elif args.inference_mode == "cot":
+            # Strong CoT baseline：用 TASK_TEST_CONFIGS 的 prompt_template、不带 system，
+            # 与未训练 1.7B basic v0 同 prompt——"同 prompt 不同模型"对照最干净
+            prediction, turn_history, mode = run_cot_baseline(
+                model, tokenizer, args.task, sample,
+                max_new_tokens=args.max_new_tokens,
+            )
         else:  # mixed_agent
             prediction, turn_history, mode = run_mixed_agent(
                 model, tokenizer, args.task, sample, task_config,
@@ -152,7 +164,7 @@ def main():
     # 4. 保存结果
     task_output_dir = os.path.join(args.output_dir, args.task)
     os.makedirs(task_output_dir, exist_ok=True)
-    out_name    = f"predictions_baseline_{args.model}_{args.task}.json"
+    out_name    = f"predictions_baseline_{args.model}_{args.inference_mode}_{args.task}.json"
     output_path = os.path.join(task_output_dir, out_name)
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=4)
