@@ -1,4 +1,4 @@
-# DistillTableCoT
+# Hybrid SQL-CoT Reasoning
 
 本项目旨在探索和评估小模型(Qwen3-1.7B)在表格问答任务表现上的最优蒸馏方案，并支持混合推理（如 SQL-Agent 与 CoT 结合）的模型蒸馏微调。
 
