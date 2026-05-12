@@ -35,7 +35,7 @@ sys.path.insert(0, ROOT)
 
 from datasets import load_dataset
 
-from configs import TASK_CONFIGS, COT_SYSTEM_PROMPT
+from configs import TASK_CONFIGS, TASK_TEST_CONFIGS, COT_SYSTEM_PROMPT
 from utils import format_table, call_deepseek_api, table_to_sqlite, execute_sql
 
 
@@ -43,6 +43,83 @@ def extract_sql(text):
     """从模型输出中提取 ```sql ... ``` 代码块 (镜像 run_inference.py 同名函数)。"""
     match = re.search(r"```sql\s*(.*?)\s*```", text, re.DOTALL | re.IGNORECASE)
     return match.group(1).strip() if match else None
+
+
+def teacher_cot_predictions(task_name, split, num_samples,
+                            out_name, output_dir="outputs"):
+    """
+    Teacher (DeepSeek) 标准 CoT baseline。
+
+    与 teacher_agent_predictions 的区别:
+      - 不构造 SQLite, 不走 SQL 多轮循环, 不带 schema
+      - 用 TASK_TEST_CONFIGS[task]["prompt_template"] (与未训练 1.7B basic v0 同 prompt)
+      - 不带 system prompt, 单轮 user message 调用
+    设计动机: 给 teacher 加一档不带 SQL 脚手架的标准 CoT 参考线 (ablation),
+    证明 mixed_agent 范式对 teacher 自己也有提升, 而非只对学生有用。
+    """
+    if task_name not in TASK_TEST_CONFIGS:
+        print(f"错误: 任务 '{task_name}' 未在 TASK_TEST_CONFIGS 中定义。")
+        return
+
+    print(f"--- Teacher CoT baseline 开始: task={task_name}, split={split}, n={num_samples} ---")
+
+    test_config = TASK_TEST_CONFIGS[task_name]
+    eval_config = TASK_CONFIGS[task_name]   # 后处理 / target_field / dataset_name 仍走 TASK_CONFIGS
+
+    try:
+        dataset = load_dataset(eval_config["dataset_name"], split=split)
+    except Exception as e:
+        print(f"❌ 数据集加载失败: {e}")
+        return
+
+    if num_samples > len(dataset):
+        num_samples = len(dataset)
+    dataset = dataset.select(range(num_samples))
+
+    results_to_save = []
+
+    for i, sample in enumerate(tqdm.tqdm(dataset, desc=f"teacher-cot → {task_name}")):
+        raw_table = sample.get('table') or sample.get('table_content') or sample.get('table_text')
+        table_str = format_table(raw_table, task_name=task_name)
+
+        prompt = test_config["prompt_template"].format(
+            table=table_str,
+            question=sample.get('question', ''),
+            statement=sample.get('statement', ''),
+        )
+        # 与 run_cot_baseline (scripts/test_model.py) 一致: 不带 system, 单轮 user
+        messages = [{"role": "user", "content": prompt}]
+        final_prediction = call_deepseek_api(messages)
+
+        postprocess_func = eval_config["postprocess_func"]
+        reference_label = sample[eval_config["target_field"]]
+        try:
+            processed_pred, _ = postprocess_func(final_prediction, reference_label)
+        except Exception as e:
+            print(f"⚠️ 后处理失败 (sample {i}): {e}")
+            processed_pred = final_prediction
+
+        results_to_save.append({
+            "id": i,
+            "original_dataset_id": str(sample.get("original_dataset_id", sample.get("id", "N/A"))),
+            "task": task_name,
+            "model": "teacher_deepseek",
+            "mode": "CoT",
+            "prediction": final_prediction,
+            "processed_prediction": processed_pred,
+            "reference": reference_label,
+            # 单轮无 turn_history, 显式留空键以便下游统一访问
+            "turn_details": [],
+        })
+
+    task_output_dir = os.path.join(output_dir, task_name)
+    os.makedirs(task_output_dir, exist_ok=True)
+    output_path = os.path.join(task_output_dir, out_name)
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(results_to_save, f, ensure_ascii=False, indent=4)
+
+    print(f"\n✅ {len(results_to_save)} 条 teacher CoT 结果保存至: {output_path}")
+    print("   下一步: python3 scripts/batch_eval_qwen3.py")
 
 
 def teacher_agent_predictions(task_name, split, num_samples,
@@ -192,9 +269,11 @@ def main():
     parser.add_argument("--task", type=str, required=True,
                         choices=["wikitableqa", "tabfact", "fetaqa", "hitab"])
     parser.add_argument("--inference_mode", type=str, default="mixed_agent",
-                        choices=["mixed_agent", "sql_agent"],
+                        choices=["mixed_agent", "sql_agent", "cot"],
                         help="mixed_agent = SQL+CoT 回退 (= run_inference.py 默认行为); "
-                             "sql_agent = 关闭 CoT 回退 (= run_inference.py --pure_sql)")
+                             "sql_agent  = 关闭 CoT 回退 (= run_inference.py --pure_sql); "
+                             "cot        = 标准 CoT baseline, 用 TASK_TEST_CONFIGS 的 prompt、"
+                             "无 system, 单轮调用 (与 run_baseline.py --inference_mode cot 同款)")
     parser.add_argument("--split", type=str, default="test",
                         help="数据切片，默认 test (与学生模型评估一致)")
     parser.add_argument("--num_samples", type=int, default=100)
@@ -210,21 +289,31 @@ def main():
         print("    请先 export DEEPSEEK_API_KEY=sk-xxx 再跑。")
         return
 
-    fallback_to_cot = (args.inference_mode == "mixed_agent")
     out_name = args.out_name or f"predictions_teacher_deepseek_{args.inference_mode}.json"
     if not out_name.endswith(".json"):
         out_name += ".json"
 
-    teacher_agent_predictions(
-        task_name=args.task,
-        split=args.split,
-        num_samples=args.num_samples,
-        out_name=out_name,
-        max_turns=args.max_turns,
-        max_empty=args.max_empty,
-        fallback_to_cot=fallback_to_cot,
-        output_dir=args.output_dir,
-    )
+    if args.inference_mode == "cot":
+        # max_turns / max_empty 对 CoT 模式无意义, 静默忽略 (argparse 仍允许传)
+        teacher_cot_predictions(
+            task_name=args.task,
+            split=args.split,
+            num_samples=args.num_samples,
+            out_name=out_name,
+            output_dir=args.output_dir,
+        )
+    else:
+        fallback_to_cot = (args.inference_mode == "mixed_agent")
+        teacher_agent_predictions(
+            task_name=args.task,
+            split=args.split,
+            num_samples=args.num_samples,
+            out_name=out_name,
+            max_turns=args.max_turns,
+            max_empty=args.max_empty,
+            fallback_to_cot=fallback_to_cot,
+            output_dir=args.output_dir,
+        )
 
 
 if __name__ == "__main__":

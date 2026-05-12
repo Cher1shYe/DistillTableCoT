@@ -2,8 +2,19 @@
   {
     "task": "wikitableqa",
     "kind": "baseline",
-    "variant": "qwen3-8b_wikitableqa",
-    "file": "predictions_baseline_qwen3-8b_wikitableqa.json",
+    "variant": "qwen3-8b_cot_wikitableqa",
+    "file": "predictions_baseline_qwen3-8b_cot_wikitableqa.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.44
+    }
+  },
+  {
+    "task": "wikitableqa",
+    "kind": "baseline",
+    "variant": "qwen3-8b_mixed_agent_wikitableqa",
+    "file": "predictions_baseline_qwen3-8b_mixed_agent_wikitableqa.json",
     "n": 100,
     "changed": 0,
     "metrics": {
@@ -57,6 +68,17 @@
   {
     "task": "wikitableqa",
     "kind": "teacher",
+    "variant": "deepseek_cot",
+    "file": "predictions_teacher_deepseek_cot.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.82
+    }
+  },
+  {
+    "task": "wikitableqa",
+    "kind": "teacher",
     "variant": "deepseek_mixed_agent",
     "file": "predictions_teacher_deepseek_mixed_agent.json",
     "n": 100,
@@ -68,8 +90,19 @@
   {
     "task": "tabfact",
     "kind": "baseline",
-    "variant": "qwen3-8b_tabfact",
-    "file": "predictions_baseline_qwen3-8b_tabfact.json",
+    "variant": "qwen3-8b_cot_tabfact",
+    "file": "predictions_baseline_qwen3-8b_cot_tabfact.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "accuracy": 0.84
+    }
+  },
+  {
+    "task": "tabfact",
+    "kind": "baseline",
+    "variant": "qwen3-8b_mixed_agent_tabfact",
+    "file": "predictions_baseline_qwen3-8b_mixed_agent_tabfact.json",
     "n": 100,
     "changed": 0,
     "metrics": {
@@ -123,6 +156,17 @@
   {
     "task": "tabfact",
     "kind": "teacher",
+    "variant": "deepseek_cot",
+    "file": "predictions_teacher_deepseek_cot.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "accuracy": 0.89
+    }
+  },
+  {
+    "task": "tabfact",
+    "kind": "teacher",
     "variant": "deepseek_mixed_agent",
     "file": "predictions_teacher_deepseek_mixed_agent.json",
     "n": 100,
@@ -134,15 +178,30 @@
   {
     "task": "fetaqa",
     "kind": "baseline",
-    "variant": "qwen3-8b_fetaqa",
-    "file": "predictions_baseline_qwen3-8b_fetaqa.json",
+    "variant": "qwen3-8b_cot_fetaqa",
+    "file": "predictions_baseline_qwen3-8b_cot_fetaqa.json",
     "n": 100,
     "changed": 0,
     "metrics": {
-      "rouge1": 0.5186,
-      "rouge2": 0.3036,
-      "rougeL": 0.4201,
-      "rougeLsum": 0.4229,
+      "rouge1": 0.5939,
+      "rouge2": 0.3716,
+      "rougeL": 0.4701,
+      "rougeLsum": 0.4742,
+      "sacrebleu": 22.52
+    }
+  },
+  {
+    "task": "fetaqa",
+    "kind": "baseline",
+    "variant": "qwen3-8b_mixed_agent_fetaqa",
+    "file": "predictions_baseline_qwen3-8b_mixed_agent_fetaqa.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "rouge1": 0.5166,
+      "rouge2": 0.3032,
+      "rougeL": 0.4198,
+      "rougeLsum": 0.421,
       "sacrebleu": 20.05
     }
   },
@@ -154,10 +213,10 @@
     "n": 100,
     "changed": 0,
     "metrics": {
-      "rouge1": 0.4502,
-      "rouge2": 0.2749,
-      "rougeL": 0.3641,
-      "rougeLsum": 0.3637,
+      "rouge1": 0.4514,
+      "rouge2": 0.2743,
+      "rougeL": 0.3636,
+      "rougeLsum": 0.3639,
       "sacrebleu": 17.92
     }
   },
@@ -169,10 +228,10 @@
     "n": 100,
     "changed": 0,
     "metrics": {
-      "rouge1": 0.4419,
-      "rouge2": 0.233,
-      "rougeL": 0.3531,
-      "rougeLsum": 0.3571,
+      "rouge1": 0.4415,
+      "rouge2": 0.2326,
+      "rougeL": 0.3536,
+      "rougeLsum": 0.3563,
       "sacrebleu": 14.3
     }
   },
@@ -184,10 +243,10 @@
     "n": 100,
     "changed": 0,
     "metrics": {
-      "rouge1": 0.5667,
-      "rouge2": 0.3494,
-      "rougeL": 0.4731,
-      "rougeLsum": 0.4732,
+      "rouge1": 0.5665,
+      "rouge2": 0.3495,
+      "rougeL": 0.4708,
+      "rougeLsum": 0.4715,
       "sacrebleu": 23.52
     }
   },
@@ -199,11 +258,26 @@
     "n": 100,
     "changed": 0,
     "metrics": {
-      "rouge1": 0.5642,
-      "rouge2": 0.3481,
-      "rougeL": 0.4632,
-      "rougeLsum": 0.4622,
+      "rouge1": 0.5662,
+      "rouge2": 0.3484,
+      "rougeL": 0.4596,
+      "rougeLsum": 0.4613,
       "sacrebleu": 19.95
+    }
+  },
+  {
+    "task": "fetaqa",
+    "kind": "teacher",
+    "variant": "deepseek_cot",
+    "file": "predictions_teacher_deepseek_cot.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "rouge1": 0.6236,
+      "rouge2": 0.4027,
+      "rougeL": 0.5191,
+      "rougeLsum": 0.5186,
+      "sacrebleu": 26.68
     }
   },
   {
@@ -214,18 +288,29 @@
     "n": 100,
     "changed": 0,
     "metrics": {
-      "rouge1": 0.5948,
-      "rouge2": 0.3854,
-      "rougeL": 0.4879,
-      "rougeLsum": 0.4868,
+      "rouge1": 0.597,
+      "rouge2": 0.3871,
+      "rougeL": 0.4872,
+      "rougeLsum": 0.488,
       "sacrebleu": 28.24
     }
   },
   {
     "task": "hitab",
     "kind": "baseline",
-    "variant": "qwen3-8b_hitab",
-    "file": "predictions_baseline_qwen3-8b_hitab.json",
+    "variant": "qwen3-8b_cot_hitab",
+    "file": "predictions_baseline_qwen3-8b_cot_hitab.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.03
+    }
+  },
+  {
+    "task": "hitab",
+    "kind": "baseline",
+    "variant": "qwen3-8b_mixed_agent_hitab",
+    "file": "predictions_baseline_qwen3-8b_mixed_agent_hitab.json",
     "n": 100,
     "changed": 0,
     "metrics": {
@@ -274,6 +359,17 @@
     "changed": 0,
     "metrics": {
       "exact_match": 0.69
+    }
+  },
+  {
+    "task": "hitab",
+    "kind": "teacher",
+    "variant": "deepseek_cot",
+    "file": "predictions_teacher_deepseek_cot.json",
+    "n": 100,
+    "changed": 0,
+    "metrics": {
+      "exact_match": 0.74
     }
   },
   {

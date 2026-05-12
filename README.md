@@ -1,26 +1,28 @@
+# DistillTableCoT
+
+本项目旨在探索和评估小模型(Qwen3-1.7B)在表格问答任务表现上的最优蒸馏方案，并支持混合推理（如 SQL-Agent 与 CoT 结合）的模型蒸馏微调。
 
 ## 支持的任务
 
 - `wikitableqa`: 表格问答
 - `tabfact`: 表格事实判断
 - `fetaqa`: 自由格式的表格问答
+- `hitab`: 层次化表格问答与计算
 
 ## 项目结构
 
-```
-deepseek-table-eval/
-├── outputs/                  # 存放所有模型输出的文件夹
-├── ├── fetaqa/
-│   │   └── predictions.json
-│   ├── tabfact/
-│   │   └── predictions.json
-│   └── wikitableqa/
-│       └── predictions.json
-├── configs.py                # 任务配置中心
-├── utils.py                  # 辅助函数
-├── run_inference.py          # 运行推理并保存结果
-├── evaluate.py               # 读取结果并进行评估
-├── requirements.txt          # 项目依赖
+```text
+DistillTableCoT/
+├── configs/                  # 训练配置文件目录
+├── data_loader/              # 数据加载相关
+├── local_datasets/           # 本地数据集存储
+├── outputs/                  # 存放所有模型输出与预测结果
+├── scripts/                  # 训练蒸馏脚本目录
+├── utils_train/              # 训练辅助函数
+├── configs.py                # 任务配置中心 (Prompt及后处理逻辑)
+├── utils.py                  # 通用辅助函数
+├── run_inference.py          # 运行大模型推理并保存结果
+├── run_evaluate.py           # 读取结果并进行评估
 └── README.md                 # 本说明文件
 ```
 
@@ -28,95 +30,88 @@ deepseek-table-eval/
 
 ### 1. 环境准备
 
-首先，请确保你已经安装了 Python 3.8+。
+请确保您已安装 Python 3.8+。
 
 **安装依赖:**
 ```bash
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
-本项目在数据处理和评估阶段需要 NLTK 的 punkt 和 punkt_tab 数据包。你可以通过运行一个简单的 Python 命令来下载它们。
-
-进入 Python 交互环境：
-```python
-python3
-```
-然后在 Python 中执行：
-
-```
-import nltk
-nltk.download('punkt')
-nltk.download('punkt_tab')
-exit()
-```
-**设置 API Key:**
-你需要将你的 DeepSeek API 密钥设置为环境变量。
+本项目在数据处理和评估阶段需要 NLTK 的 `punkt` 和 `punkt_tab` 数据包，可通过以下快捷命令下载：
 ```bash
-# 在 Linux/macOS
+python -c "import nltk; nltk.download('punkt'); nltk.download('punkt_tab')"
+```
+
+**设置 API Key (如使用 DeepSeek API 进行推理蒸馏数据生成):**
+将您的 DeepSeek API 密钥设置为环境变量：
+```bash
+# Linux / macOS
 export DEEPSEEK_API_KEY="your_api_key_here"
 
-# 在 Windows (CMD)
+# Windows (CMD)
 set DEEPSEEK_API_KEY=your_api_key_here
 
-# 在 Windows (PowerShell)
+# Windows (PowerShell)
 $env:DEEPSEEK_API_KEY="your_api_key_here"
 ```
 
 ### 2. 生成预测结果
 
-使用 `run_inference.py` 脚本来调用 API 并生成预测。你需要指定任务名称和样本数量。
+使用 `run_inference.py` 脚本来调用 API（或模型）生成预测。需指定任务名称和样本数量。
 
 **示例:** 为 `wikitableqa` 任务的前 5 个样本生成预测。
 ```bash
-python3 run_inference.py --task_name wikitableqa --num_samples 5
+python run_inference.py --task_name wikitableqa --num_samples 5
 ```
-运行后，结果将保存在 `outputs/wikitableqa/predictions.json`。
+运行后，结果将保存在 `outputs/wikitableqa/predictions.json` 或类似路径下。
 
 **其他任务示例:**
 ```bash
-# 为 tabfact 生成 5 个样本的预测
-python3 run_inference.py --task_name tabfact --num_samples 5
-
-# 为 fetaqa 生成 5 个样本的预测
-python3 run_inference.py --task_name fetaqa --num_samples 5
+python run_inference.py --task_name tabfact --num_samples 5
+python run_inference.py --task_name fetaqa --num_samples 5
+python run_inference.py --task_name hitab --num_samples 5
 ```
 
 ### 3. 评估预测结果
 
-生成预测文件后，使用 `evaluate.py` 脚本来计算评估指标。
+生成预测文件后，使用 `run_evaluate.py` 脚本来计算评估指标（如 Exact Match, Accuracy, ROUGE 等）。
 
-**示例:** 评估 `wikitableqa` 的预测结果。
+**示例:** 评估 `wikitableqa` 下文件`predicion.json`的预测结果。
 ```bash
-python3 evaluate.py --task_name wikitableqa
+python run_evaluate.py --task_name wikitableqa --pred_file prediction.json
 ```
-脚本会自动从 `outputs/wikitableqa/predictions.json` 读取数据并打印评估分数。
+脚本会自动读取对应的预测结果数据并打印评估分数。
 
-**评估其他任务:**
-```bash
-python3 evaluate.py --task_name tabfact
-python3 evaluate.py --task_name fetaqa
-```
+### 4. 训练蒸馏模型
 
-### 4. 训练模型
-
-设置好 `configs/` 下的配置文件，使用 `train_distill.py` 训练模型：
+设置好 `configs/` 下的配置文件后，使用 `scripts/train_distill.py` 脚本训练模型，本项目支持多种范式的训练，配置参数在configs文件夹下：
 
 ```bash
-# 训练Qwen3-1.7B模型
-python scripts/train_distill.py --config configs/qwen3-1.7b.yaml
+# 以混合范式蒸馏 Qwen3-1.7B 模型
+python scripts/train_distill.py --config configs/qwen3-mixed.yaml
 
-# 训练Qwen3-4B模型  
-python scripts/train_distill.py --config configs/qwen3-4b.yaml
 ```
+训练输出的模型和日志默认保存在 `outputs/models/` 目录下。
 
-输出模型保存在 `outputs/models/` 中。
+### 5. 测试微调模型
 
-### 5. 测试模型
-
-在 Hugging Face 访问通畅的情况下，使用 `test_model.py` 输出之前三个评估任务的结果。`model_path` 指定调用模型路径，`split` 用来指定测试用的数据集分块，`out_name` 指定输出预测结果文件名，保存在 `outputs/<task_name>/` 中：
+在网络访问 Hugging Face 通畅的情况下，使用 `scripts/test_model.py` 输出评估任务的结果，测试代码支持多种参数，如提示词范式，max_tokens等：
 
 ```bash
-python test_model.py --task_name <task_name> --num_samples <num_samples> --model_path <model_path> --out_name <out_name> --split <>
+python scripts/test_model.py \
+    --task_name wikitableqa \
+    --num_samples 100 \
+    --model_path outputs/models/your_model_dir \
+    --out_name predictions_qwen.json \
+    --max_new_tokens 2048 \
+    --prompt_mode mixed_agent \
+    --split test
 ```
 
-如果网络受阻可以用 `test_model_local_dataset.py` 代替 `test_model.py` 读取本地数据集（在 `local_datasets/` 中）。
+### 6. 评估模型结果
+
+本项目设计了自动化评估脚本`scripts/batch_eval_qwen3.py`，其会自动阅读`outputs/数据集/`目录下相应小模型与大模型的预测结果文件，并生成评估报告，示例命令如下：
+
+```bash
+python scripts/batch_eval_qwen3.py
+```
