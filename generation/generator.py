@@ -3,10 +3,13 @@ Generate nsql and questions.
 """
 
 from typing import Dict, List, Union, Tuple
-import openai
+from openai import OpenAI
 import time
 
 from generation.prompt import PromptBuilder
+
+# SiliconFlow API base URL
+SILICONFLOW_BASE_URL = "https://api.siliconflow.cn/v1"
 
 
 class Generator(object):
@@ -55,7 +58,7 @@ class Generator(object):
         """
         Build few-shot prompt for generation from file.
         """
-        with open(file_path, 'r') as f:
+        with open(file_path, 'r', encoding='utf-8') as f:
             lines = f.readlines()
         few_shot_prompt_list = []
         one_shot_prompt = ''
@@ -69,6 +72,8 @@ class Generator(object):
             last_line = line
         few_shot_prompt_list.append(one_shot_prompt)
         few_shot_prompt_list = few_shot_prompt_list[:n_shots]
+        if len(few_shot_prompt_list) == 0:
+            return ""  # n_shots reduced to 0 due to context length
         few_shot_prompt_list[-1] = few_shot_prompt_list[
             -1].strip()  # It is essential for prompting to remove extra '\n'
         few_shot_prompt = '\n'.join(few_shot_prompt_list)
@@ -101,11 +106,8 @@ class Generator(object):
         prompts = [p[1] for p in prompts]
         start_time = time.time()
 
-        # fixme: hardcoded, fix later
-        is_chat = self.args.engine in ["gpt-3.5-turbo", "gpt-3.5-turbo-16k", "gpt-3.5-turbo-0613",
-                                       "gpt-3.5-turbo-16k-0613",
-                                       "gpt-4", "gpt-4-0613"]
-
+        # Qwen models don't work well with stop tokens — they produce empty output
+        stop_tokens = None if 'qwen' in self.args.engine.lower() else self.args.stop_tokens
         result = self._call_openai_api(
             engine=self.args.engine,
             prompt=prompts,
@@ -113,8 +115,7 @@ class Generator(object):
             temperature=self.args.temperature,
             top_p=self.args.top_p,
             n=self.args.sampling_n,
-            stop=self.args.stop_tokens,
-            is_chat=is_chat
+            stop=stop_tokens,
         )
         print(f'Openai api one inference time: {time.time() - start_time}')
 
@@ -129,13 +130,26 @@ class Generator(object):
         response_dict = dict()
         for idx, g in enumerate(result['choices']):
             try:
-                # fixme: hardcoded, fix later
-                text = g['message']['content'] if is_chat else g['text']
-                if 'logprobs' not in g:
-                    # Since the logprobs are not returned after the chatgpt era
-                    logprob = 1
-                else:
-                    logprob = sum(g['logprobs']['token_logprobs'])
+                text = g['message']['content'].strip().replace('\n', ' ').replace('\\n', ' ')
+                # Retry with higher temperature if output is empty (model hesitation)
+                if not text or not text.strip():
+                    eid = result_idx_to_eid[idx]
+                    prompt_item = prompts[idx % len(prompts)] if prompts else ""
+                    if isinstance(prompt_item, tuple):
+                        prompt_item = prompt_item[1]
+                    print(f"Empty generation for eid#{eid}, retrying with higher temperature...")
+                    retry_result = self._call_openai_api(
+                        engine=self.args.engine,
+                        prompt=[prompt_item],
+                        max_tokens=self.args.max_generation_tokens,
+                        temperature=0.8,  # Higher temp to break out of hesitation
+                        top_p=self.args.top_p,
+                        n=1,
+                        stop=None,
+                    )
+                    if retry_result and retry_result.get('choices'):
+                        text = retry_result['choices'][0]['message']['content'].strip().replace('\n', ' ').replace('\\n', ' ')
+                logprob = 1  # Chat models don't return logprobs
                 eid = result_idx_to_eid[idx]
                 eid_pairs = response_dict.get(eid, None)
                 if eid_pairs is None:
@@ -167,71 +181,74 @@ class Generator(object):
             top_p: float,
             n: int,
             stop: List[str],
-            is_chat=True
     ):
         start_time = time.time()
         result = None
-        while result is None:
+        retry_count = 0
+        max_retries = 10
+        while result is None and retry_count < max_retries:
             try:
                 key = self.keys[self.current_key_id]
                 self.current_key_id = (self.current_key_id + 1) % len(self.keys)
-                print(f"Using openai api key: {key}")
+                print(f"Using SiliconFlow api key: {key[:20]}...")
 
-                if is_chat:
-                    choices = []
-                    if isinstance(prompt, str):
-                        prompt = [prompt]
-                    for prompt_item in prompt:
-                        re = openai.ChatCompletion.create(
+                client = OpenAI(
+                    api_key=key,
+                    base_url=SILICONFLOW_BASE_URL
+                )
+
+                choices = []
+                if isinstance(prompt, str):
+                    prompt = [prompt]
+                for prompt_item in prompt:
+                    # SiliconFlow doesn't allow `stop` when `n > 1`,
+                    # so batch multiple n=1 calls instead
+                    actual_n = n
+                    if n > 1 and stop:
+                        actual_n = 1
+                        call_times = n
+                    else:
+                        call_times = 1
+
+                    for _ in range(call_times):
+                        response = client.chat.completions.create(
                             model=engine,
                             messages=[
                                 {"role": "system",
                                  "content": "I will give you some x-y examples followed by a x, you need to give me the y, and no other content."},
                                 {"role": "user", "content": prompt_item},
                             ],
-                            api_key=key,
                             max_tokens=max_tokens,
                             temperature=temperature,
                             top_p=top_p,
-                            n=n,
+                            n=actual_n,
                             stop=stop,
                         )
-                        choices += re["choices"]
-                    result = {"choices": choices}
-                    print('Openai api inference time:', time.time() - start_time)
-                    return result
+                        # Convert response to legacy format for compatibility
+                        for choice in response.choices:
+                            choices.append({"message": {"content": choice.message.content}})
+                    # Rate limit guard: small delay between prompt items
+                    if len(prompt) > 1:
+                        time.sleep(1)
+                result = {"choices": choices}
+                print('SiliconFlow api inference time:', time.time() - start_time)
+                return result
 
-                else:
-                    choices = []
-                    if isinstance(prompt, str):
-                        prompt = [prompt]
-                    for prompt_item in prompt:
-                        re = openai.Completion.create(
-                            engine=engine,
-                            prompt=prompt_item,
-                            api_key=key,
-                            max_tokens=max_tokens,
-                            temperature=temperature,
-                            top_p=top_p,
-                            n=n,
-                            stop=stop,
-                            logprobs=1
-                        )
-                        choices += re["choices"]
-                    result = {"choices": choices}
-                    print('Openai api inference time:', time.time() - start_time)
-                    return result
-            except openai.error.InvalidRequestError as e:
-                # fixme: hardcoded, fix when refactoring
-                if "This model's maximum context length is" in str(e):
+            except Exception as e:
+                retry_count += 1
+                err_str = str(e).lower()
+                # Handle context length errors
+                if "maximum context length" in err_str or "context length" in err_str:
                     print(e)
                     print("Set a place holder, and skip this example")
-                    result = {"choices": [{"message": {"content": "PLACEHOLDER"}}]} if is_chat \
-                        else {"choices": [{"text": "PLACEHOLDER"}]}
-                    print('Openai api inference time:', time.time() - start_time)
+                    result = {"choices": [{"message": {"content": "PLACEHOLDER"}}]}
+                    print('SiliconFlow api inference time:', time.time() - start_time)
+                    return result
+                # Handle rate limiting with exponential backoff
+                elif "rate limit" in err_str or "429" in err_str or "tpm" in err_str:
+                    wait = min(5 * (2 ** retry_count), 120)
+                    print(f'Rate limited, waiting {wait}s (retry {retry_count}/{max_retries})...')
+                    time.sleep(wait)
                 else:
-                    print(e, 'Retry.')
+                    print(e, f'Retry {retry_count}/{max_retries}.')
                     time.sleep(3)
-            except Exception as e:
-                print(e, 'Retry.')
-                time.sleep(3)

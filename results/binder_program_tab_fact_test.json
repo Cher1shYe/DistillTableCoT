@@ -1,0 +1,119 @@
+{
+    "0": {
+        "generations": [
+            [
+                "SELECT (SELECT `top - 5` FROM w WHERE tournament = 'masters tournament') >= 1 AND (SELECT `top - 5` FROM w WHERE tournament = 'us open') >= 1 AND (SELECT `top - 5` FROM w WHERE tournament = 'open championship') >= 1",
+                1
+            ]
+        ],
+        "ori_data_item": {
+            "id": "",
+            "question": "tony lema be in the top 5 for the master tournament , the us open , and the open championship",
+            "table": {
+                "id": "",
+                "page_title": "tony lema",
+                "header": [
+                    "tournament#wins#top - 5#top - 10#top - 25#events#cuts made"
+                ],
+                "rows": [
+                    [
+                        "masters tournament#0#1#2#4#4#4"
+                    ],
+                    [
+                        "us open#0#2#3#4#6#5"
+                    ],
+                    [
+                        "the open championship#1#2#2#2#3#3"
+                    ],
+                    [
+                        "pga championship#0#0#1#2#5#4"
+                    ],
+                    [
+                        "totals#1#5#8#12#18#16"
+                    ]
+                ]
+            },
+            "answer_text": [
+                "Entailed"
+            ]
+        }
+    },
+    "1": {
+        "generations": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE QA(\"map@extract tournament name\"; tournament#wins#top - 5#top - 10#top - 25#events#cuts made) = 'master tournament') > 0 AND (SELECT COUNT(*) FROM w WHERE QA(\"map@extract tournament name\"; tournament#wins#top - 5#top - 10#top - 25#events#cuts made) = 'us open') > 0 AND (SELECT COUNT(*) FROM w WHERE QA(\"map@extract tournament name\"; tournament#wins#top - 5#top - 10#top - 25#events#cuts made) = 'pga championship') > 0 AND (SELECT COUNT(*) FROM w WHERE QA(\"map@extract tournament name\"; tournament#wins#top - 5#top - 10#top - 25#events#cuts made) = 'open championship') > 0",
+                1
+            ]
+        ],
+        "ori_data_item": {
+            "id": "",
+            "question": "tournament that tony lema have participate in include the master tournament , the us open , the pga championship and the open championship",
+            "table": {
+                "id": "",
+                "page_title": "tony lema",
+                "header": [
+                    "tournament#wins#top - 5#top - 10#top - 25#events#cuts made"
+                ],
+                "rows": [
+                    [
+                        "masters tournament#0#1#2#4#4#4"
+                    ],
+                    [
+                        "us open#0#2#3#4#6#5"
+                    ],
+                    [
+                        "the open championship#1#2#2#2#3#3"
+                    ],
+                    [
+                        "pga championship#0#0#1#2#5#4"
+                    ],
+                    [
+                        "totals#1#5#8#12#18#16"
+                    ]
+                ]
+            },
+            "answer_text": [
+                "Entailed"
+            ]
+        }
+    },
+    "2": {
+        "generations": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE QA(\"map@what is the number of wins?\"; `tournament#wins#top - 5#top - 10#top - 25#events#cuts made`) > 0) = 1 AND (SELECT QA(\"map@what is the tournament?\"; `tournament#wins#top - 5#top - 10#top - 25#events#cuts made`) FROM w WHERE QA(\"map@what is the number of wins?\"; `tournament#wins#top - 5#top - 10#top - 25#events#cuts made`) > 0) = 'the open championship'",
+                1
+            ]
+        ],
+        "ori_data_item": {
+            "id": "",
+            "question": "the only tournament that tony lema win in be the open championship",
+            "table": {
+                "id": "",
+                "page_title": "tony lema",
+                "header": [
+                    "tournament#wins#top - 5#top - 10#top - 25#events#cuts made"
+                ],
+                "rows": [
+                    [
+                        "masters tournament#0#1#2#4#4#4"
+                    ],
+                    [
+                        "us open#0#2#3#4#6#5"
+                    ],
+                    [
+                        "the open championship#1#2#2#2#3#3"
+                    ],
+                    [
+                        "pga championship#0#0#1#2#5#4"
+                    ],
+                    [
+                        "totals#1#5#8#12#18#16"
+                    ]
+                ]
+            },
+            "answer_text": [
+                "Entailed"
+            ]
+        }
+    }
+}

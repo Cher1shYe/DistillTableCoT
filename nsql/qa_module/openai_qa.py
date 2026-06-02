@@ -41,25 +41,35 @@ class OpenAIQAModel(object):
                                                      temperature=0,
                                                      top_p=1,
                                                      n=1,
-                                                     stop=["\n\n"])
+                                                     stop=None)  # Don't use stop tokens with Qwen
         return completion
+
+    def _strip_think_block(self, text):
+        """Strip Qwen3 think blocks: ... or ..."""
+        import re
+        # Remove  think  block (Qwen3 reasoning tag)
+        text = re.sub(r'<think>.*?</think>', '', text, flags=re.DOTALL)
+        # Remove  think  block
+        text = re.sub(r'<thinking>.*?</thinking>', '', text, flags=re.DOTALL)
+        return text.strip()
 
     def call_openai_for_completion_text(self, prompt, openai_usage_type="completion"):
         if openai_usage_type == "completion":
             completion = self.call_openai_api_completion(prompt)
-
-            # fixme: hard code for now, fix later
-            is_chat = self.engine in ["gpt-3.5-turbo", "gpt-3.5-turbo-16k", "gpt-3.5-turbo-0613",
-                                      "gpt-3.5-turbo-16k-0613",
-                                      "gpt-4", "gpt-4-0613"]
-
-            text = completion['choices'][0]['message']['content'] if is_chat else completion['choices'][0]['text']
+            text = completion['choices'][0]['message']['content']
+            text = self._strip_think_block(text)
+            text = text.strip().replace('\xa0', ' ')
+            # Convert literal \n (backslash-n) to actual newlines for row-by-row format
+            text = text.replace('\\n', '\n')
             return text
         else:
             raise ValueError("The model usage type '{}' doesn't exists!".format(openai_usage_type))
 
     @staticmethod
     def merge_tables(tables, by='row_id'):
+        # Guard against None headers from empty query results
+        if any(_table.get('header') is None for _table in tables):
+            return {"header": [], "rows": []}
         assert len(set([len(_table['rows']) for _table in tables])) == 1, "Tables must have the same rows!"
         merged_header = [by]
         by_idx = tables[0]['header'].index(by)

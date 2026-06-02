@@ -239,7 +239,7 @@ if __name__ == '__main__':
     parser.add_argument('--seed', type=int, default=42)
 
     # Codex options
-    parser.add_argument('--engine', type=str, default="code-davinci-002")
+    parser.add_argument('--engine', type=str, default="Qwen/Qwen3-8B")
     parser.add_argument('--n_parallel_prompts', type=int, default=2)
     parser.add_argument('--max_generation_tokens', type=int, default=512)
     parser.add_argument('--max_api_total_tokens', type=int, default=8001)

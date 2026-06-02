@@ -1,0 +1,443 @@
+{
+    "0": {
+        "generations": [
+            [
+                "SELECT QA(\"map@country code?\"; cyclist) FROM w WHERE rank <= '10' GROUP BY QA(\"map@country code?\"; cyclist) ORDER BY COUNT(*) DESC LIMIT 1",
+                1
+            ]
+        ],
+        "ori_data_item": {
+            "id": "",
+            "question": "which country had the most cyclists finish within the top 10?",
+            "table": {
+                "page_title": "",
+                "header": [
+                    "Rank",
+                    "Cyclist",
+                    "Team",
+                    "Time",
+                    "UCI ProTour\\nPoints"
+                ],
+                "rows": [
+                    [
+                        "1",
+                        "Alejandro Valverde (ESP)",
+                        "Caisse d'Epargne",
+                        "5h 29' 10\"",
+                        "40"
+                    ],
+                    [
+                        "2",
+                        "Alexandr Kolobnev (RUS)",
+                        "Team CSC Saxo Bank",
+                        "s.t.",
+                        "30"
+                    ],
+                    [
+                        "3",
+                        "Davide Rebellin (ITA)",
+                        "Gerolsteiner",
+                        "s.t.",
+                        "25"
+                    ],
+                    [
+                        "4",
+                        "Paolo Bettini (ITA)",
+                        "Quick Step",
+                        "s.t.",
+                        "20"
+                    ],
+                    [
+                        "5",
+                        "Franco Pellizotti (ITA)",
+                        "Liquigas",
+                        "s.t.",
+                        "15"
+                    ],
+                    [
+                        "6",
+                        "Denis Menchov (RUS)",
+                        "Rabobank",
+                        "s.t.",
+                        "11"
+                    ],
+                    [
+                        "7",
+                        "Samuel S\u00e1nchez (ESP)",
+                        "Euskaltel-Euskadi",
+                        "s.t.",
+                        "7"
+                    ],
+                    [
+                        "8",
+                        "St\u00e9phane Goubert (FRA)",
+                        "Ag2r-La Mondiale",
+                        "+ 2\"",
+                        "5"
+                    ],
+                    [
+                        "9",
+                        "Haimar Zubeldia (ESP)",
+                        "Euskaltel-Euskadi",
+                        "+ 2\"",
+                        "3"
+                    ],
+                    [
+                        "10",
+                        "David Moncouti\u00e9 (FRA)",
+                        "Cofidis",
+                        "+ 2\"",
+                        "1"
+                    ]
+                ]
+            },
+            "answer_text": [
+                "Italy"
+            ]
+        }
+    },
+    "1": {
+        "generations": [
+            [
+                "SELECT `1940/41` FROM w WHERE `description losses` = 'murdered'",
+                1
+            ]
+        ],
+        "ori_data_item": {
+            "id": "",
+            "question": "how many people were murdered in 1940/41?",
+            "table": {
+                "page_title": "",
+                "header": [
+                    "Description Losses",
+                    "1939/40",
+                    "1940/41",
+                    "1941/42",
+                    "1942/43",
+                    "1943/44",
+                    "1944/45",
+                    "Total"
+                ],
+                "rows": [
+                    [
+                        "Direct War Losses",
+                        "360,000",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "183,000",
+                        "543,000"
+                    ],
+                    [
+                        "Murdered",
+                        "75,000",
+                        "100,000",
+                        "116,000",
+                        "133,000",
+                        "82,000",
+                        "",
+                        "506,000"
+                    ],
+                    [
+                        "Deaths In Prisons & Camps",
+                        "69,000",
+                        "210,000",
+                        "220,000",
+                        "266,000",
+                        "381,000",
+                        "",
+                        "1,146,000"
+                    ],
+                    [
+                        "Deaths Outside of Prisons & Camps",
+                        "",
+                        "42,000",
+                        "71,000",
+                        "142,000",
+                        "218,000",
+                        "",
+                        "473,000"
+                    ],
+                    [
+                        "Murdered in Eastern Regions",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "100,000",
+                        "100,000"
+                    ],
+                    [
+                        "Deaths other countries",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "2,000"
+                    ],
+                    [
+                        "Total",
+                        "504,000",
+                        "352,000",
+                        "407,000",
+                        "541,000",
+                        "681,000",
+                        "270,000",
+                        "2,770,000"
+                    ]
+                ]
+            },
+            "answer_text": [
+                "100,000"
+            ]
+        }
+    },
+    "2": {
+        "generations": [
+            [
+                "SELECT MIN(CAST(SUBSTRING(year, 1, 4) AS INT)) - 1936 FROM w WHERE `national cup` = 'champion (no playoff)'",
+                1
+            ]
+        ],
+        "ori_data_item": {
+            "id": "",
+            "question": "how long did it take for the new york americans to win the national cup after 1936?",
+            "table": {
+                "page_title": "",
+                "header": [
+                    "Year",
+                    "Division",
+                    "League",
+                    "Reg. Season",
+                    "Playoffs",
+                    "National Cup"
+                ],
+                "rows": [
+                    [
+                        "1931",
+                        "1",
+                        "ASL",
+                        "6th (Fall)",
+                        "No playoff",
+                        "N/A"
+                    ],
+                    [
+                        "Spring 1932",
+                        "1",
+                        "ASL",
+                        "5th?",
+                        "No playoff",
+                        "1st Round"
+                    ],
+                    [
+                        "Fall 1932",
+                        "1",
+                        "ASL",
+                        "3rd",
+                        "No playoff",
+                        "N/A"
+                    ],
+                    [
+                        "Spring 1933",
+                        "1",
+                        "ASL",
+                        "?",
+                        "?",
+                        "Final"
+                    ],
+                    [
+                        "1933/34",
+                        "N/A",
+                        "ASL",
+                        "2nd",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1934/35",
+                        "N/A",
+                        "ASL",
+                        "2nd",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1935/36",
+                        "N/A",
+                        "ASL",
+                        "1st",
+                        "Champion (no playoff)",
+                        "?"
+                    ],
+                    [
+                        "1936/37",
+                        "N/A",
+                        "ASL",
+                        "5th, National",
+                        "Did not qualify",
+                        "Champion"
+                    ],
+                    [
+                        "1937/38",
+                        "N/A",
+                        "ASL",
+                        "3rd(t), National",
+                        "1st Round",
+                        "?"
+                    ],
+                    [
+                        "1938/39",
+                        "N/A",
+                        "ASL",
+                        "4th, National",
+                        "Did not qualify",
+                        "?"
+                    ],
+                    [
+                        "1939/40",
+                        "N/A",
+                        "ASL",
+                        "4th",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1940/41",
+                        "N/A",
+                        "ASL",
+                        "6th",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1941/42",
+                        "N/A",
+                        "ASL",
+                        "3rd",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1942/43",
+                        "N/A",
+                        "ASL",
+                        "6th",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1943/44",
+                        "N/A",
+                        "ASL",
+                        "9th",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1944/45",
+                        "N/A",
+                        "ASL",
+                        "9th",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1945/46",
+                        "N/A",
+                        "ASL",
+                        "5th",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1946/47",
+                        "N/A",
+                        "ASL",
+                        "6th",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1947/48",
+                        "N/A",
+                        "ASL",
+                        "6th",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1948/49",
+                        "N/A",
+                        "ASL",
+                        "1st(t)",
+                        "Finals",
+                        "?"
+                    ],
+                    [
+                        "1949/50",
+                        "N/A",
+                        "ASL",
+                        "3rd",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1950/51",
+                        "N/A",
+                        "ASL",
+                        "5th",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1951/52",
+                        "N/A",
+                        "ASL",
+                        "6th",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1952/53",
+                        "N/A",
+                        "ASL",
+                        "6th",
+                        "No playoff",
+                        "Semifinals"
+                    ],
+                    [
+                        "1953/54",
+                        "N/A",
+                        "ASL",
+                        "1st",
+                        "Champion (no playoff)",
+                        "Champion"
+                    ],
+                    [
+                        "1954/55",
+                        "N/A",
+                        "ASL",
+                        "8th",
+                        "No playoff",
+                        "?"
+                    ],
+                    [
+                        "1955/56",
+                        "N/A",
+                        "ASL",
+                        "6th",
+                        "No playoff",
+                        "?"
+                    ]
+                ]
+            },
+            "answer_text": [
+                "17 years"
+            ]
+        }
+    }
+}

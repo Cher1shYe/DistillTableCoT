@@ -1,0 +1,26 @@
+{
+    "0": {
+        "nsqls": [
+            [
+                "SELECT (SELECT `top - 5` FROM w WHERE tournament = 'masters tournament') >= 1 AND (SELECT `top - 5` FROM w WHERE tournament = 'us open') >= 1 AND (SELECT `top - 5` FROM w WHERE tournament = 'open championship') >= 1",
+                1
+            ]
+        ]
+    },
+    "1": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE QA(\"map@extract tournament name\"; tournament#wins#top - 5#top - 10#top - 25#events#cuts made) = 'master tournament') > 0 AND (SELECT COUNT(*) FROM w WHERE QA(\"map@extract tournament name\"; tournament#wins#top - 5#top - 10#top - 25#events#cuts made) = 'us open') > 0 AND (SELECT COUNT(*) FROM w WHERE QA(\"map@extract tournament name\"; tournament#wins#top - 5#top - 10#top - 25#events#cuts made) = 'pga championship') > 0 AND (SELECT COUNT(*) FROM w WHERE QA(\"map@extract tournament name\"; tournament#wins#top - 5#top - 10#top - 25#events#cuts made) = 'open championship') > 0",
+                1
+            ]
+        ]
+    },
+    "2": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE QA(\"map@what is the number of wins?\"; `tournament#wins#top - 5#top - 10#top - 25#events#cuts made`) > 0) = 1 AND (SELECT QA(\"map@what is the tournament?\"; `tournament#wins#top - 5#top - 10#top - 25#events#cuts made`) FROM w WHERE QA(\"map@what is the number of wins?\"; `tournament#wins#top - 5#top - 10#top - 25#events#cuts made`) > 0) = 'the open championship'",
+                1
+            ]
+        ]
+    }
+}

@@ -59,12 +59,20 @@ def worker_annotate(
             max_prompt_tokens = args.max_api_total_tokens - args.max_generation_tokens
             while len(tokenizer.tokenize(prompt)) >= max_prompt_tokens:  # TODO: Add shrink rows
                 n_shots -= 1
-                assert n_shots >= 0
+                if n_shots < 0:
+                    print(f"Process#{pid}: eid#{g_eid} prompt too long even with 0 shots, skipping...")
+                    prompt = "SKIP"
+                    break
                 few_shot_prompt = generator.build_few_shot_prompt_from_file(
                     file_path=args.prompt_file,
                     n_shots=n_shots
                 )
                 prompt = few_shot_prompt + "\n\n" + generate_prompt
+
+            if prompt == "SKIP":
+                # Use placeholder to avoid API call for too-long prompts
+                g_dict[g_eid]['generations'] = [("PLACEHOLDER", 0.0)]
+                continue
 
             print(f"Process#{pid}: Building prompt for eid#{g_eid}, original_id#{g_data_item['id']}")
             built_few_shot_prompts.append((g_eid, prompt))
@@ -112,10 +120,16 @@ def main():
 
     # For TabFact test split, we load the small test set (about 2k examples) to test,
     # since it is expensive to test on full set
-    if args.dataset == "tab_fact" and args.dataset_split == "test":
+    if args.dataset == "tab_fact" and args.dataset_split == "test" and not args.max_items:
         with open(os.path.join(ROOT_DIR, "utils", "tab_fact", "small_test_id.json"), "r") as f:
             small_test_ids_for_iter = json.load(f)
-        dataset = [data_item for data_item in dataset if data_item['table']['id'] in small_test_ids_for_iter]
+        dataset = [data_item for data_item in dataset if data_item['table'].get('id', '') in small_test_ids_for_iter]
+        print(f"Filtered TabFact to {len(dataset)} small test items")
+
+    # Limit dataset size for testing
+    if args.max_items is not None and args.max_items > 0:
+        dataset = dataset[:args.max_items]
+        print(f"Limited dataset to {len(dataset)} items")
 
     # Load openai keys
     with open(args.api_keys_file, 'r') as f:
@@ -152,7 +166,7 @@ def main():
 
     # Save annotation results
     # "_".join(["{}={}".format(k, str(args.__dict__[k])) for k in args.__dict__ if k not in ['api_keys_file', 'prompt_file', 'save_dir', 'stop_tokens']])
-    save_file_name = f'binder_program_{args.dataset}_{args.dataset_split}_chatgpt.json'
+    save_file_name = f'binder_program_{args.dataset}_{args.dataset_split}.json'
     with open(os.path.join(args.save_dir, save_file_name), 'w') as f:
         json.dump(g_dict, f, indent=4)
 
@@ -191,7 +205,7 @@ if __name__ == '__main__':
     parser.add_argument('--seed', type=int, default=42)
 
     # Codex options
-    parser.add_argument('--engine', type=str, default="gpt-3.5-turbo")
+    parser.add_argument('--engine', type=str, default="Qwen/Qwen3-8B")
     parser.add_argument('--n_parallel_prompts', type=int, default=1)
     parser.add_argument('--max_generation_tokens', type=int, default=256)
     parser.add_argument('--max_api_total_tokens', type=int, default=3800)
@@ -202,6 +216,8 @@ if __name__ == '__main__':
                         help='Split stop tokens by ||')
 
     # debug options
+    parser.add_argument('--max_items', type=int, default=None,
+                        help='Limit to first N items for testing')
     parser.add_argument('-v', '--verbose', action='store_false')
 
     args = parser.parse_args()

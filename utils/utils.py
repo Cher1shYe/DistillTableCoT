@@ -8,6 +8,9 @@ from functools import cmp_to_key
 import math
 from collections.abc import Iterable
 
+# Use HF mirror for China access (must be set before importing datasets)
+os.environ.setdefault('HF_ENDPOINT', 'https://hf-mirror.com')
+
 from datasets import load_dataset
 
 ROOT_DIR = os.path.join(os.path.dirname(__file__), "../")
@@ -146,30 +149,35 @@ def majority_vote(
 
 
 def load_data_split(dataset_to_load, split, data_dir=os.path.join(ROOT_DIR, 'datasets/')):
+    # data_preprocess.py style: load from local preprocessed JSON, auto-generate if missing
+    cache_dir = os.path.join(ROOT_DIR, 'output')
+    os.makedirs(cache_dir, exist_ok=True)
+
+    # Map dataset name to HF table-benchmark path
+    hf_map = {
+        'wikitq': 'table-benchmark/wikiqa',
+        'tab_fact': 'table-benchmark/tabfact',
+    }
+    # All wikitq variants use the same data
+    for key in ['has_squall', 'missing_squall', 'wikitq_sql_solvable', 'wikitq_sql_solvable_lower',
+                'wikitq_sql_unsolvable', 'wikitq_sql_unsolvable_but_in_squall',
+                'wikitq_scalability_ori', 'wikitq_scalability_100rows', 'wikitq_scalability_200rows',
+                'wikitq_scalability_500rows', 'wikitq_robustness']:
+        hf_map[key] = 'table-benchmark/wikiqa'
+
+    if dataset_to_load in hf_map:
+        cache_file = os.path.join(cache_dir, f'{dataset_to_load}_{split}.json')
+        if not os.path.exists(cache_file):
+            _preprocess_and_save(hf_map[dataset_to_load], dataset_to_load, split, cache_file)
+        return _load_from_json(cache_file)
+
+    # Original loading for other datasets (hybridqa, mmqa)
     dataset_split_loaded = load_dataset(
         path=os.path.join(data_dir, "{}.py".format(dataset_to_load)),
         cache_dir=os.path.join(data_dir, "data"))[split]
 
     # unify names of keys
-    if dataset_to_load in ['wikitq', 'has_squall', 'missing_squall',
-                           'wikitq', 'wikitq_sql_solvable', 'wikitq_sql_unsolvable',
-                           'wikitq_sql_unsolvable_but_in_squall',
-                           'wikitq_scalability_ori',
-                           'wikitq_scalability_100rows',
-                           'wikitq_scalability_200rows',
-                           'wikitq_scalability_500rows',
-                           'wikitq_robustness'
-                           ]:
-        pass
-    elif dataset_to_load == 'tab_fact':
-        new_dataset_split_loaded = []
-        for data_item in dataset_split_loaded:
-            data_item['question'] = data_item['statement']
-            data_item['answer_text'] = data_item['label']
-            data_item['table']['page_title'] = data_item['table']['caption']
-            new_dataset_split_loaded.append(data_item)
-        dataset_split_loaded = new_dataset_split_loaded
-    elif dataset_to_load == 'hybridqa':
+    if dataset_to_load in ['hybridqa']:
         new_dataset_split_loaded = []
         for data_item in dataset_split_loaded:
             data_item['table']['page_title'] = data_item['context'].split(' | ')[0]
@@ -181,9 +189,65 @@ def load_data_split(dataset_to_load, split, data_dir=os.path.join(ROOT_DIR, 'dat
             data_item['table']['page_title'] = data_item['table']['title']
             new_dataset_split_loaded.append(data_item)
         dataset_split_loaded = new_dataset_split_loaded
-    else:
-        raise ValueError(f'{dataset_to_load} dataset is not supported now.')
+    elif dataset_to_load not in ['wikitq', 'tab_fact']:
+        pass  # Already handled above
     return dataset_split_loaded
+
+
+def _preprocess_and_save(hf_path, dataset_name, split, cache_file):
+    """Download from HF table-benchmark, preprocess, save as local JSON."""
+    import ast
+    from utils.table_parser import _parse_table_universal
+
+    print(f"[Preprocessing] Downloading {hf_path} ({split}) to {cache_file}...")
+    ds = load_dataset(hf_path, split=split)
+
+    items = []
+    for sample in ds:
+        table = sample.get("table")
+        headers, rows = _parse_table_universal(table, task_name=dataset_name)
+
+        if dataset_name == 'tab_fact':
+            table_title = sample.get("table_title", "") or ""
+            table_id = str(sample.get("table_id", sample.get("id", "")))
+            answer = sample.get("answer", sample.get("label", None))
+            if isinstance(answer, (int, float)):
+                answer_text = "Entailed" if int(answer) == 1 else "Refuted"
+            else:
+                ans_lower = str(answer).strip().lower()
+                answer_text = "Entailed" if ans_lower in ["entailed", "entailment", "1", "true"] else "Refuted" if ans_lower in ["refuted", "contradiction", "0", "false"] else str(answer)
+            items.append({
+                "id": str(sample.get("id", "")),
+                "question": str(sample.get("question", sample.get("statement", ""))),
+                "table": {"id": table_id, "page_title": str(table_title), "header": headers, "rows": rows},
+                "answer_text": [answer_text],
+            })
+        else:
+            answer = sample.get("answer", sample.get("answers", []))
+            if isinstance(answer, str):
+                try:
+                    answer = ast.literal_eval(answer)
+                except (ValueError, SyntaxError):
+                    answer = [answer]
+            if not isinstance(answer, list):
+                answer = [str(answer)]
+            items.append({
+                "id": str(sample.get("id", "")),
+                "question": str(sample.get("question", "")),
+                "table": {"page_title": "", "header": headers, "rows": rows},
+                "answer_text": [str(a) for a in answer],
+            })
+
+    with open(cache_file, 'w', encoding='utf-8') as f:
+        json.dump(items, f, ensure_ascii=False)
+    print(f"[Preprocessing] Saved {len(items)} items to {cache_file}")
+
+
+def _load_from_json(cache_file):
+    """Load preprocessed data from local JSON."""
+    with open(cache_file, 'r', encoding='utf-8') as f:
+        items = json.load(f)
+    return items
 
 
 def pprint_dict(dic):

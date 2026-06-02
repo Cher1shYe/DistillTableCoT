@@ -456,7 +456,7 @@ def post_process_sql(sql_str, df, table_title=None, process_program_with_fuzzy_m
                             print("\tfuzzy match replacing!", value_str, '->', matched_cell, f'fuzz_score:{fuzz_score}')
                         break
             if is_string:
-                new_value_str = f"\"{new_value_str}\""
+                new_value_str = f"'{new_value_str}'"
             sql_tokens[value_idx] = new_value_str
         # Compose new sql string
         # Clean column name in SQL since columns may have been tokenized in the postprocessing, e.g., (ppp) -> ( ppp )

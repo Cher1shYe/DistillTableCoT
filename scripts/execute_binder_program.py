@@ -119,10 +119,11 @@ def main():
 
     # For TabFact test split, we load the small test set (about 2k examples) to test,
     # since it is expensive to test on full set
-    if args.dataset == "tab_fact" and args.dataset_split == "test":
+    if args.dataset == "tab_fact" and args.dataset_split == "test" and not getattr(args, 'max_items', None):
         with open(os.path.join(ROOT_DIR, "utils", "tab_fact", "small_test_id.json"), "r") as f:
             small_test_ids_for_iter = json.load(f)
-        dataset = [data_item for data_item in dataset if data_item['table']['id'] in small_test_ids_for_iter]
+        dataset = [data_item for data_item in dataset if data_item['table'].get('id', '') in small_test_ids_for_iter]
+        print(f"Filtered TabFact to {len(dataset)} small test items")
 
     # Load openai keys
     with open(args.api_keys_file, 'r') as f:
@@ -200,10 +201,10 @@ if __name__ == '__main__':
                         default='binder_program_wikitq_test_chatgpt_exec.json')
 
     # Multiprocess options
-    parser.add_argument('--n_processes', type=str, default=1)
+    parser.add_argument('--n_processes', type=int, default=1)
 
     # Execution options
-    parser.add_argument('--engine', type=str, default="gpt-3.5-turbo")
+    parser.add_argument('--engine', type=str, default="Qwen/Qwen3-8B")
     parser.add_argument('--use_majority_vote', action='store_false',
                         help='Whether use majority vote to determine the prediction answer.')
     parser.add_argument('--allow_none_and_empty_answer', action='store_true',

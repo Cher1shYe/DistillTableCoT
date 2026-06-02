@@ -207,9 +207,10 @@ if __name__ == '__main__':
                         default='binder_program_execution_tab_fact_validation.json')
 
     # Multiprocess options
-    parser.add_argument('--n_processes', type=str, default=4)
+    parser.add_argument('--n_processes', type=int, default=4)
 
     # Execution options
+    parser.add_argument('--engine', type=str, default="Qwen/Qwen3-8B")
     parser.add_argument('--use_majority_vote', action='store_false',
                         help='Whether use majority vote to determine the prediction answer.')
     parser.add_argument('--allow_none_and_empty_answer', action='store_true',
