@@ -81,6 +81,15 @@ def worker_execute(
             answer_biased=args.answer_biased,
             answer_biased_weight=args.answer_biased_weight
         )
+        # TabFact: map 0/1 to Refuted/Entailed
+        if args.dataset == 'tab_fact':
+            if isinstance(pred_answer, list) and len(pred_answer) == 1:
+                v = str(pred_answer[0]).strip()
+                if v in ('0', 'refuted', 'false'):
+                    pred_answer = ['Refuted']
+                elif v in ('1', 'entailed', 'true'):
+                    pred_answer = ['Entailed']
+
         # Evaluate
         result_dict[eid]['pred_answer'] = pred_answer
         result_dict[eid]['nsql'] = pred_answer_nsqls
@@ -124,6 +133,11 @@ def main():
             small_test_ids_for_iter = json.load(f)
         dataset = [data_item for data_item in dataset if data_item['table'].get('id', '') in small_test_ids_for_iter]
         print(f"Filtered TabFact to {len(dataset)} small test items")
+
+    # Limit dataset size for testing
+    if args.max_items is not None and args.max_items > 0:
+        dataset = dataset[:args.max_items]
+        print(f"Limited dataset to {len(dataset)} items")
 
     # Load openai keys
     with open(args.api_keys_file, 'r') as f:
@@ -222,6 +236,8 @@ if __name__ == '__main__':
     parser.add_argument('--process_program_with_fuzzy_match_on_db', action='store_false',
                         help='Whether use fuzzy match with db and program to improve on program.')
 
+    parser.add_argument('--max_items', type=int, default=None,
+                        help='Limit to first N items for testing')
     # Debugging options
     parser.add_argument('--verbose', action='store_true')
 

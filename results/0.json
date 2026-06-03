@@ -5,12 +5,22 @@
                 "SELECT (SELECT `top - 5` FROM w WHERE tournament = 'masters tournament') >= 1 AND (SELECT `top - 5` FROM w WHERE tournament = 'us open') >= 1 AND (SELECT `top - 5` FROM w WHERE tournament = 'open championship') >= 1",
                 1
             ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
         ]
     },
     "1": {
         "nsqls": [
             [
-                "SELECT (SELECT COUNT(*) FROM w WHERE QA(\"map@extract tournament name\"; tournament#wins#top - 5#top - 10#top - 25#events#cuts made) = 'master tournament') > 0 AND (SELECT COUNT(*) FROM w WHERE QA(\"map@extract tournament name\"; tournament#wins#top - 5#top - 10#top - 25#events#cuts made) = 'us open') > 0 AND (SELECT COUNT(*) FROM w WHERE QA(\"map@extract tournament name\"; tournament#wins#top - 5#top - 10#top - 25#events#cuts made) = 'pga championship') > 0 AND (SELECT COUNT(*) FROM w WHERE QA(\"map@extract tournament name\"; tournament#wins#top - 5#top - 10#top - 25#events#cuts made) = 'open championship') > 0",
+                "SELECT (SELECT COUNT(*) FROM w WHERE tournament IN ('masters tournament', 'us open', 'pga championship', 'the open championship')) = 4",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
                 1
             ]
         ]
@@ -18,7 +28,1245 @@
     "2": {
         "nsqls": [
             [
-                "SELECT (SELECT COUNT(*) FROM w WHERE QA(\"map@what is the number of wins?\"; `tournament#wins#top - 5#top - 10#top - 25#events#cuts made`) > 0) = 1 AND (SELECT QA(\"map@what is the tournament?\"; `tournament#wins#top - 5#top - 10#top - 25#events#cuts made`) FROM w WHERE QA(\"map@what is the number of wins?\"; `tournament#wins#top - 5#top - 10#top - 25#events#cuts made`) > 0) = 'the open championship'",
+                "SELECT (SELECT COUNT(*) FROM w WHERE tournament = 'the open championship' AND wins = '1') = 1 AND (SELECT COUNT(*) FROM w WHERE tournament != 'the open championship' AND wins = '1') = 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "3": {
+        "nsqls": [
+            [
+                "SELECT (SELECT wins FROM w WHERE tournament = 'us open') = '0'",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "4": {
+        "nsqls": [
+            [
+                "SELECT (SELECT `top - 10` FROM w WHERE tournament = 'pga championship') > 0 AND (SELECT `top - 25` FROM w WHERE tournament = 'pga championship') = 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "5": {
+        "nsqls": [
+            [
+                "SELECT (SELECT `top - 5` FROM w WHERE tournament = 'pga championship') > 0 AND (SELECT `top - 5` FROM w WHERE tournament = 'us open') > 0 AND (SELECT `top - 5` FROM w WHERE tournament = 'the open championship') > 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "6": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE tournament IN ('master tournament', 'us open', 'pga championship', 'open championship')) = 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "7": {
+        "nsqls": [
+            [
+                "SELECT (SELECT tournament FROM w WHERE wins > 0) = 'pga championship'",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "8": {
+        "nsqls": [
+            [
+                "SELECT (SELECT wins FROM w WHERE tournament = 'pga championship') = 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "9": {
+        "nsqls": [
+            [
+                "SELECT (SELECT `top - 10` FROM w WHERE tournament = 'us open') > 0 AND (SELECT `top - 5` FROM w WHERE tournament = 'us open') = 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "10": {
+        "nsqls": [
+            [
+                "SELECT (SELECT QA(\"map@convert tries to int\") FROM w WHERE player = 'paul emerick') < (SELECT MAX(QA(\"map@convert tries to int\")) FROM w)",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "11": {
+        "nsqls": [
+            [
+                "SELECT (SELECT MAX(drop) FROM w WHERE QA(\"map@is it 8 years?\"; span) = 'yes') = (SELECT MAX(drop) FROM w)",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "12": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w) = 9 AND (SELECT COUNT(*) FROM w WHERE span LIKE '% -') = 3",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "13": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE drop > 0) = 2 AND (SELECT drop FROM w WHERE player = 'chris wyles') > 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "14": {
+        "nsqls": [
+            [
+                "SELECT (SELECT QA(\"map@what is the duration?\"; span) FROM w WHERE player = 'Riaan van zyl') = (SELECT MIN(QA(\"map@what is the duration?\"; span)) FROM w) AND (SELECT COUNT(*) FROM w WHERE tries = (SELECT MIN(tries) FROM w)) = 3",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "15": {
+        "nsqls": [
+            [
+                "SELECT (SELECT MAX(CAST(tries AS INT)) FROM w WHERE player != 'paul emerick') <= (SELECT CAST(tries AS INT) FROM w WHERE player = 'paul emerick')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "16": {
+        "nsqls": [
+            [
+                "SELECT (SELECT MAX(drop) FROM w) = (SELECT drop FROM w WHERE QA(\"map@span duration\"; span) = 1)",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "17": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE span LIKE '% -%') = 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "18": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE drop > 0) = 1",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "19": {
+        "nsqls": [
+            [
+                "SELECT (SELECT QA(\"map@what is the duration?\"; span) FROM w WHERE player = 'Riaan van zyl') = (SELECT MAX(QA(\"map@what is the duration?\"; span)) FROM w) AND (SELECT COUNT(*) FROM w WHERE tries = (SELECT MAX(tries) FROM w)) = 2 AND (SELECT COUNT(*) FROM w WHERE player = 'Riaan van zyl' AND tries = (SELECT MAX(tries) FROM w)) = 1",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "20": {
+        "nsqls": [
+            [
+                "SELECT (SELECT `no for series` FROM w WHERE title = 'sweet dreams') > (SELECT `no for series` FROM w WHERE title = 'the witchfinder')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "21": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE `directed by` = 'david moore') = 3",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "22": {
+        "nsqls": [
+            [
+                "SELECT (SELECT `uk viewers (million)` FROM w WHERE title = 'the lady of the lake') = (SELECT MAX(`uk viewers (million)`) FROM w)",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "23": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE `written by` = 'lucy watkins') = 1",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "24": {
+        "nsqls": [
+            [
+                "SELECT (SELECT `uk viewers (million)` FROM w WHERE title = 'beauty and the beast (part 2)') > (SELECT `uk viewers (million)` FROM w WHERE title = 'beauty and the beast (part 1)')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "25": {
+        "nsqls": [
+            [
+                "SELECT (SELECT `no for series` FROM w WHERE title = 'sweet dreams') < (SELECT `no for series` FROM w WHERE title = 'the witchfinder')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "26": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE `directed by` = 'david moore') = 5",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "27": {
+        "nsqls": [
+            [
+                "SELECT (SELECT `uk viewers (million)` FROM w WHERE title = 'the lady of the lake') = (SELECT MIN(`uk viewers (million)`) FROM w)",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "28": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE written by = 'lucy watkins') = 6",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "29": {
+        "nsqls": [
+            [
+                "SELECT (SELECT `uk viewers (million)` FROM w WHERE title = 'beauty and the beast (part 1)') < (SELECT `uk viewers (million)` FROM w WHERE title = 'beauty and the beast (part 2)')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "30": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE total = 3) = 4 AND (SELECT COUNT(*) FROM w WHERE total = 3 AND league = 4) = 4",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "31": {
+        "nsqls": [
+            [
+                "SELECT (SELECT total FROM w WHERE player = 'jonathan legear')::int = (SELECT total FROM w WHERE player = 'mat\u00edas su\u00e1rez')::int + 4 AND (SELECT MAX(total) FROM w WHERE super cup = '1') = (SELECT total FROM w WHERE player = 'mat\u00edas su\u00e1rez')::int",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "32": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE QA(\"map@is it in belgian cup?\"; super cup) = 'yes') = 4 AND (SELECT total FROM w WHERE player = 'jonathan legear') > (SELECT SUM(total) FROM w WHERE QA(\"map@is it in belgian cup?\"; super cup) = 'yes' AND player != 'jonathan legear')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "33": {
+        "nsqls": [
+            [
+                "SELECT (SELECT total FROM w WHERE player = 'guillaume gillet') = 9 AND (SELECT COUNT(*) FROM w WHERE total = 3) = 2",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "34": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE QA(\"ans@how many are from belgian first division a?\"; player) = 4) AND (SELECT `total` FROM w WHERE player = 'mat\u00edas su\u00e1rez') = 3 AND (SELECT `total` FROM w WHERE player = 'mbark boussoufa') = 11",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "35": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE total = 3 AND league = 5) = 4",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "36": {
+        "nsqls": [
+            [
+                "SELECT (SELECT total FROM w WHERE player = 'thomas chatelle') - (SELECT total FROM w WHERE player = 'mat\u00edas su\u00e1rez') = 4 AND (SELECT MAX(total) FROM w WHERE super cup = '1' AND league = 'belgian first division a league') = (SELECT total FROM w WHERE player = 'thomas chatelle')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "37": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE title playoff > 0) = 4 AND (SELECT title playoff FROM w WHERE player = 'lucas biglia') > (SELECT SUM(title playoff) FROM w WHERE title playoff > 0 AND player != 'lucas biglia')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "38": {
+        "nsqls": [
+            [
+                "SELECT (SELECT total FROM w WHERE player = 'jelle van damme') = 3 AND (SELECT COUNT(*) FROM w WHERE total = 1) = 2",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "39": {
+        "nsqls": [
+            [
+                "NeuralSQL: SELECT (SELECT COUNT(*) FROM w WHERE league = 'Belgian first division a' AND row_id < 19) = 4 AND (SELECT total FROM w WHERE player = 'matias suarez') = (SELECT total FROM w WHERE player = 'bart goor') - 5 AND (SELECT total FROM w WHERE player = 'bart goor') = 11",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "40": {
+        "nsqls": [
+            [
+                "SELECT (SELECT SUM(`goal`) FROM w WHERE competition = 'friendly') = 3",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "41": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(DISTINCT YEAR(date)) FROM w WHERE (competition LIKE '%world cup%' OR competition LIKE '%concacaf gold cup%') AND CAST(goal AS INT) > 1) = 1 AND (SELECT YEAR(date) FROM w WHERE (competition LIKE '%world cup%' OR competition LIKE '%concacaf gold cup%') AND CAST(goal AS INT) > 1 LIMIT 1) = 2000",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "42": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE competition = '2006 fifa world cup') > 0 AND (SELECT COUNT(*) FROM w WHERE competition = '2010 fifa world cup') > 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "43": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE goal IS NOT NULL AND QA(\"map@is it a loss?\"; result) = 'yes') = 1",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "44": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE date LIKE '2001%' OR date LIKE '2009%' OR date LIKE '2012%') = 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "45": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE competition = 'friendly') < 3",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "46": {
+        "nsqls": [
+            [
+                "NeuralSQL: SELECT (SELECT COUNT(DISTINCT YEAR(date)) FROM w WHERE competition IN ('concacaf gold cup', 'world cup qualifier', 'fifa world cup') AND goal > 1) = 2 AND (SELECT YEAR(date) FROM w WHERE competition IN ('concacaf gold cup', 'world cup qualifier', 'fifa world cup') AND goal > 1 AND YEAR(date) = 2000) IS NOT NULL",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "47": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE competition = '2006 fifa world cup') > 0 AND (SELECT COUNT(*) FROM w WHERE competition = '2010 fifa world cup') = 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "48": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE goal IS NOT NULL) = 2 AND (SELECT COUNT(*) FROM w WHERE goal IS NOT NULL AND QA(\"map@is it a loss?\"; result) = 'yes') = 1",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "49": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE date LIKE '2001%' AND goal != '0') > 0 AND (SELECT COUNT(*) FROM w WHERE date LIKE '2009%' AND goal != '0') > 0 AND (SELECT COUNT(*) FROM w WHERE date LIKE '2012%' AND goal != '0') > 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "50": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE place = 't9' AND country = 'united states') = 3",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "51": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE country = 'united states' AND QA(\"map@is it under par?\"; to par) = 'yes') > (SELECT COUNT(*) FROM w WHERE QA(\"map@is it under par?\"; to par) = 'yes') / 2",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "52": {
+        "nsqls": [
+            [
+                "SELECT (SELECT AVG(QA(\"map@what is the score?\"; score)) FROM w WHERE country = 'japan') = 281",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "53": {
+        "nsqls": [
+            [
+                "SELECT COUNT(DISTINCT country) = 4 FROM w",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "54": {
+        "nsqls": [
+            [
+                "SELECT (SELECT MAX(money) FROM w WHERE country = 'wales') = 67823",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "55": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE place = '5') = 3 AND (SELECT COUNT(*) FROM w WHERE place = '5' AND country = 'united states') = 3",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "56": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE country = 'united states' AND QA(\"map@is it over par?\"; to par) > 0) > (SELECT COUNT(*) FROM w WHERE QA(\"map@is it over par?\"; to par) > 0) / 2",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "57": {
+        "nsqls": [
+            [
+                "SELECT (SELECT AVG(QA(\"map@what is the total score?\"; score)) FROM w WHERE country = 'japan') = 251",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "58": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(DISTINCT country) FROM w) = 5",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "59": {
+        "nsqls": [
+            [
+                "SELECT (SELECT MAX(money) FROM w WHERE country = 'wales') = 46823",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "60": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE record = '50 - 50' AND date LIKE 'august%') = 2",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "61": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE date LIKE 'august%' AND (CAST(SUBSTRING_INDEX(record, ' - ', 1) AS INT) > CAST(SUBSTRING_INDEX(record, ' - ', -1) AS INT))) = 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "62": {
+        "nsqls": [
+            [
+                "SELECT (SELECT loss FROM w ORDER BY attendance DESC LIMIT 1) IS NOT NULL",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "63": {
+        "nsqls": [
+            [
+                "SELECT (SELECT CAST(SUBSTRING_INDEX(score, ' - ', 1) AS INT) > CAST(SUBSTRING_INDEX(score, ' - ', -1) AS INT) FROM w WHERE attendance = (SELECT MIN(CAST(attendance AS INT)) FROM w)) = TRUE",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "64": {
+        "nsqls": [
+            [
+                "SELECT (31 - (SELECT COUNT(DISTINCT date) FROM w)) = 4",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "65": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE CAST(SUBSTRING_INDEX(record, ' ', 1) AS INT) = CAST(SUBSTRING_INDEX(record, ' ', -1) AS INT)) = 3",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "66": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE CAST(SUBSTRING_INDEX(record, ' - ', 1) AS INT) > CAST(SUBSTRING_INDEX(record, ' - ', -1) AS INT)) = 3",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "67": {
+        "nsqls": [
+            [
+                "SELECT (SELECT QA(\"map@what is the brewers score?\"; score) FROM w WHERE date LIKE 'august%' AND attendance = (SELECT MAX(attendance) FROM w WHERE date LIKE 'august%')) > (SELECT QA(\"map@what is the opponent score?\"; score) FROM w WHERE date LIKE 'august%' AND attendance = (SELECT MAX(attendance) FROM w WHERE date LIKE 'august%'))",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                null
+            ]
+        ]
+    },
+    "68": {
+        "nsqls": [
+            [
+                "SELECT (SELECT attendance FROM w ORDER BY CAST(attendance AS INT) LIMIT 1) = (SELECT attendance FROM w WHERE loss IS NOT NULL ORDER BY CAST(attendance AS INT) LIMIT 1)",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "69": {
+        "nsqls": [
+            [
+                "SELECT (31 - (SELECT COUNT(DISTINCT date) FROM w)) = 3",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "70": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE nationality != 'slovakia' AND QA(\"map@is it north america?\"; nationality) = 'no') = 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "71": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE nationality = 'united states') = 5 AND (SELECT COUNT(*) FROM w WHERE nationality = 'canada') = 5",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "72": {
+        "nsqls": [
+            [
+                "SELECT COUNT(DISTINCT `college / junior / club team (league)`) = (SELECT COUNT(*) FROM w)",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "73": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE round = '3') = 1 AND (SELECT COUNT(*) FROM w WHERE round != '3' GROUP BY round HAVING COUNT(*) = 2)",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "74": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE position = 'left wing') = 1",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "75": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE nationality NOT IN ('united states', 'canada')) = 1 AND (SELECT nationality FROM w WHERE nationality NOT IN ('united states', 'canada') LIMIT 1) = 'norway'",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "76": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE nationality = 'canada') > (SELECT COUNT(*) FROM w WHERE nationality = 'united states')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "77": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE \"college / junior / club team (league)\" IS NOT NULL) = (SELECT COUNT(*) FROM w)",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "78": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE round = '3') = 2 AND (SELECT COUNT(*) FROM w WHERE round = '9') = 2",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "79": {
+        "nsqls": [
+            [
+                "SELECT (SELECT position FROM w WHERE player = 'triston grant') = (SELECT position FROM w WHERE round = (SELECT round FROM w WHERE player = 'triston grant') AND player != 'triston grant')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "80": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE beer name = 'good old boy' AND year BETWEEN '1995' AND '2009') = 5",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "81": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE `beer name` = 'dr hexter 's healer' AND `prize` = 'gold medal' AND `year` BETWEEN '1995' AND '2009') = 3",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "82": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE beer name = 'Maggs Magnificent Mild' AND QA(\"map@convert year to int\"; year) BETWEEN 1995 AND 2009) = (SELECT MAX(prize_count) FROM (SELECT COUNT(*) AS prize_count FROM w WHERE QA(\"map@convert year to int\"; year) BETWEEN 1995 AND 2009 GROUP BY beer name) AS counts)",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "83": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM (SELECT beer_name FROM w WHERE year BETWEEN '1995' AND '2009' GROUP BY beer_name HAVING COUNT(*) = 1) AS sub) = 3",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "84": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE `beer name` = 'maggs magnificent mild' AND `competition` = 'siba national beer competition' AND `year` BETWEEN '1995' AND '2009') = 2",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "85": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE beer name = 'good old boy' AND year BETWEEN 1995 AND 2009) = 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "86": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE `beer name` = 'dr hexter ''s healer' AND `year` BETWEEN '1995' AND '2009' AND prize = 'silver medal') = (SELECT COUNT(*) FROM w WHERE `beer name` = 'dr hexter ''s healer' AND `year` BETWEEN '1995' AND '2009')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            "<error>"
+        ]
+    },
+    "87": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE beer name = 'Maggs Magnificent Mild' AND year BETWEEN 1995 AND 2009 AND prize != 'gold medal') = 0",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "88": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE beer name = 'Maggs Magnificent Mild' AND competition = 'siba national beer competition' AND year BETWEEN 1995 AND 2005 AND prize = 'bronze medal') = 2",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "89": {
+        "nsqls": [
+            [
+                "SELECT (SELECT COUNT(*) FROM w WHERE QA(\"map@what is the attendance number?\"; location attendance) = 18422) = 3",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "90": {
+        "nsqls": [
+            [
+                "SELECT (SELECT MAX(QA(\"map@extract attendance number\"; `location attendance`)) FROM w) = (SELECT QA(\"map@extract attendance number\"; `location attendance`) FROM w WHERE `location attendance` LIKE 'american airlines center%')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "91": {
+        "nsqls": [
+            [
+                "SELECT (SELECT date FROM w WHERE `location attendance` = 'target center 18478') > (SELECT date FROM w WHERE `location attendance` = 'fedexforum 15908')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "92": {
+        "nsqls": [
+            [
+                "SELECT (SELECT QA(\"map@extract attendance number\"; location attendance) FROM w WHERE team = 'minnesota') > (SELECT QA(\"map@extract attendance number\"; location attendance) FROM w WHERE team = 'new orleans')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "93": {
+        "nsqls": [
+            [
+                "SELECT (SELECT QA(\"map@extract attendance number\"; location attendance) FROM w WHERE team = 'new orleans') < (SELECT MAX(QA(\"map@extract attendance number\"; location attendance)) FROM w)",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                1
+            ]
+        ]
+    },
+    "94": {
+        "nsqls": [
+            [
+                "SELECT (SELECT QA(\"map@extract attendance number\"; location attendance) FROM w WHERE team = 'golden state') = (SELECT QA(\"map@extract attendance number\"; location attendance) FROM w WHERE team = 'memphis') AND (SELECT QA(\"map@extract attendance number\"; location attendance) FROM w WHERE team = 'memphis') = (SELECT QA(\"map@extract attendance number\"; location attendance) FROM w WHERE team = 'new orleans')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "95": {
+        "nsqls": [
+            [
+                "SELECT (SELECT MAX(QA(\"map@extract attendance number\"; location attendance)) FROM w) = (SELECT QA(\"map@extract attendance number\"; location attendance) FROM w WHERE QA(\"map@is it target center?\"; location attendance) = 'yes')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                null
+            ]
+        ]
+    },
+    "96": {
+        "nsqls": [
+            [
+                "SELECT (SELECT date FROM w WHERE location attendance LIKE '%fedexforum%') > (SELECT date FROM w WHERE location attendance LIKE '%target center%')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "97": {
+        "nsqls": [
+            [
+                "SELECT (SELECT QA(\"map@extract attendance number\"; location attendance) FROM w WHERE team = 'minnesota') < (SELECT QA(\"map@extract attendance number\"; location attendance) FROM w WHERE team = 'new orleans')",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "98": {
+        "nsqls": [
+            [
+                "SELECT (SELECT MAX(`location attendance`) FROM w WHERE team = 'new orleans') = (SELECT MAX(`location attendance`) FROM w)",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
+                0
+            ]
+        ]
+    },
+    "99": {
+        "nsqls": [
+            [
+                "SELECT (SELECT rank FROM w WHERE name = 'emi watanabe') = (SELECT rank FROM w WHERE name = 'dagmar lurz') - 1",
+                1
+            ]
+        ],
+        "exec_answers": [
+            [
                 1
             ]
         ]

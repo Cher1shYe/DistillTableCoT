@@ -9,7 +9,7 @@ import math
 from collections.abc import Iterable
 
 # Use HF mirror for China access (must be set before importing datasets)
-os.environ.setdefault('HF_ENDPOINT', 'https://hf-mirror.com')
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 
 from datasets import load_dataset
 
@@ -206,6 +206,11 @@ def _preprocess_and_save(hf_path, dataset_name, split, cache_file):
     for sample in ds:
         table = sample.get("table")
         headers, rows = _parse_table_universal(table, task_name=dataset_name)
+
+        # Extra fix: table-benchmark/tabfact uses #-delimited single-column format
+        if len(headers) == 1 and '#' in headers[0]:
+            headers = headers[0].split('#')
+            rows = [row[0].split('#') if (len(row) == 1 and '#' in row[0]) else row for row in rows]
 
         if dataset_name == 'tab_fact':
             table_title = sample.get("table_title", "") or ""

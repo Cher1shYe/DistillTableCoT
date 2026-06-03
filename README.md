@@ -1,70 +1,117 @@
-# Binder🔗: Binding Language Models in Symbolic Languages
+# Binder: Binding Language Models in Symbolic Languages
 
-<p align="left">
-    <a href="https://img.shields.io/badge/PRs-Welcome-red">
-        <img src="https://img.shields.io/badge/PRs-Welcome-red">
-    </a>
-    <a href="https://img.shields.io/github/last-commit/HKUNLP/Binder?color=green">
-        <img src="https://img.shields.io/github/last-commit/HKUNLP/Binder?color=green">
-    </a>
-    <br/>
-</p>
+Original paper: [Binding Language Models in Symbolic Languages](https://arxiv.org/abs/2210.02875) (ICLR 2023 Spotlight).
 
-Code for paper [Binding Language Models in Symbolic Languages](https://arxiv.org/abs/2210.02875). 
-Please refer to our [project page](https://lm-code-binder.github.io/) for more demonstrations and up-to-date related resources. 
-Check out our [demo page](https://huggingface.co/spaces/hkunlp/Binder) to have an instant experience of Binder, which achieves **sota or comparable performance with only dozens of(~10) program annotations**.
+This fork adapts the project to run with **SiliconFlow API (Qwen3-8B)** on **Windows**.
 
-<img src="pics/binder.png" align="middle" width="100%">
+## Quick Start
 
-## Updates
-- **2023-08-25**: 🔥 Update to support OpenAI chat series models like `gpt-3.5-xxx` and `gpt-4-xxx`, code will be further refactor later to support more!
-- **2023-03-23**: Since OpenAI no longer supports Codex series models, we will sooner test and update the engine from "code-davinci-002" to "gpt-3.5-turbo".
-- **2023-01-22**: Accepted by ICLR 2023 (Spotlight)
-- **2022-12-04**: Due to the fact OpenAI's new policy on request limitation, the n sampling couldn't be done as previously, we will add features to call multiple times to be the same usage soon!
-- **2022-10-06**: We released our [code](https://github.com/HKUNLP/binder), [huggingface spaces demo](https://huggingface.co/spaces/hkunlp/Binder) and [project page](https://lm-code-binder.github.io/). Check it out!
-
-
-## Dependencies
-To establish the environment run this code in the shell:
 ```bash
-conda env create -f py3.7binder.yaml
-pip install records==0.5.3
-```
-That will create the environment `binder` we used.
-
-
-## Usage
-
-### Environment setup
-Activate the environment by running
-``````shell
+# 1. Create environment
+conda create -n binder python=3.9
 conda activate binder
-``````
 
-### Add key
-Apply and get `API keys`(sk-xxxx like) from [OpenAI API](https://openai.com/api/), save the key in `key.txt` file, make sure you have the rights to access the model(in the implementation of this repo, `code-davinci-002`) you need.
+# 2. Install dependencies
+pip install -r requirements.txt
 
-### Run
-Check out commands in `run.py`
+# 3. Set API key (SiliconFlow)
+echo sk-your-key > key.txt
 
-## Citation
-If you find our work helpful, please cite as
-```
-@article{Binder,
-  title={Binding Language Models in Symbolic Languages},
-  author={Zhoujun Cheng and Tianbao Xie and Peng Shi and Chengzu Li and Rahul Nadkarni and Yushi Hu and Caiming Xiong and Dragomir Radev and Mari Ostendorf and Luke Zettlemoyer and Noah A. Smith and Tao Yu},
-  journal={ICLR},
-  year={2023},
-  volume={abs/2210.02875}
-}
+# 4. Run pipeline (3 items each, wiki + tabfact)
+python run.py
 ```
 
-## Contributors
-<a href="https://github.com/BlankCheng">  <img src="https://avatars.githubusercontent.com/u/34505296?v=4"  width="50" /></a>
-<a href="https://github.com/Timothyxxx">  <img src="https://avatars.githubusercontent.com/u/47296835?v=4"  width="50" /></a>
-<a href="https://github.com/chengzu-li"><img src="https://avatars.githubusercontent.com/u/69832207?v=4"  width="50" /></a>
-<a href="https://github.com/Impavidity">  <img src="https://avatars.githubusercontent.com/u/9245607?v=4"  width="50" /></a>
-<a href="https://github.com/Yushi-Hu"><img src="https://avatars.githubusercontent.com/u/65428713?v=4"  width="50" /></a>
-<a href="https://github.com/taoyds"><img src="https://avatars.githubusercontent.com/u/14208639?v=4"  width="50" /></a>
+## Commands
 
+### Full Pipeline
 
+```bash
+python run.py                                    # wiki + tabfact, 各3条
+python run.py --max_items 10                     # wiki + tabfact, 各10条
+python run.py --datasets wikitq                  # 只跑 wiki
+python run.py --datasets tab_fact --max_items 5  # 只跑 tabfact, 5条
+```
+
+**Parameters:**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `--max_items` | int | `3` | 每个数据集跑多少条 |
+| `--datasets` | list | `wikitq tab_fact` | 选择数据集，支持多个 |
+
+### Evaluation
+
+```bash
+# 原始 Binder 评估方法
+python eval_original.py --dataset wikitq
+python eval_original.py --dataset tab_fact
+
+# DistillTableCoT 评估方法（更宽松的 exact match）
+python eval_results.py --dataset wikitq --print_details
+python eval_results.py --dataset tab_fact --print_details
+```
+
+### Annotation Only
+
+```bash
+set PYTHONPATH=D:\CS\srtp\Binder
+python scripts/annotate_binder_program.py \
+    --dataset wikitq --dataset_split test \
+    --prompt_file templates/prompts/wikitq_binder.txt \
+    --max_items 3 --sampling_n 1
+```
+
+### Execution Only (requires existing annotation results)
+
+```bash
+set PYTHONPATH=D:\CS\srtp\Binder
+python scripts/execute_binder_program.py \
+    --dataset wikitq --dataset_split test \
+    --input_program_file binder_program_wikitq_test.json \
+    --output_program_execution_file binder_program_wikitq_test_exec.json \
+    --max_items 3 --vote_method simple
+```
+
+## Output Files
+
+All output goes to `results/`:
+
+| File | Content |
+|------|---------|
+| `binder_program_<dataset>_test.json` | Generated NSQL programs |
+| `binder_program_<dataset>_test_exec.json` | Execution results with pred/gold answers |
+
+Data cache in `output/`:
+
+| File | Content |
+|------|---------|
+| `wikitq_test.json` | Preprocessed WikiTQ data |
+| `tab_fact_test.json` | Preprocessed TabFact data |
+
+## Configuration
+
+### API
+
+- **Provider**: SiliconFlow (`https://api.siliconflow.cn/v1`)
+- **Model**: `Qwen/Qwen3-8B`
+- **Key file**: `key.txt` (one API key per line)
+
+### Key Modifications from Original
+
+- OpenAI API → SiliconFlow API with Qwen3-8B
+- GitHub dataset downloads → HuggingFace `table-benchmark/` → local JSON cache
+- Added `--max_items` for quick testing
+- Windows compatibility fixes (export → set, encoding, path separators)
+- TabFact 0/1 → Entailed/Refuted mapping
+- `#`-delimited table format fix for TabFact
+- Qwen3 think block (`<think>...</think>`) stripping
+- SQLite dialect normalization in post-processing
+
+## Supported Datasets
+
+| Dataset | Tasks | Description |
+|---------|-------|-------------|
+| WikiTQ | Table QA | 表格问答 |
+| TabFact | Fact Verification | 表格事实验证 |
+| HybridQA | Table+Text QA | 表格+文本段落问答 |
+| MMQA | Multimodal QA | 表格+文本+图片多模态问答 |

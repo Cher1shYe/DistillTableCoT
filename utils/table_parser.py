@@ -32,6 +32,13 @@ def _parse_table_universal(table_data: Any, task_name: str = None) -> Tuple[List
         if 'header' in table_data and 'rows' in table_data:
             headers = [str(h) for h in table_data['header']]
             rows = [[str(c) for c in row] for row in table_data['rows']]
+            # Fix #-delimited format from table-benchmark/tabfact (single-element lists)
+            if len(headers) == 1 and '#' in headers[0]:
+                headers = headers[0].split('#')
+                rows = [row[0].split('#') if (len(row) == 1 and '#' in row[0]) else row for row in rows]
+            # Clean NBSP
+            headers = [h.replace('\xa0', ' ') for h in headers]
+            rows = [[c.replace('\xa0', ' ') for c in row] for row in rows]
             return headers, rows
 
     # String: try Python dict repr first (table-benchmark stores tables as repr strings)
@@ -43,6 +50,10 @@ def _parse_table_universal(table_data: Any, task_name: str = None) -> Tuple[List
                 if isinstance(parsed, dict) and 'header' in parsed and 'rows' in parsed:
                     headers = [str(h).replace('\xa0', ' ') for h in parsed['header']]
                     rows = [[str(c).replace('\xa0', ' ') for c in row] for row in parsed['rows']]
+                    # Fix #-delimited format from table-benchmark/tabfact
+                    if len(headers) == 1 and '#' in headers[0]:
+                        headers = headers[0].split('#')
+                        rows = [row[0].split('#') if (len(row) == 1 and '#' in row[0]) else row for row in rows]
                     return headers, rows
             except (ValueError, SyntaxError):
                 pass

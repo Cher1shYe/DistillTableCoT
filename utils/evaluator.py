@@ -101,8 +101,14 @@ class Evaluator:
 
     def eval_tabfact_match(self, pred, gold):
         if isinstance(pred, list):
-            pred = pred[0]
-        pred, gold = str(pred), str(gold)
+            pred = pred[0] if pred else ''
+        if isinstance(gold, list):
+            gold = gold[0] if gold else ''
+        pred, gold = str(pred).lower().strip(), str(gold).lower().strip()
+        # Normalize 0/1 <-> refuted/entailed
+        norm = {'0': 'refuted', '1': 'entailed', 'refuted': 'refuted', 'entailed': 'entailed'}
+        pred = norm.get(pred, pred)
+        gold = norm.get(gold, gold)
         return pred == gold
 
     def eval_mmqa_match(self, pred_answer, gold_answer):
