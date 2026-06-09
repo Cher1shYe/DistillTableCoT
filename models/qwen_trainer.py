@@ -95,6 +95,10 @@ class QwenDistillTrainer:
             print("=> Using AgentDataset for Multi-Turn Agent Training")
             from data_loader.agent_dataset import AgentDataset
             DatasetClass = AgentDataset
+        elif dataset_type == 'route':
+            print("=> Using RouteSFTDataset for cost-aware route SFT")
+            from data_loader.route_dataset import RouteSFTDataset
+            DatasetClass = RouteSFTDataset
         else:
             print("=> Using CoTDataset for Single-Turn CoT Training")
             DatasetClass = CoTDataset

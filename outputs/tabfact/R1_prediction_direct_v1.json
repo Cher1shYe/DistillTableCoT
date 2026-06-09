@@ -1,0 +1,1902 @@
+[
+    {
+        "id": 0,
+        "original_dataset_id": "0",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 215,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1864409446716309,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 1,
+        "original_dataset_id": "0",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 218,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9300360679626465,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 2,
+        "original_dataset_id": "0",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 206,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9882519245147705,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 3,
+        "original_dataset_id": "0",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 203,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9977121353149414,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 4,
+        "original_dataset_id": "0",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 214,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6918327808380127,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 5,
+        "original_dataset_id": "0",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 216,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6997320652008057,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 6,
+        "original_dataset_id": "0",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 219,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8089590072631836,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 7,
+        "original_dataset_id": "0",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 204,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9475100040435791,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 8,
+        "original_dataset_id": "0",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 204,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7701759338378906,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 9,
+        "original_dataset_id": "0",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 213,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9752099514007568,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 10,
+        "original_dataset_id": "1",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 345,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8414568901062012,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 11,
+        "original_dataset_id": "1",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 343,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9484968185424805,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 12,
+        "original_dataset_id": "1",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 349,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7472789287567139,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 13,
+        "original_dataset_id": "1",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 347,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6508839130401611,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 14,
+        "original_dataset_id": "1",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 356,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0289349555969238,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 15,
+        "original_dataset_id": "1",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 339,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8266539573669434,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 16,
+        "original_dataset_id": "1",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 344,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0280160903930664,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 17,
+        "original_dataset_id": "1",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 345,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8886628150939941,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 18,
+        "original_dataset_id": "1",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 343,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7097418308258057,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 19,
+        "original_dataset_id": "1",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 358,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9273710250854492,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 20,
+        "original_dataset_id": "2",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 539,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9331071376800537,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 21,
+        "original_dataset_id": "2",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 541,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1377108097076416,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 22,
+        "original_dataset_id": "2",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 537,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9719607830047607,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 23,
+        "original_dataset_id": "2",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 539,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9473762512207031,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 24,
+        "original_dataset_id": "2",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 548,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0145230293273926,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 25,
+        "original_dataset_id": "2",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 539,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0731489658355713,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 26,
+        "original_dataset_id": "2",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 541,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9475221633911133,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 27,
+        "original_dataset_id": "2",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 537,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9278600215911865,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 28,
+        "original_dataset_id": "2",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 539,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9902641773223877,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 29,
+        "original_dataset_id": "2",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 548,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9390029907226562,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 30,
+        "original_dataset_id": "3",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 443,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.5829868316650391,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 31,
+        "original_dataset_id": "3",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 462,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6333200931549072,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 32,
+        "original_dataset_id": "3",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 450,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9123268127441406,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 33,
+        "original_dataset_id": "3",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 450,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8731129169464111,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 34,
+        "original_dataset_id": "3",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 470,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0234971046447754,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 35,
+        "original_dataset_id": "3",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 443,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0783519744873047,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 36,
+        "original_dataset_id": "3",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 462,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9947159290313721,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 37,
+        "original_dataset_id": "3",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 450,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6555919647216797,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 38,
+        "original_dataset_id": "3",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 451,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9009473323822021,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 39,
+        "original_dataset_id": "3",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 467,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8992857933044434,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 40,
+        "original_dataset_id": "4",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 487,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8010561466217041,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 41,
+        "original_dataset_id": "4",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 492,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.935164213180542,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 42,
+        "original_dataset_id": "4",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 493,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.899554967880249,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 43,
+        "original_dataset_id": "4",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 490,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0979409217834473,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 44,
+        "original_dataset_id": "4",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 496,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8132007122039795,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 45,
+        "original_dataset_id": "4",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 489,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7731728553771973,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 46,
+        "original_dataset_id": "4",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 495,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.01338791847229,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 47,
+        "original_dataset_id": "4",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 498,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7484040260314941,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 48,
+        "original_dataset_id": "4",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 492,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.5694591999053955,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 49,
+        "original_dataset_id": "4",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 496,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7799129486083984,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 50,
+        "original_dataset_id": "5",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 498,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9300663471221924,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 51,
+        "original_dataset_id": "5",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 498,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.960935115814209,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 52,
+        "original_dataset_id": "5",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 495,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.902195930480957,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 53,
+        "original_dataset_id": "5",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 496,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7478971481323242,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 54,
+        "original_dataset_id": "5",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 499,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.923408031463623,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 55,
+        "original_dataset_id": "5",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 498,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6573560237884521,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 56,
+        "original_dataset_id": "5",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 498,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7727868556976318,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 57,
+        "original_dataset_id": "5",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 495,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9608728885650635,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 58,
+        "original_dataset_id": "5",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 496,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8535590171813965,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 59,
+        "original_dataset_id": "5",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 499,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9187889099121094,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 60,
+        "original_dataset_id": "6",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 1001,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9536788463592529,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 61,
+        "original_dataset_id": "6",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 992,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0033669471740723,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 62,
+        "original_dataset_id": "6",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 991,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6315391063690186,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 63,
+        "original_dataset_id": "6",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 988,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9722380638122559,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 64,
+        "original_dataset_id": "6",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 994,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8397817611694336,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 65,
+        "original_dataset_id": "6",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 1001,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8274257183074951,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 66,
+        "original_dataset_id": "6",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 993,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8896539211273193,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 67,
+        "original_dataset_id": "6",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 991,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8529798984527588,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 68,
+        "original_dataset_id": "6",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 988,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7811379432678223,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 69,
+        "original_dataset_id": "6",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 994,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8472340106964111,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 70,
+        "original_dataset_id": "7",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 361,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8762948513031006,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 71,
+        "original_dataset_id": "7",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 361,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8623299598693848,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 72,
+        "original_dataset_id": "7",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 364,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8668859004974365,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 73,
+        "original_dataset_id": "7",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 359,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.86686110496521,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 74,
+        "original_dataset_id": "7",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 360,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9622721672058105,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 75,
+        "original_dataset_id": "7",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 364,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9210348129272461,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 76,
+        "original_dataset_id": "7",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 366,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.01796293258667,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 77,
+        "original_dataset_id": "7",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 363,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.174917221069336,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 78,
+        "original_dataset_id": "7",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 363,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.924004077911377,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 79,
+        "original_dataset_id": "7",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 364,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8134970664978027,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 80,
+        "original_dataset_id": "8",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 770,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7864623069763184,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 81,
+        "original_dataset_id": "8",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 773,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.3609421253204346,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 82,
+        "original_dataset_id": "8",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 771,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8486390113830566,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 83,
+        "original_dataset_id": "8",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 771,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8795578479766846,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 84,
+        "original_dataset_id": "8",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 779,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7553009986877441,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 85,
+        "original_dataset_id": "8",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 772,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8535442352294922,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 86,
+        "original_dataset_id": "8",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 774,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.955535888671875,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 87,
+        "original_dataset_id": "8",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 780,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0159728527069092,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 88,
+        "original_dataset_id": "8",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 780,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.685532808303833,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 89,
+        "original_dataset_id": "9",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 272,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0933787822723389,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 90,
+        "original_dataset_id": "9",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 267,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.6760640144348145,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 91,
+        "original_dataset_id": "9",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 274,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8800430297851562,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 92,
+        "original_dataset_id": "9",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 275,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0969369411468506,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 93,
+        "original_dataset_id": "9",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 270,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9190380573272705,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 94,
+        "original_dataset_id": "9",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 273,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1281309127807617,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 95,
+        "original_dataset_id": "9",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 266,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1138439178466797,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 96,
+        "original_dataset_id": "9",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 274,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0473768711090088,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 97,
+        "original_dataset_id": "9",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 275,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.3264367580413818,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 98,
+        "original_dataset_id": "9",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Refuted",
+        "processed_prediction": "Refuted",
+        "reference": "Refuted",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 268,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8789618015289307,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 99,
+        "original_dataset_id": "10",
+        "task": "tabfact",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Entailed",
+        "processed_prediction": "Entailed",
+        "reference": "Entailed",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 850,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8300180435180664,
+        "tool_calls": 0,
+        "turn_details": []
+    }
+]

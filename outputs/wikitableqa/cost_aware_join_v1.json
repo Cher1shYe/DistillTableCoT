@@ -1,0 +1,3849 @@
+{
+  "summary": {
+    "task": "wikitableqa",
+    "version": 1,
+    "n": 100,
+    "path_files": {
+      "cot": "outputs/wikitableqa/R1_prediction_cot_v1.json",
+      "direct": "outputs/wikitableqa/R1_prediction_direct_v1.json",
+      "sql": "outputs/wikitableqa/R1_prediction_sql_agent_v1.json"
+    },
+    "baseline": {
+      "direct": {
+        "accuracy": 0.69,
+        "avg_completion_tokens": 6.32,
+        "avg_reasoning_tokens": 0.0,
+        "avg_tool_calls": 0.0,
+        "avg_latency": 0.8718731522560119
+      },
+      "cot": {
+        "accuracy": 0.84,
+        "avg_completion_tokens": 576.13,
+        "avg_reasoning_tokens": 522.69,
+        "avg_tool_calls": 0.0,
+        "avg_latency": 5.835584259033203
+      },
+      "sql": {
+        "accuracy": 0.82,
+        "avg_completion_tokens": 1162.53,
+        "avg_reasoning_tokens": 1112.96,
+        "avg_tool_calls": 0.91,
+        "avg_latency": 12.421810698509216
+      }
+    },
+    "oracle": {
+      "accuracy": 0.91,
+      "avg_completion_tokens": 151.9010989010989,
+      "avg_tool_calls": 0.01098901098901099,
+      "avg_latency": 1.9752929210662842,
+      "path_distribution": {
+        "direct": 69,
+        "cot": 21,
+        "sql": 1
+      }
+    },
+    "overthinking_rate_mixed": null
+  },
+  "samples": [
+    {
+      "id": 0,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Italy",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 345,
+          "tool_calls": 0,
+          "latency": 1.2145709991455078
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "Italy and Spain",
+          "tier": 1,
+          "completion_tokens": 587,
+          "reasoning_tokens": 561,
+          "prompt_tokens": 335,
+          "tool_calls": 0,
+          "latency": 6.573632717132568
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "Italy and Spain",
+          "tier": 2,
+          "completion_tokens": 2164,
+          "reasoning_tokens": 2050,
+          "prompt_tokens": 1311,
+          "tool_calls": 1,
+          "latency": 23.855212926864624
+        }
+      },
+      "reference": "['Italy']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 1,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "100000",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 312,
+          "tool_calls": 0,
+          "latency": 0.9487228393554688
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "100000",
+          "tier": 1,
+          "completion_tokens": 150,
+          "reasoning_tokens": 110,
+          "prompt_tokens": 302,
+          "tool_calls": 0,
+          "latency": 2.021605968475342
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "100000",
+          "tier": 2,
+          "completion_tokens": 306,
+          "reasoning_tokens": 271,
+          "prompt_tokens": 1223,
+          "tool_calls": 1,
+          "latency": 4.62942099571228
+        }
+      },
+      "reference": "['100,000']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 2,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "17 years",
+          "tier": 0,
+          "completion_tokens": 20,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 678,
+          "tool_calls": 0,
+          "latency": 0.9760761260986328
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "17 years",
+          "tier": 1,
+          "completion_tokens": 6531,
+          "reasoning_tokens": 6463,
+          "prompt_tokens": 668,
+          "tool_calls": 0,
+          "latency": 62.314096212387085
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "17",
+          "tier": 2,
+          "completion_tokens": 7449,
+          "reasoning_tokens": 7162,
+          "prompt_tokens": 1984,
+          "tool_calls": 1,
+          "latency": 69.82318925857544
+        }
+      },
+      "reference": "['17 years']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 3,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "1995-01-26",
+          "tier": 0,
+          "completion_tokens": 10,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 1831,
+          "tool_calls": 0,
+          "latency": 0.8004128932952881
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "1995-01-26",
+          "tier": 1,
+          "completion_tokens": 141,
+          "reasoning_tokens": 93,
+          "prompt_tokens": 1821,
+          "tool_calls": 0,
+          "latency": 1.6327719688415527
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "1995-01-26",
+          "tier": 2,
+          "completion_tokens": 207,
+          "reasoning_tokens": 196,
+          "prompt_tokens": 2059,
+          "tool_calls": 0,
+          "latency": 2.5974528789520264
+        }
+      },
+      "reference": "['January 26, 1995']",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 4,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "14",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 767,
+          "tool_calls": 0,
+          "latency": 0.730816125869751
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "17",
+          "tier": 1,
+          "completion_tokens": 596,
+          "reasoning_tokens": 555,
+          "prompt_tokens": 757,
+          "tool_calls": 0,
+          "latency": 4.777623176574707
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "17",
+          "tier": 2,
+          "completion_tokens": 567,
+          "reasoning_tokens": 543,
+          "prompt_tokens": 2087,
+          "tool_calls": 1,
+          "latency": 7.418189287185669
+        }
+      },
+      "reference": "['17']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 5,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "World Junior Championships",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 322,
+          "tool_calls": 0,
+          "latency": 0.5748012065887451
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "World Junior Championships",
+          "tier": 1,
+          "completion_tokens": 478,
+          "reasoning_tokens": 403,
+          "prompt_tokens": 312,
+          "tool_calls": 0,
+          "latency": 5.63781476020813
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "World Junior Championships",
+          "tier": 2,
+          "completion_tokens": 606,
+          "reasoning_tokens": 582,
+          "prompt_tokens": 1166,
+          "tool_calls": 1,
+          "latency": 8.437268018722534
+        }
+      },
+      "reference": "['World Junior Championships']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 6,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "16",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 471,
+          "tool_calls": 0,
+          "latency": 0.8879590034484863
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "15",
+          "tier": 1,
+          "completion_tokens": 717,
+          "reasoning_tokens": 641,
+          "prompt_tokens": 461,
+          "tool_calls": 0,
+          "latency": 6.612230062484741
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "15",
+          "tier": 2,
+          "completion_tokens": 1819,
+          "reasoning_tokens": 1794,
+          "prompt_tokens": 1450,
+          "tool_calls": 1,
+          "latency": 15.105852365493774
+        }
+      },
+      "reference": "['15']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 7,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "363",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 751,
+          "tool_calls": 0,
+          "latency": 0.6029291152954102
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "363",
+          "tier": 1,
+          "completion_tokens": 336,
+          "reasoning_tokens": 301,
+          "prompt_tokens": 741,
+          "tool_calls": 0,
+          "latency": 4.118551969528198
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "363",
+          "tier": 2,
+          "completion_tokens": 166,
+          "reasoning_tokens": 160,
+          "prompt_tokens": 1006,
+          "tool_calls": 0,
+          "latency": 2.817112922668457
+        }
+      },
+      "reference": "['363']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 8,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "1977–1978, 1982–1985",
+          "tier": 0,
+          "completion_tokens": 16,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 398,
+          "tool_calls": 0,
+          "latency": 0.8326570987701416
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "1982–1985",
+          "tier": 1,
+          "completion_tokens": 477,
+          "reasoning_tokens": 434,
+          "prompt_tokens": 388,
+          "tool_calls": 0,
+          "latency": 4.230222940444946
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "1982–1985",
+          "tier": 2,
+          "completion_tokens": 1927,
+          "reasoning_tokens": 1857,
+          "prompt_tokens": 2066,
+          "tool_calls": 2,
+          "latency": 20.222497940063477
+        }
+      },
+      "reference": "['1982-1985']",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 9,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "2000",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 657,
+          "tool_calls": 0,
+          "latency": 1.069828987121582
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "2000",
+          "tier": 1,
+          "completion_tokens": 332,
+          "reasoning_tokens": 278,
+          "prompt_tokens": 647,
+          "tool_calls": 0,
+          "latency": 4.047558784484863
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "2000",
+          "tier": 2,
+          "completion_tokens": 630,
+          "reasoning_tokens": 603,
+          "prompt_tokens": 1840,
+          "tool_calls": 1,
+          "latency": 7.372416257858276
+        }
+      },
+      "reference": "['2000']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 10,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "1970-1972",
+          "tier": 0,
+          "completion_tokens": 9,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 1922,
+          "tool_calls": 0,
+          "latency": 0.9873268604278564
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "2004, 2005, 2006",
+          "tier": 1,
+          "completion_tokens": 1311,
+          "reasoning_tokens": 1233,
+          "prompt_tokens": 1912,
+          "tool_calls": 0,
+          "latency": 10.791264057159424
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "2004, 2005, 2006",
+          "tier": 2,
+          "completion_tokens": 4227,
+          "reasoning_tokens": 4089,
+          "prompt_tokens": 4543,
+          "tool_calls": 1,
+          "latency": 32.34600615501404
+        }
+      },
+      "reference": "['2004', '2005', '2006']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 11,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "John",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 335,
+          "tool_calls": 0,
+          "latency": 0.8464970588684082
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "John",
+          "tier": 1,
+          "completion_tokens": 129,
+          "reasoning_tokens": 96,
+          "prompt_tokens": 325,
+          "tool_calls": 0,
+          "latency": 1.8158378601074219
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "John O'Flynn",
+          "tier": 2,
+          "completion_tokens": 578,
+          "reasoning_tokens": 471,
+          "prompt_tokens": 1221,
+          "tool_calls": 1,
+          "latency": 6.8781468868255615
+        }
+      },
+      "reference": "['John']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 12,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "440",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 956,
+          "tool_calls": 0,
+          "latency": 0.9176480770111084
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "440",
+          "tier": 1,
+          "completion_tokens": 300,
+          "reasoning_tokens": 217,
+          "prompt_tokens": 946,
+          "tool_calls": 0,
+          "latency": 2.7424492835998535
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "440",
+          "tier": 2,
+          "completion_tokens": 453,
+          "reasoning_tokens": 447,
+          "prompt_tokens": 1241,
+          "tool_calls": 0,
+          "latency": 5.094825029373169
+        }
+      },
+      "reference": "['440']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 13,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "8",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 337,
+          "tool_calls": 0,
+          "latency": 0.8145530223846436
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "7",
+          "tier": 1,
+          "completion_tokens": 475,
+          "reasoning_tokens": 357,
+          "prompt_tokens": 327,
+          "tool_calls": 0,
+          "latency": 4.9730517864227295
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "7",
+          "tier": 2,
+          "completion_tokens": 824,
+          "reasoning_tokens": 779,
+          "prompt_tokens": 1213,
+          "tool_calls": 1,
+          "latency": 8.79936695098877
+        }
+      },
+      "reference": "['7']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 14,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "space",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 2023,
+          "tool_calls": 0,
+          "latency": 0.8720171451568604
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "space",
+          "tier": 1,
+          "completion_tokens": 6147,
+          "reasoning_tokens": 6050,
+          "prompt_tokens": 2013,
+          "tool_calls": 0,
+          "latency": 63.20295691490173
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "space",
+          "tier": 2,
+          "completion_tokens": 5083,
+          "reasoning_tokens": 5078,
+          "prompt_tokens": 2252,
+          "tool_calls": 0,
+          "latency": 52.92939901351929
+        }
+      },
+      "reference": "['space']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 15,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "82",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 584,
+          "tool_calls": 0,
+          "latency": 0.8587479591369629
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "68",
+          "tier": 1,
+          "completion_tokens": 301,
+          "reasoning_tokens": 215,
+          "prompt_tokens": 574,
+          "tool_calls": 0,
+          "latency": 2.890860080718994
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "68",
+          "tier": 2,
+          "completion_tokens": 2337,
+          "reasoning_tokens": 2063,
+          "prompt_tokens": 1741,
+          "tool_calls": 1,
+          "latency": 23.664588928222656
+        }
+      },
+      "reference": "['68']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 16,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Tomomi Manako",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 630,
+          "tool_calls": 0,
+          "latency": 0.9440140724182129
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Tomomi Manako",
+          "tier": 1,
+          "completion_tokens": 82,
+          "reasoning_tokens": 45,
+          "prompt_tokens": 620,
+          "tool_calls": 0,
+          "latency": 1.6751618385314941
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Tomomi Manako",
+          "tier": 2,
+          "completion_tokens": 126,
+          "reasoning_tokens": 118,
+          "prompt_tokens": 859,
+          "tool_calls": 0,
+          "latency": 1.9025371074676514
+        }
+      },
+      "reference": "['Tomomi Manako']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 17,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "6",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 498,
+          "tool_calls": 0,
+          "latency": 0.7119481563568115
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "5",
+          "tier": 1,
+          "completion_tokens": 417,
+          "reasoning_tokens": 337,
+          "prompt_tokens": 488,
+          "tool_calls": 0,
+          "latency": 3.9337520599365234
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "5",
+          "tier": 2,
+          "completion_tokens": 463,
+          "reasoning_tokens": 439,
+          "prompt_tokens": 1507,
+          "tool_calls": 1,
+          "latency": 5.501426935195923
+        }
+      },
+      "reference": "['5']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 18,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Vidant Bertie Hospital",
+          "tier": 0,
+          "completion_tokens": 8,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 3338,
+          "tool_calls": 0,
+          "latency": 0.7008321285247803
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Vidant Bertie Hospital",
+          "tier": 1,
+          "completion_tokens": 132,
+          "reasoning_tokens": 95,
+          "prompt_tokens": 3328,
+          "tool_calls": 0,
+          "latency": 2.080367088317871
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Vidant Bertie Hospital",
+          "tier": 2,
+          "completion_tokens": 151,
+          "reasoning_tokens": 142,
+          "prompt_tokens": 3589,
+          "tool_calls": 0,
+          "latency": 1.8019680976867676
+        }
+      },
+      "reference": "['Vidant Bertie Hospital']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 19,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "492111",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 754,
+          "tool_calls": 0,
+          "latency": 0.9352319240570068
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "492111",
+          "tier": 1,
+          "completion_tokens": 573,
+          "reasoning_tokens": 486,
+          "prompt_tokens": 744,
+          "tool_calls": 0,
+          "latency": 5.070101976394653
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 2,
+          "completion_tokens": 2096,
+          "reasoning_tokens": 2002,
+          "prompt_tokens": 3893,
+          "tool_calls": 3,
+          "latency": 22.667296648025513
+        }
+      },
+      "reference": "['492,111']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 20,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "1",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 995,
+          "tool_calls": 0,
+          "latency": 0.7588610649108887
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "1",
+          "tier": 1,
+          "completion_tokens": 314,
+          "reasoning_tokens": 267,
+          "prompt_tokens": 985,
+          "tool_calls": 0,
+          "latency": 3.171434164047241
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "1",
+          "tier": 2,
+          "completion_tokens": 231,
+          "reasoning_tokens": 201,
+          "prompt_tokens": 2553,
+          "tool_calls": 1,
+          "latency": 3.8061351776123047
+        }
+      },
+      "reference": "['1']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 21,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Brazil",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 305,
+          "tool_calls": 0,
+          "latency": 0.9158308506011963
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Brazil",
+          "tier": 1,
+          "completion_tokens": 69,
+          "reasoning_tokens": 44,
+          "prompt_tokens": 295,
+          "tool_calls": 0,
+          "latency": 1.1713790893554688
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Brazil",
+          "tier": 2,
+          "completion_tokens": 38,
+          "reasoning_tokens": 33,
+          "prompt_tokens": 537,
+          "tool_calls": 0,
+          "latency": 1.4663310050964355
+        }
+      },
+      "reference": "['Brazil']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 22,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "7",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 474,
+          "tool_calls": 0,
+          "latency": 1.024548053741455
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "7",
+          "tier": 1,
+          "completion_tokens": 147,
+          "reasoning_tokens": 101,
+          "prompt_tokens": 463,
+          "tool_calls": 0,
+          "latency": 1.9574568271636963
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "7",
+          "tier": 2,
+          "completion_tokens": 295,
+          "reasoning_tokens": 269,
+          "prompt_tokens": 1473,
+          "tool_calls": 1,
+          "latency": 4.232356309890747
+        }
+      },
+      "reference": "['7']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 23,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "Ragamuffin",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 477,
+          "tool_calls": 0,
+          "latency": 0.8663427829742432
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Brindabella",
+          "tier": 1,
+          "completion_tokens": 813,
+          "reasoning_tokens": 739,
+          "prompt_tokens": 467,
+          "tool_calls": 0,
+          "latency": 8.356104135513306
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Brindabella",
+          "tier": 2,
+          "completion_tokens": 1759,
+          "reasoning_tokens": 1752,
+          "prompt_tokens": 745,
+          "tool_calls": 0,
+          "latency": 16.755894899368286
+        }
+      },
+      "reference": "['Brindabella']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 24,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "GL-B-6",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 226,
+          "tool_calls": 0,
+          "latency": 0.7631590366363525
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "GL-B-6",
+          "tier": 1,
+          "completion_tokens": 163,
+          "reasoning_tokens": 137,
+          "prompt_tokens": 216,
+          "tool_calls": 0,
+          "latency": 1.8455212116241455
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "GL-B-6",
+          "tier": 2,
+          "completion_tokens": 1108,
+          "reasoning_tokens": 1062,
+          "prompt_tokens": 986,
+          "tool_calls": 1,
+          "latency": 12.09152603149414
+        }
+      },
+      "reference": "['GL-B-6']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 25,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "9",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 538,
+          "tool_calls": 0,
+          "latency": 1.0959649085998535
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "8",
+          "tier": 1,
+          "completion_tokens": 260,
+          "reasoning_tokens": 210,
+          "prompt_tokens": 528,
+          "tool_calls": 0,
+          "latency": 2.812546730041504
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "8",
+          "tier": 2,
+          "completion_tokens": 315,
+          "reasoning_tokens": 282,
+          "prompt_tokens": 1669,
+          "tool_calls": 1,
+          "latency": 4.40281867980957
+        }
+      },
+      "reference": "['3']",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 26,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "22",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 572,
+          "tool_calls": 0,
+          "latency": 0.7033059597015381
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "20",
+          "tier": 1,
+          "completion_tokens": 2830,
+          "reasoning_tokens": 2776,
+          "prompt_tokens": 562,
+          "tool_calls": 0,
+          "latency": 17.455348014831543
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "20",
+          "tier": 2,
+          "completion_tokens": 2798,
+          "reasoning_tokens": 2774,
+          "prompt_tokens": 1659,
+          "tool_calls": 1,
+          "latency": 26.062516927719116
+        }
+      },
+      "reference": "['20']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 27,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Simon Makienok Christoffersen",
+          "tier": 0,
+          "completion_tokens": 13,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 1295,
+          "tool_calls": 0,
+          "latency": 1.1260552406311035
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Simon Makienok Christoffersen",
+          "tier": 1,
+          "completion_tokens": 107,
+          "reasoning_tokens": 64,
+          "prompt_tokens": 1285,
+          "tool_calls": 0,
+          "latency": 1.683995008468628
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Simon Makienok Christoffersen",
+          "tier": 2,
+          "completion_tokens": 1065,
+          "reasoning_tokens": 1028,
+          "prompt_tokens": 3158,
+          "tool_calls": 1,
+          "latency": 12.242576122283936
+        }
+      },
+      "reference": "['Simon Makienok Christoffersen']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 28,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "9",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 752,
+          "tool_calls": 0,
+          "latency": 0.9085018634796143
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "9",
+          "tier": 1,
+          "completion_tokens": 279,
+          "reasoning_tokens": 248,
+          "prompt_tokens": 742,
+          "tool_calls": 0,
+          "latency": 2.6335079669952393
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "9",
+          "tier": 2,
+          "completion_tokens": 613,
+          "reasoning_tokens": 607,
+          "prompt_tokens": 995,
+          "tool_calls": 0,
+          "latency": 5.585265874862671
+        }
+      },
+      "reference": "['9']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 29,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "1",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 578,
+          "tool_calls": 0,
+          "latency": 1.0265610218048096
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "1",
+          "tier": 1,
+          "completion_tokens": 338,
+          "reasoning_tokens": 291,
+          "prompt_tokens": 568,
+          "tool_calls": 0,
+          "latency": 3.570557117462158
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "1",
+          "tier": 2,
+          "completion_tokens": 3980,
+          "reasoning_tokens": 3951,
+          "prompt_tokens": 1722,
+          "tool_calls": 1,
+          "latency": 40.454070806503296
+        }
+      },
+      "reference": "['1']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 30,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "42, 43",
+          "tier": 0,
+          "completion_tokens": 8,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 7358,
+          "tool_calls": 0,
+          "latency": 1.1597821712493896
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Pennsylvania Avenue Metro Extra Line",
+          "tier": 1,
+          "completion_tokens": 388,
+          "reasoning_tokens": 318,
+          "prompt_tokens": 7348,
+          "tool_calls": 0,
+          "latency": 3.799081802368164
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Pennsylvania Avenue Metro Extra Line",
+          "tier": 2,
+          "completion_tokens": 1305,
+          "reasoning_tokens": 1262,
+          "prompt_tokens": 15298,
+          "tool_calls": 1,
+          "latency": 14.743419885635376
+        }
+      },
+      "reference": "['Pennsylvania Avenue Metro Extra Line']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 31,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "DW Stadium",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 440,
+          "tool_calls": 0,
+          "latency": 0.8602471351623535
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "DW Stadium",
+          "tier": 1,
+          "completion_tokens": 68,
+          "reasoning_tokens": 39,
+          "prompt_tokens": 430,
+          "tool_calls": 0,
+          "latency": 1.79610013961792
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "DW Stadium",
+          "tier": 2,
+          "completion_tokens": 903,
+          "reasoning_tokens": 878,
+          "prompt_tokens": 1381,
+          "tool_calls": 1,
+          "latency": 10.92034363746643
+        }
+      },
+      "reference": "['DW Stadium']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 32,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 275,
+          "tool_calls": 0,
+          "latency": 0.9992680549621582
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 1,
+          "completion_tokens": 160,
+          "reasoning_tokens": 93,
+          "prompt_tokens": 265,
+          "tool_calls": 0,
+          "latency": 2.13517689704895
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 2,
+          "completion_tokens": 360,
+          "reasoning_tokens": 336,
+          "prompt_tokens": 1073,
+          "tool_calls": 1,
+          "latency": 4.7770678997039795
+        }
+      },
+      "reference": "['2']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 33,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "1914–15",
+          "tier": 0,
+          "completion_tokens": 8,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 303,
+          "tool_calls": 0,
+          "latency": 0.8384199142456055
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "1914–15",
+          "tier": 1,
+          "completion_tokens": 277,
+          "reasoning_tokens": 235,
+          "prompt_tokens": 293,
+          "tool_calls": 0,
+          "latency": 2.730201005935669
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "1914–15",
+          "tier": 2,
+          "completion_tokens": 1224,
+          "reasoning_tokens": 1186,
+          "prompt_tokens": 1147,
+          "tool_calls": 1,
+          "latency": 14.533348083496094
+        }
+      },
+      "reference": "['1914-15']",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 34,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Jahaira Novgorodova, Natalia Melckenberger, Carmen Jenockova, Mariesea Mnesiču, Patricia Valiahmetova, Anastasija Larkova",
+          "tier": 0,
+          "completion_tokens": 40,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 2855,
+          "tool_calls": 0,
+          "latency": 1.1082139015197754
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Jahaira Novgorodova, Carmen Jenockova, Mariesea Mnesiču, Patricia Valiahmetova, Anastasija Larkova",
+          "tier": 1,
+          "completion_tokens": 760,
+          "reasoning_tokens": 623,
+          "prompt_tokens": 2845,
+          "tool_calls": 0,
+          "latency": 5.254906892776489
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Jahaira Novgorodova, Carmen Jenockova, Mariesea Mnesiču, Patricia Valiahmetova, Anastasija Larkova",
+          "tier": 2,
+          "completion_tokens": 2025,
+          "reasoning_tokens": 1931,
+          "prompt_tokens": 9420,
+          "tool_calls": 2,
+          "latency": 20.229618787765503
+        }
+      },
+      "reference": "['Jahaira Novgorodova', 'Carmen Jenockova', 'Mariesea Mnesiču', 'Patricia Valiahmetova', 'Anastasija Larkova']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 35,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "0",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 215,
+          "tool_calls": 0,
+          "latency": 0.9728169441223145
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "0",
+          "tier": 1,
+          "completion_tokens": 288,
+          "reasoning_tokens": 252,
+          "prompt_tokens": 205,
+          "tool_calls": 0,
+          "latency": 3.476166009902954
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "0",
+          "tier": 2,
+          "completion_tokens": 368,
+          "reasoning_tokens": 362,
+          "prompt_tokens": 443,
+          "tool_calls": 0,
+          "latency": 4.7563090324401855
+        }
+      },
+      "reference": "['0']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 36,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "4",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 763,
+          "tool_calls": 0,
+          "latency": 0.622838020324707
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "4",
+          "tier": 1,
+          "completion_tokens": 3469,
+          "reasoning_tokens": 3369,
+          "prompt_tokens": 753,
+          "tool_calls": 0,
+          "latency": 31.41417694091797
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "0",
+          "tier": 2,
+          "completion_tokens": 5615,
+          "reasoning_tokens": 5518,
+          "prompt_tokens": 3209,
+          "tool_calls": 2,
+          "latency": 56.544979095458984
+        }
+      },
+      "reference": "['4']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 37,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "0",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 246,
+          "tool_calls": 0,
+          "latency": 0.7371759414672852
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "0",
+          "tier": 1,
+          "completion_tokens": 4187,
+          "reasoning_tokens": 4106,
+          "prompt_tokens": 236,
+          "tool_calls": 0,
+          "latency": 41.909765005111694
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "0",
+          "tier": 2,
+          "completion_tokens": 2059,
+          "reasoning_tokens": 2024,
+          "prompt_tokens": 1006,
+          "tool_calls": 1,
+          "latency": 22.35899329185486
+        }
+      },
+      "reference": "['10']",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 38,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 477,
+          "tool_calls": 0,
+          "latency": 0.6225810050964355
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 1,
+          "completion_tokens": 100,
+          "reasoning_tokens": 70,
+          "prompt_tokens": 467,
+          "tool_calls": 0,
+          "latency": 1.773329257965088
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 2,
+          "completion_tokens": 157,
+          "reasoning_tokens": 129,
+          "prompt_tokens": 1481,
+          "tool_calls": 1,
+          "latency": 3.229923725128174
+        }
+      },
+      "reference": "['2']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 39,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "2005",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 347,
+          "tool_calls": 0,
+          "latency": 0.47220301628112793
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "2005",
+          "tier": 1,
+          "completion_tokens": 247,
+          "reasoning_tokens": 213,
+          "prompt_tokens": 337,
+          "tool_calls": 0,
+          "latency": 2.843388080596924
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "2005",
+          "tier": 2,
+          "completion_tokens": 711,
+          "reasoning_tokens": 651,
+          "prompt_tokens": 1289,
+          "tool_calls": 1,
+          "latency": 8.812976121902466
+        }
+      },
+      "reference": "['2005']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 40,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "6",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 666,
+          "tool_calls": 0,
+          "latency": 1.2223291397094727
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "5",
+          "tier": 1,
+          "completion_tokens": 295,
+          "reasoning_tokens": 240,
+          "prompt_tokens": 656,
+          "tool_calls": 0,
+          "latency": 2.882169723510742
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "5",
+          "tier": 2,
+          "completion_tokens": 563,
+          "reasoning_tokens": 540,
+          "prompt_tokens": 1846,
+          "tool_calls": 1,
+          "latency": 6.404153108596802
+        }
+      },
+      "reference": "['5']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 41,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "Eric Wynalda",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 291,
+          "tool_calls": 0,
+          "latency": 1.0675950050354004
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Clint Dempsey",
+          "tier": 1,
+          "completion_tokens": 93,
+          "reasoning_tokens": 58,
+          "prompt_tokens": 281,
+          "tool_calls": 0,
+          "latency": 1.5929694175720215
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Clint Dempsey",
+          "tier": 2,
+          "completion_tokens": 345,
+          "reasoning_tokens": 302,
+          "prompt_tokens": 1114,
+          "tool_calls": 1,
+          "latency": 4.93726110458374
+        }
+      },
+      "reference": "['Clint Dempsey']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 42,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "Strasbourg Cathedral",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 611,
+          "tool_calls": 0,
+          "latency": 0.9044818878173828
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "St Nikolai",
+          "tier": 1,
+          "completion_tokens": 1494,
+          "reasoning_tokens": 1372,
+          "prompt_tokens": 601,
+          "tool_calls": 0,
+          "latency": 16.80840492248535
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "St Nikolai",
+          "tier": 2,
+          "completion_tokens": 3218,
+          "reasoning_tokens": 3010,
+          "prompt_tokens": 3811,
+          "tool_calls": 3,
+          "latency": 34.03247117996216
+        }
+      },
+      "reference": "[\"St. Mary's Church\"]",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 43,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Independent",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 2746,
+          "tool_calls": 0,
+          "latency": 0.959165096282959
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Independent",
+          "tier": 1,
+          "completion_tokens": 237,
+          "reasoning_tokens": 183,
+          "prompt_tokens": 2736,
+          "tool_calls": 0,
+          "latency": 3.2799642086029053
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Independent",
+          "tier": 2,
+          "completion_tokens": 874,
+          "reasoning_tokens": 835,
+          "prompt_tokens": 6104,
+          "tool_calls": 1,
+          "latency": 9.146246910095215
+        }
+      },
+      "reference": "['Independent']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 44,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "1992",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 4007,
+          "tool_calls": 0,
+          "latency": 1.0231881141662598
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "1992",
+          "tier": 1,
+          "completion_tokens": 849,
+          "reasoning_tokens": 826,
+          "prompt_tokens": 3997,
+          "tool_calls": 0,
+          "latency": 6.132142066955566
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "1992",
+          "tier": 2,
+          "completion_tokens": 462,
+          "reasoning_tokens": 414,
+          "prompt_tokens": 8659,
+          "tool_calls": 1,
+          "latency": 6.052767753601074
+        }
+      },
+      "reference": "['1992']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 45,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "504000",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 316,
+          "tool_calls": 0,
+          "latency": 1.0264010429382324
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "504000",
+          "tier": 1,
+          "completion_tokens": 273,
+          "reasoning_tokens": 189,
+          "prompt_tokens": 306,
+          "tool_calls": 0,
+          "latency": 3.0272839069366455
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "504000",
+          "tier": 2,
+          "completion_tokens": 1818,
+          "reasoning_tokens": 1655,
+          "prompt_tokens": 1935,
+          "tool_calls": 2,
+          "latency": 19.643460750579834
+        }
+      },
+      "reference": "['504,000']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 46,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "10",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 918,
+          "tool_calls": 0,
+          "latency": 0.8668739795684814
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "12",
+          "tier": 1,
+          "completion_tokens": 712,
+          "reasoning_tokens": 669,
+          "prompt_tokens": 908,
+          "tool_calls": 0,
+          "latency": 6.111412048339844
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "12",
+          "tier": 2,
+          "completion_tokens": 984,
+          "reasoning_tokens": 962,
+          "prompt_tokens": 2402,
+          "tool_calls": 1,
+          "latency": 9.583518981933594
+        }
+      },
+      "reference": "['20']",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 47,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "6",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 397,
+          "tool_calls": 0,
+          "latency": 0.9382240772247314
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "7",
+          "tier": 1,
+          "completion_tokens": 250,
+          "reasoning_tokens": 201,
+          "prompt_tokens": 387,
+          "tool_calls": 0,
+          "latency": 2.875580072402954
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "7",
+          "tier": 2,
+          "completion_tokens": 1048,
+          "reasoning_tokens": 1016,
+          "prompt_tokens": 1381,
+          "tool_calls": 1,
+          "latency": 10.834885597229004
+        }
+      },
+      "reference": "['7']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 48,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Chile, Ecuador",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 310,
+          "tool_calls": 0,
+          "latency": 0.823235034942627
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Chile and Ecuador",
+          "tier": 1,
+          "completion_tokens": 374,
+          "reasoning_tokens": 333,
+          "prompt_tokens": 299,
+          "tool_calls": 0,
+          "latency": 4.097965240478516
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Chile, Ecuador",
+          "tier": 2,
+          "completion_tokens": 690,
+          "reasoning_tokens": 661,
+          "prompt_tokens": 1149,
+          "tool_calls": 1,
+          "latency": 7.6705710887908936
+        }
+      },
+      "reference": "['Chile', 'Ecuador']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 49,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "2",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 1236,
+          "tool_calls": 0,
+          "latency": 0.8001010417938232
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "1",
+          "tier": 1,
+          "completion_tokens": 275,
+          "reasoning_tokens": 229,
+          "prompt_tokens": 1226,
+          "tool_calls": 0,
+          "latency": 3.3568649291992188
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "1",
+          "tier": 2,
+          "completion_tokens": 301,
+          "reasoning_tokens": 295,
+          "prompt_tokens": 1472,
+          "tool_calls": 0,
+          "latency": 3.871242046356201
+        }
+      },
+      "reference": "['1']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 50,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Carlin",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 541,
+          "tool_calls": 0,
+          "latency": 0.6650152206420898
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Carlin",
+          "tier": 1,
+          "completion_tokens": 537,
+          "reasoning_tokens": 477,
+          "prompt_tokens": 531,
+          "tool_calls": 0,
+          "latency": 4.352847099304199
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Carlin",
+          "tier": 2,
+          "completion_tokens": 531,
+          "reasoning_tokens": 499,
+          "prompt_tokens": 1670,
+          "tool_calls": 1,
+          "latency": 6.421236753463745
+        }
+      },
+      "reference": "['Carlin']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 51,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "10",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 373,
+          "tool_calls": 0,
+          "latency": 0.877551794052124
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "10",
+          "tier": 1,
+          "completion_tokens": 357,
+          "reasoning_tokens": 210,
+          "prompt_tokens": 363,
+          "tool_calls": 0,
+          "latency": 3.726901054382324
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "10",
+          "tier": 2,
+          "completion_tokens": 1017,
+          "reasoning_tokens": 1011,
+          "prompt_tokens": 608,
+          "tool_calls": 0,
+          "latency": 11.291829824447632
+        }
+      },
+      "reference": "['10']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 52,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Yankton",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 248,
+          "tool_calls": 0,
+          "latency": 1.0771150588989258
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Yankton",
+          "tier": 1,
+          "completion_tokens": 203,
+          "reasoning_tokens": 159,
+          "prompt_tokens": 238,
+          "tool_calls": 0,
+          "latency": 2.4179069995880127
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Yankton",
+          "tier": 2,
+          "completion_tokens": 500,
+          "reasoning_tokens": 474,
+          "prompt_tokens": 1047,
+          "tool_calls": 1,
+          "latency": 5.902543783187866
+        }
+      },
+      "reference": "['Yankton']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 53,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "1935",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 893,
+          "tool_calls": 0,
+          "latency": 0.9568750858306885
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "1935",
+          "tier": 1,
+          "completion_tokens": 287,
+          "reasoning_tokens": 236,
+          "prompt_tokens": 883,
+          "tool_calls": 0,
+          "latency": 3.445410966873169
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "1935",
+          "tier": 2,
+          "completion_tokens": 4167,
+          "reasoning_tokens": 4070,
+          "prompt_tokens": 3493,
+          "tool_calls": 2,
+          "latency": 42.592480182647705
+        }
+      },
+      "reference": "['1935']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 54,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "David Russell",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 299,
+          "tool_calls": 0,
+          "latency": 0.5422341823577881
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "David Russell",
+          "tier": 1,
+          "completion_tokens": 103,
+          "reasoning_tokens": 59,
+          "prompt_tokens": 289,
+          "tool_calls": 0,
+          "latency": 1.8347110748291016
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "David Russell",
+          "tier": 2,
+          "completion_tokens": 392,
+          "reasoning_tokens": 370,
+          "prompt_tokens": 1114,
+          "tool_calls": 1,
+          "latency": 5.9359400272369385
+        }
+      },
+      "reference": "['David Russell']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 55,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "World Championships",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 332,
+          "tool_calls": 0,
+          "latency": 0.8150708675384521
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "World Championships",
+          "tier": 1,
+          "completion_tokens": 163,
+          "reasoning_tokens": 112,
+          "prompt_tokens": 322,
+          "tool_calls": 0,
+          "latency": 1.9327609539031982
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "World Championships",
+          "tier": 2,
+          "completion_tokens": 839,
+          "reasoning_tokens": 797,
+          "prompt_tokens": 1192,
+          "tool_calls": 1,
+          "latency": 9.590786457061768
+        }
+      },
+      "reference": "['World Championships']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 56,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "460252",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 747,
+          "tool_calls": 0,
+          "latency": 0.85422682762146
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "460252",
+          "tier": 1,
+          "completion_tokens": 250,
+          "reasoning_tokens": 219,
+          "prompt_tokens": 737,
+          "tool_calls": 0,
+          "latency": 3.1231892108917236
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 2,
+          "completion_tokens": 910,
+          "reasoning_tokens": 869,
+          "prompt_tokens": 2239,
+          "tool_calls": 2,
+          "latency": 10.753708124160767
+        }
+      },
+      "reference": "['460,252']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 57,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Mig-15",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 454,
+          "tool_calls": 0,
+          "latency": 0.7790629863739014
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Mig-15",
+          "tier": 1,
+          "completion_tokens": 894,
+          "reasoning_tokens": 823,
+          "prompt_tokens": 444,
+          "tool_calls": 0,
+          "latency": 7.5251781940460205
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Mig-15",
+          "tier": 2,
+          "completion_tokens": 1803,
+          "reasoning_tokens": 1769,
+          "prompt_tokens": 1442,
+          "tool_calls": 1,
+          "latency": 16.316848039627075
+        }
+      },
+      "reference": "['Mig-15']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 58,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Esther Shahamorov",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 652,
+          "tool_calls": 0,
+          "latency": 0.6901211738586426
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "Ze'ev Friedman",
+          "tier": 1,
+          "completion_tokens": 2001,
+          "reasoning_tokens": 1895,
+          "prompt_tokens": 642,
+          "tool_calls": 0,
+          "latency": 22.1246600151062
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "Ze'ev Friedman",
+          "tier": 2,
+          "completion_tokens": 2621,
+          "reasoning_tokens": 2569,
+          "prompt_tokens": 1850,
+          "tool_calls": 1,
+          "latency": 27.451059103012085
+        }
+      },
+      "reference": "['Esther Shahamorov']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 59,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "No",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 1065,
+          "tool_calls": 0,
+          "latency": 0.941171407699585
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "No",
+          "tier": 1,
+          "completion_tokens": 400,
+          "reasoning_tokens": 339,
+          "prompt_tokens": 1055,
+          "tool_calls": 0,
+          "latency": 4.192795753479004
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "No",
+          "tier": 2,
+          "completion_tokens": 580,
+          "reasoning_tokens": 406,
+          "prompt_tokens": 1312,
+          "tool_calls": 0,
+          "latency": 5.276512145996094
+        }
+      },
+      "reference": "['no']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 60,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Giant Slalom",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 572,
+          "tool_calls": 0,
+          "latency": 1.0872538089752197
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Giant Slalom",
+          "tier": 1,
+          "completion_tokens": 418,
+          "reasoning_tokens": 359,
+          "prompt_tokens": 562,
+          "tool_calls": 0,
+          "latency": 4.589077949523926
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Giant Slalom",
+          "tier": 2,
+          "completion_tokens": 4352,
+          "reasoning_tokens": 4301,
+          "prompt_tokens": 1732,
+          "tool_calls": 1,
+          "latency": 42.791011095047
+        }
+      },
+      "reference": "['Giant Slalom']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 61,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "S",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 209,
+          "tool_calls": 0,
+          "latency": 0.8211419582366943
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "S",
+          "tier": 1,
+          "completion_tokens": 207,
+          "reasoning_tokens": 178,
+          "prompt_tokens": 199,
+          "tool_calls": 0,
+          "latency": 2.854296922683716
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "S",
+          "tier": 2,
+          "completion_tokens": 412,
+          "reasoning_tokens": 380,
+          "prompt_tokens": 936,
+          "tool_calls": 1,
+          "latency": 5.3088648319244385
+        }
+      },
+      "reference": "['S']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 62,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Ph.D",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 401,
+          "tool_calls": 0,
+          "latency": 0.9397838115692139
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "Ph",
+          "tier": 1,
+          "completion_tokens": 103,
+          "reasoning_tokens": 68,
+          "prompt_tokens": 391,
+          "tool_calls": 0,
+          "latency": 1.689802885055542
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Ph.D",
+          "tier": 2,
+          "completion_tokens": 370,
+          "reasoning_tokens": 330,
+          "prompt_tokens": 1376,
+          "tool_calls": 1,
+          "latency": 5.155853033065796
+        }
+      },
+      "reference": "['Ph.D']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 63,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "None",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 668,
+          "tool_calls": 0,
+          "latency": 0.740429162979126
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "0",
+          "tier": 1,
+          "completion_tokens": 814,
+          "reasoning_tokens": 759,
+          "prompt_tokens": 658,
+          "tool_calls": 0,
+          "latency": 8.349716901779175
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "19",
+          "tier": 2,
+          "completion_tokens": 2039,
+          "reasoning_tokens": 2008,
+          "prompt_tokens": 2808,
+          "tool_calls": 2,
+          "latency": 22.978222846984863
+        }
+      },
+      "reference": "['18']",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 64,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "5",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 661,
+          "tool_calls": 0,
+          "latency": 1.2217168807983398
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "5",
+          "tier": 1,
+          "completion_tokens": 424,
+          "reasoning_tokens": 354,
+          "prompt_tokens": 651,
+          "tool_calls": 0,
+          "latency": 3.595123052597046
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "5",
+          "tier": 2,
+          "completion_tokens": 343,
+          "reasoning_tokens": 319,
+          "prompt_tokens": 1845,
+          "tool_calls": 1,
+          "latency": 4.279405355453491
+        }
+      },
+      "reference": "['5']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 65,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Alissa Joanndova",
+          "tier": 0,
+          "completion_tokens": 8,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 2852,
+          "tool_calls": 0,
+          "latency": 1.0890908241271973
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Alissa Joanndova",
+          "tier": 1,
+          "completion_tokens": 180,
+          "reasoning_tokens": 126,
+          "prompt_tokens": 2842,
+          "tool_calls": 0,
+          "latency": 2.4023711681365967
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Alissa Joanndova",
+          "tier": 2,
+          "completion_tokens": 674,
+          "reasoning_tokens": 665,
+          "prompt_tokens": 3085,
+          "tool_calls": 0,
+          "latency": 7.437405347824097
+        }
+      },
+      "reference": "['Alissa Joanndova']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 66,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "2010-09-06",
+          "tier": 0,
+          "completion_tokens": 10,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 238,
+          "tool_calls": 0,
+          "latency": 0.9037759304046631
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "2010-09-06",
+          "tier": 1,
+          "completion_tokens": 227,
+          "reasoning_tokens": 177,
+          "prompt_tokens": 228,
+          "tool_calls": 0,
+          "latency": 2.5348269939422607
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "2010-09-06",
+          "tier": 2,
+          "completion_tokens": 2031,
+          "reasoning_tokens": 1967,
+          "prompt_tokens": 1032,
+          "tool_calls": 1,
+          "latency": 19.748516082763672
+        }
+      },
+      "reference": "['December 6, 2010']",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 67,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "1",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 676,
+          "tool_calls": 0,
+          "latency": 1.003830909729004
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "1",
+          "tier": 1,
+          "completion_tokens": 262,
+          "reasoning_tokens": 199,
+          "prompt_tokens": 666,
+          "tool_calls": 0,
+          "latency": 2.7994749546051025
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "1",
+          "tier": 2,
+          "completion_tokens": 380,
+          "reasoning_tokens": 355,
+          "prompt_tokens": 1906,
+          "tool_calls": 1,
+          "latency": 5.68686580657959
+        }
+      },
+      "reference": "['1']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 68,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "19",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 841,
+          "tool_calls": 0,
+          "latency": 0.7491409778594971
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "18",
+          "tier": 1,
+          "completion_tokens": 525,
+          "reasoning_tokens": 482,
+          "prompt_tokens": 831,
+          "tool_calls": 0,
+          "latency": 4.29160213470459
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "18",
+          "tier": 2,
+          "completion_tokens": 499,
+          "reasoning_tokens": 473,
+          "prompt_tokens": 2253,
+          "tool_calls": 1,
+          "latency": 5.7532148361206055
+        }
+      },
+      "reference": "['18']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 69,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Justiciar",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 256,
+          "tool_calls": 0,
+          "latency": 0.6873979568481445
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Justiciar",
+          "tier": 1,
+          "completion_tokens": 179,
+          "reasoning_tokens": 146,
+          "prompt_tokens": 246,
+          "tool_calls": 0,
+          "latency": 2.2034311294555664
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Justiciar",
+          "tier": 2,
+          "completion_tokens": 145,
+          "reasoning_tokens": 138,
+          "prompt_tokens": 490,
+          "tool_calls": 0,
+          "latency": 2.354820728302002
+        }
+      },
+      "reference": "['Justiciar']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 70,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Karolína Plíšková",
+          "tier": 0,
+          "completion_tokens": 10,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 680,
+          "tool_calls": 0,
+          "latency": 0.8880770206451416
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Karolína Plíšková",
+          "tier": 1,
+          "completion_tokens": 636,
+          "reasoning_tokens": 570,
+          "prompt_tokens": 670,
+          "tool_calls": 0,
+          "latency": 6.939804792404175
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Karolína Plíšková",
+          "tier": 2,
+          "completion_tokens": 575,
+          "reasoning_tokens": 475,
+          "prompt_tokens": 927,
+          "tool_calls": 0,
+          "latency": 6.191331148147583
+        }
+      },
+      "reference": "['Karolína Plíšková']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 71,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 301,
+          "tool_calls": 0,
+          "latency": 0.6577858924865723
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 1,
+          "completion_tokens": 157,
+          "reasoning_tokens": 125,
+          "prompt_tokens": 291,
+          "tool_calls": 0,
+          "latency": 2.0686938762664795
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 2,
+          "completion_tokens": 130,
+          "reasoning_tokens": 106,
+          "prompt_tokens": 1115,
+          "tool_calls": 1,
+          "latency": 3.0368447303771973
+        }
+      },
+      "reference": "['2']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 72,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "2002",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 375,
+          "tool_calls": 0,
+          "latency": 0.9055290222167969
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "2003",
+          "tier": 1,
+          "completion_tokens": 301,
+          "reasoning_tokens": 245,
+          "prompt_tokens": 365,
+          "tool_calls": 0,
+          "latency": 3.6270389556884766
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "2003",
+          "tier": 2,
+          "completion_tokens": 491,
+          "reasoning_tokens": 442,
+          "prompt_tokens": 1335,
+          "tool_calls": 1,
+          "latency": 5.873818874359131
+        }
+      },
+      "reference": "['2003']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 73,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "9",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 249,
+          "tool_calls": 0,
+          "latency": 0.6590242385864258
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "9",
+          "tier": 1,
+          "completion_tokens": 117,
+          "reasoning_tokens": 75,
+          "prompt_tokens": 239,
+          "tool_calls": 0,
+          "latency": 1.8595077991485596
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "9",
+          "tier": 2,
+          "completion_tokens": 249,
+          "reasoning_tokens": 219,
+          "prompt_tokens": 1024,
+          "tool_calls": 1,
+          "latency": 3.5739481449127197
+        }
+      },
+      "reference": "['9']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 74,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "3",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 331,
+          "tool_calls": 0,
+          "latency": 0.718620777130127
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "3",
+          "tier": 1,
+          "completion_tokens": 170,
+          "reasoning_tokens": 137,
+          "prompt_tokens": 321,
+          "tool_calls": 0,
+          "latency": 2.093487024307251
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "3",
+          "tier": 2,
+          "completion_tokens": 346,
+          "reasoning_tokens": 319,
+          "prompt_tokens": 1178,
+          "tool_calls": 1,
+          "latency": 4.404708385467529
+        }
+      },
+      "reference": "['3']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 75,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "2",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 447,
+          "tool_calls": 0,
+          "latency": 0.8137567043304443
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "4",
+          "tier": 1,
+          "completion_tokens": 423,
+          "reasoning_tokens": 371,
+          "prompt_tokens": 437,
+          "tool_calls": 0,
+          "latency": 3.9179928302764893
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "4",
+          "tier": 2,
+          "completion_tokens": 1024,
+          "reasoning_tokens": 977,
+          "prompt_tokens": 1438,
+          "tool_calls": 1,
+          "latency": 10.447926044464111
+        }
+      },
+      "reference": "['4']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 76,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "1938",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 511,
+          "tool_calls": 0,
+          "latency": 0.8776628971099854
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "1926",
+          "tier": 1,
+          "completion_tokens": 209,
+          "reasoning_tokens": 175,
+          "prompt_tokens": 501,
+          "tool_calls": 0,
+          "latency": 2.629014015197754
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "1926",
+          "tier": 2,
+          "completion_tokens": 195,
+          "reasoning_tokens": 164,
+          "prompt_tokens": 1595,
+          "tool_calls": 1,
+          "latency": 3.512190818786621
+        }
+      },
+      "reference": "['1926']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 77,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "736",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 337,
+          "tool_calls": 0,
+          "latency": 0.8483269214630127
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "736",
+          "tier": 1,
+          "completion_tokens": 58,
+          "reasoning_tokens": 35,
+          "prompt_tokens": 327,
+          "tool_calls": 0,
+          "latency": 1.5423221588134766
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "736",
+          "tier": 2,
+          "completion_tokens": 157,
+          "reasoning_tokens": 131,
+          "prompt_tokens": 1183,
+          "tool_calls": 1,
+          "latency": 3.285877227783203
+        }
+      },
+      "reference": "['736']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 78,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Mike Conway",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 1078,
+          "tool_calls": 0,
+          "latency": 0.9123833179473877
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Mike Conway",
+          "tier": 1,
+          "completion_tokens": 114,
+          "reasoning_tokens": 75,
+          "prompt_tokens": 1068,
+          "tool_calls": 0,
+          "latency": 1.7130951881408691
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Mike Conway",
+          "tier": 2,
+          "completion_tokens": 279,
+          "reasoning_tokens": 244,
+          "prompt_tokens": 2747,
+          "tool_calls": 1,
+          "latency": 4.472468137741089
+        }
+      },
+      "reference": "['Mike Conway']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 79,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Athens, Greece",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 335,
+          "tool_calls": 0,
+          "latency": 0.8546130657196045
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Athens, Greece",
+          "tier": 1,
+          "completion_tokens": 146,
+          "reasoning_tokens": 118,
+          "prompt_tokens": 325,
+          "tool_calls": 0,
+          "latency": 2.032374143600464
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Athens, Greece",
+          "tier": 2,
+          "completion_tokens": 461,
+          "reasoning_tokens": 407,
+          "prompt_tokens": 1183,
+          "tool_calls": 1,
+          "latency": 5.173979043960571
+        }
+      },
+      "reference": "['Athens, Greece']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 80,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "3",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 399,
+          "tool_calls": 0,
+          "latency": 0.788848876953125
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "3",
+          "tier": 1,
+          "completion_tokens": 488,
+          "reasoning_tokens": 435,
+          "prompt_tokens": 389,
+          "tool_calls": 0,
+          "latency": 4.228716135025024
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "3",
+          "tier": 2,
+          "completion_tokens": 809,
+          "reasoning_tokens": 784,
+          "prompt_tokens": 1312,
+          "tool_calls": 1,
+          "latency": 8.242714166641235
+        }
+      },
+      "reference": "['3']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 81,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "3",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 2825,
+          "tool_calls": 0,
+          "latency": 0.7085697650909424
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "5",
+          "tier": 1,
+          "completion_tokens": 512,
+          "reasoning_tokens": 491,
+          "prompt_tokens": 2815,
+          "tool_calls": 0,
+          "latency": 4.375996112823486
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "5",
+          "tier": 2,
+          "completion_tokens": 268,
+          "reasoning_tokens": 262,
+          "prompt_tokens": 3066,
+          "tool_calls": 0,
+          "latency": 2.865417957305908
+        }
+      },
+      "reference": "['5']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 82,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "1",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 385,
+          "tool_calls": 0,
+          "latency": 0.991840124130249
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "0",
+          "tier": 1,
+          "completion_tokens": 425,
+          "reasoning_tokens": 377,
+          "prompt_tokens": 375,
+          "tool_calls": 0,
+          "latency": 4.637139797210693
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "0",
+          "tier": 2,
+          "completion_tokens": 645,
+          "reasoning_tokens": 615,
+          "prompt_tokens": 1295,
+          "tool_calls": 1,
+          "latency": 7.079385042190552
+        }
+      },
+      "reference": "['1']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 83,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Doriano Romboni",
+          "tier": 0,
+          "completion_tokens": 8,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 700,
+          "tool_calls": 0,
+          "latency": 0.9090769290924072
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Doriano Romboni",
+          "tier": 1,
+          "completion_tokens": 81,
+          "reasoning_tokens": 33,
+          "prompt_tokens": 690,
+          "tool_calls": 0,
+          "latency": 1.6605348587036133
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Doriano Romboni",
+          "tier": 2,
+          "completion_tokens": 42,
+          "reasoning_tokens": 33,
+          "prompt_tokens": 929,
+          "tool_calls": 0,
+          "latency": 1.1422510147094727
+        }
+      },
+      "reference": "['Doriano Romboni']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 84,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Wigan Warriors",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 443,
+          "tool_calls": 0,
+          "latency": 1.0216748714447021
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Wigan Warriors",
+          "tier": 1,
+          "completion_tokens": 158,
+          "reasoning_tokens": 132,
+          "prompt_tokens": 433,
+          "tool_calls": 0,
+          "latency": 2.2927281856536865
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Wigan Warriors",
+          "tier": 2,
+          "completion_tokens": 913,
+          "reasoning_tokens": 863,
+          "prompt_tokens": 1411,
+          "tool_calls": 1,
+          "latency": 11.13218092918396
+        }
+      },
+      "reference": "['Wigan Warriors']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 85,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "14",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 494,
+          "tool_calls": 0,
+          "latency": 0.8254477977752686
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "14",
+          "tier": 1,
+          "completion_tokens": 317,
+          "reasoning_tokens": 276,
+          "prompt_tokens": 484,
+          "tool_calls": 0,
+          "latency": 3.644263982772827
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "14",
+          "tier": 2,
+          "completion_tokens": 357,
+          "reasoning_tokens": 351,
+          "prompt_tokens": 720,
+          "tool_calls": 0,
+          "latency": 4.380756855010986
+        }
+      },
+      "reference": "['14']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 86,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "4",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 706,
+          "tool_calls": 0,
+          "latency": 0.8939657211303711
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "4",
+          "tier": 1,
+          "completion_tokens": 147,
+          "reasoning_tokens": 117,
+          "prompt_tokens": 696,
+          "tool_calls": 0,
+          "latency": 2.225241184234619
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "4",
+          "tier": 2,
+          "completion_tokens": 502,
+          "reasoning_tokens": 475,
+          "prompt_tokens": 1966,
+          "tool_calls": 1,
+          "latency": 6.289062261581421
+        }
+      },
+      "reference": "['4']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 87,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "1965-1970",
+          "tier": 0,
+          "completion_tokens": 9,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 656,
+          "tool_calls": 0,
+          "latency": 0.7738819122314453
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "1965-1970",
+          "tier": 1,
+          "completion_tokens": 866,
+          "reasoning_tokens": 821,
+          "prompt_tokens": 646,
+          "tool_calls": 0,
+          "latency": 8.975664854049683
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "1965-1970",
+          "tier": 2,
+          "completion_tokens": 929,
+          "reasoning_tokens": 873,
+          "prompt_tokens": 1927,
+          "tool_calls": 1,
+          "latency": 9.916797876358032
+        }
+      },
+      "reference": "['1965-1970']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 88,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Russia",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 580,
+          "tool_calls": 0,
+          "latency": 0.8280460834503174
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Russia",
+          "tier": 1,
+          "completion_tokens": 89,
+          "reasoning_tokens": 55,
+          "prompt_tokens": 570,
+          "tool_calls": 0,
+          "latency": 1.5569348335266113
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Russia",
+          "tier": 2,
+          "completion_tokens": 1076,
+          "reasoning_tokens": 925,
+          "prompt_tokens": 1734,
+          "tool_calls": 1,
+          "latency": 12.726258277893066
+        }
+      },
+      "reference": "['Russia']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 89,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 255,
+          "tool_calls": 0,
+          "latency": 1.0310120582580566
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 1,
+          "completion_tokens": 68,
+          "reasoning_tokens": 42,
+          "prompt_tokens": 245,
+          "tool_calls": 0,
+          "latency": 1.2026441097259521
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 2,
+          "completion_tokens": 1593,
+          "reasoning_tokens": 1513,
+          "prompt_tokens": 1618,
+          "tool_calls": 2,
+          "latency": 18.291107892990112
+        }
+      },
+      "reference": "['2']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 90,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "3",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 627,
+          "tool_calls": 0,
+          "latency": 1.1131649017333984
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 1,
+          "completion_tokens": 318,
+          "reasoning_tokens": 197,
+          "prompt_tokens": 617,
+          "tool_calls": 0,
+          "latency": 3.273365020751953
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "2",
+          "tier": 2,
+          "completion_tokens": 530,
+          "reasoning_tokens": 524,
+          "prompt_tokens": 894,
+          "tool_calls": 0,
+          "latency": 6.081494092941284
+        }
+      },
+      "reference": "['2']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 91,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "Canada",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 393,
+          "tool_calls": 0,
+          "latency": 0.8539810180664062
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "United States",
+          "tier": 1,
+          "completion_tokens": 478,
+          "reasoning_tokens": 386,
+          "prompt_tokens": 383,
+          "tool_calls": 0,
+          "latency": 5.1263651847839355
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "USA",
+          "tier": 2,
+          "completion_tokens": 1262,
+          "reasoning_tokens": 1133,
+          "prompt_tokens": 1469,
+          "tool_calls": 1,
+          "latency": 12.351213216781616
+        }
+      },
+      "reference": "['USA']",
+      "oracle_path": "sql",
+      "oracle_correct": true
+    },
+    {
+      "id": 92,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Yes",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 304,
+          "tool_calls": 0,
+          "latency": 0.6828539371490479
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "No",
+          "tier": 1,
+          "completion_tokens": 533,
+          "reasoning_tokens": 477,
+          "prompt_tokens": 294,
+          "tool_calls": 0,
+          "latency": 6.172256231307983
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "No",
+          "tier": 2,
+          "completion_tokens": 2232,
+          "reasoning_tokens": 2148,
+          "prompt_tokens": 1782,
+          "tool_calls": 1,
+          "latency": 25.092210054397583
+        }
+      },
+      "reference": "['Yes']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 93,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "1928",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 508,
+          "tool_calls": 0,
+          "latency": 0.7600748538970947
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "1928",
+          "tier": 1,
+          "completion_tokens": 301,
+          "reasoning_tokens": 265,
+          "prompt_tokens": 498,
+          "tool_calls": 0,
+          "latency": 3.3531241416931152
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "1928",
+          "tier": 2,
+          "completion_tokens": 661,
+          "reasoning_tokens": 618,
+          "prompt_tokens": 1591,
+          "tool_calls": 1,
+          "latency": 8.127028942108154
+        }
+      },
+      "reference": "['1928']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 94,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "8",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 1078,
+          "tool_calls": 0,
+          "latency": 0.9284441471099854
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "11",
+          "tier": 1,
+          "completion_tokens": 516,
+          "reasoning_tokens": 454,
+          "prompt_tokens": 1068,
+          "tool_calls": 0,
+          "latency": 4.744681119918823
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "11",
+          "tier": 2,
+          "completion_tokens": 4992,
+          "reasoning_tokens": 4794,
+          "prompt_tokens": 2877,
+          "tool_calls": 1,
+          "latency": 47.63017988204956
+        }
+      },
+      "reference": "['11']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 95,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "24",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 349,
+          "tool_calls": 0,
+          "latency": 0.8297989368438721
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "22",
+          "tier": 1,
+          "completion_tokens": 554,
+          "reasoning_tokens": 501,
+          "prompt_tokens": 339,
+          "tool_calls": 0,
+          "latency": 6.305809259414673
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "22",
+          "tier": 2,
+          "completion_tokens": 316,
+          "reasoning_tokens": 290,
+          "prompt_tokens": 1250,
+          "tool_calls": 1,
+          "latency": 4.878430128097534
+        }
+      },
+      "reference": "['22']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 96,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "1.56 billion",
+          "tier": 0,
+          "completion_tokens": 8,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 378,
+          "tool_calls": 0,
+          "latency": 0.7632620334625244
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "1",
+          "tier": 1,
+          "completion_tokens": 139,
+          "reasoning_tokens": 97,
+          "prompt_tokens": 368,
+          "tool_calls": 0,
+          "latency": 2.1990630626678467
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "1.56 billion",
+          "tier": 2,
+          "completion_tokens": 416,
+          "reasoning_tokens": 345,
+          "prompt_tokens": 1331,
+          "tool_calls": 1,
+          "latency": 5.177708864212036
+        }
+      },
+      "reference": "['$1.56 billion']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 97,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "October 2011",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 220,
+          "tool_calls": 0,
+          "latency": 0.6411809921264648
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "October 2011",
+          "tier": 1,
+          "completion_tokens": 81,
+          "reasoning_tokens": 54,
+          "prompt_tokens": 210,
+          "tool_calls": 0,
+          "latency": 1.3279051780700684
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "October 2011",
+          "tier": 2,
+          "completion_tokens": 214,
+          "reasoning_tokens": 182,
+          "prompt_tokens": 956,
+          "tool_calls": 1,
+          "latency": 4.140121936798096
+        }
+      },
+      "reference": "['October 2011']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 98,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Mike Imrie",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 808,
+          "tool_calls": 0,
+          "latency": 1.1396632194519043
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Mike Imrie",
+          "tier": 1,
+          "completion_tokens": 273,
+          "reasoning_tokens": 241,
+          "prompt_tokens": 798,
+          "tool_calls": 0,
+          "latency": 3.2542829513549805
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Mike Imrie",
+          "tier": 2,
+          "completion_tokens": 516,
+          "reasoning_tokens": 493,
+          "prompt_tokens": 2187,
+          "tool_calls": 1,
+          "latency": 7.55251407623291
+        }
+      },
+      "reference": "['Mike Imrie']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 99,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Chester Township, Ohio",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 306,
+          "tool_calls": 0,
+          "latency": 0.6828782558441162
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Chester Township, Ohio",
+          "tier": 1,
+          "completion_tokens": 76,
+          "reasoning_tokens": 50,
+          "prompt_tokens": 296,
+          "tool_calls": 0,
+          "latency": 1.495483160018921
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Chester Township, Ohio",
+          "tier": 2,
+          "completion_tokens": 57,
+          "reasoning_tokens": 49,
+          "prompt_tokens": 522,
+          "tool_calls": 0,
+          "latency": 2.036794900894165
+        }
+      },
+      "reference": "['Chester Township, Ohio']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    }
+  ]
+}

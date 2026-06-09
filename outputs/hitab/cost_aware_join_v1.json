@@ -1,0 +1,4858 @@
+{
+  "summary": {
+    "task": "hitab",
+    "version": 1,
+    "n": 100,
+    "path_files": {
+      "cot": "outputs/hitab/R1_prediction_cot_v1.json",
+      "direct": "outputs/hitab/R1_prediction_direct_v1.json",
+      "mixed": "outputs/hitab/R1_prediction_mixed_agent_v1.json",
+      "sql": "outputs/hitab/R1_prediction_sql_agent_v1.json"
+    },
+    "baseline": {
+      "direct": {
+        "accuracy": 0.79,
+        "avg_completion_tokens": 7.27,
+        "avg_reasoning_tokens": 0.0,
+        "avg_tool_calls": 0.0,
+        "avg_latency": 1.0542255640029907
+      },
+      "cot": {
+        "accuracy": 0.76,
+        "avg_completion_tokens": 1121.86,
+        "avg_reasoning_tokens": 1043.3,
+        "avg_tool_calls": 0.0,
+        "avg_latency": 25.627534322738647
+      },
+      "sql": {
+        "accuracy": 0.74,
+        "avg_completion_tokens": 1714.73,
+        "avg_reasoning_tokens": 1633.73,
+        "avg_tool_calls": 0.95,
+        "avg_latency": 17.30382632255554
+      },
+      "mixed": {
+        "accuracy": 0.72,
+        "avg_completion_tokens": 1900.32,
+        "avg_reasoning_tokens": 1810.55,
+        "avg_tool_calls": 0.76,
+        "avg_latency": 16.62515390396118
+      }
+    },
+    "oracle": {
+      "accuracy": 0.97,
+      "avg_completion_tokens": 323.1340206185567,
+      "avg_tool_calls": 0.13402061855670103,
+      "avg_latency": 4.0505219808558826,
+      "path_distribution": {
+        "direct": 79,
+        "cot": 5,
+        "sql": 5,
+        "mixed": 8
+      }
+    },
+    "overthinking_rate_mixed": 0.8888888888888888
+  },
+  "samples": [
+    {
+      "id": 0,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[52.1]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 255,
+          "tool_calls": 0,
+          "latency": 1.1238970756530762
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[52.1]",
+          "tier": 1,
+          "completion_tokens": 246,
+          "reasoning_tokens": 167,
+          "prompt_tokens": 245,
+          "tool_calls": 0,
+          "latency": 3.970032215118408
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[52.1]",
+          "tier": 2,
+          "completion_tokens": 843,
+          "reasoning_tokens": 791,
+          "prompt_tokens": 1165,
+          "tool_calls": 1,
+          "latency": 8.563477039337158
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[51.0]",
+          "tier": 4,
+          "completion_tokens": 1116,
+          "reasoning_tokens": 1079,
+          "prompt_tokens": 1655,
+          "tool_calls": 1,
+          "latency": 11.078129053115845
+        }
+      },
+      "reference": "[51.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 1,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[60.6]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 257,
+          "tool_calls": 0,
+          "latency": 1.1506712436676025
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[60.6]",
+          "tier": 1,
+          "completion_tokens": 382,
+          "reasoning_tokens": 265,
+          "prompt_tokens": 247,
+          "tool_calls": 0,
+          "latency": 4.3747289180755615
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[60.6]",
+          "tier": 2,
+          "completion_tokens": 703,
+          "reasoning_tokens": 655,
+          "prompt_tokens": 1163,
+          "tool_calls": 1,
+          "latency": 7.661696672439575
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[1.0]",
+          "tier": 4,
+          "completion_tokens": 271,
+          "reasoning_tokens": 265,
+          "prompt_tokens": 846,
+          "tool_calls": 0,
+          "latency": 2.698770046234131
+        }
+      },
+      "reference": "[1.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 2,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[55.0]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 258,
+          "tool_calls": 0,
+          "latency": 1.1222851276397705
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 1,
+          "completion_tokens": 8192,
+          "reasoning_tokens": 8192,
+          "prompt_tokens": 248,
+          "tool_calls": 0,
+          "latency": 85.93719387054443
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[48.629531]",
+          "tier": 2,
+          "completion_tokens": 3432,
+          "reasoning_tokens": 3347,
+          "prompt_tokens": 1195,
+          "tool_calls": 1,
+          "latency": 35.17450761795044
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[8189.0]",
+          "tier": 4,
+          "completion_tokens": 803,
+          "reasoning_tokens": 700,
+          "prompt_tokens": 1889,
+          "tool_calls": 1,
+          "latency": 8.005286931991577
+        }
+      },
+      "reference": "[8189.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 3,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[58.1]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 260,
+          "tool_calls": 0,
+          "latency": 0.9485340118408203
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[58.1]",
+          "tier": 1,
+          "completion_tokens": 5719,
+          "reasoning_tokens": 5618,
+          "prompt_tokens": 250,
+          "tool_calls": 0,
+          "latency": 458.9262671470642
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[0.513705]",
+          "tier": 2,
+          "completion_tokens": 1481,
+          "reasoning_tokens": 1408,
+          "prompt_tokens": 1187,
+          "tool_calls": 1,
+          "latency": 15.590312957763672
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['men']",
+          "tier": 4,
+          "completion_tokens": 520,
+          "reasoning_tokens": 515,
+          "prompt_tokens": 1264,
+          "tool_calls": 0,
+          "latency": 5.162760019302368
+        }
+      },
+      "reference": "['men']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 4,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['women']",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 570,
+          "tool_calls": 0,
+          "latency": 0.8794341087341309
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['women']",
+          "tier": 1,
+          "completion_tokens": 1085,
+          "reasoning_tokens": 1053,
+          "prompt_tokens": 560,
+          "tool_calls": 0,
+          "latency": 9.771416902542114
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['women']",
+          "tier": 2,
+          "completion_tokens": 2138,
+          "reasoning_tokens": 1941,
+          "prompt_tokens": 1919,
+          "tool_calls": 1,
+          "latency": 17.394787073135376
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['cameroon', 'nigeria', \"cote d'ivoire\", 'senegal', 'guinea']",
+          "tier": 4,
+          "completion_tokens": 1383,
+          "reasoning_tokens": 1308,
+          "prompt_tokens": 3964,
+          "tool_calls": 1,
+          "latency": 11.966228008270264
+        }
+      },
+      "reference": "['cameroon', \"cote d'ivoire\", 'senegal']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 5,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[15.5]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 548,
+          "tool_calls": 0,
+          "latency": 0.9619028568267822
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[15.5]",
+          "tier": 1,
+          "completion_tokens": 984,
+          "reasoning_tokens": 891,
+          "prompt_tokens": 538,
+          "tool_calls": 0,
+          "latency": 11.505491256713867
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[15.5]",
+          "tier": 2,
+          "completion_tokens": 1494,
+          "reasoning_tokens": 1445,
+          "prompt_tokens": 1723,
+          "tool_calls": 1,
+          "latency": 15.837711095809937
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "['black immigrants']",
+          "tier": 4,
+          "completion_tokens": 2039,
+          "reasoning_tokens": 2033,
+          "prompt_tokens": 822,
+          "tool_calls": 0,
+          "latency": 18.03213405609131
+        }
+      },
+      "reference": "['black population']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 6,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[18.8]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 541,
+          "tool_calls": 0,
+          "latency": 0.8872630596160889
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[18.8]",
+          "tier": 1,
+          "completion_tokens": 339,
+          "reasoning_tokens": 282,
+          "prompt_tokens": 531,
+          "tool_calls": 0,
+          "latency": 3.8623979091644287
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[18.8]",
+          "tier": 2,
+          "completion_tokens": 326,
+          "reasoning_tokens": 278,
+          "prompt_tokens": 813,
+          "tool_calls": 0,
+          "latency": 3.8844988346099854
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[29.2]",
+          "tier": 4,
+          "completion_tokens": 10283,
+          "reasoning_tokens": 10228,
+          "prompt_tokens": 1721,
+          "tool_calls": 1,
+          "latency": 87.13820886611938
+        }
+      },
+      "reference": "[29.2]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 7,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "['women of african ancestry']",
+          "tier": 0,
+          "completion_tokens": 8,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 558,
+          "tool_calls": 0,
+          "latency": 1.0952398777008057
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "['women of african ancestry']",
+          "tier": 1,
+          "completion_tokens": 319,
+          "reasoning_tokens": 246,
+          "prompt_tokens": 548,
+          "tool_calls": 0,
+          "latency": 4.0439698696136475
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['africa']",
+          "tier": 2,
+          "completion_tokens": 883,
+          "reasoning_tokens": 739,
+          "prompt_tokens": 1782,
+          "tool_calls": 1,
+          "latency": 8.883737802505493
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[18.1]",
+          "tier": 4,
+          "completion_tokens": 5910,
+          "reasoning_tokens": 5856,
+          "prompt_tokens": 1730,
+          "tool_calls": 1,
+          "latency": 49.14164423942566
+        }
+      },
+      "reference": "[9.8]",
+      "oracle_path": "sql",
+      "oracle_correct": true
+    },
+    {
+      "id": 8,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[50.8]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 540,
+          "tool_calls": 0,
+          "latency": 1.0180978775024414
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[50.8]",
+          "tier": 1,
+          "completion_tokens": 385,
+          "reasoning_tokens": 313,
+          "prompt_tokens": 530,
+          "tool_calls": 0,
+          "latency": 4.791183948516846
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[50.8]",
+          "tier": 2,
+          "completion_tokens": 704,
+          "reasoning_tokens": 652,
+          "prompt_tokens": 1715,
+          "tool_calls": 1,
+          "latency": 7.863719940185547
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['caribbean and latin america']",
+          "tier": 4,
+          "completion_tokens": 1763,
+          "reasoning_tokens": 1753,
+          "prompt_tokens": 825,
+          "tool_calls": 0,
+          "latency": 15.345726251602173
+        }
+      },
+      "reference": "['caribbean and latin america']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 9,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[34.8]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 544,
+          "tool_calls": 0,
+          "latency": 1.1293160915374756
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[34.8]",
+          "tier": 1,
+          "completion_tokens": 331,
+          "reasoning_tokens": 277,
+          "prompt_tokens": 534,
+          "tool_calls": 0,
+          "latency": 4.159467935562134
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[34.8]",
+          "tier": 2,
+          "completion_tokens": 930,
+          "reasoning_tokens": 802,
+          "prompt_tokens": 1726,
+          "tool_calls": 1,
+          "latency": 9.798595905303955
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['caribbean and latin america']",
+          "tier": 4,
+          "completion_tokens": 4691,
+          "reasoning_tokens": 4617,
+          "prompt_tokens": 2569,
+          "tool_calls": 1,
+          "latency": 42.99662899971008
+        }
+      },
+      "reference": "['caribbean and latin america']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 10,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[19.1]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 541,
+          "tool_calls": 0,
+          "latency": 0.9289059638977051
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[19.1]",
+          "tier": 1,
+          "completion_tokens": 238,
+          "reasoning_tokens": 192,
+          "prompt_tokens": 531,
+          "tool_calls": 0,
+          "latency": 3.37174129486084
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[19.1]",
+          "tier": 2,
+          "completion_tokens": 906,
+          "reasoning_tokens": 858,
+          "prompt_tokens": 1713,
+          "tool_calls": 1,
+          "latency": 9.913241147994995
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "['africa']",
+          "tier": 4,
+          "completion_tokens": 711,
+          "reasoning_tokens": 500,
+          "prompt_tokens": 1215,
+          "tool_calls": 0,
+          "latency": 6.133441925048828
+        }
+      },
+      "reference": "['caribbean and latin america']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 11,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[Not enough information]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 538,
+          "tool_calls": 0,
+          "latency": 1.2991421222686768
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[35.3]",
+          "tier": 1,
+          "completion_tokens": 5559,
+          "reasoning_tokens": 5418,
+          "prompt_tokens": 528,
+          "tool_calls": 0,
+          "latency": 63.986151933670044
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[35.3]",
+          "tier": 2,
+          "completion_tokens": 3339,
+          "reasoning_tokens": 3163,
+          "prompt_tokens": 1710,
+          "tool_calls": 1,
+          "latency": 34.76193118095398
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['caribbean and latin america']",
+          "tier": 4,
+          "completion_tokens": 620,
+          "reasoning_tokens": 554,
+          "prompt_tokens": 2485,
+          "tool_calls": 1,
+          "latency": 5.77153205871582
+        }
+      },
+      "reference": "['caribbean and latin america']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 12,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[59.5]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 543,
+          "tool_calls": 0,
+          "latency": 1.1155991554260254
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 1,
+          "completion_tokens": 8192,
+          "reasoning_tokens": 8192,
+          "prompt_tokens": 533,
+          "tool_calls": 0,
+          "latency": 89.12823414802551
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[18.4]",
+          "tier": 2,
+          "completion_tokens": 4153,
+          "reasoning_tokens": 4098,
+          "prompt_tokens": 1724,
+          "tool_calls": 1,
+          "latency": 43.37132525444031
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "['somalia', 'sudan', 'south sudan', 'eritrea']",
+          "tier": 4,
+          "completion_tokens": 2774,
+          "reasoning_tokens": 2710,
+          "prompt_tokens": 2452,
+          "tool_calls": 1,
+          "latency": 24.92215085029602
+        }
+      },
+      "reference": "['democratic republic of the congo', 'nigeria', 'somalia', 'sudan']",
+      "oracle_path": "sql",
+      "oracle_correct": true
+    },
+    {
+      "id": 13,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 478,
+          "tool_calls": 0,
+          "latency": 1.327071189880371
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 1,
+          "completion_tokens": 152,
+          "reasoning_tokens": 110,
+          "prompt_tokens": 468,
+          "tool_calls": 0,
+          "latency": 2.225738048553467
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 2,
+          "completion_tokens": 522,
+          "reasoning_tokens": 456,
+          "prompt_tokens": 1873,
+          "tool_calls": 1,
+          "latency": 6.005030155181885
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "['africa']",
+          "tier": 4,
+          "completion_tokens": 888,
+          "reasoning_tokens": 811,
+          "prompt_tokens": 1907,
+          "tool_calls": 1,
+          "latency": 8.491533041000366
+        }
+      },
+      "reference": "['women']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 14,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 477,
+          "tool_calls": 0,
+          "latency": 1.1207690238952637
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 1,
+          "completion_tokens": 202,
+          "reasoning_tokens": 144,
+          "prompt_tokens": 467,
+          "tool_calls": 0,
+          "latency": 2.6451680660247803
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 2,
+          "completion_tokens": 218,
+          "reasoning_tokens": 163,
+          "prompt_tokens": 882,
+          "tool_calls": 0,
+          "latency": 3.300745964050293
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['health care and social assistance']",
+          "tier": 4,
+          "completion_tokens": 606,
+          "reasoning_tokens": 563,
+          "prompt_tokens": 2799,
+          "tool_calls": 1,
+          "latency": 6.272662878036499
+        }
+      },
+      "reference": "['health care and social assistance']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 15,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 477,
+          "tool_calls": 0,
+          "latency": 1.0558769702911377
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 1,
+          "completion_tokens": 306,
+          "reasoning_tokens": 204,
+          "prompt_tokens": 467,
+          "tool_calls": 0,
+          "latency": 2.9833779335021973
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 2,
+          "completion_tokens": 466,
+          "reasoning_tokens": 396,
+          "prompt_tokens": 1890,
+          "tool_calls": 1,
+          "latency": 5.184643983840942
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[health care and social assistance]",
+          "tier": 4,
+          "completion_tokens": 242,
+          "reasoning_tokens": 233,
+          "prompt_tokens": 1361,
+          "tool_calls": 0,
+          "latency": 2.6817290782928467
+        }
+      },
+      "reference": "[11.7]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 16,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 475,
+          "tool_calls": 0,
+          "latency": 1.1917622089385986
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 1,
+          "completion_tokens": 204,
+          "reasoning_tokens": 142,
+          "prompt_tokens": 465,
+          "tool_calls": 0,
+          "latency": 2.6417250633239746
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 2,
+          "completion_tokens": 250,
+          "reasoning_tokens": 243,
+          "prompt_tokens": 880,
+          "tool_calls": 0,
+          "latency": 2.7992241382598877
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[17.6]",
+          "tier": 4,
+          "completion_tokens": 1871,
+          "reasoning_tokens": 1794,
+          "prompt_tokens": 4297,
+          "tool_calls": 2,
+          "latency": 15.568467855453491
+        }
+      },
+      "reference": "[17.6]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 17,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['weekend']",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 238,
+          "tool_calls": 0,
+          "latency": 0.9737401008605957
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "['weekend sedentary time']",
+          "tier": 1,
+          "completion_tokens": 249,
+          "reasoning_tokens": 164,
+          "prompt_tokens": 228,
+          "tool_calls": 0,
+          "latency": 3.0702929496765137
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['weekend']",
+          "tier": 2,
+          "completion_tokens": 472,
+          "reasoning_tokens": 436,
+          "prompt_tokens": 992,
+          "tool_calls": 1,
+          "latency": 5.65585994720459
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['1:12.8697']",
+          "tier": 4,
+          "completion_tokens": 314,
+          "reasoning_tokens": 268,
+          "prompt_tokens": 986,
+          "tool_calls": 1,
+          "latency": 3.9671919345855713
+        }
+      },
+      "reference": "['1:12.8697']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 18,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['weekend']",
+          "tier": 0,
+          "completion_tokens": 4,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 238,
+          "tool_calls": 0,
+          "latency": 1.0330250263214111
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "['lpa weekend']",
+          "tier": 1,
+          "completion_tokens": 234,
+          "reasoning_tokens": 186,
+          "prompt_tokens": 228,
+          "tool_calls": 0,
+          "latency": 2.7542080879211426
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['weekend']",
+          "tier": 2,
+          "completion_tokens": 800,
+          "reasoning_tokens": 625,
+          "prompt_tokens": 990,
+          "tool_calls": 1,
+          "latency": 8.408382177352905
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[30.0]",
+          "tier": 4,
+          "completion_tokens": 1510,
+          "reasoning_tokens": 1454,
+          "prompt_tokens": 4979,
+          "tool_calls": 1,
+          "latency": 13.445688962936401
+        }
+      },
+      "reference": "[30.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 19,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[120824.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 287,
+          "tool_calls": 0,
+          "latency": 1.1136720180511475
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[120824.0]",
+          "tier": 1,
+          "completion_tokens": 495,
+          "reasoning_tokens": 420,
+          "prompt_tokens": 277,
+          "tool_calls": 0,
+          "latency": 5.93585205078125
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[120824.0]",
+          "tier": 2,
+          "completion_tokens": 305,
+          "reasoning_tokens": 298,
+          "prompt_tokens": 526,
+          "tool_calls": 0,
+          "latency": 3.772226095199585
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[1696.0]",
+          "tier": 4,
+          "completion_tokens": 495,
+          "reasoning_tokens": 458,
+          "prompt_tokens": 2280,
+          "tool_calls": 1,
+          "latency": 5.512411117553711
+        }
+      },
+      "reference": "[1696.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 20,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[374685.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 292,
+          "tool_calls": 0,
+          "latency": 0.9667048454284668
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[374685.0]",
+          "tier": 1,
+          "completion_tokens": 403,
+          "reasoning_tokens": 317,
+          "prompt_tokens": 282,
+          "tool_calls": 0,
+          "latency": 4.834298133850098
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 2,
+          "completion_tokens": 1150,
+          "reasoning_tokens": 1054,
+          "prompt_tokens": 1156,
+          "tool_calls": 2,
+          "latency": 12.064695358276367
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['flora']",
+          "tier": 4,
+          "completion_tokens": 3807,
+          "reasoning_tokens": 3802,
+          "prompt_tokens": 1573,
+          "tool_calls": 0,
+          "latency": 33.90302801132202
+        }
+      },
+      "reference": "['flora']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 21,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[9.6]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 292,
+          "tool_calls": 0,
+          "latency": 1.1571037769317627
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[9.6]",
+          "tier": 1,
+          "completion_tokens": 733,
+          "reasoning_tokens": 693,
+          "prompt_tokens": 282,
+          "tool_calls": 0,
+          "latency": 8.309859037399292
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[9.6]",
+          "tier": 2,
+          "completion_tokens": 1221,
+          "reasoning_tokens": 1174,
+          "prompt_tokens": 1144,
+          "tool_calls": 1,
+          "latency": 11.351226329803467
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[27.2, 14.4]",
+          "tier": 4,
+          "completion_tokens": 6378,
+          "reasoning_tokens": 5940,
+          "prompt_tokens": 2688,
+          "tool_calls": 2,
+          "latency": 51.95829629898071
+        }
+      },
+      "reference": "[27.2, 14.4]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 22,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[4.2]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 293,
+          "tool_calls": 0,
+          "latency": 0.889117956161499
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[4.2]",
+          "tier": 1,
+          "completion_tokens": 267,
+          "reasoning_tokens": 209,
+          "prompt_tokens": 283,
+          "tool_calls": 0,
+          "latency": 2.932589054107666
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 2,
+          "completion_tokens": 1510,
+          "reasoning_tokens": 1409,
+          "prompt_tokens": 1164,
+          "tool_calls": 2,
+          "latency": 14.61972713470459
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[24.3]",
+          "tier": 4,
+          "completion_tokens": 5722,
+          "reasoning_tokens": 5663,
+          "prompt_tokens": 1520,
+          "tool_calls": 1,
+          "latency": 48.84469032287598
+        }
+      },
+      "reference": "[24.9]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 23,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[54.0]",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 915,
+          "tool_calls": 0,
+          "latency": 0.7747387886047363
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[54.0]",
+          "tier": 1,
+          "completion_tokens": 700,
+          "reasoning_tokens": 614,
+          "prompt_tokens": 905,
+          "tool_calls": 0,
+          "latency": 8.25080680847168
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[54.0]",
+          "tier": 2,
+          "completion_tokens": 2369,
+          "reasoning_tokens": 2332,
+          "prompt_tokens": 2476,
+          "tool_calls": 1,
+          "latency": 24.648881912231445
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[16.1]",
+          "tier": 4,
+          "completion_tokens": 3931,
+          "reasoning_tokens": 995,
+          "prompt_tokens": 5063,
+          "tool_calls": 2,
+          "latency": 33.93023920059204
+        }
+      },
+      "reference": "[16.1]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 24,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[77]",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 456,
+          "tool_calls": 0,
+          "latency": 0.6704988479614258
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 1,
+          "completion_tokens": 8192,
+          "reasoning_tokens": 8192,
+          "prompt_tokens": 446,
+          "tool_calls": 0,
+          "latency": 89.88968396186829
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[77.0]",
+          "tier": 2,
+          "completion_tokens": 11694,
+          "reasoning_tokens": 11604,
+          "prompt_tokens": 2802,
+          "tool_calls": 2,
+          "latency": 122.50748181343079
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[1.89]",
+          "tier": 4,
+          "completion_tokens": 14698,
+          "reasoning_tokens": 14512,
+          "prompt_tokens": 2411,
+          "tool_calls": 1,
+          "latency": 123.19802284240723
+        }
+      },
+      "reference": "[1.888889]",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 25,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[46.9]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 451,
+          "tool_calls": 0,
+          "latency": 0.8879921436309814
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 1,
+          "completion_tokens": 8192,
+          "reasoning_tokens": 8192,
+          "prompt_tokens": 441,
+          "tool_calls": 0,
+          "latency": 90.86547684669495
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[39.5]",
+          "tier": 2,
+          "completion_tokens": 5796,
+          "reasoning_tokens": 5671,
+          "prompt_tokens": 1945,
+          "tool_calls": 1,
+          "latency": 61.18470120429993
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['saint vincent and the grenadines', 'grenada', 'saint lucia', 'ethiopia', 'somalia', 'eritrea', 'sudan', 'south sudan']",
+          "tier": 4,
+          "completion_tokens": 1746,
+          "reasoning_tokens": 1630,
+          "prompt_tokens": 2206,
+          "tool_calls": 1,
+          "latency": 14.09227705001831
+        }
+      },
+      "reference": "['ethiopia', 'saint vincent and the grenadines', 'grenada', 'saint lucia', 'somalia', 'eritrea', 'sudan', 'south sudan']",
+      "oracle_path": "mixed",
+      "oracle_correct": true
+    },
+    {
+      "id": 26,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 474,
+          "tool_calls": 0,
+          "latency": 0.8378150463104248
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 1,
+          "completion_tokens": 819,
+          "reasoning_tokens": 650,
+          "prompt_tokens": 464,
+          "tool_calls": 0,
+          "latency": 7.858115196228027
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 2,
+          "completion_tokens": 3496,
+          "reasoning_tokens": 3235,
+          "prompt_tokens": 2064,
+          "tool_calls": 1,
+          "latency": 32.83533787727356
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[53.1]",
+          "tier": 4,
+          "completion_tokens": 186,
+          "reasoning_tokens": 178,
+          "prompt_tokens": 1010,
+          "tool_calls": 0,
+          "latency": 1.9482460021972656
+        }
+      },
+      "reference": "[53.1]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 27,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 473,
+          "tool_calls": 0,
+          "latency": 0.9533071517944336
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 1,
+          "completion_tokens": 786,
+          "reasoning_tokens": 742,
+          "prompt_tokens": 463,
+          "tool_calls": 0,
+          "latency": 8.496290922164917
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['french-language workers']",
+          "tier": 2,
+          "completion_tokens": 2351,
+          "reasoning_tokens": 2157,
+          "prompt_tokens": 2001,
+          "tool_calls": 1,
+          "latency": 23.145775079727173
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[68562.0]",
+          "tier": 4,
+          "completion_tokens": 137,
+          "reasoning_tokens": 90,
+          "prompt_tokens": 3419,
+          "tool_calls": 0,
+          "latency": 1.768537998199463
+        }
+      },
+      "reference": "[68562.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 28,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[37.9]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 880,
+          "tool_calls": 0,
+          "latency": 0.909848690032959
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[37.9]",
+          "tier": 1,
+          "completion_tokens": 1617,
+          "reasoning_tokens": 1504,
+          "prompt_tokens": 870,
+          "tool_calls": 0,
+          "latency": 16.73991823196411
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[16.8]",
+          "tier": 2,
+          "completion_tokens": 599,
+          "reasoning_tokens": 561,
+          "prompt_tokens": 2378,
+          "tool_calls": 1,
+          "latency": 7.512316942214966
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[463]",
+          "tier": 4,
+          "completion_tokens": 170,
+          "reasoning_tokens": 164,
+          "prompt_tokens": 3419,
+          "tool_calls": 0,
+          "latency": 1.824098825454712
+        }
+      },
+      "reference": "[-463]",
+      "oracle_path": "sql",
+      "oracle_correct": true
+    },
+    {
+      "id": 29,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[8.2]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 881,
+          "tool_calls": 0,
+          "latency": 0.7031381130218506
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[8.2]",
+          "tier": 1,
+          "completion_tokens": 549,
+          "reasoning_tokens": 452,
+          "prompt_tokens": 871,
+          "tool_calls": 0,
+          "latency": 5.833877801895142
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[8.2]",
+          "tier": 2,
+          "completion_tokens": 2053,
+          "reasoning_tokens": 1955,
+          "prompt_tokens": 3637,
+          "tool_calls": 2,
+          "latency": 21.492584228515625
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[185.0]",
+          "tier": 4,
+          "completion_tokens": 747,
+          "reasoning_tokens": 667,
+          "prompt_tokens": 6921,
+          "tool_calls": 1,
+          "latency": 7.046299934387207
+        }
+      },
+      "reference": "[185.0]",
+      "oracle_path": "mixed",
+      "oracle_correct": true
+    },
+    {
+      "id": 30,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[7.6]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 878,
+          "tool_calls": 0,
+          "latency": 1.1147270202636719
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[7.6]",
+          "tier": 1,
+          "completion_tokens": 1525,
+          "reasoning_tokens": 1393,
+          "prompt_tokens": 868,
+          "tool_calls": 0,
+          "latency": 16.05192995071411
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[7.6]",
+          "tier": 2,
+          "completion_tokens": 1378,
+          "reasoning_tokens": 1338,
+          "prompt_tokens": 2376,
+          "tool_calls": 1,
+          "latency": 14.31331491470337
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[2.1]",
+          "tier": 4,
+          "completion_tokens": 805,
+          "reasoning_tokens": 770,
+          "prompt_tokens": 6927,
+          "tool_calls": 1,
+          "latency": 7.064999341964722
+        }
+      },
+      "reference": "[2.1]",
+      "oracle_path": "mixed",
+      "oracle_correct": true
+    },
+    {
+      "id": 31,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['lessors of real estate', 'services to buildings and dwellings', 'child day-care services']",
+          "tier": 0,
+          "completion_tokens": 19,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 877,
+          "tool_calls": 0,
+          "latency": 1.0345962047576904
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['lessors of real estate', 'services to buildings and dwellings', 'child day-care services']",
+          "tier": 1,
+          "completion_tokens": 2553,
+          "reasoning_tokens": 2430,
+          "prompt_tokens": 867,
+          "tool_calls": 0,
+          "latency": 25.31112027168274
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['lessors of real estate', 'services to buildings and dwellings', 'child day-care services']",
+          "tier": 2,
+          "completion_tokens": 2827,
+          "reasoning_tokens": 2669,
+          "prompt_tokens": 3727,
+          "tool_calls": 2,
+          "latency": 29.049824476242065
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[31050.0]",
+          "tier": 4,
+          "completion_tokens": 423,
+          "reasoning_tokens": 416,
+          "prompt_tokens": 3426,
+          "tool_calls": 0,
+          "latency": 4.095495939254761
+        }
+      },
+      "reference": "[31050.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 32,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['services to buildings and dwellings (14.8)', 'lessors of real estate (11.5)', 'specialty trade contractors (10.1)']",
+          "tier": 0,
+          "completion_tokens": 31,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 871,
+          "tool_calls": 0,
+          "latency": 0.820580244064331
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "['all other industries', 'services to buildings and dwellings', 'lessors of real estate']",
+          "tier": 1,
+          "completion_tokens": 2951,
+          "reasoning_tokens": 2852,
+          "prompt_tokens": 861,
+          "tool_calls": 0,
+          "latency": 28.07683300971985
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "['all other industries', 'services to buildings and dwellings', 'lessors of real estate']",
+          "tier": 2,
+          "completion_tokens": 2930,
+          "reasoning_tokens": 2850,
+          "prompt_tokens": 2418,
+          "tool_calls": 1,
+          "latency": 29.077193021774292
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[1535]",
+          "tier": 4,
+          "completion_tokens": 906,
+          "reasoning_tokens": 850,
+          "prompt_tokens": 6938,
+          "tool_calls": 1,
+          "latency": 8.275635957717896
+        }
+      },
+      "reference": "[1998]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 33,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['stockport county']",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 1247,
+          "tool_calls": 0,
+          "latency": 0.9874753952026367
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "['southport']",
+          "tier": 1,
+          "completion_tokens": 4682,
+          "reasoning_tokens": 4596,
+          "prompt_tokens": 1237,
+          "tool_calls": 0,
+          "latency": 48.75110697746277
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "['stockport county, southport']",
+          "tier": 2,
+          "completion_tokens": 9855,
+          "reasoning_tokens": 9794,
+          "prompt_tokens": 4793,
+          "tool_calls": 2,
+          "latency": 100.37991094589233
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[1.565097]",
+          "tier": 4,
+          "completion_tokens": 500,
+          "reasoning_tokens": 400,
+          "prompt_tokens": 6994,
+          "tool_calls": 1,
+          "latency": 5.141953706741333
+        }
+      },
+      "reference": "[0.064348]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 34,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[1979.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 794,
+          "tool_calls": 0,
+          "latency": 1.0505478382110596
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[1979.0]",
+          "tier": 1,
+          "completion_tokens": 160,
+          "reasoning_tokens": 104,
+          "prompt_tokens": 784,
+          "tool_calls": 0,
+          "latency": 2.5385091304779053
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[1979.0]",
+          "tier": 2,
+          "completion_tokens": 224,
+          "reasoning_tokens": 217,
+          "prompt_tokens": 1153,
+          "tool_calls": 0,
+          "latency": 3.1746110916137695
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[182]",
+          "tier": 4,
+          "completion_tokens": 2106,
+          "reasoning_tokens": 2043,
+          "prompt_tokens": 2541,
+          "tool_calls": 1,
+          "latency": 19.270663738250732
+        }
+      },
+      "reference": "[182]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 35,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "['heterosexual people']",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 648,
+          "tool_calls": 0,
+          "latency": 1.1834731101989746
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['heterosexual']",
+          "tier": 1,
+          "completion_tokens": 2186,
+          "reasoning_tokens": 1925,
+          "prompt_tokens": 638,
+          "tool_calls": 0,
+          "latency": 23.364071130752563
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['heterosexual']",
+          "tier": 2,
+          "completion_tokens": 3466,
+          "reasoning_tokens": 3038,
+          "prompt_tokens": 1084,
+          "tool_calls": 0,
+          "latency": 30.744569063186646
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[38459]",
+          "tier": 4,
+          "completion_tokens": 810,
+          "reasoning_tokens": 803,
+          "prompt_tokens": 1206,
+          "tool_calls": 0,
+          "latency": 7.54935097694397
+        }
+      },
+      "reference": "[38459]",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 36,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[44.1]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 644,
+          "tool_calls": 0,
+          "latency": 1.4225199222564697
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[44.1]",
+          "tier": 1,
+          "completion_tokens": 160,
+          "reasoning_tokens": 100,
+          "prompt_tokens": 634,
+          "tool_calls": 0,
+          "latency": 2.4931650161743164
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[44.1]",
+          "tier": 2,
+          "completion_tokens": 432,
+          "reasoning_tokens": 392,
+          "prompt_tokens": 2236,
+          "tool_calls": 1,
+          "latency": 5.0642712116241455
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[0.19102418]",
+          "tier": 4,
+          "completion_tokens": 3042,
+          "reasoning_tokens": 2954,
+          "prompt_tokens": 2550,
+          "tool_calls": 1,
+          "latency": 26.111303091049194
+        }
+      },
+      "reference": "[0.191024]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 37,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[2.54]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 655,
+          "tool_calls": 0,
+          "latency": 1.0396332740783691
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[2.5]",
+          "tier": 1,
+          "completion_tokens": 647,
+          "reasoning_tokens": 542,
+          "prompt_tokens": 645,
+          "tool_calls": 0,
+          "latency": 6.860567092895508
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[2.538462]",
+          "tier": 2,
+          "completion_tokens": 1542,
+          "reasoning_tokens": 1480,
+          "prompt_tokens": 2277,
+          "tool_calls": 1,
+          "latency": 14.937770128250122
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[499.0]",
+          "tier": 4,
+          "completion_tokens": 167,
+          "reasoning_tokens": 161,
+          "prompt_tokens": 1005,
+          "tool_calls": 0,
+          "latency": 1.9448649883270264
+        }
+      },
+      "reference": "[499.0]",
+      "oracle_path": "sql",
+      "oracle_correct": true
+    },
+    {
+      "id": 38,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[14.0]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 641,
+          "tool_calls": 0,
+          "latency": 0.9346890449523926
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[14.0]",
+          "tier": 1,
+          "completion_tokens": 303,
+          "reasoning_tokens": 264,
+          "prompt_tokens": 631,
+          "tool_calls": 0,
+          "latency": 3.9838809967041016
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[14.0]",
+          "tier": 2,
+          "completion_tokens": 450,
+          "reasoning_tokens": 407,
+          "prompt_tokens": 2233,
+          "tool_calls": 1,
+          "latency": 6.0138890743255615
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[933.0]",
+          "tier": 4,
+          "completion_tokens": 226,
+          "reasoning_tokens": 220,
+          "prompt_tokens": 1082,
+          "tool_calls": 0,
+          "latency": 2.531888961791992
+        }
+      },
+      "reference": "[933.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 39,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[10.4]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 651,
+          "tool_calls": 0,
+          "latency": 0.8538832664489746
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[10.4]",
+          "tier": 1,
+          "completion_tokens": 233,
+          "reasoning_tokens": 152,
+          "prompt_tokens": 641,
+          "tool_calls": 0,
+          "latency": 3.1284055709838867
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[10.4]",
+          "tier": 2,
+          "completion_tokens": 323,
+          "reasoning_tokens": 314,
+          "prompt_tokens": 1087,
+          "tool_calls": 0,
+          "latency": 3.4597251415252686
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[214.0, -282.0]",
+          "tier": 4,
+          "completion_tokens": 347,
+          "reasoning_tokens": 308,
+          "prompt_tokens": 1501,
+          "tool_calls": 1,
+          "latency": 4.559628963470459
+        }
+      },
+      "reference": "[214.0, 282.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 40,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[29.5]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 654,
+          "tool_calls": 0,
+          "latency": 0.8660018444061279
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[29.5]",
+          "tier": 1,
+          "completion_tokens": 388,
+          "reasoning_tokens": 311,
+          "prompt_tokens": 644,
+          "tool_calls": 0,
+          "latency": 4.33014988899231
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[29.5]",
+          "tier": 2,
+          "completion_tokens": 988,
+          "reasoning_tokens": 932,
+          "prompt_tokens": 2272,
+          "tool_calls": 1,
+          "latency": 10.106168270111084
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "['2018-02-16']",
+          "tier": 4,
+          "completion_tokens": 825,
+          "reasoning_tokens": 771,
+          "prompt_tokens": 1882,
+          "tool_calls": 1,
+          "latency": 7.942870855331421
+        }
+      },
+      "reference": "['february 16, 2018']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 41,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[18913.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 2152,
+          "tool_calls": 0,
+          "latency": 0.9903831481933594
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[18913.0]",
+          "tier": 1,
+          "completion_tokens": 339,
+          "reasoning_tokens": 273,
+          "prompt_tokens": 2142,
+          "tool_calls": 0,
+          "latency": 4.584244251251221
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[18913.0]",
+          "tier": 2,
+          "completion_tokens": 222,
+          "reasoning_tokens": 215,
+          "prompt_tokens": 2526,
+          "tool_calls": 0,
+          "latency": 2.8301570415496826
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[199.0]",
+          "tier": 4,
+          "completion_tokens": 2879,
+          "reasoning_tokens": 2727,
+          "prompt_tokens": 2263,
+          "tool_calls": 1,
+          "latency": 24.303766012191772
+        }
+      },
+      "reference": "[199.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 42,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[679.0]",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 890,
+          "tool_calls": 0,
+          "latency": 0.8955676555633545
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[32431.0]",
+          "tier": 1,
+          "completion_tokens": 772,
+          "reasoning_tokens": 661,
+          "prompt_tokens": 880,
+          "tool_calls": 0,
+          "latency": 8.566588878631592
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[32431.0]",
+          "tier": 2,
+          "completion_tokens": 2896,
+          "reasoning_tokens": 2805,
+          "prompt_tokens": 3831,
+          "tool_calls": 2,
+          "latency": 29.877315998077393
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[139337]",
+          "tier": 4,
+          "completion_tokens": 1053,
+          "reasoning_tokens": 1002,
+          "prompt_tokens": 2238,
+          "tool_calls": 1,
+          "latency": 9.912247896194458
+        }
+      },
+      "reference": "[139337]",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 43,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[31647.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 890,
+          "tool_calls": 0,
+          "latency": 1.054718255996704
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[31647.0]",
+          "tier": 1,
+          "completion_tokens": 1033,
+          "reasoning_tokens": 928,
+          "prompt_tokens": 880,
+          "tool_calls": 0,
+          "latency": 10.749773979187012
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 2,
+          "completion_tokens": 3770,
+          "reasoning_tokens": 3675,
+          "prompt_tokens": 2525,
+          "tool_calls": 2,
+          "latency": 37.97808265686035
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[116441]",
+          "tier": 4,
+          "completion_tokens": 2492,
+          "reasoning_tokens": 2485,
+          "prompt_tokens": 1077,
+          "tool_calls": 0,
+          "latency": 19.986712217330933
+        }
+      },
+      "reference": "[116442]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 44,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[401.0]",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 879,
+          "tool_calls": 0,
+          "latency": 1.147947072982788
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[1265.0]",
+          "tier": 1,
+          "completion_tokens": 1483,
+          "reasoning_tokens": 1347,
+          "prompt_tokens": 869,
+          "tool_calls": 0,
+          "latency": 15.240702867507935
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[1265.0]",
+          "tier": 2,
+          "completion_tokens": 3332,
+          "reasoning_tokens": 3139,
+          "prompt_tokens": 3893,
+          "tool_calls": 2,
+          "latency": 32.20416808128357
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[492]",
+          "tier": 4,
+          "completion_tokens": 3906,
+          "reasoning_tokens": 3871,
+          "prompt_tokens": 2181,
+          "tool_calls": 1,
+          "latency": 33.68409609794617
+        }
+      },
+      "reference": "[492]",
+      "oracle_path": "mixed",
+      "oracle_correct": true
+    },
+    {
+      "id": 45,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[5.9]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 416,
+          "tool_calls": 0,
+          "latency": 1.209697961807251
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[5.9]",
+          "tier": 1,
+          "completion_tokens": 302,
+          "reasoning_tokens": 204,
+          "prompt_tokens": 406,
+          "tool_calls": 0,
+          "latency": 3.2163970470428467
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[5.9]",
+          "tier": 2,
+          "completion_tokens": 1031,
+          "reasoning_tokens": 1003,
+          "prompt_tokens": 1388,
+          "tool_calls": 1,
+          "latency": 10.469075918197632
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[-3, -12]",
+          "tier": 4,
+          "completion_tokens": 3844,
+          "reasoning_tokens": 3625,
+          "prompt_tokens": 2275,
+          "tool_calls": 1,
+          "latency": 31.69202494621277
+        }
+      },
+      "reference": "[4, 12]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 46,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['between 1 and 4']",
+          "tier": 0,
+          "completion_tokens": 9,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 399,
+          "tool_calls": 0,
+          "latency": 1.5810060501098633
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['between 1 and 4']",
+          "tier": 1,
+          "completion_tokens": 186,
+          "reasoning_tokens": 137,
+          "prompt_tokens": 389,
+          "tool_calls": 0,
+          "latency": 2.789395809173584
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['between 1 and 4']",
+          "tier": 2,
+          "completion_tokens": 595,
+          "reasoning_tokens": 585,
+          "prompt_tokens": 645,
+          "tool_calls": 0,
+          "latency": 6.5047008991241455
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[22895]",
+          "tier": 4,
+          "completion_tokens": 769,
+          "reasoning_tokens": 738,
+          "prompt_tokens": 2179,
+          "tool_calls": 1,
+          "latency": 7.889389753341675
+        }
+      },
+      "reference": "[22895]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 47,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['between 50 and 99']",
+          "tier": 0,
+          "completion_tokens": 9,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 392,
+          "tool_calls": 0,
+          "latency": 1.2815968990325928
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['between 50 and 99']",
+          "tier": 1,
+          "completion_tokens": 383,
+          "reasoning_tokens": 320,
+          "prompt_tokens": 382,
+          "tool_calls": 0,
+          "latency": 4.230402946472168
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['between 50 and 99']",
+          "tier": 2,
+          "completion_tokens": 600,
+          "reasoning_tokens": 558,
+          "prompt_tokens": 1354,
+          "tool_calls": 1,
+          "latency": 6.234984874725342
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[54]",
+          "tier": 4,
+          "completion_tokens": 181,
+          "reasoning_tokens": 157,
+          "prompt_tokens": 2157,
+          "tool_calls": 1,
+          "latency": 3.2579591274261475
+        }
+      },
+      "reference": "[81]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 48,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['1,000 and above']",
+          "tier": 0,
+          "completion_tokens": 9,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 390,
+          "tool_calls": 0,
+          "latency": 1.1524038314819336
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['1,000 and above']",
+          "tier": 1,
+          "completion_tokens": 129,
+          "reasoning_tokens": 95,
+          "prompt_tokens": 380,
+          "tool_calls": 0,
+          "latency": 2.254215717315674
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['1,000 and above']",
+          "tier": 2,
+          "completion_tokens": 219,
+          "reasoning_tokens": 189,
+          "prompt_tokens": 1337,
+          "tool_calls": 1,
+          "latency": 3.476168394088745
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[0]",
+          "tier": 4,
+          "completion_tokens": 2427,
+          "reasoning_tokens": 2382,
+          "prompt_tokens": 2214,
+          "tool_calls": 1,
+          "latency": 20.8705050945282
+        }
+      },
+      "reference": "[3]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 49,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[145.0]",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 527,
+          "tool_calls": 0,
+          "latency": 1.1689369678497314
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[145.0]",
+          "tier": 1,
+          "completion_tokens": 79,
+          "reasoning_tokens": 51,
+          "prompt_tokens": 517,
+          "tool_calls": 0,
+          "latency": 1.7211318016052246
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[145.0]",
+          "tier": 2,
+          "completion_tokens": 164,
+          "reasoning_tokens": 158,
+          "prompt_tokens": 867,
+          "tool_calls": 0,
+          "latency": 2.326077938079834
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[4]",
+          "tier": 4,
+          "completion_tokens": 1198,
+          "reasoning_tokens": 1155,
+          "prompt_tokens": 2218,
+          "tool_calls": 1,
+          "latency": 10.59017014503479
+        }
+      },
+      "reference": "[4]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 50,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[680.0]",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 732,
+          "tool_calls": 0,
+          "latency": 1.3137316703796387
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[680.0]",
+          "tier": 1,
+          "completion_tokens": 255,
+          "reasoning_tokens": 206,
+          "prompt_tokens": 722,
+          "tool_calls": 0,
+          "latency": 3.366874933242798
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[680.0]",
+          "tier": 2,
+          "completion_tokens": 761,
+          "reasoning_tokens": 731,
+          "prompt_tokens": 2214,
+          "tool_calls": 1,
+          "latency": 8.990783214569092
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[0.18600000000000003]",
+          "tier": 4,
+          "completion_tokens": 850,
+          "reasoning_tokens": 786,
+          "prompt_tokens": 2235,
+          "tool_calls": 1,
+          "latency": 8.41086745262146
+        }
+      },
+      "reference": "[0.186393]",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 51,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[88.2]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 367,
+          "tool_calls": 0,
+          "latency": 1.1844170093536377
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[88.2]",
+          "tier": 1,
+          "completion_tokens": 1052,
+          "reasoning_tokens": 940,
+          "prompt_tokens": 357,
+          "tool_calls": 0,
+          "latency": 12.129857063293457
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[88.2]",
+          "tier": 2,
+          "completion_tokens": 1504,
+          "reasoning_tokens": 1456,
+          "prompt_tokens": 1353,
+          "tool_calls": 1,
+          "latency": 15.236051797866821
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[82.17]",
+          "tier": 4,
+          "completion_tokens": 1478,
+          "reasoning_tokens": 1416,
+          "prompt_tokens": 2235,
+          "tool_calls": 1,
+          "latency": 13.057960033416748
+        }
+      },
+      "reference": "[0.821697]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 52,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['50 to 69 years']",
+          "tier": 0,
+          "completion_tokens": 9,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 761,
+          "tool_calls": 0,
+          "latency": 1.0771968364715576
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['50 to 69 years']",
+          "tier": 1,
+          "completion_tokens": 684,
+          "reasoning_tokens": 550,
+          "prompt_tokens": 751,
+          "tool_calls": 0,
+          "latency": 8.244559049606323
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['50 to 69 years']",
+          "tier": 2,
+          "completion_tokens": 3166,
+          "reasoning_tokens": 2904,
+          "prompt_tokens": 3922,
+          "tool_calls": 2,
+          "latency": 33.166903018951416
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[36845]",
+          "tier": 4,
+          "completion_tokens": 1634,
+          "reasoning_tokens": 1589,
+          "prompt_tokens": 2204,
+          "tool_calls": 1,
+          "latency": 14.801825761795044
+        }
+      },
+      "reference": "[36845]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 53,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[83.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 361,
+          "tool_calls": 0,
+          "latency": 1.0384440422058105
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[83.0]",
+          "tier": 1,
+          "completion_tokens": 386,
+          "reasoning_tokens": 336,
+          "prompt_tokens": 351,
+          "tool_calls": 0,
+          "latency": 4.750884056091309
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[83.0]",
+          "tier": 2,
+          "completion_tokens": 1823,
+          "reasoning_tokens": 1737,
+          "prompt_tokens": 2051,
+          "tool_calls": 2,
+          "latency": 20.555833101272583
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[21704]",
+          "tier": 4,
+          "completion_tokens": 678,
+          "reasoning_tokens": 648,
+          "prompt_tokens": 2191,
+          "tool_calls": 1,
+          "latency": 7.208931922912598
+        }
+      },
+      "reference": "[21704]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 54,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[31.5]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 464,
+          "tool_calls": 0,
+          "latency": 1.0388731956481934
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[31.5]",
+          "tier": 1,
+          "completion_tokens": 896,
+          "reasoning_tokens": 844,
+          "prompt_tokens": 454,
+          "tool_calls": 0,
+          "latency": 9.487086772918701
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[31.5]",
+          "tier": 2,
+          "completion_tokens": 2739,
+          "reasoning_tokens": 2692,
+          "prompt_tokens": 1627,
+          "tool_calls": 1,
+          "latency": 25.992795705795288
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[15141]",
+          "tier": 4,
+          "completion_tokens": 290,
+          "reasoning_tokens": 263,
+          "prompt_tokens": 2180,
+          "tool_calls": 1,
+          "latency": 3.4656076431274414
+        }
+      },
+      "reference": "[15141]",
+      "oracle_path": "mixed",
+      "oracle_correct": true
+    },
+    {
+      "id": 55,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[20.1]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 464,
+          "tool_calls": 0,
+          "latency": 0.8086068630218506
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[20.1]",
+          "tier": 1,
+          "completion_tokens": 668,
+          "reasoning_tokens": 588,
+          "prompt_tokens": 454,
+          "tool_calls": 0,
+          "latency": 7.23829197883606
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[20.1]",
+          "tier": 2,
+          "completion_tokens": 709,
+          "reasoning_tokens": 671,
+          "prompt_tokens": 769,
+          "tool_calls": 0,
+          "latency": 7.066431999206543
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[87]",
+          "tier": 4,
+          "completion_tokens": 948,
+          "reasoning_tokens": 919,
+          "prompt_tokens": 2174,
+          "tool_calls": 1,
+          "latency": 8.9771249294281
+        }
+      },
+      "reference": "[87]",
+      "oracle_path": "mixed",
+      "oracle_correct": true
+    },
+    {
+      "id": 56,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[53.1]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 466,
+          "tool_calls": 0,
+          "latency": 1.031229019165039
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[53.1]",
+          "tier": 1,
+          "completion_tokens": 529,
+          "reasoning_tokens": 476,
+          "prompt_tokens": 456,
+          "tool_calls": 0,
+          "latency": 5.843660116195679
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[53.1]",
+          "tier": 2,
+          "completion_tokens": 648,
+          "reasoning_tokens": 605,
+          "prompt_tokens": 1627,
+          "tool_calls": 1,
+          "latency": 7.141451835632324
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[41.666667]",
+          "tier": 4,
+          "completion_tokens": 1294,
+          "reasoning_tokens": 1200,
+          "prompt_tokens": 2254,
+          "tool_calls": 1,
+          "latency": 10.545459270477295
+        }
+      },
+      "reference": "[3]",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 57,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[19.3]",
+          "tier": 0,
+          "completion_tokens": 8,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 464,
+          "tool_calls": 0,
+          "latency": 1.1398048400878906
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[19.3]",
+          "tier": 1,
+          "completion_tokens": 1104,
+          "reasoning_tokens": 1022,
+          "prompt_tokens": 454,
+          "tool_calls": 0,
+          "latency": 11.450437784194946
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[19.3]",
+          "tier": 2,
+          "completion_tokens": 652,
+          "reasoning_tokens": 643,
+          "prompt_tokens": 769,
+          "tool_calls": 0,
+          "latency": 6.230587005615234
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[3]",
+          "tier": 4,
+          "completion_tokens": 1092,
+          "reasoning_tokens": 1047,
+          "prompt_tokens": 2240,
+          "tool_calls": 1,
+          "latency": 9.847287654876709
+        }
+      },
+      "reference": "[3]",
+      "oracle_path": "mixed",
+      "oracle_correct": true
+    },
+    {
+      "id": 58,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[53.1]",
+          "tier": 0,
+          "completion_tokens": 8,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 456,
+          "tool_calls": 0,
+          "latency": 0.9504337310791016
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[53.1]",
+          "tier": 1,
+          "completion_tokens": 939,
+          "reasoning_tokens": 860,
+          "prompt_tokens": 446,
+          "tool_calls": 0,
+          "latency": 9.722769021987915
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[53.1]",
+          "tier": 2,
+          "completion_tokens": 2012,
+          "reasoning_tokens": 1971,
+          "prompt_tokens": 1605,
+          "tool_calls": 1,
+          "latency": 18.72566294670105
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[5]",
+          "tier": 4,
+          "completion_tokens": 1254,
+          "reasoning_tokens": 1191,
+          "prompt_tokens": 2226,
+          "tool_calls": 1,
+          "latency": 10.520062923431396
+        }
+      },
+      "reference": "[5]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 59,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[42.3]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 456,
+          "tool_calls": 0,
+          "latency": 1.0131371021270752
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[42.3]",
+          "tier": 1,
+          "completion_tokens": 408,
+          "reasoning_tokens": 341,
+          "prompt_tokens": 446,
+          "tool_calls": 0,
+          "latency": 4.314128160476685
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[42.3]",
+          "tier": 2,
+          "completion_tokens": 849,
+          "reasoning_tokens": 813,
+          "prompt_tokens": 1599,
+          "tool_calls": 1,
+          "latency": 8.072558879852295
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['manitoba']",
+          "tier": 4,
+          "completion_tokens": 763,
+          "reasoning_tokens": 739,
+          "prompt_tokens": 2184,
+          "tool_calls": 1,
+          "latency": 7.962548732757568
+        }
+      },
+      "reference": "['manitoba']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 60,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[31.6]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 456,
+          "tool_calls": 0,
+          "latency": 0.7307829856872559
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[31.6]",
+          "tier": 1,
+          "completion_tokens": 207,
+          "reasoning_tokens": 157,
+          "prompt_tokens": 446,
+          "tool_calls": 0,
+          "latency": 2.7525081634521484
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[31.6]",
+          "tier": 2,
+          "completion_tokens": 907,
+          "reasoning_tokens": 872,
+          "prompt_tokens": 1598,
+          "tool_calls": 1,
+          "latency": 9.916265726089478
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['british columbia']",
+          "tier": 4,
+          "completion_tokens": 618,
+          "reasoning_tokens": 503,
+          "prompt_tokens": 1052,
+          "tool_calls": 0,
+          "latency": 5.572362661361694
+        }
+      },
+      "reference": "['british columbia']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 61,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[12.6]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 455,
+          "tool_calls": 0,
+          "latency": 0.9984300136566162
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[12.6]",
+          "tier": 1,
+          "completion_tokens": 407,
+          "reasoning_tokens": 361,
+          "prompt_tokens": 445,
+          "tool_calls": 0,
+          "latency": 4.015144109725952
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[12.6]",
+          "tier": 2,
+          "completion_tokens": 1318,
+          "reasoning_tokens": 1310,
+          "prompt_tokens": 760,
+          "tool_calls": 0,
+          "latency": 11.475028038024902
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[95679]",
+          "tier": 4,
+          "completion_tokens": 1939,
+          "reasoning_tokens": 1870,
+          "prompt_tokens": 2271,
+          "tool_calls": 1,
+          "latency": 17.080036640167236
+        }
+      },
+      "reference": "[95680]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 62,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[1057417.0]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 450,
+          "tool_calls": 0,
+          "latency": 1.024155855178833
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[1057417.0]",
+          "tier": 1,
+          "completion_tokens": 337,
+          "reasoning_tokens": 250,
+          "prompt_tokens": 440,
+          "tool_calls": 0,
+          "latency": 4.038153886795044
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[1057417.0]",
+          "tier": 2,
+          "completion_tokens": 173,
+          "reasoning_tokens": 165,
+          "prompt_tokens": 755,
+          "tool_calls": 0,
+          "latency": 2.248638868331909
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[7754]",
+          "tier": 4,
+          "completion_tokens": 886,
+          "reasoning_tokens": 858,
+          "prompt_tokens": 2195,
+          "tool_calls": 1,
+          "latency": 8.582405090332031
+        }
+      },
+      "reference": "[7754]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 63,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[1009381.0]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 451,
+          "tool_calls": 0,
+          "latency": 0.9230470657348633
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[1009381.0]",
+          "tier": 1,
+          "completion_tokens": 150,
+          "reasoning_tokens": 111,
+          "prompt_tokens": 441,
+          "tool_calls": 0,
+          "latency": 2.1572859287261963
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[1009381.0]",
+          "tier": 2,
+          "completion_tokens": 452,
+          "reasoning_tokens": 415,
+          "prompt_tokens": 1592,
+          "tool_calls": 1,
+          "latency": 5.176492929458618
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[404]",
+          "tier": 4,
+          "completion_tokens": 235,
+          "reasoning_tokens": 229,
+          "prompt_tokens": 1071,
+          "tool_calls": 0,
+          "latency": 2.1476149559020996
+        }
+      },
+      "reference": "[404]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 64,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[893436.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 450,
+          "tool_calls": 0,
+          "latency": 1.4255719184875488
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[893436.0]",
+          "tier": 1,
+          "completion_tokens": 311,
+          "reasoning_tokens": 245,
+          "prompt_tokens": 440,
+          "tool_calls": 0,
+          "latency": 3.7581100463867188
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[893436.0]",
+          "tier": 2,
+          "completion_tokens": 334,
+          "reasoning_tokens": 327,
+          "prompt_tokens": 755,
+          "tool_calls": 0,
+          "latency": 3.8555750846862793
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[-5]",
+          "tier": 4,
+          "completion_tokens": 3328,
+          "reasoning_tokens": 3179,
+          "prompt_tokens": 2230,
+          "tool_calls": 1,
+          "latency": 29.551485300064087
+        }
+      },
+      "reference": "[5]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 65,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['70 years and older']",
+          "tier": 0,
+          "completion_tokens": 8,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 716,
+          "tool_calls": 0,
+          "latency": 1.3212311267852783
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['70 years and older']",
+          "tier": 1,
+          "completion_tokens": 388,
+          "reasoning_tokens": 304,
+          "prompt_tokens": 706,
+          "tool_calls": 0,
+          "latency": 5.277074098587036
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 2,
+          "completion_tokens": 6047,
+          "reasoning_tokens": 5551,
+          "prompt_tokens": 2518,
+          "tool_calls": 2,
+          "latency": 53.719446897506714
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[-13]",
+          "tier": 4,
+          "completion_tokens": 2202,
+          "reasoning_tokens": 2196,
+          "prompt_tokens": 1071,
+          "tool_calls": 0,
+          "latency": 18.903748035430908
+        }
+      },
+      "reference": "[13]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 66,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[40.6]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 958,
+          "tool_calls": 0,
+          "latency": 0.6184341907501221
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[40.6]",
+          "tier": 1,
+          "completion_tokens": 1368,
+          "reasoning_tokens": 1289,
+          "prompt_tokens": 948,
+          "tool_calls": 0,
+          "latency": 16.15312099456787
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[40.6]",
+          "tier": 2,
+          "completion_tokens": 1206,
+          "reasoning_tokens": 1144,
+          "prompt_tokens": 2565,
+          "tool_calls": 1,
+          "latency": 11.908106327056885
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[1982.0]",
+          "tier": 4,
+          "completion_tokens": 169,
+          "reasoning_tokens": 141,
+          "prompt_tokens": 2572,
+          "tool_calls": 1,
+          "latency": 2.860910177230835
+        }
+      },
+      "reference": "[1982.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 67,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[2.8]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 958,
+          "tool_calls": 0,
+          "latency": 0.8990981578826904
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[2.8]",
+          "tier": 1,
+          "completion_tokens": 1776,
+          "reasoning_tokens": 1696,
+          "prompt_tokens": 948,
+          "tool_calls": 0,
+          "latency": 950.0989210605621
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[2.8]",
+          "tier": 2,
+          "completion_tokens": 2464,
+          "reasoning_tokens": 2397,
+          "prompt_tokens": 2570,
+          "tool_calls": 1,
+          "latency": 23.736487865447998
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[136.0]",
+          "tier": 4,
+          "completion_tokens": 195,
+          "reasoning_tokens": 160,
+          "prompt_tokens": 2643,
+          "tool_calls": 1,
+          "latency": 3.0881848335266113
+        }
+      },
+      "reference": "[136.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 68,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[40.6]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 938,
+          "tool_calls": 0,
+          "latency": 0.9225671291351318
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[63.8]",
+          "tier": 1,
+          "completion_tokens": 363,
+          "reasoning_tokens": 302,
+          "prompt_tokens": 928,
+          "tool_calls": 0,
+          "latency": 4.69691276550293
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[43.4]",
+          "tier": 2,
+          "completion_tokens": 2076,
+          "reasoning_tokens": 1980,
+          "prompt_tokens": 2561,
+          "tool_calls": 1,
+          "latency": 19.23073983192444
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[22.1]",
+          "tier": 4,
+          "completion_tokens": 243,
+          "reasoning_tokens": 235,
+          "prompt_tokens": 1226,
+          "tool_calls": 0,
+          "latency": 2.8135008811950684
+        }
+      },
+      "reference": "[22.1]",
+      "oracle_path": "sql",
+      "oracle_correct": true
+    },
+    {
+      "id": 69,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[6.5]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 943,
+          "tool_calls": 0,
+          "latency": 0.958967924118042
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[10.2]",
+          "tier": 1,
+          "completion_tokens": 1482,
+          "reasoning_tokens": 1312,
+          "prompt_tokens": 933,
+          "tool_calls": 0,
+          "latency": 15.635777950286865
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[10.188088]",
+          "tier": 2,
+          "completion_tokens": 4632,
+          "reasoning_tokens": 4491,
+          "prompt_tokens": 3875,
+          "tool_calls": 2,
+          "latency": 42.78780698776245
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[94.8]",
+          "tier": 4,
+          "completion_tokens": 4286,
+          "reasoning_tokens": 3876,
+          "prompt_tokens": 2892,
+          "tool_calls": 1,
+          "latency": 32.22374486923218
+        }
+      },
+      "reference": "[88.9]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 70,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[0.9]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 939,
+          "tool_calls": 0,
+          "latency": 1.0702059268951416
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[0.013999999999999999]",
+          "tier": 1,
+          "completion_tokens": 2837,
+          "reasoning_tokens": 2709,
+          "prompt_tokens": 929,
+          "tool_calls": 0,
+          "latency": 31.02487087249756
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[0.9]",
+          "tier": 2,
+          "completion_tokens": 2339,
+          "reasoning_tokens": 2289,
+          "prompt_tokens": 2515,
+          "tool_calls": 1,
+          "latency": 23.126996994018555
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[7.0]",
+          "tier": 4,
+          "completion_tokens": 1378,
+          "reasoning_tokens": 1326,
+          "prompt_tokens": 2542,
+          "tool_calls": 1,
+          "latency": 12.180594682693481
+        }
+      },
+      "reference": "[7.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 71,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[6.5]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 951,
+          "tool_calls": 0,
+          "latency": 1.4264400005340576
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[5.2]",
+          "tier": 1,
+          "completion_tokens": 3099,
+          "reasoning_tokens": 2905,
+          "prompt_tokens": 941,
+          "tool_calls": 0,
+          "latency": 32.75938391685486
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[3.3]",
+          "tier": 2,
+          "completion_tokens": 6384,
+          "reasoning_tokens": 6308,
+          "prompt_tokens": 2564,
+          "tool_calls": 1,
+          "latency": 58.09463286399841
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[17.9]",
+          "tier": 4,
+          "completion_tokens": 547,
+          "reasoning_tokens": 495,
+          "prompt_tokens": 2534,
+          "tool_calls": 1,
+          "latency": 5.721034049987793
+        }
+      },
+      "reference": "[17.9]",
+      "oracle_path": "mixed",
+      "oracle_correct": true
+    },
+    {
+      "id": 72,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[10.5]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 939,
+          "tool_calls": 0,
+          "latency": 0.810291051864624
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "[16.5]",
+          "tier": 1,
+          "completion_tokens": 2617,
+          "reasoning_tokens": 2535,
+          "prompt_tokens": 929,
+          "tool_calls": 0,
+          "latency": 29.069777011871338
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[16.45768]",
+          "tier": 2,
+          "completion_tokens": 1626,
+          "reasoning_tokens": 1538,
+          "prompt_tokens": 2552,
+          "tool_calls": 1,
+          "latency": 15.908244132995605
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[341807.0]",
+          "tier": 4,
+          "completion_tokens": 3798,
+          "reasoning_tokens": 3761,
+          "prompt_tokens": 2716,
+          "tool_calls": 1,
+          "latency": 30.902318954467773
+        }
+      },
+      "reference": "[341807.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 73,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['kapaz']",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 338,
+          "tool_calls": 0,
+          "latency": 0.9125640392303467
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['kapaz']",
+          "tier": 1,
+          "completion_tokens": 164,
+          "reasoning_tokens": 109,
+          "prompt_tokens": 328,
+          "tool_calls": 0,
+          "latency": 2.6359238624572754
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "['kapaz']",
+          "tier": 2,
+          "completion_tokens": 644,
+          "reasoning_tokens": 558,
+          "prompt_tokens": 1359,
+          "tool_calls": 1,
+          "latency": 7.863669157028198
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[-3]",
+          "tier": 4,
+          "completion_tokens": 1056,
+          "reasoning_tokens": 1011,
+          "prompt_tokens": 2709,
+          "tool_calls": 1,
+          "latency": 9.404921770095825
+        }
+      },
+      "reference": "[3]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 74,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[49.9]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 501,
+          "tool_calls": 0,
+          "latency": 1.0202391147613525
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[49.9]",
+          "tier": 1,
+          "completion_tokens": 187,
+          "reasoning_tokens": 125,
+          "prompt_tokens": 491,
+          "tool_calls": 0,
+          "latency": 2.6326701641082764
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 2,
+          "completion_tokens": 1011,
+          "reasoning_tokens": 921,
+          "prompt_tokens": 2587,
+          "tool_calls": 3,
+          "latency": 11.38573932647705
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[0.9536054]",
+          "tier": 4,
+          "completion_tokens": 3224,
+          "reasoning_tokens": 3144,
+          "prompt_tokens": 2709,
+          "tool_calls": 1,
+          "latency": 27.930450916290283
+        }
+      },
+      "reference": "[0.953605]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 75,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[56.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 775,
+          "tool_calls": 0,
+          "latency": 0.8484580516815186
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[56.0]",
+          "tier": 1,
+          "completion_tokens": 238,
+          "reasoning_tokens": 168,
+          "prompt_tokens": 765,
+          "tool_calls": 0,
+          "latency": 3.3362410068511963
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[56.0]",
+          "tier": 2,
+          "completion_tokens": 266,
+          "reasoning_tokens": 201,
+          "prompt_tokens": 1166,
+          "tool_calls": 0,
+          "latency": 3.0217370986938477
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[-8]",
+          "tier": 4,
+          "completion_tokens": 2395,
+          "reasoning_tokens": 2336,
+          "prompt_tokens": 2734,
+          "tool_calls": 1,
+          "latency": 20.75388240814209
+        }
+      },
+      "reference": "[-8]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 76,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[44.0]",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 775,
+          "tool_calls": 0,
+          "latency": 1.4578227996826172
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[44.0]",
+          "tier": 1,
+          "completion_tokens": 190,
+          "reasoning_tokens": 108,
+          "prompt_tokens": 765,
+          "tool_calls": 0,
+          "latency": 2.4360718727111816
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[44.0]",
+          "tier": 2,
+          "completion_tokens": 326,
+          "reasoning_tokens": 319,
+          "prompt_tokens": 1166,
+          "tool_calls": 0,
+          "latency": 3.761338233947754
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['new brunswick and ontario']",
+          "tier": 4,
+          "completion_tokens": 3221,
+          "reasoning_tokens": 3103,
+          "prompt_tokens": 2777,
+          "tool_calls": 1,
+          "latency": 26.91867423057556
+        }
+      },
+      "reference": "['new brunswick', 'ontario']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 77,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[12]",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 781,
+          "tool_calls": 0,
+          "latency": 0.9844200611114502
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[12]",
+          "tier": 1,
+          "completion_tokens": 361,
+          "reasoning_tokens": 273,
+          "prompt_tokens": 771,
+          "tool_calls": 0,
+          "latency": 4.158447265625
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[12]",
+          "tier": 2,
+          "completion_tokens": 519,
+          "reasoning_tokens": 513,
+          "prompt_tokens": 1172,
+          "tool_calls": 0,
+          "latency": 5.201447010040283
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[quebec]",
+          "tier": 4,
+          "completion_tokens": 5742,
+          "reasoning_tokens": 5500,
+          "prompt_tokens": 2802,
+          "tool_calls": 1,
+          "latency": 45.86746621131897
+        }
+      },
+      "reference": "[9]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 78,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "['anchorman: the legend of ron burgundy (2004)', 'wake up', 'ron burgundy: the lost movie (2004)', 'anchorman 2: the legend continues (2013)']",
+          "tier": 0,
+          "completion_tokens": 44,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 317,
+          "tool_calls": 0,
+          "latency": 0.849686861038208
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "['anchorman: the legend of ron burgundy', 'wake up', 'ron burgundy: the lost movie', 'anchorman 2: the legend continues']",
+          "tier": 1,
+          "completion_tokens": 1219,
+          "reasoning_tokens": 1084,
+          "prompt_tokens": 307,
+          "tool_calls": 0,
+          "latency": 14.00440001487732
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "['2004-07-09', '2004-12-28', '2013-12-18']",
+          "tier": 2,
+          "completion_tokens": 2557,
+          "reasoning_tokens": 2418,
+          "prompt_tokens": 2029,
+          "tool_calls": 2,
+          "latency": 28.310503005981445
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['nunavut']",
+          "tier": 4,
+          "completion_tokens": 1386,
+          "reasoning_tokens": 1290,
+          "prompt_tokens": 2788,
+          "tool_calls": 1,
+          "latency": 11.723716020584106
+        }
+      },
+      "reference": "['nunavut']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 79,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[25.0]",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 534,
+          "tool_calls": 0,
+          "latency": 0.9735188484191895
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[25.0]",
+          "tier": 1,
+          "completion_tokens": 539,
+          "reasoning_tokens": 490,
+          "prompt_tokens": 524,
+          "tool_calls": 0,
+          "latency": 5.878213167190552
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[25.0]",
+          "tier": 2,
+          "completion_tokens": 392,
+          "reasoning_tokens": 386,
+          "prompt_tokens": 812,
+          "tool_calls": 0,
+          "latency": 4.822480201721191
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['custody']",
+          "tier": 4,
+          "completion_tokens": 1126,
+          "reasoning_tokens": 1121,
+          "prompt_tokens": 721,
+          "tool_calls": 0,
+          "latency": 9.929980993270874
+        }
+      },
+      "reference": "['custody']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 80,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[43.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 532,
+          "tool_calls": 0,
+          "latency": 1.01947021484375
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[43.0]",
+          "tier": 1,
+          "completion_tokens": 347,
+          "reasoning_tokens": 300,
+          "prompt_tokens": 522,
+          "tool_calls": 0,
+          "latency": 3.944232940673828
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[43.0]",
+          "tier": 2,
+          "completion_tokens": 522,
+          "reasoning_tokens": 516,
+          "prompt_tokens": 823,
+          "tool_calls": 0,
+          "latency": 6.207672834396362
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[24.0]",
+          "tier": 4,
+          "completion_tokens": 1333,
+          "reasoning_tokens": 1327,
+          "prompt_tokens": 719,
+          "tool_calls": 0,
+          "latency": 11.600895166397095
+        }
+      },
+      "reference": "[24.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 81,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[48.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 524,
+          "tool_calls": 0,
+          "latency": 1.263094186782837
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[48.0]",
+          "tier": 1,
+          "completion_tokens": 334,
+          "reasoning_tokens": 239,
+          "prompt_tokens": 514,
+          "tool_calls": 0,
+          "latency": 4.4941160678863525
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[48.0]",
+          "tier": 2,
+          "completion_tokens": 314,
+          "reasoning_tokens": 308,
+          "prompt_tokens": 815,
+          "tool_calls": 0,
+          "latency": 3.359710931777954
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[26.0]",
+          "tier": 4,
+          "completion_tokens": 2458,
+          "reasoning_tokens": 2429,
+          "prompt_tokens": 1514,
+          "tool_calls": 1,
+          "latency": 22.24829888343811
+        }
+      },
+      "reference": "[26.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 82,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[39.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 524,
+          "tool_calls": 0,
+          "latency": 0.9413199424743652
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[39.0]",
+          "tier": 1,
+          "completion_tokens": 345,
+          "reasoning_tokens": 281,
+          "prompt_tokens": 514,
+          "tool_calls": 0,
+          "latency": 3.708122968673706
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[39.0]",
+          "tier": 2,
+          "completion_tokens": 717,
+          "reasoning_tokens": 575,
+          "prompt_tokens": 1722,
+          "tool_calls": 1,
+          "latency": 7.77500581741333
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[23.0]",
+          "tier": 4,
+          "completion_tokens": 3705,
+          "reasoning_tokens": 3675,
+          "prompt_tokens": 1502,
+          "tool_calls": 1,
+          "latency": 32.87762427330017
+        }
+      },
+      "reference": "[23.0]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 83,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[76.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 524,
+          "tool_calls": 0,
+          "latency": 1.0930140018463135
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[76.0]",
+          "tier": 1,
+          "completion_tokens": 209,
+          "reasoning_tokens": 156,
+          "prompt_tokens": 514,
+          "tool_calls": 0,
+          "latency": 2.928685188293457
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[76.0]",
+          "tier": 2,
+          "completion_tokens": 228,
+          "reasoning_tokens": 221,
+          "prompt_tokens": 815,
+          "tool_calls": 0,
+          "latency": 3.0693750381469727
+        },
+        "mixed": {
+          "correct": false,
+          "processed_prediction": "[4581961]",
+          "tier": 4,
+          "completion_tokens": 1199,
+          "reasoning_tokens": 1166,
+          "prompt_tokens": 2341,
+          "tool_calls": 1,
+          "latency": 11.169968128204346
+        }
+      },
+      "reference": "[4.581961]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 84,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[76.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 522,
+          "tool_calls": 0,
+          "latency": 1.0204317569732666
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[76.0]",
+          "tier": 1,
+          "completion_tokens": 321,
+          "reasoning_tokens": 263,
+          "prompt_tokens": 512,
+          "tool_calls": 0,
+          "latency": 3.939350128173828
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[76.0]",
+          "tier": 2,
+          "completion_tokens": 1034,
+          "reasoning_tokens": 988,
+          "prompt_tokens": 1712,
+          "tool_calls": 1,
+          "latency": 10.808151960372925
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[5.3]",
+          "tier": 4,
+          "completion_tokens": 876,
+          "reasoning_tokens": 781,
+          "prompt_tokens": 2371,
+          "tool_calls": 1,
+          "latency": 8.058335781097412
+        }
+      },
+      "reference": "[5.3]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 85,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[76.0]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 523,
+          "tool_calls": 0,
+          "latency": 0.9870882034301758
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[76.0]",
+          "tier": 1,
+          "completion_tokens": 194,
+          "reasoning_tokens": 145,
+          "prompt_tokens": 513,
+          "tool_calls": 0,
+          "latency": 2.8998351097106934
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[76.0]",
+          "tier": 2,
+          "completion_tokens": 594,
+          "reasoning_tokens": 546,
+          "prompt_tokens": 1718,
+          "tool_calls": 1,
+          "latency": 6.883857727050781
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[130.32]",
+          "tier": 4,
+          "completion_tokens": 725,
+          "reasoning_tokens": 682,
+          "prompt_tokens": 2353,
+          "tool_calls": 1,
+          "latency": 7.19149374961853
+        }
+      },
+      "reference": "[130.32]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 86,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[60]",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 536,
+          "tool_calls": 0,
+          "latency": 1.4462640285491943
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[54]",
+          "tier": 1,
+          "completion_tokens": 2269,
+          "reasoning_tokens": 2197,
+          "prompt_tokens": 526,
+          "tool_calls": 0,
+          "latency": 23.85604500770569
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[54]",
+          "tier": 2,
+          "completion_tokens": 2279,
+          "reasoning_tokens": 2273,
+          "prompt_tokens": 827,
+          "tool_calls": 0,
+          "latency": 21.918393850326538
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['federal']",
+          "tier": 4,
+          "completion_tokens": 1528,
+          "reasoning_tokens": 1490,
+          "prompt_tokens": 1132,
+          "tool_calls": 0,
+          "latency": 13.654802083969116
+        }
+      },
+      "reference": "['federal']",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 87,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[60]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 528,
+          "tool_calls": 0,
+          "latency": 1.013479232788086
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[60]",
+          "tier": 1,
+          "completion_tokens": 291,
+          "reasoning_tokens": 216,
+          "prompt_tokens": 518,
+          "tool_calls": 0,
+          "latency": 3.419398784637451
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[60]",
+          "tier": 2,
+          "completion_tokens": 1015,
+          "reasoning_tokens": 960,
+          "prompt_tokens": 1729,
+          "tool_calls": 1,
+          "latency": 10.542221784591675
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[298.07]",
+          "tier": 4,
+          "completion_tokens": 448,
+          "reasoning_tokens": 439,
+          "prompt_tokens": 1134,
+          "tool_calls": 0,
+          "latency": 4.734673738479614
+        }
+      },
+      "reference": "[298.07]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 88,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[49]",
+          "tier": 0,
+          "completion_tokens": 6,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 529,
+          "tool_calls": 0,
+          "latency": 1.1236658096313477
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[49]",
+          "tier": 1,
+          "completion_tokens": 1689,
+          "reasoning_tokens": 1594,
+          "prompt_tokens": 519,
+          "tool_calls": 0,
+          "latency": 19.12800884246826
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[49]",
+          "tier": 2,
+          "completion_tokens": 854,
+          "reasoning_tokens": 802,
+          "prompt_tokens": 1736,
+          "tool_calls": 1,
+          "latency": 8.818305015563965
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[196.1]",
+          "tier": 4,
+          "completion_tokens": 1058,
+          "reasoning_tokens": 1003,
+          "prompt_tokens": 2375,
+          "tool_calls": 1,
+          "latency": 9.946838140487671
+        }
+      },
+      "reference": "[196.1]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 89,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[0.13]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 331,
+          "tool_calls": 0,
+          "latency": 1.0149612426757812
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[0.13]",
+          "tier": 1,
+          "completion_tokens": 648,
+          "reasoning_tokens": 532,
+          "prompt_tokens": 321,
+          "tool_calls": 0,
+          "latency": 7.022351980209351
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[0.13]",
+          "tier": 2,
+          "completion_tokens": 879,
+          "reasoning_tokens": 833,
+          "prompt_tokens": 1377,
+          "tool_calls": 1,
+          "latency": 9.074547052383423
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[17.8]",
+          "tier": 4,
+          "completion_tokens": 137,
+          "reasoning_tokens": 129,
+          "prompt_tokens": 774,
+          "tool_calls": 0,
+          "latency": 1.929006814956665
+        }
+      },
+      "reference": "[17.8]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 90,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[0.2]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 331,
+          "tool_calls": 0,
+          "latency": 1.0309488773345947
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[0.2]",
+          "tier": 1,
+          "completion_tokens": 404,
+          "reasoning_tokens": 310,
+          "prompt_tokens": 321,
+          "tool_calls": 0,
+          "latency": 4.191577911376953
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[0.2]",
+          "tier": 2,
+          "completion_tokens": 197,
+          "reasoning_tokens": 189,
+          "prompt_tokens": 642,
+          "tool_calls": 0,
+          "latency": 2.274923086166382
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[46.4]",
+          "tier": 4,
+          "completion_tokens": 7641,
+          "reasoning_tokens": 7591,
+          "prompt_tokens": 783,
+          "tool_calls": 0,
+          "latency": 64.11387896537781
+        }
+      },
+      "reference": "[46.4]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 91,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[0.11]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 331,
+          "tool_calls": 0,
+          "latency": 1.114772081375122
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[0.11]",
+          "tier": 1,
+          "completion_tokens": 699,
+          "reasoning_tokens": 604,
+          "prompt_tokens": 321,
+          "tool_calls": 0,
+          "latency": 7.170717239379883
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[0.11]",
+          "tier": 2,
+          "completion_tokens": 1736,
+          "reasoning_tokens": 1689,
+          "prompt_tokens": 1379,
+          "tool_calls": 1,
+          "latency": 17.493086338043213
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[69.5]",
+          "tier": 4,
+          "completion_tokens": 2227,
+          "reasoning_tokens": 2178,
+          "prompt_tokens": 1666,
+          "tool_calls": 1,
+          "latency": 19.318443775177002
+        }
+      },
+      "reference": "[69.5]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 92,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[55.0]",
+          "tier": 0,
+          "completion_tokens": 5,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 169,
+          "tool_calls": 0,
+          "latency": 1.330733060836792
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[55.0]",
+          "tier": 1,
+          "completion_tokens": 501,
+          "reasoning_tokens": 459,
+          "prompt_tokens": 159,
+          "tool_calls": 0,
+          "latency": 6.23820686340332
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[55.0]",
+          "tier": 2,
+          "completion_tokens": 589,
+          "reasoning_tokens": 561,
+          "prompt_tokens": 869,
+          "tool_calls": 1,
+          "latency": 7.605660915374756
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[44.8]",
+          "tier": 4,
+          "completion_tokens": 4046,
+          "reasoning_tokens": 3993,
+          "prompt_tokens": 1666,
+          "tool_calls": 1,
+          "latency": 33.488319873809814
+        }
+      },
+      "reference": "[44.8]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 93,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[1.47]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 424,
+          "tool_calls": 0,
+          "latency": 1.3157739639282227
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[1.47]",
+          "tier": 1,
+          "completion_tokens": 129,
+          "reasoning_tokens": 87,
+          "prompt_tokens": 414,
+          "tool_calls": 0,
+          "latency": 2.0751240253448486
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[1.47]",
+          "tier": 2,
+          "completion_tokens": 139,
+          "reasoning_tokens": 131,
+          "prompt_tokens": 705,
+          "tool_calls": 0,
+          "latency": 2.1108779907226562
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[13.3]",
+          "tier": 4,
+          "completion_tokens": 1611,
+          "reasoning_tokens": 1562,
+          "prompt_tokens": 1650,
+          "tool_calls": 1,
+          "latency": 14.450640678405762
+        }
+      },
+      "reference": "[13.3]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 94,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[0.15]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 423,
+          "tool_calls": 0,
+          "latency": 0.9843840599060059
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[0.15]",
+          "tier": 1,
+          "completion_tokens": 131,
+          "reasoning_tokens": 92,
+          "prompt_tokens": 413,
+          "tool_calls": 0,
+          "latency": 1.7074239253997803
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[0.15]",
+          "tier": 2,
+          "completion_tokens": 285,
+          "reasoning_tokens": 241,
+          "prompt_tokens": 1499,
+          "tool_calls": 1,
+          "latency": 4.077157020568848
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[52.9]",
+          "tier": 4,
+          "completion_tokens": 449,
+          "reasoning_tokens": 441,
+          "prompt_tokens": 790,
+          "tool_calls": 0,
+          "latency": 4.339720010757446
+        }
+      },
+      "reference": "[52.9]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 95,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[3.13]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 428,
+          "tool_calls": 0,
+          "latency": 1.0540249347686768
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[3.13]",
+          "tier": 1,
+          "completion_tokens": 378,
+          "reasoning_tokens": 282,
+          "prompt_tokens": 418,
+          "tool_calls": 0,
+          "latency": 4.2884910106658936
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[3.13]",
+          "tier": 2,
+          "completion_tokens": 172,
+          "reasoning_tokens": 164,
+          "prompt_tokens": 709,
+          "tool_calls": 0,
+          "latency": 2.0460729598999023
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[18.8]",
+          "tier": 4,
+          "completion_tokens": 2618,
+          "reasoning_tokens": 2567,
+          "prompt_tokens": 1671,
+          "tool_calls": 1,
+          "latency": 24.069209098815918
+        }
+      },
+      "reference": "[18.8]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 96,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[22.9]",
+          "tier": 0,
+          "completion_tokens": 8,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 833,
+          "tool_calls": 0,
+          "latency": 1.2202939987182617
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[22.9]",
+          "tier": 1,
+          "completion_tokens": 88,
+          "reasoning_tokens": 57,
+          "prompt_tokens": 823,
+          "tool_calls": 0,
+          "latency": 1.5208971500396729
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 2,
+          "completion_tokens": 1367,
+          "reasoning_tokens": 1307,
+          "prompt_tokens": 2486,
+          "tool_calls": 2,
+          "latency": 15.782152891159058
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[4.2]",
+          "tier": 4,
+          "completion_tokens": 1171,
+          "reasoning_tokens": 1098,
+          "prompt_tokens": 1703,
+          "tool_calls": 1,
+          "latency": 10.817799806594849
+        }
+      },
+      "reference": "[4.2]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 97,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[20.2]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 840,
+          "tool_calls": 0,
+          "latency": 1.21547269821167
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[20.2]",
+          "tier": 1,
+          "completion_tokens": 716,
+          "reasoning_tokens": 551,
+          "prompt_tokens": 830,
+          "tool_calls": 0,
+          "latency": 6.3057801723480225
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "[20.9]",
+          "tier": 2,
+          "completion_tokens": 956,
+          "reasoning_tokens": 867,
+          "prompt_tokens": 3811,
+          "tool_calls": 2,
+          "latency": 10.68312406539917
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[19.4]",
+          "tier": 4,
+          "completion_tokens": 1673,
+          "reasoning_tokens": 1620,
+          "prompt_tokens": 1686,
+          "tool_calls": 1,
+          "latency": 14.651271104812622
+        }
+      },
+      "reference": "[19.4]",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 98,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "[20.2]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 840,
+          "tool_calls": 0,
+          "latency": 1.21806001663208
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[20.9]",
+          "tier": 1,
+          "completion_tokens": 633,
+          "reasoning_tokens": 459,
+          "prompt_tokens": 830,
+          "tool_calls": 0,
+          "latency": 6.278985977172852
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "[20.9]",
+          "tier": 2,
+          "completion_tokens": 11337,
+          "reasoning_tokens": 10366,
+          "prompt_tokens": 5934,
+          "tool_calls": 3,
+          "latency": 100.15966296195984
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "[4.7]",
+          "tier": 4,
+          "completion_tokens": 1471,
+          "reasoning_tokens": 1416,
+          "prompt_tokens": 1679,
+          "tool_calls": 1,
+          "latency": 13.164033889770508
+        }
+      },
+      "reference": "[4.7]",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 99,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "[85.4]",
+          "tier": 0,
+          "completion_tokens": 7,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 833,
+          "tool_calls": 0,
+          "latency": 1.2266411781311035
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "[85.4]",
+          "tier": 1,
+          "completion_tokens": 134,
+          "reasoning_tokens": 84,
+          "prompt_tokens": 823,
+          "tool_calls": 0,
+          "latency": 2.2303760051727295
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 2,
+          "completion_tokens": 1875,
+          "reasoning_tokens": 1806,
+          "prompt_tokens": 2487,
+          "tool_calls": 2,
+          "latency": 19.551873922348022
+        },
+        "mixed": {
+          "correct": true,
+          "processed_prediction": "['chelsea']",
+          "tier": 4,
+          "completion_tokens": 165,
+          "reasoning_tokens": 158,
+          "prompt_tokens": 2027,
+          "tool_calls": 0,
+          "latency": 2.2138359546661377
+        }
+      },
+      "reference": "['chelsea']",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    }
+  ]
+}

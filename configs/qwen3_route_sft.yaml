@@ -1,0 +1,53 @@
+# Qwen3-1.7B cost-aware route-SFT 配置 (对应 cost_aware.pdf 阶段三)
+# 从干净 Qwen3-1.7B 基座 LoRA 微调，学习 <ROUTE> 路由 + 对应路径轨迹。
+#
+# 数据准备 (先跑):
+#   python3 scripts/build_route_sft.py --task hitab       --version 2 --direct_keep_ratio 0.5
+#   python3 scripts/build_route_sft.py --task fetaqa      --version 2 --direct_keep_ratio 0.5
+#   python3 scripts/build_route_sft.py --task tabfact     --version 2
+#   python3 scripts/build_route_sft.py --task wikitableqa --version 2
+# 训练:
+#   python3 scripts/train_distill.py --config configs/qwen3_route_sft.yaml
+# 端到端验证 (用 test-100, 临时覆盖数据路径):
+#   python3 scripts/build_route_sft.py --task hitab --version 1   # 先生成 v1 jsonl
+#   python3 scripts/train_distill.py --config configs/qwen3_route_sft.yaml \
+#       --data_paths outputs/hitab/route_sft_v1.jsonl --output_dir ./outputs/models/route_smoke/
+
+_base_: "train_base.yaml"
+
+model:
+  model_name: "Qwen/Qwen3-1.7B"      # Colab 无 local_path 时自动从 HF 拉，不必上传权重
+  tokenizer_name: "Qwen/Qwen3-1.7B"
+  local_path: "./origin/Qwen3-1.7B_origin"   # 本地有就用，没有则回退 model_name
+  torch_dtype: "bfloat16"
+
+data:
+  dataset_type: "route"              # 关键：用 RouteSFTDataset
+  data_paths:
+    - "outputs/wikitableqa/route_sft_v2.jsonl"
+    - "outputs/hitab/route_sft_v2.jsonl"
+    - "outputs/tabfact/route_sft_v2.jsonl"
+    - "outputs/fetaqa/route_sft_v2.jsonl"
+
+training:
+  output_dir: "./outputs/models/Qwen3-1.7B-route-sft/"
+  num_epochs: 3
+  batch_size: 2
+  eval_batch_size: 4
+  gradient_accumulation_steps: 8
+  learning_rate: 2e-4                # LoRA 用较大 lr
+  max_input_length: 2048             # input 实测最大 ~1618
+  max_target_length: 2048            # 覆盖截断后 cot (~1100 tok) + sql/direct
+  logging_steps: 10
+  eval_steps: 100
+  save_steps: 100
+  save_total_limit: 2
+  bf16: true
+  fp16: false
+  gradient_checkpointing: true
+  optim: "paged_adamw_8bit"
+  report_to: "tensorboard"
+  use_lora: true
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05

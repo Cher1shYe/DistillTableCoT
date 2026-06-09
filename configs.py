@@ -349,6 +349,11 @@ Rules:
 # 多次SQL查询仍返回空/失败时使用的简单 CoT 回退提示
 COT_SYSTEM_PROMPT = "You read tables and answer questions. Think step-by-step then output exactly 'Final Answer: <answer>'."
 
+# Direct 路径系统提示：直接作答、不展示推理，是 cost-aware 的最低成本档 (Path 1)。
+# 由非推理模型 (deepseek-chat / V3) 执行——R1 物理上关不掉推理，做不出真正的 Direct，
+# 用 V3 才能给出诚实的"无刻意推理"信号，让成本阶梯 Direct<CoT<SQL 真实拉开。
+DIRECT_SYSTEM_PROMPT = "You read tables and answer questions directly, with no explanation or reasoning. Output exactly 'Final Answer: <answer>'."
+
 # 初版提示词和configs
 # TASK_CONFIGS = {
 #     "wikitableqa": {

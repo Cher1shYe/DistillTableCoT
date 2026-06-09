@@ -1,0 +1,1902 @@
+[
+    {
+        "id": 0,
+        "original_dataset_id": "c26dd7d31e73948ab9deb29ca1fc89ef",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 52.1",
+        "processed_prediction": "[52.1]",
+        "reference": "[52.1]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 255,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1238970756530762,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 1,
+        "original_dataset_id": "f51bf3c30f1563cf9cebd279836ae679",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 60.6",
+        "processed_prediction": "[60.6]",
+        "reference": "[60.6]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 257,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1506712436676025,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 2,
+        "original_dataset_id": "c87def707f89429910ea8ec721248a3f",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 55.0",
+        "processed_prediction": "[55.0]",
+        "reference": "[55.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 258,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1222851276397705,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 3,
+        "original_dataset_id": "8c07dd3fb14be97d86e5b6f33994e04a",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 58.1",
+        "processed_prediction": "[58.1]",
+        "reference": "[58.1]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 260,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9485340118408203,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 4,
+        "original_dataset_id": "b73918d72bfda435848ac739cd396650",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: women",
+        "processed_prediction": "['women']",
+        "reference": "['women']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 570,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8794341087341309,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 5,
+        "original_dataset_id": "510476dd6fe55a9c97d995c55e2b401e",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 15.5",
+        "processed_prediction": "[15.5]",
+        "reference": "[15.5]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 548,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9619028568267822,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 6,
+        "original_dataset_id": "1e212a648cc8de318da4b3a12931d433",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 18.8",
+        "processed_prediction": "[18.8]",
+        "reference": "[18.8]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 541,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8872630596160889,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 7,
+        "original_dataset_id": "801b0d786dbcc715fa51706bc97c10a0",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: women of african ancestry",
+        "processed_prediction": "['women of african ancestry']",
+        "reference": "['africa']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 558,
+            "completion_tokens": 8,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0952398777008057,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 8,
+        "original_dataset_id": "2c52974788f4b3fa993e5876b239cbe9",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 50.8",
+        "processed_prediction": "[50.8]",
+        "reference": "[50.8]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 540,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0180978775024414,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 9,
+        "original_dataset_id": "afa1e06d380891a2944318079e801c37",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 34.8",
+        "processed_prediction": "[34.8]",
+        "reference": "[34.8]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 544,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1293160915374756,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 10,
+        "original_dataset_id": "7b25085a01c39675a528f1bd4498c271",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 19.1",
+        "processed_prediction": "[19.1]",
+        "reference": "[19.1]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 541,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9289059638977051,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 11,
+        "original_dataset_id": "0465428e164c8dfb486a83a89e5f4f65",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Not enough information",
+        "processed_prediction": "[Not enough information]",
+        "reference": "[35.3]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 538,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.2991421222686768,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 12,
+        "original_dataset_id": "240e0e3719b45b6c2d3af3c59c0931aa",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 59.5",
+        "processed_prediction": "[59.5]",
+        "reference": "[18.4]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 543,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1155991554260254,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 13,
+        "original_dataset_id": "4f5ba7d7143630317b8db3e30db1dfaa",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: french-language workers",
+        "processed_prediction": "['french-language workers']",
+        "reference": "['french-language workers']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 478,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.327071189880371,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 14,
+        "original_dataset_id": "671932699ecd8c4978cd6ffe5fc8b862",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: french-language workers",
+        "processed_prediction": "['french-language workers']",
+        "reference": "['french-language workers']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 477,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1207690238952637,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 15,
+        "original_dataset_id": "8a4582532a5dd62fc6ee1066981009fc",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: french-language workers",
+        "processed_prediction": "['french-language workers']",
+        "reference": "['french-language workers']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 477,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0558769702911377,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 16,
+        "original_dataset_id": "83b60aac2b4c4f955538c1be3e7617a9",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: french-language workers",
+        "processed_prediction": "['french-language workers']",
+        "reference": "['french-language workers']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 475,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1917622089385986,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 17,
+        "original_dataset_id": "6db0266b6c1b65ee6f3d6e9af6f2d502",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: weekend",
+        "processed_prediction": "['weekend']",
+        "reference": "['weekend']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 238,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9737401008605957,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 18,
+        "original_dataset_id": "5b24929db63445b7f5a3dd55aad4240f",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: weekend",
+        "processed_prediction": "['weekend']",
+        "reference": "['weekend']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 238,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0330250263214111,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 19,
+        "original_dataset_id": "957ff1802f7171dfe85593e08a8eb8c6",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 120824",
+        "processed_prediction": "[120824.0]",
+        "reference": "[120824.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 287,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1136720180511475,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 20,
+        "original_dataset_id": "15ef07a1e7916da2207b2a0bad45bf22",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 374685",
+        "processed_prediction": "[374685.0]",
+        "reference": "[374685.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 292,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9667048454284668,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 21,
+        "original_dataset_id": "068e85ed06c5b22bb4aeb913e8e1d4f2",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 9.6",
+        "processed_prediction": "[9.6]",
+        "reference": "[9.6]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 292,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1571037769317627,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 22,
+        "original_dataset_id": "5c146e18a1e3b336c33c7411414b0cee",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 4.2",
+        "processed_prediction": "[4.2]",
+        "reference": "[4.2]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 293,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.889117956161499,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 23,
+        "original_dataset_id": "a34f6e729c2148fc1c2cd88acc04a460",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 54",
+        "processed_prediction": "[54.0]",
+        "reference": "[54.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 915,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7747387886047363,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 24,
+        "original_dataset_id": "d2edc87983ee8e889bdd808f54ae3cee",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 77",
+        "processed_prediction": "[77]",
+        "reference": "[74.6]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 456,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6704988479614258,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 25,
+        "original_dataset_id": "7a1a08bc849e24129f0e3033326e1699",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 46.9",
+        "processed_prediction": "[46.9]",
+        "reference": "[32.3]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 451,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8879921436309814,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 26,
+        "original_dataset_id": "481eaa706962145140a0c437259d32f0",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: french-language workers",
+        "processed_prediction": "['french-language workers']",
+        "reference": "['french-language workers']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 474,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8378150463104248,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 27,
+        "original_dataset_id": "3ba4b0372241ab437942a17b5d530179",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: french-language workers",
+        "processed_prediction": "['french-language workers']",
+        "reference": "['french-language workers']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 473,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9533071517944336,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 28,
+        "original_dataset_id": "ac0da0deca6a65e743f8e21e7e362d91",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 37.9",
+        "processed_prediction": "[37.9]",
+        "reference": "[16.8]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 880,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.909848690032959,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 29,
+        "original_dataset_id": "ad4ae741363dd3f59446c3b8b4dbb2d2",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 8.2",
+        "processed_prediction": "[8.2]",
+        "reference": "[10.5]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 881,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7031381130218506,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 30,
+        "original_dataset_id": "8c30383b79d05359f5a509ac8f35890a",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 7.6",
+        "processed_prediction": "[7.6]",
+        "reference": "[6.6]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 878,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1147270202636719,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 31,
+        "original_dataset_id": "81b6a355354336c03ef72d0f71128501",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: lessors of real estate, services to buildings and dwellings, child day-care services",
+        "processed_prediction": "['lessors of real estate', 'services to buildings and dwellings', 'child day-care services']",
+        "reference": "['lessors of real estate', 'services to buildings and dwellings', 'child day-care services']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 877,
+            "completion_tokens": 19,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0345962047576904,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 32,
+        "original_dataset_id": "9c0dbc0537709db233ab8d4cb50030ac",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: services to buildings and dwellings (14.8), lessors of real estate (11.5), specialty trade contractors (10.1)",
+        "processed_prediction": "['services to buildings and dwellings (14.8)', 'lessors of real estate (11.5)', 'specialty trade contractors (10.1)']",
+        "reference": "['lessors of real estate', 'services to buildings and dwellings', 'specialty trade contractors']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 871,
+            "completion_tokens": 31,
+            "reasoning_tokens": null
+        },
+        "latency": 0.820580244064331,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 33,
+        "original_dataset_id": "c1e6a83fb46cede5b8fdc81d863c7377",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: stockport county",
+        "processed_prediction": "['stockport county']",
+        "reference": "['stockport county']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 1247,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9874753952026367,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 34,
+        "original_dataset_id": "9a7c49ba945ef6da7196625942e29004",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1979",
+        "processed_prediction": "[1979.0]",
+        "reference": "[1979.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 794,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0505478382110596,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 35,
+        "original_dataset_id": "7f93e3f2825412da02c207ce87e95c13",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: heterosexual people",
+        "processed_prediction": "['heterosexual people']",
+        "reference": "['heterosexual']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 648,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1834731101989746,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 36,
+        "original_dataset_id": "c7813e067a46abd356f7c0322f484a91",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 44.1",
+        "processed_prediction": "[44.1]",
+        "reference": "[44.1]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 644,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.4225199222564697,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 37,
+        "original_dataset_id": "0c87c1fb770e48785607ed4a9da70534",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 2.54",
+        "processed_prediction": "[2.54]",
+        "reference": "[2.538462]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 655,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0396332740783691,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 38,
+        "original_dataset_id": "c704cd0441e4f71add6f592c0932155c",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 14.0",
+        "processed_prediction": "[14.0]",
+        "reference": "[14.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 641,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9346890449523926,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 39,
+        "original_dataset_id": "8b3cf29b9259385318f45cc6147034e4",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 10.4",
+        "processed_prediction": "[10.4]",
+        "reference": "[10.4]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 651,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8538832664489746,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 40,
+        "original_dataset_id": "6e349fb0dd2437f259c0a31b7466d9bc",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 29.5",
+        "processed_prediction": "[29.5]",
+        "reference": "[29.5]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 654,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8660018444061279,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 41,
+        "original_dataset_id": "61143c012eadeb4070c9f6ce7072fa8b",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 18913",
+        "processed_prediction": "[18913.0]",
+        "reference": "[18913.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 2152,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9903831481933594,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 42,
+        "original_dataset_id": "c926b3d861ea24989d873c6f781bfce9",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 679",
+        "processed_prediction": "[679.0]",
+        "reference": "[32431.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 890,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8955676555633545,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 43,
+        "original_dataset_id": "ee75c80f04501d76eb87e15f9d95fad6",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 31647",
+        "processed_prediction": "[31647.0]",
+        "reference": "[31647.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 890,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.054718255996704,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 44,
+        "original_dataset_id": "08147555888ee98eea4891c287470047",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 401",
+        "processed_prediction": "[401.0]",
+        "reference": "[29796.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 879,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.147947072982788,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 45,
+        "original_dataset_id": "8ec692fe85b783ce8c4caf34842f4335",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 5.9",
+        "processed_prediction": "[5.9]",
+        "reference": "[5.9]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 416,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.209697961807251,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 46,
+        "original_dataset_id": "c0d141c3c97c1bad0bf26fb9ff36d613",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: between 1 and 4",
+        "processed_prediction": "['between 1 and 4']",
+        "reference": "['between 1 and 4']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 399,
+            "completion_tokens": 9,
+            "reasoning_tokens": null
+        },
+        "latency": 1.5810060501098633,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 47,
+        "original_dataset_id": "a881a2535e467e32bf151bb2c3e7ccd3",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: between 50 and 99",
+        "processed_prediction": "['between 50 and 99']",
+        "reference": "['between 50 and 99']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 392,
+            "completion_tokens": 9,
+            "reasoning_tokens": null
+        },
+        "latency": 1.2815968990325928,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 48,
+        "original_dataset_id": "dd7a8a26a0fb6710ecb269a6e24fdee0",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1,000 and above",
+        "processed_prediction": "['1,000 and above']",
+        "reference": "['1,000 and above']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 390,
+            "completion_tokens": 9,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1524038314819336,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 49,
+        "original_dataset_id": "bf6344d47b99a075ce59da530c7f921c",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 145",
+        "processed_prediction": "[145.0]",
+        "reference": "[145.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 527,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1689369678497314,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 50,
+        "original_dataset_id": "b5702dee560bce9515710fd1baa6abce",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 680",
+        "processed_prediction": "[680.0]",
+        "reference": "[541.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 732,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.3137316703796387,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 51,
+        "original_dataset_id": "71b2074b8fabd4e6d561e419a2b789d5",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 88.2",
+        "processed_prediction": "[88.2]",
+        "reference": "[88.2]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 367,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1844170093536377,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 52,
+        "original_dataset_id": "0a2a15793b2790d2eb0098e755c44c47",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 50 to 69 years",
+        "processed_prediction": "['50 to 69 years']",
+        "reference": "['50 to 69 years']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 761,
+            "completion_tokens": 9,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0771968364715576,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 53,
+        "original_dataset_id": "9466257bd11e7dc29371ced3999789eb",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 83%",
+        "processed_prediction": "[83.0]",
+        "reference": "[83.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 361,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0384440422058105,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 54,
+        "original_dataset_id": "359963ee333a95efe2d1d410c9cc284d",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 31.5",
+        "processed_prediction": "[31.5]",
+        "reference": "[6435825.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 464,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0388731956481934,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 55,
+        "original_dataset_id": "434d469e02f18c63ec75bcc2f01e632a",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 20.1",
+        "processed_prediction": "[20.1]",
+        "reference": "[1466968.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 464,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8086068630218506,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 56,
+        "original_dataset_id": "3f7a9c3426c49c4b90eb45165f35572f",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 53.1",
+        "processed_prediction": "[53.1]",
+        "reference": "[1385359.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 466,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.031229019165039,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 57,
+        "original_dataset_id": "d51db5d8c98b19ee1ca05369aa4fae96",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 19.3%",
+        "processed_prediction": "[19.3]",
+        "reference": "[4816782.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 464,
+            "completion_tokens": 8,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1398048400878906,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 58,
+        "original_dataset_id": "7253ec462587d8d541b52f1982bde1ed",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 53.1%",
+        "processed_prediction": "[53.1]",
+        "reference": "[53.1]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 456,
+            "completion_tokens": 8,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9504337310791016,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 59,
+        "original_dataset_id": "d4ae99fbde00850b2c9935cb73b5b2bb",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 42.3",
+        "processed_prediction": "[42.3]",
+        "reference": "[42.3]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 456,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0131371021270752,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 60,
+        "original_dataset_id": "6bfbd8a440d0558ecddc50b6f75c3d66",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 31.6",
+        "processed_prediction": "[31.6]",
+        "reference": "[31.6]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 456,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7307829856872559,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 61,
+        "original_dataset_id": "5200d6cbd72bc037fb7b6b31e55dfd7f",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 12.6",
+        "processed_prediction": "[12.6]",
+        "reference": "[12.6]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 455,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9984300136566162,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 62,
+        "original_dataset_id": "cc704afd1b268281ff004196fff3feb3",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1057417",
+        "processed_prediction": "[1057417.0]",
+        "reference": "[1057417.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 450,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.024155855178833,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 63,
+        "original_dataset_id": "c4197f9670fb7a72f2bd4190049be741",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1009381",
+        "processed_prediction": "[1009381.0]",
+        "reference": "[1009381.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 451,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9230470657348633,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 64,
+        "original_dataset_id": "bbccb55220f779a83120d01daaa80700",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 893436",
+        "processed_prediction": "[893436.0]",
+        "reference": "[893436.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 450,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.4255719184875488,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 65,
+        "original_dataset_id": "d2e7519b453f2992c662dd41d1e273bc",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 70 years and older",
+        "processed_prediction": "['70 years and older']",
+        "reference": "['70 years and older']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 716,
+            "completion_tokens": 8,
+            "reasoning_tokens": null
+        },
+        "latency": 1.3212311267852783,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 66,
+        "original_dataset_id": "543d8e71ac90940dcca360ce7e6aac84",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 40.6",
+        "processed_prediction": "[40.6]",
+        "reference": "[40.6]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 958,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6184341907501221,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 67,
+        "original_dataset_id": "65c87738e72da590916d26b2cdb30f80",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 2.8",
+        "processed_prediction": "[2.8]",
+        "reference": "[2.8]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 958,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8990981578826904,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 68,
+        "original_dataset_id": "6434859ae08c35b1f99e0ed88ab9616f",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 40.6",
+        "processed_prediction": "[40.6]",
+        "reference": "[43.4]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 938,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9225671291351318,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 69,
+        "original_dataset_id": "8de0568a39ff7a040d3a85b767645b6b",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 6.5",
+        "processed_prediction": "[6.5]",
+        "reference": "[6.5]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 943,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.958967924118042,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 70,
+        "original_dataset_id": "67f51c74d5bfb2a95b2dc1a915f2e858",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 0.9",
+        "processed_prediction": "[0.9]",
+        "reference": "[0.9]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 939,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0702059268951416,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 71,
+        "original_dataset_id": "66acd2dc5d61ca374d80267450418220",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 6.5",
+        "processed_prediction": "[6.5]",
+        "reference": "[2.4]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 951,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.4264400005340576,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 72,
+        "original_dataset_id": "94ec935ccd5a65b5bddda9781514b476",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 10.5",
+        "processed_prediction": "[10.5]",
+        "reference": "[10.5]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 939,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.810291051864624,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 73,
+        "original_dataset_id": "373b65816ae0a7b4573f091699c87068",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: kapaz",
+        "processed_prediction": "['kapaz']",
+        "reference": "['kapaz']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 338,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9125640392303467,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 74,
+        "original_dataset_id": "9e723ea38e1aa2c604c4694a93e29ff5",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 49.9",
+        "processed_prediction": "[49.9]",
+        "reference": "[49.9]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 501,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0202391147613525,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 75,
+        "original_dataset_id": "c2c16cedcf3741ef9fab9d533df88843",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 56%",
+        "processed_prediction": "[56.0]",
+        "reference": "[56.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 775,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8484580516815186,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 76,
+        "original_dataset_id": "2fbed7c4411da15c9a26fd16b691cb51",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 44",
+        "processed_prediction": "[44.0]",
+        "reference": "[44.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 775,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.4578227996826172,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 77,
+        "original_dataset_id": "683f3d18a14a2f1ce5f6722a27748971",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 12",
+        "processed_prediction": "[12]",
+        "reference": "[12]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 781,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9844200611114502,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 78,
+        "original_dataset_id": "266fb3a27de1acc27fede79072470b35",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Anchorman: The Legend of Ron Burgundy (2004), Wake Up, Ron Burgundy: The Lost Movie (2004), and Anchorman 2: The Legend Continues (2013).",
+        "processed_prediction": "['anchorman: the legend of ron burgundy (2004)', 'wake up', 'ron burgundy: the lost movie (2004)', 'anchorman 2: the legend continues (2013)']",
+        "reference": "['anchorman: the legend of ron burgundy', 'wake up, ron burgundy: the lost movie', 'anchorman 2: the legend continues']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 317,
+            "completion_tokens": 44,
+            "reasoning_tokens": null
+        },
+        "latency": 0.849686861038208,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 79,
+        "original_dataset_id": "d3e7fd6b7c74122016bd95ddde48b56a",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 25",
+        "processed_prediction": "[25.0]",
+        "reference": "[25.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 534,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9735188484191895,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 80,
+        "original_dataset_id": "7682b95b7c74164664a19a6e1eb1ba87",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 43%",
+        "processed_prediction": "[43.0]",
+        "reference": "[43.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 532,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.01947021484375,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 81,
+        "original_dataset_id": "da56f7fb3028b86c326590cf474730ce",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 48%",
+        "processed_prediction": "[48.0]",
+        "reference": "[48.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 524,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.263094186782837,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 82,
+        "original_dataset_id": "9de60081a649229b489a828713e48df7",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 39%",
+        "processed_prediction": "[39.0]",
+        "reference": "[39.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 524,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9413199424743652,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 83,
+        "original_dataset_id": "72ce793a108b5e3e98a4e5fa2aa8c605",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 76%",
+        "processed_prediction": "[76.0]",
+        "reference": "[76.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 524,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0930140018463135,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 84,
+        "original_dataset_id": "681dba9c7d1609c8771e0f971160f1bc",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 76%",
+        "processed_prediction": "[76.0]",
+        "reference": "[76.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 522,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0204317569732666,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 85,
+        "original_dataset_id": "a4824051063e7ffa1ace84653873aa2e",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 76%",
+        "processed_prediction": "[76.0]",
+        "reference": "[76.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 523,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9870882034301758,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 86,
+        "original_dataset_id": "a51cbfd03a4bd65cdb1b3326f4ffc3b3",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 60",
+        "processed_prediction": "[60]",
+        "reference": "[54]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 536,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.4462640285491943,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 87,
+        "original_dataset_id": "79fb1187ddb680cb6c4ad6aaeab55a6e",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 60%",
+        "processed_prediction": "[60]",
+        "reference": "[60]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 528,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.013479232788086,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 88,
+        "original_dataset_id": "a83ce7436fd6c98b7650f87dc7c27950",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 49%",
+        "processed_prediction": "[49]",
+        "reference": "[49]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 529,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1236658096313477,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 89,
+        "original_dataset_id": "dea2c8fa34aa54c8add5466363500d34",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 0.13",
+        "processed_prediction": "[0.13]",
+        "reference": "[0.13]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 331,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0149612426757812,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 90,
+        "original_dataset_id": "78494cbb42804decd6ebc72ef4285373",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 0.2",
+        "processed_prediction": "[0.2]",
+        "reference": "[0.2]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 331,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0309488773345947,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 91,
+        "original_dataset_id": "2985d1dc1a18bb917a270236b2db1349",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 0.11",
+        "processed_prediction": "[0.11]",
+        "reference": "[0.11]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 331,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.114772081375122,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 92,
+        "original_dataset_id": "72fe3ca6c01d6dcf81de0112677e08e6",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 55",
+        "processed_prediction": "[55.0]",
+        "reference": "[55.0]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 169,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.330733060836792,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 93,
+        "original_dataset_id": "f2981b6e76e0520b46f4a30298c90bfd",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1.47",
+        "processed_prediction": "[1.47]",
+        "reference": "[1.47]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 424,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.3157739639282227,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 94,
+        "original_dataset_id": "c430404aac995651402cfbd235f6ecf3",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 0.15",
+        "processed_prediction": "[0.15]",
+        "reference": "[0.15]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 423,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9843840599060059,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 95,
+        "original_dataset_id": "a28720deff65ba0752388202bcc431cf",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 3.13",
+        "processed_prediction": "[3.13]",
+        "reference": "[3.13]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 428,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0540249347686768,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 96,
+        "original_dataset_id": "e1c8687235f8e555f783d63f9f5edd3a",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 22.9%",
+        "processed_prediction": "[22.9]",
+        "reference": "[22.9]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 833,
+            "completion_tokens": 8,
+            "reasoning_tokens": null
+        },
+        "latency": 1.2202939987182617,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 97,
+        "original_dataset_id": "37f89641cde6f1a39ab1873bc6e9181a",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 20.2",
+        "processed_prediction": "[20.2]",
+        "reference": "[20.2]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 840,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.21547269821167,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 98,
+        "original_dataset_id": "fb8f3cf2c2efdb499801bd16950860b3",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 20.2",
+        "processed_prediction": "[20.2]",
+        "reference": "[20.9]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 840,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.21806001663208,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 99,
+        "original_dataset_id": "7830eca2a7b161ca6d40dd8dc40418eb",
+        "task": "hitab",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 85.4",
+        "processed_prediction": "[85.4]",
+        "reference": "[85.4]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 833,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.2266411781311035,
+        "tool_calls": 0,
+        "turn_details": []
+    }
+]

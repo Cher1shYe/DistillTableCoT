@@ -1,0 +1,3849 @@
+{
+  "summary": {
+    "task": "fetaqa",
+    "version": 1,
+    "n": 100,
+    "path_files": {
+      "cot": "outputs/fetaqa/R1_prediction_cot_v1.json",
+      "direct": "outputs/fetaqa/R1_prediction_direct_v1.json",
+      "sql": "outputs/fetaqa/R1_prediction_sql_agent_v1.json"
+    },
+    "baseline": {
+      "direct": {
+        "accuracy": 0.82,
+        "avg_completion_tokens": 33.02,
+        "avg_reasoning_tokens": 0.0,
+        "avg_tool_calls": 0.0,
+        "avg_latency": 1.0996214461326599
+      },
+      "cot": {
+        "accuracy": 0.8,
+        "avg_completion_tokens": 445.92,
+        "avg_reasoning_tokens": 335.42,
+        "avg_tool_calls": 0.0,
+        "avg_latency": 4.632506353855133
+      },
+      "sql": {
+        "accuracy": 0.79,
+        "avg_completion_tokens": 1395.57,
+        "avg_reasoning_tokens": 1313.58,
+        "avg_tool_calls": 0.92,
+        "avg_latency": 14.892072725296021
+      }
+    },
+    "oracle": {
+      "accuracy": 0.89,
+      "avg_completion_tokens": 75.11235955056179,
+      "avg_tool_calls": 0.011235955056179775,
+      "avg_latency": 1.5236712332521931,
+      "path_distribution": {
+        "direct": 82,
+        "cot": 6,
+        "sql": 1
+      }
+    },
+    "overthinking_rate_mixed": null
+  },
+  "samples": [
+    {
+      "id": 0,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "She was seen in Laal Ishq, Vikram Betaal Ki Rahasya Gatha, and Shaadi Ke Siyape in 2019.",
+          "tier": 0,
+          "completion_tokens": 35,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 250,
+          "tool_calls": 0,
+          "latency": 1.2462499141693115
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Shagun Sharma was seen in 2019 in the TV shows Laal Ishq, Vikram Betaal Ki Rahasya Gatha, and Shaadi Ke Siyape.",
+          "tier": 1,
+          "completion_tokens": 352,
+          "reasoning_tokens": 209,
+          "prompt_tokens": 263,
+          "tool_calls": 0,
+          "latency": 3.88493275642395
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Shagun Sharma was seen in Laal Ishq, Vikram Betaal Ki Rahasya Gatha, and Shaadi Ke Siyape in 2019.",
+          "tier": 2,
+          "completion_tokens": 1453,
+          "reasoning_tokens": 1397,
+          "prompt_tokens": 1014,
+          "tool_calls": 1,
+          "latency": 16.678635120391846
+        }
+      },
+      "reference": "In 2019, Shagun Sharma played in the roles as Pernia in Laal Ishq, Vikram Betaal Ki Rahasya Gatha as Rukmani/Kashi and Shaadi Ke Siyape as Dua.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 1,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The Vietnamese Fatherland Front won all 424 seats.",
+          "tier": 0,
+          "completion_tokens": 14,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 143,
+          "tool_calls": 0,
+          "latency": 0.9926090240478516
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The Vietnamese Fatherland Front won all 424 seats.",
+          "tier": 1,
+          "completion_tokens": 194,
+          "reasoning_tokens": 144,
+          "prompt_tokens": 156,
+          "tool_calls": 0,
+          "latency": 2.4996659755706787
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The Vietnamese Fatherland Front won all 424 seats in the election.",
+          "tier": 2,
+          "completion_tokens": 845,
+          "reasoning_tokens": 729,
+          "prompt_tokens": 808,
+          "tool_calls": 1,
+          "latency": 9.527028322219849
+        }
+      },
+      "reference": "In the 1975 North Vietnamese legislative election, the Vietnamese Fatherland Front won all 424 seats.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 2,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Christian Cooke played Luke Rutherford-Van Helsing in Demons and Lord Dorian Gaudain in Trinity in 2009.",
+          "tier": 0,
+          "completion_tokens": 27,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 493,
+          "tool_calls": 0,
+          "latency": 0.9785916805267334
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "In 2009, Christian Cooke played Luke Rutherford-Van Helsing in \"Demons\" and Lord Dorian Gaudain in \"Trinity.\"",
+          "tier": 1,
+          "completion_tokens": 225,
+          "reasoning_tokens": 150,
+          "prompt_tokens": 506,
+          "tool_calls": 0,
+          "latency": 2.47949481010437
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "In 2009, Christian Cooke played Luke Rutherford-Van Helsing in Demons and Lord Dorian Gaudain in Trinity.",
+          "tier": 2,
+          "completion_tokens": 709,
+          "reasoning_tokens": 663,
+          "prompt_tokens": 1487,
+          "tool_calls": 1,
+          "latency": 9.016319751739502
+        }
+      },
+      "reference": "During 2009, Christian Cooke played the lead role of Luke Rutherford in Demons & Lord Dorian Gaudain in Trinity.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 3,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "The track \"Rhythm & Police (K.O.G G3 Mix)\" and others have the lowest BPM at 175, and \"Mission: Impossible Theme\" has the highest at 195.",
+          "tier": 0,
+          "completion_tokens": 43,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 476,
+          "tool_calls": 0,
+          "latency": 1.0018408298492432
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The tracks with the lowest BPM (175) include \"Rhythm & Police (K.O.G G3 Mix)\" and many others, while the track with the highest BPM is \"Mission: Impossible Theme\" at 195.",
+          "tier": 1,
+          "completion_tokens": 1111,
+          "reasoning_tokens": 984,
+          "prompt_tokens": 489,
+          "tool_calls": 0,
+          "latency": 11.619155168533325
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 2,
+          "completion_tokens": 6831,
+          "reasoning_tokens": 6560,
+          "prompt_tokens": 3982,
+          "tool_calls": 5,
+          "latency": 71.348872423172
+        }
+      },
+      "reference": "The Speed SFX's lowest bpm is 175 on tracks #5–16, and the highest bpm is 195 on #20 in the Speed series.",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 4,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Kazunari Okayama started his career in 1997 with Yokohama Marinos in the J1 League.",
+          "tier": 0,
+          "completion_tokens": 27,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 936,
+          "tool_calls": 0,
+          "latency": 1.2983038425445557
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Kazunari Okayama started his career in 1997 with Yokohama Marinos in the J1 League.",
+          "tier": 1,
+          "completion_tokens": 203,
+          "reasoning_tokens": 133,
+          "prompt_tokens": 949,
+          "tool_calls": 0,
+          "latency": 2.3669519424438477
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Kazunari Okayama started his career in 1997 with Yokohama Marinos in the J1 League.",
+          "tier": 2,
+          "completion_tokens": 423,
+          "reasoning_tokens": 372,
+          "prompt_tokens": 2517,
+          "tool_calls": 1,
+          "latency": 5.420928001403809
+        }
+      },
+      "reference": "Kazunari Okayama joined J1 League club Yokohama Marinos (later Yokohama F. Marinos) in 1997.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 5,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The German submarine U-438 sank 3 ships (Condylis, Oregon, and Trolla) totaling 12,045 GRT and damaged 1 ship (Hartington) of 5,496 GRT, causing overall damage of 17,541 GRT.",
+          "tier": 0,
+          "completion_tokens": 59,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 165,
+          "tool_calls": 0,
+          "latency": 1.335270881652832
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The German submarine U-438 caused a total of 17,541 gross register tons of damage, comprising 4,439 GRT from Condylis, 6,008 GRT from Oregon, 1,598 GRT from Trolla, and 5,496 GRT from Hartington.",
+          "tier": 1,
+          "completion_tokens": 398,
+          "reasoning_tokens": 282,
+          "prompt_tokens": 178,
+          "tool_calls": 0,
+          "latency": 4.39866304397583
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The German submarine U-438 caused a total of 17,541 GRT of damage, sinking three ships and damaging one.",
+          "tier": 2,
+          "completion_tokens": 1053,
+          "reasoning_tokens": 1000,
+          "prompt_tokens": 859,
+          "tool_calls": 1,
+          "latency": 12.045343160629272
+        }
+      },
+      "reference": "The U-438 sank three ships, totalling 12,045 gross register tons (GRT) and damaged one ship totalling 5,496 GRT.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 6,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "Yu Da-Hyun set the fastest average in Megaminx.",
+          "tier": 0,
+          "completion_tokens": 16,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 174,
+          "tool_calls": 0,
+          "latency": 1.1198720932006836
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "Yu Da-Hyun (유다현) set the fastest average in Megaminx.",
+          "tier": 1,
+          "completion_tokens": 205,
+          "reasoning_tokens": 149,
+          "prompt_tokens": 187,
+          "tool_calls": 0,
+          "latency": 2.7780120372772217
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "Yu Da-Hyun (유다현) set the fastest average in Megaminx.",
+          "tier": 2,
+          "completion_tokens": 453,
+          "reasoning_tokens": 410,
+          "prompt_tokens": 389,
+          "tool_calls": 0,
+          "latency": 5.646130323410034
+        }
+      },
+      "reference": "The 32.03 seconds average of five solves is set by Yu Da-Hyun (유다현) at CWR Winter 2018.",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 7,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Faye appeared for Hull City in the 2012–13 and 2013–14 seasons.",
+          "tier": 0,
+          "completion_tokens": 24,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 1173,
+          "tool_calls": 0,
+          "latency": 1.0130808353424072
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Faye appeared for Hull City in the 2012–13 and 2013–14 seasons.",
+          "tier": 1,
+          "completion_tokens": 298,
+          "reasoning_tokens": 248,
+          "prompt_tokens": 1186,
+          "tool_calls": 0,
+          "latency": 3.2907309532165527
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Faye appeared for Hull City in the 2012–13 and 2013–14 seasons.",
+          "tier": 2,
+          "completion_tokens": 492,
+          "reasoning_tokens": 438,
+          "prompt_tokens": 3004,
+          "tool_calls": 1,
+          "latency": 6.407171964645386
+        }
+      },
+      "reference": "Faye appeared for Hull City in the 2012–13 and 2013–14 seasons.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 8,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "267Rf has been reported with a half-life of 1.3 hours and a decay mode of SF.",
+          "tier": 0,
+          "completion_tokens": 27,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 676,
+          "tool_calls": 0,
+          "latency": 0.9346799850463867
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "All isotopes listed in the table have been reported, though some have uncertain values indicated by question marks.",
+          "tier": 1,
+          "completion_tokens": 2128,
+          "reasoning_tokens": 1912,
+          "prompt_tokens": 689,
+          "tool_calls": 0,
+          "latency": 23.111515998840332
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "The isotope 263mRf ? has been reported as the only one with a question mark in its name.",
+          "tier": 2,
+          "completion_tokens": 3882,
+          "reasoning_tokens": 3836,
+          "prompt_tokens": 1874,
+          "tool_calls": 1,
+          "latency": 41.76703500747681
+        }
+      },
+      "reference": "Sixteen different isotopes have been reported with atomic masses from 253 to 270 (with the exceptions of 264 and 269).",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 9,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The winner is Walter Hagen, and the second place is shared by Jim Barnes, George Duncan, and J.H. Taylor.",
+          "tier": 0,
+          "completion_tokens": 28,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 246,
+          "tool_calls": 0,
+          "latency": 1.033897876739502
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The winner is Walter Hagen, and the second place is a tie among Jim Barnes, George Duncan, and J.H. Taylor.",
+          "tier": 1,
+          "completion_tokens": 227,
+          "reasoning_tokens": 170,
+          "prompt_tokens": 259,
+          "tool_calls": 0,
+          "latency": 2.8888919353485107
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The winner is Walter Hagen, and the second place is a tie among Jim Barnes, George Duncan, and J.H. Taylor.",
+          "tier": 2,
+          "completion_tokens": 588,
+          "reasoning_tokens": 533,
+          "prompt_tokens": 1016,
+          "tool_calls": 1,
+          "latency": 7.35942006111145
+        }
+      },
+      "reference": "Walter Hagen was the leader at 149, two strokes ahead of Jim Barnes, George Duncan and J.H. Taylor.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 10,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "Yu won the Most Popular Screenwriter award at the Grand Ceremony of Movie & TV New Forces in 2011.",
+          "tier": 0,
+          "completion_tokens": 27,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 234,
+          "tool_calls": 0,
+          "latency": 1.128467082977295
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "Yu won three screenwriting awards for \"Palace\" in 2011.",
+          "tier": 1,
+          "completion_tokens": 225,
+          "reasoning_tokens": 139,
+          "prompt_tokens": 247,
+          "tool_calls": 0,
+          "latency": 2.685290813446045
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "In 2011, Yu won three awards for his work on Palace: the Most Popular Screenwriter award at the Grand Ceremony of Movie & TV New Forces, the Best Screenwriter award at the 16th Asian Television Awards, and the Screenwriter Award at the Youku Film and Television Award.",
+          "tier": 2,
+          "completion_tokens": 624,
+          "reasoning_tokens": 529,
+          "prompt_tokens": 1049,
+          "tool_calls": 1,
+          "latency": 7.581363201141357
+        }
+      },
+      "reference": "In 2011 Yu was noted for Palace, which earned him a Best Screenwriter award at the 16th Asian Television Awards.",
+      "oracle_path": "sql",
+      "oracle_correct": true
+    },
+    {
+      "id": 11,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Huang Yu-ting won gold medals in the women's 300 m time trial, 500 m sprint, and 1000 m sprint at the 2009 World Games.",
+          "tier": 0,
+          "completion_tokens": 39,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 404,
+          "tool_calls": 0,
+          "latency": 1.0768980979919434
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Huang Yu-ting is doing exceptionally well, winning gold in all three of her events (300 m time trial, 500 m sprint, and 1000 m sprint).",
+          "tier": 1,
+          "completion_tokens": 215,
+          "reasoning_tokens": 108,
+          "prompt_tokens": 417,
+          "tool_calls": 0,
+          "latency": 2.8079841136932373
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Huang Yu-ting won three gold medals in the 2009 World Games: the Women's 300 m time trial, Women's 500 m sprint, and Women's 1000 m sprint.",
+          "tier": 2,
+          "completion_tokens": 598,
+          "reasoning_tokens": 445,
+          "prompt_tokens": 1447,
+          "tool_calls": 1,
+          "latency": 7.384876251220703
+        }
+      },
+      "reference": "As an inline speed skater, Huang won three gold medals at the 2009 World Games in Chinese Taipei: 300 m time trial, 500 m sprint, and 1000 m sprint.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 12,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The table shows the Yale Bulldogs in 1912 with a 7–1–1 record, but does not mention Art Howe.",
+          "tier": 0,
+          "completion_tokens": 30,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 318,
+          "tool_calls": 0,
+          "latency": 1.1337361335754395
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Art Howe coached the Yale Bulldogs in 1912, finishing with an overall record of 7–1–1.",
+          "tier": 1,
+          "completion_tokens": 1701,
+          "reasoning_tokens": 1608,
+          "prompt_tokens": 331,
+          "tool_calls": 0,
+          "latency": 18.233688831329346
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Art Howe coached the Yale Bulldogs in 1912 and had an overall record of 7–1–1.",
+          "tier": 2,
+          "completion_tokens": 3450,
+          "reasoning_tokens": 3355,
+          "prompt_tokens": 1176,
+          "tool_calls": 1,
+          "latency": 35.06749415397644
+        }
+      },
+      "reference": "Howe led the Yale football team as head coach for one year (1912) and compiled a 7–1–1 record.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 13,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "In 1996, Marisol Nichols appeared in \"My Guys\", \"Due South\", and \"Beverly Hills, 90210\".",
+          "tier": 0,
+          "completion_tokens": 33,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 783,
+          "tool_calls": 0,
+          "latency": 0.9233169555664062
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Marisol Nichols appeared in the shows \"My Guys,\" \"Due South,\" and \"Beverly Hills, 90210\" during 1996.",
+          "tier": 1,
+          "completion_tokens": 308,
+          "reasoning_tokens": 167,
+          "prompt_tokens": 796,
+          "tool_calls": 0,
+          "latency": 3.9782679080963135
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Marisol Nichols appeared in My Guys, Due South, and Beverly Hills, 90210 in 1996.",
+          "tier": 2,
+          "completion_tokens": 917,
+          "reasoning_tokens": 847,
+          "prompt_tokens": 3130,
+          "tool_calls": 1,
+          "latency": 10.441545248031616
+        }
+      },
+      "reference": "In 1996, Marisol Nichols appeared in My Guys, Due South, and Beverly Hills, 90210.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 14,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Lotte Friis and Sarah Köhler finished 7th and 8th with times of 8:24.50 and 8:27.75, respectively.",
+          "tier": 0,
+          "completion_tokens": 38,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 267,
+          "tool_calls": 0,
+          "latency": 1.283207893371582
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The last two finishers were Lotte Friis in 7th place (8:24.50) and Sarah Köhler in 8th place (8:27.75).",
+          "tier": 1,
+          "completion_tokens": 516,
+          "reasoning_tokens": 413,
+          "prompt_tokens": 280,
+          "tool_calls": 0,
+          "latency": 4.94245719909668
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The last two finishers were Lotte Friis with a time of 8:24.50 and Sarah Köhler with a time of 8:27.75.",
+          "tier": 2,
+          "completion_tokens": 3257,
+          "reasoning_tokens": 3092,
+          "prompt_tokens": 1084,
+          "tool_calls": 1,
+          "latency": 31.701586961746216
+        }
+      },
+      "reference": "Denmark's Lotte Friis recorded a time of 8:24.50 and Germany's Sarah Köhler recorded a time of 8:27.75 at the Olympics.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 15,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "The Unionist candidate Robert McCalmont won the East Antrim election in the 1910's with 94.6% of the vote.",
+          "tier": 0,
+          "completion_tokens": 33,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 206,
+          "tool_calls": 0,
+          "latency": 1.2268249988555908
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "The Unionist candidate won a landslide victory with 94.6% of the vote and an 89.3% majority.",
+          "tier": 1,
+          "completion_tokens": 321,
+          "reasoning_tokens": 179,
+          "prompt_tokens": 219,
+          "tool_calls": 0,
+          "latency": 3.7720770835876465
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "The Unionist candidate Robert McCalmont won the East Antrim election with 15,206 votes (94.6%), holding the seat with a majority of 14,345 (89.3%).",
+          "tier": 2,
+          "completion_tokens": 1790,
+          "reasoning_tokens": 1711,
+          "prompt_tokens": 982,
+          "tool_calls": 1,
+          "latency": 19.122539043426514
+        }
+      },
+      "reference": "The Unionist candidate had a victory by 15,206 votes to Sinn Féin's 861 votes.",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 16,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The athlete who finished 2nd at the 2014 Commonwealth Games achieved a time of 10.1 in the 100m.",
+          "tier": 0,
+          "completion_tokens": 31,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 778,
+          "tool_calls": 0,
+          "latency": 1.0683050155639648
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Adam Gemili finished 2nd at the 2014 Commonwealth Games in the 100m with a time of 10.1 seconds (10.10 officially).",
+          "tier": 1,
+          "completion_tokens": 696,
+          "reasoning_tokens": 602,
+          "prompt_tokens": 791,
+          "tool_calls": 0,
+          "latency": 8.241765975952148
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The competitor finished 2nd in the 100m at the 2014 Commonwealth Games with a time of 10.1 seconds.",
+          "tier": 2,
+          "completion_tokens": 6645,
+          "reasoning_tokens": 6533,
+          "prompt_tokens": 3193,
+          "tool_calls": 2,
+          "latency": 64.48697853088379
+        }
+      },
+      "reference": "In the 2014 Commonwealth Games, Gemili finished the 100m in second position with a time of 10.10 seconds.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 17,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "The table does not provide a release date for \"I've Got a Feeling\".",
+          "tier": 0,
+          "completion_tokens": 19,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 116,
+          "tool_calls": 0,
+          "latency": 1.0752577781677246
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The song \"I've Got a Feeling\" was released on October 7, 1997, in the United States, and later in 1998 in Australia.",
+          "tier": 1,
+          "completion_tokens": 435,
+          "reasoning_tokens": 296,
+          "prompt_tokens": 129,
+          "tool_calls": 0,
+          "latency": 4.924046039581299
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The song \"I've Got a Feeling\" was released on 1997-10-07 in the United States and on 1998-01-01 in Australia.",
+          "tier": 2,
+          "completion_tokens": 1617,
+          "reasoning_tokens": 1563,
+          "prompt_tokens": 752,
+          "tool_calls": 1,
+          "latency": 16.84533405303955
+        }
+      },
+      "reference": "\"I've Got a Feeling\" was released, through Atlantic, in the United States on October 7, 1997 and in Australia in 1998.",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 18,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Tom Felton's first two roles were Peagreen Clock in 1997's The Borrowers and Louis T. Leonowens in 1999's Anna and the King.",
+          "tier": 0,
+          "completion_tokens": 40,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 570,
+          "tool_calls": 0,
+          "latency": 1.0443310737609863
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Tom Felton's first two roles were Peagreen Clock in The Borrowers (1997) and Louis T. Leonowens in Anna and the King (1999).",
+          "tier": 1,
+          "completion_tokens": 400,
+          "reasoning_tokens": 296,
+          "prompt_tokens": 583,
+          "tool_calls": 0,
+          "latency": 4.0575079917907715
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Tom Felton's first two roles were Peagreen Clock in The Borrowers (1997) and Louis T. Leonowens in Anna and the King (1999).",
+          "tier": 2,
+          "completion_tokens": 941,
+          "reasoning_tokens": 828,
+          "prompt_tokens": 2507,
+          "tool_calls": 1,
+          "latency": 10.175338745117188
+        }
+      },
+      "reference": "Tom Felton made his debut in the role of Peagreen Clock in The Borrowers in 1997 and portrayed Louis T. Leonowens in Anna and the King in 1999.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 19,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Labour beat the National British Party by 192 votes.",
+          "tier": 0,
+          "completion_tokens": 14,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 245,
+          "tool_calls": 0,
+          "latency": 0.9767439365386963
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Labour beat the National British Party by 192 votes.",
+          "tier": 1,
+          "completion_tokens": 202,
+          "reasoning_tokens": 154,
+          "prompt_tokens": 258,
+          "tool_calls": 0,
+          "latency": 2.4680309295654297
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Labour beat the National British Party by 192 votes.",
+          "tier": 2,
+          "completion_tokens": 739,
+          "reasoning_tokens": 667,
+          "prompt_tokens": 1059,
+          "tool_calls": 1,
+          "latency": 8.65918493270874
+        }
+      },
+      "reference": "Labour defeated the British National Party by 192 votes.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 20,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "The 1990 Colorado gubernatorial election resulted in Democratic candidate Roy Romer winning re-election with 61.89% of the vote, defeating Republican John Andrews (35.43%), Libertarian David Aitken (1.87%), and Prohibition candidate David Livingston (0.78%).",
+          "tier": 0,
+          "completion_tokens": 63,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 216,
+          "tool_calls": 0,
+          "latency": 1.3227169513702393
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Democrat Roy Romer won the 1990 Colorado gubernatorial election with 61.89% of the vote, defeating Republican John Andrews and two third-party candidates.",
+          "tier": 1,
+          "completion_tokens": 721,
+          "reasoning_tokens": 527,
+          "prompt_tokens": 229,
+          "tool_calls": 0,
+          "latency": 7.4412150382995605
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "In the 1990 Colorado gubernatorial election, Democratic candidate Roy Romer won with 626,032 votes (61.89%), followed by Republican John Andrews with 358,403 votes (35.43%), Libertarian David Aitken with 18,930 votes (1.87%), and Prohibition candidate David Livingston with 7,907 votes (0.78%).",
+          "tier": 2,
+          "completion_tokens": 946,
+          "reasoning_tokens": 802,
+          "prompt_tokens": 1063,
+          "tool_calls": 1,
+          "latency": 9.7309091091156
+        }
+      },
+      "reference": "Democrat Roy Romer defeated Republican nominee, John Andrews with 61.89% of the vote.",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 21,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Hal Sutton had the lowest individual score of 276, which was 6 strokes lower than Chen Tze-chung.",
+          "tier": 0,
+          "completion_tokens": 27,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 335,
+          "tool_calls": 0,
+          "latency": 0.8280379772186279
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Hal Sutton had the lowest individual score, 6 strokes lower than any other player.",
+          "tier": 1,
+          "completion_tokens": 253,
+          "reasoning_tokens": 201,
+          "prompt_tokens": 348,
+          "tool_calls": 0,
+          "latency": 3.1252009868621826
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Hal Sutton's total score of 276 was 6 strokes lower than any other player's score.",
+          "tier": 2,
+          "completion_tokens": 1538,
+          "reasoning_tokens": 1385,
+          "prompt_tokens": 1297,
+          "tool_calls": 1,
+          "latency": 16.22719717025757
+        }
+      },
+      "reference": "Hal Sutton had the lowest individual score of 12-under-par 276, six strokes better than any other player.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 22,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Richard M. Simpson's service ended on January 7, 1960, and his successor was Douglas H. Elliott.",
+          "tier": 0,
+          "completion_tokens": 28,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 754,
+          "tool_calls": 0,
+          "latency": 1.108180046081543
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Richard M. Simpson's service ended on January 7, 1960, and his successor was Douglas H. Elliott.",
+          "tier": 1,
+          "completion_tokens": 216,
+          "reasoning_tokens": 135,
+          "prompt_tokens": 767,
+          "tool_calls": 0,
+          "latency": 2.5701990127563477
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The end of Richard M. Simpson's service was January 7, 1960, and his successor was Douglas H. Elliott (R).",
+          "tier": 2,
+          "completion_tokens": 622,
+          "reasoning_tokens": 560,
+          "prompt_tokens": 2077,
+          "tool_calls": 1,
+          "latency": 6.847887277603149
+        }
+      },
+      "reference": "In the 86th United States Congress, Richard M. Simpson (R) served until January 7, 1960 and was succeeded by Douglas H. Elliott (R) on April 26, 1960, who served until June 19, 1960.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 23,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Sandra Peabody played The Sun in Tarot and Minnie in Annie Get Your Gun.",
+          "tier": 0,
+          "completion_tokens": 22,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 114,
+          "tool_calls": 0,
+          "latency": 1.3611011505126953
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Sandra Peabody played The Sun in Tarot and Minnie in Annie Get Your Gun.",
+          "tier": 1,
+          "completion_tokens": 236,
+          "reasoning_tokens": 112,
+          "prompt_tokens": 127,
+          "tool_calls": 0,
+          "latency": 3.074262857437134
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Sandra Peabody played The Sun in Tarot and Minnie in Annie Get Your Gun.",
+          "tier": 2,
+          "completion_tokens": 793,
+          "reasoning_tokens": 739,
+          "prompt_tokens": 747,
+          "tool_calls": 1,
+          "latency": 9.147042989730835
+        }
+      },
+      "reference": "Peabody appeared as The Sun in an Off-Broadway production of Tarot (1970), which she followed with the role as Minnie in Annie Get Your Gun (1973-1974).",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 24,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The winner, Lamar Smith, received 68.9% of the vote while the runner-up, Lainey Melnick, received 27.9%, making the margin of victory 41 percentage points.",
+          "tier": 0,
+          "completion_tokens": 45,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 194,
+          "tool_calls": 0,
+          "latency": 1.2992031574249268
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The Texas' 21st congressional district election was not close, as the Republican candidate won by a large margin of 96,929 votes (41 percentage points).",
+          "tier": 1,
+          "completion_tokens": 1458,
+          "reasoning_tokens": 1213,
+          "prompt_tokens": 207,
+          "tool_calls": 0,
+          "latency": 14.619744777679443
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "The election was won by a margin of 104,090 votes.",
+          "tier": 2,
+          "completion_tokens": 963,
+          "reasoning_tokens": 894,
+          "prompt_tokens": 952,
+          "tool_calls": 1,
+          "latency": 11.614628791809082
+        }
+      },
+      "reference": "In the Texas's 21st congressional district election, Lamar Smith defeated Lainey Melnick with 68.9 percent of the vote, with a majority of 96929 votes.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 25,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Rickards received solo nominations at the Teen Choice Awards for Female Breakout Star in 2014, Choice TV Actress - Fantasy/Sci-Fi in 2015 and 2016, and Choice TV Actress - Action in 2017 and 2018.",
+          "tier": 0,
+          "completion_tokens": 55,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 493,
+          "tool_calls": 0,
+          "latency": 1.4541480541229248
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Emily Bett Rickards received solo nominations in the Teen Choice Awards for Female Breakout Star (2014), Choice TV Actress – Fantasy/Sci-Fi (2015 and 2016), and Choice TV Actress – Action (2017 and 2018).",
+          "tier": 1,
+          "completion_tokens": 511,
+          "reasoning_tokens": 375,
+          "prompt_tokens": 506,
+          "tool_calls": 0,
+          "latency": 4.608670949935913
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "The only non-Leo award for which Emily Bett Rickards received a solo nomination is the Teen Choice Awards.",
+          "tier": 2,
+          "completion_tokens": 1313,
+          "reasoning_tokens": 1255,
+          "prompt_tokens": 1524,
+          "tool_calls": 1,
+          "latency": 13.523398399353027
+        }
+      },
+      "reference": "Rickards has been nominated for five Teen Choice Awards: four for Choice TV Actress in Fantasy, Sci-Fi, or Action, and one for Female Breakout Star in 2014.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 26,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "In 2017, Aaron Taylor-Johnson appeared in \"The Wall,\" and in 2018, he appeared in \"Outlaw King\" and \"A Million Little Pieces.\"",
+          "tier": 0,
+          "completion_tokens": 40,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 815,
+          "tool_calls": 0,
+          "latency": 1.1836981773376465
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Aaron Taylor-Johnson appeared in \"The Wall\" (2017) and both \"Outlaw King\" and \"A Million Little Pieces\" (2018).",
+          "tier": 1,
+          "completion_tokens": 220,
+          "reasoning_tokens": 121,
+          "prompt_tokens": 828,
+          "tool_calls": 0,
+          "latency": 2.7113420963287354
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Aaron Taylor-Johnson appeared in \"The Wall\" (2017), \"Outlaw King\" (2018), and \"A Million Little Pieces\" (2018).",
+          "tier": 2,
+          "completion_tokens": 831,
+          "reasoning_tokens": 771,
+          "prompt_tokens": 2148,
+          "tool_calls": 1,
+          "latency": 9.686740636825562
+        }
+      },
+      "reference": "In 2017, Aaron Taylor-Johnson appeared in Doug Liman's The Wall and, in 2018, appeared in Outlaw King as well as A milliom Little Pieces.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 27,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Aksoy won the Best Actress award at the 2009 Ankara International Film Festival and the Best Actress award at the 2009 Bursa Silk Road Film Festival for Love in Another Language.",
+          "tier": 0,
+          "completion_tokens": 42,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 258,
+          "tool_calls": 0,
+          "latency": 1.1654210090637207
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Aksoy won Best Actress at the Ankara International Film Festival and Best Actress at the Bursa Silk Road Film Festival, both in 2009, for Love in Another Language.",
+          "tier": 1,
+          "completion_tokens": 205,
+          "reasoning_tokens": 116,
+          "prompt_tokens": 271,
+          "tool_calls": 0,
+          "latency": 3.0718629360198975
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Aksoy won Best Actress at the Ankara International Film Festival and Best Actress at the Bursa Silk Road Film Festival for Love in Another Language.",
+          "tier": 2,
+          "completion_tokens": 625,
+          "reasoning_tokens": 555,
+          "prompt_tokens": 1060,
+          "tool_calls": 1,
+          "latency": 7.199671506881714
+        }
+      },
+      "reference": "Saadet Aksoy's 2009 Love in Another Language brought her Best Actress awards at Ankara International Film Festival and Bursa Silk Road Film Festival.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 28,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Choi won two Best Actress awards in 1994, from the Three Continents Festival and the Blue Dragon Film Awards (both for \"Rosy Life\").",
+          "tier": 0,
+          "completion_tokens": 34,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 709,
+          "tool_calls": 0,
+          "latency": 1.375135898590088
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Choi won two Best Actress Awards in 1994, one from the 16th Three Continents Festival and the other from the 15th Blue Dragon Film Awards.",
+          "tier": 1,
+          "completion_tokens": 520,
+          "reasoning_tokens": 317,
+          "prompt_tokens": 722,
+          "tool_calls": 0,
+          "latency": 4.8541741371154785
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Choi won 2 Best Actress Awards in 1994: from the 15th Blue Dragon Film Awards and the 16th Three Continents Festival.",
+          "tier": 2,
+          "completion_tokens": 790,
+          "reasoning_tokens": 713,
+          "prompt_tokens": 1972,
+          "tool_calls": 1,
+          "latency": 8.774375915527344
+        }
+      },
+      "reference": "Choi received 2 Best Actress awards for Rosy Life, one at the 16th Three Continents Festival and the other in the 15th Blue Dragon Film Awards.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 29,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "Rosie Huntington-Whiteley was most successful in 2011, winning four awards.",
+          "tier": 0,
+          "completion_tokens": 20,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 344,
+          "tool_calls": 0,
+          "latency": 1.135801076889038
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "2011",
+          "tier": 1,
+          "completion_tokens": 369,
+          "reasoning_tokens": 294,
+          "prompt_tokens": 357,
+          "tool_calls": 0,
+          "latency": 3.476855993270874
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "Rosie Huntington-Whiteley was most successful in 2011 with 3 wins.",
+          "tier": 2,
+          "completion_tokens": 676,
+          "reasoning_tokens": 617,
+          "prompt_tokens": 1223,
+          "tool_calls": 1,
+          "latency": 8.439078092575073
+        }
+      },
+      "reference": "In 2011 Rosie Huntington-Whiteley won 3 awards and was nominated for the Teen Choice Awards Choice Movie Actress: Summer award.",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 30,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "The top 2 finishers were Harrison Dillard (United States) and Jack Davis (United States).",
+          "tier": 0,
+          "completion_tokens": 24,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 192,
+          "tool_calls": 0,
+          "latency": 1.0524568557739258
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "The top 2 finishers were Harrison Dillard (gold) and Jack Davis (silver).",
+          "tier": 1,
+          "completion_tokens": 525,
+          "reasoning_tokens": 360,
+          "prompt_tokens": 205,
+          "tool_calls": 0,
+          "latency": 5.888101100921631
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "The top 2 finishers in the 1952 Summer Olympics – Men's 110 metres hurdles were Harrison Dillard and Jack Davis.",
+          "tier": 2,
+          "completion_tokens": 895,
+          "reasoning_tokens": 827,
+          "prompt_tokens": 906,
+          "tool_calls": 1,
+          "latency": 10.005358934402466
+        }
+      },
+      "reference": "Automatic timing showed Dillard had a time of 13.91 and Davis recorded a time of 14.00.",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 31,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "In 1997, Morris played Korben Dallas's mother (voice) in The Fifth Element and Karen Pruitt in Home Alone 3.",
+          "tier": 0,
+          "completion_tokens": 32,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 365,
+          "tool_calls": 0,
+          "latency": 1.1716609001159668
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "In 1997, Morris voiced Korben Dallas's mother in The Fifth Element and played Karen Pruitt in Home Alone 3.",
+          "tier": 1,
+          "completion_tokens": 376,
+          "reasoning_tokens": 238,
+          "prompt_tokens": 378,
+          "tool_calls": 0,
+          "latency": 3.954432964324951
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "In 1997, Morris played Korben Dallas's mother in The Fifth Element and Karen Pruitt in Home Alone 3.",
+          "tier": 2,
+          "completion_tokens": 924,
+          "reasoning_tokens": 894,
+          "prompt_tokens": 582,
+          "tool_calls": 0,
+          "latency": 10.183767080307007
+        }
+      },
+      "reference": "Morris played Korben Dallas's mother in The Fifth Element and Karen Pruitt in Home Alone 3 in 1997.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 32,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "Sandra Farmer-Patrick (USA) received the silver medal and Janeene Vickers (USA) received the bronze medal.",
+          "tier": 0,
+          "completion_tokens": 28,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 224,
+          "tool_calls": 0,
+          "latency": 0.8083271980285645
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "The silver medal was awarded to Sandra Farmer-Patrick (USA) and the bronze medal to Janeene Vickers (USA).",
+          "tier": 1,
+          "completion_tokens": 498,
+          "reasoning_tokens": 368,
+          "prompt_tokens": 237,
+          "tool_calls": 0,
+          "latency": 5.077648878097534
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "The silver medal was won by Sandra Farmer-Patrick (USA) and the bronze medal by Janeene Vickers (USA).",
+          "tier": 2,
+          "completion_tokens": 3781,
+          "reasoning_tokens": 3659,
+          "prompt_tokens": 1504,
+          "tool_calls": 2,
+          "latency": 39.89097476005554
+        }
+      },
+      "reference": "Farmer-Patrick was in second, winning silver in 53.69 secs, while Vickers narrowly held on for the bronze medal from Ledovskaya, both being timed at 54.31 secs.",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 33,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The population of Nurpur Jattan is 763, with 401 males and 362 females, and it has 157 houses.",
+          "tier": 0,
+          "completion_tokens": 31,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 215,
+          "tool_calls": 0,
+          "latency": 0.8288779258728027
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The population breakdown is 401 males and 362 females, and there are 157 houses.",
+          "tier": 1,
+          "completion_tokens": 155,
+          "reasoning_tokens": 99,
+          "prompt_tokens": 228,
+          "tool_calls": 0,
+          "latency": 1.9404847621917725
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Nurpur Jattan has 157 houses and a population of 763, comprising 401 males and 362 females.",
+          "tier": 2,
+          "completion_tokens": 789,
+          "reasoning_tokens": 650,
+          "prompt_tokens": 967,
+          "tool_calls": 1,
+          "latency": 10.029247760772705
+        }
+      },
+      "reference": "Nurpur Jattan has total number of 157 houses and population of 763, of which include 401 males and 362 females.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 34,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Kathryn Beaumont starred as Wendy Darling in the 1953 film Peter Pan.",
+          "tier": 0,
+          "completion_tokens": 19,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 310,
+          "tool_calls": 0,
+          "latency": 1.243610143661499
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Kathryn Beaumont starred in the 1953 film \"Peter Pan\" as the voice of Wendy Darling.",
+          "tier": 1,
+          "completion_tokens": 100,
+          "reasoning_tokens": 53,
+          "prompt_tokens": 323,
+          "tool_calls": 0,
+          "latency": 1.417902946472168
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "She starred in \"Peter Pan\" in 1953.",
+          "tier": 2,
+          "completion_tokens": 267,
+          "reasoning_tokens": 251,
+          "prompt_tokens": 527,
+          "tool_calls": 0,
+          "latency": 3.5467708110809326
+        }
+      },
+      "reference": "Kathryn Beaumont starred in the voice role of Wendy Darling in Peter Pan (1953).",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 35,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The total statistics of Talwandi Mehma include 258 houses, a population of 1396 (715 male, 681 female), 141 children aged 0-6, 984 Scheduled Castes, 0 Scheduled Tribes, 912 literates, 484 illiterates, and 471 workers (305 main, 166 marginal).",
+          "tier": 0,
+          "completion_tokens": 74,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 216,
+          "tool_calls": 0,
+          "latency": 1.402630090713501
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "The total statistics for Talwandi Mehma are: 258 houses; total population 1,396 (715 male, 681 female); 141 persons aged 0–6 (74 male, 67 female); 984 Scheduled Castes (510 male, 474 female); 0 Scheduled Tribes; 912 literates (498 male, 414 female); 484 illiterates (217 male, 267 female); 471 total workers (399 male, 72 female) comprising 305 main workers (274 male, 31 female) and 166 marginal workers (125 male, 41 female).",
+          "tier": 1,
+          "completion_tokens": 881,
+          "reasoning_tokens": 580,
+          "prompt_tokens": 229,
+          "tool_calls": 0,
+          "latency": 7.371783971786499
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Talwandi Mehma has 258 houses, a total population of 1396 (715 male, 681 female), 141 in the age group 0–6 years, 984 Scheduled Castes, 0 Scheduled Tribes, 912 literates, 484 illiterate, 471 total workers (399 male, 72 female), including 305 main workers and 166 marginal workers.",
+          "tier": 2,
+          "completion_tokens": 1028,
+          "reasoning_tokens": 932,
+          "prompt_tokens": 1078,
+          "tool_calls": 1,
+          "latency": 12.047624826431274
+        }
+      },
+      "reference": "Talwandi Mehma has total number of 258 houses and a population of 1,396 of which include 715 males and 681 females.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 36,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Fabrizio Donato won gold medals at the 2001 Mediterranean Games, the 2009 European Indoor Championships, and the 2012 European Championships.",
+          "tier": 0,
+          "completion_tokens": 35,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 895,
+          "tool_calls": 0,
+          "latency": 1.0791301727294922
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Fabrizio Donato won gold medals at the 2001 Mediterranean Games, the 2009 European Indoor Championships, and the 2012 European Championships.",
+          "tier": 1,
+          "completion_tokens": 403,
+          "reasoning_tokens": 247,
+          "prompt_tokens": 908,
+          "tool_calls": 0,
+          "latency": 3.4991419315338135
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Fabrizio Donato won gold medals at the Mediterranean Games in 2001, the European Indoor Championships in 2009, and the European Championships in 2012.",
+          "tier": 2,
+          "completion_tokens": 633,
+          "reasoning_tokens": 573,
+          "prompt_tokens": 2320,
+          "tool_calls": 1,
+          "latency": 6.981914758682251
+        }
+      },
+      "reference": "Fabrizio Donato won gold medals at the 2001 Mediterranean Games with a record of 17.05 metres and the 2009 European Indoor Championships, a championship record of 17.59 metres.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 37,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Wayne Kerrins played for Fulham in the Third Division during the 1986–87 and 1987–88 seasons.",
+          "tier": 0,
+          "completion_tokens": 29,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 419,
+          "tool_calls": 0,
+          "latency": 0.9832141399383545
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Wayne Kerrins played for Fulham in the Third Division during the 1986–87, 1987–88, and 1988–89 seasons.",
+          "tier": 1,
+          "completion_tokens": 478,
+          "reasoning_tokens": 379,
+          "prompt_tokens": 432,
+          "tool_calls": 0,
+          "latency": 4.22084903717041
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Wayne Kerrins played for Fulham in the Third Division during the 1986–87, 1987–88, and 1988–89 seasons.",
+          "tier": 2,
+          "completion_tokens": 653,
+          "reasoning_tokens": 597,
+          "prompt_tokens": 1465,
+          "tool_calls": 1,
+          "latency": 7.596703290939331
+        }
+      },
+      "reference": "Wayne Kerrins played for Fulham in the Third Division in 1986–87, 1987–88, and 1988–89.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 38,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Maylee Todd released Choose Your Own Adventure in 2010, Do Right! Serato Pressing featuring Maylee Todd in 2011, Escapology in 2013, and Acts Of Love in 2017 on the Do Right Music label.",
+          "tier": 0,
+          "completion_tokens": 55,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 167,
+          "tool_calls": 0,
+          "latency": 1.086824893951416
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Maylee Todd released the albums \"Choose Your Own Adventure\" in 2010, \"Escapology\" in 2013, and \"Acts Of Love\" in 2017 on the Do Right Music label.",
+          "tier": 1,
+          "completion_tokens": 723,
+          "reasoning_tokens": 549,
+          "prompt_tokens": 180,
+          "tool_calls": 0,
+          "latency": 6.13576602935791
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Maylee Todd released the albums 'Choose Your Own Adventure' (2010), 'Escapology' (2013), and 'Acts Of Love' (2017) on the Do Right Music label.",
+          "tier": 2,
+          "completion_tokens": 4208,
+          "reasoning_tokens": 4107,
+          "prompt_tokens": 1340,
+          "tool_calls": 2,
+          "latency": 42.40608501434326
+        }
+      },
+      "reference": "Maylee Todd released her first album Choose Your Own Adventure in 2010 and Escapology in 2013 on the Do Right Music label.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 39,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "There are 185 males and 165 females in Mithra households.",
+          "tier": 0,
+          "completion_tokens": 18,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 201,
+          "tool_calls": 0,
+          "latency": 0.9734821319580078
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "There are 185 males and 165 females.",
+          "tier": 1,
+          "completion_tokens": 382,
+          "reasoning_tokens": 323,
+          "prompt_tokens": 214,
+          "tool_calls": 0,
+          "latency": 3.571274995803833
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "There are 185 males and 165 females in Mithra households.",
+          "tier": 2,
+          "completion_tokens": 312,
+          "reasoning_tokens": 274,
+          "prompt_tokens": 906,
+          "tool_calls": 1,
+          "latency": 4.3725340366363525
+        }
+      },
+      "reference": "Mithra has a total number of 80 houses and a population of 350 which includes 185 males and 165 females.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 40,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Daniela Ramirez played Selena in American Reunion and Vanessa in Premium Rush in 2012.",
+          "tier": 0,
+          "completion_tokens": 23,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 343,
+          "tool_calls": 0,
+          "latency": 1.0679807662963867
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "In 2012, she acted in the films \"American Reunion\" as Selena and \"Premium Rush\" as Vanessa.",
+          "tier": 1,
+          "completion_tokens": 221,
+          "reasoning_tokens": 145,
+          "prompt_tokens": 356,
+          "tool_calls": 0,
+          "latency": 2.3454601764678955
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "In 2012, Daniela Ramirez played Selena in \"American Reunion\" and Vanessa in \"Premium Rush\".",
+          "tier": 2,
+          "completion_tokens": 418,
+          "reasoning_tokens": 390,
+          "prompt_tokens": 560,
+          "tool_calls": 0,
+          "latency": 5.217015027999878
+        }
+      },
+      "reference": "In 2012, Ramirez appeared in two roles: Selena in American Reunion and Vanessa in Premium Rush.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 41,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Feyisa Lilesa ran the Xiamen International Marathon, Rotterdam Marathon, and Chicago Marathon in 2010.",
+          "tier": 0,
+          "completion_tokens": 28,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 375,
+          "tool_calls": 0,
+          "latency": 0.9580879211425781
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "In 2010, Feyisa Lilesa ran the Xiamen International Marathon, the Rotterdam Marathon, and the Chicago Marathon.",
+          "tier": 1,
+          "completion_tokens": 244,
+          "reasoning_tokens": 101,
+          "prompt_tokens": 388,
+          "tool_calls": 0,
+          "latency": 2.662125825881958
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Feyisa Lilesa ran in the Xiamen International Marathon, Rotterdam Marathon, and Chicago Marathon in 2010.",
+          "tier": 2,
+          "completion_tokens": 432,
+          "reasoning_tokens": 378,
+          "prompt_tokens": 1287,
+          "tool_calls": 1,
+          "latency": 5.404660940170288
+        }
+      },
+      "reference": "Feyisa Lilesa ran at the 2010 Chicago Marathon, at the 2010 Rotterdam Marathon, and at the Xiamen International Marathon.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 42,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Smacksoft's albums \"Shines in the Dark\" and \"Follow Your Heart\" were nominated for Best Modern Rock Album at the Korean Music Awards in 2010 and 2013, respectively.",
+          "tier": 0,
+          "completion_tokens": 44,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 136,
+          "tool_calls": 0,
+          "latency": 0.9226796627044678
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Smacksoft's albums \"Shines in the Dark\" (nominated in 2010) and \"Follow Your Heart\" (nominated in 2013) were nominated for Best Modern Rock Album at the Korean Music Awards.",
+          "tier": 1,
+          "completion_tokens": 271,
+          "reasoning_tokens": 168,
+          "prompt_tokens": 149,
+          "tool_calls": 0,
+          "latency": 3.0463991165161133
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Smacksoft's album \"Shines in the Dark\" was nominated in 2010, and \"Follow Your Heart\" was nominated in 2013.",
+          "tier": 2,
+          "completion_tokens": 182,
+          "reasoning_tokens": 146,
+          "prompt_tokens": 369,
+          "tool_calls": 0,
+          "latency": 2.164210081100464
+        }
+      },
+      "reference": "Two of Smacksoft's albums were nominated for Best Modern Rock Album at the Korean Music Awards: Shines in the Dark in 2010 and Follow Your Heart in 2013.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 43,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Anthony Alonzo won Metro Manila Film Festival awards in 1983 for Bago Kumalat ang Kamandag and in 1987 for Anak Badjao.",
+          "tier": 0,
+          "completion_tokens": 37,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 125,
+          "tool_calls": 0,
+          "latency": 1.016942024230957
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Anthony Alonzo won Metro Manila Film Festival awards in 1983 for \"Bago Kumalat ang Kamandag\" and in 1987 for \"Anak Badjao.\"",
+          "tier": 1,
+          "completion_tokens": 271,
+          "reasoning_tokens": 174,
+          "prompt_tokens": 138,
+          "tool_calls": 0,
+          "latency": 2.859994888305664
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Anthony Alonzo won Metro Manila Film Festival awards in 1983 for \"Bago Kumalat ang Kamandag\" and in 1987 for \"Anak Badjao\".",
+          "tier": 2,
+          "completion_tokens": 778,
+          "reasoning_tokens": 720,
+          "prompt_tokens": 779,
+          "tool_calls": 1,
+          "latency": 9.14911699295044
+        }
+      },
+      "reference": "Anthony Alonzo won the Best Actor awards from the Metro Manila Film Festival for Bago Kumalat Ang Kamandag in 1983 and for Anak Badjao in 1987.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 44,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Minal Khan played lead roles in 2017 in Beti To Main Bhi Hun as Haya and Parchayee as Pari.",
+          "tier": 0,
+          "completion_tokens": 32,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 504,
+          "tool_calls": 0,
+          "latency": 1.0712130069732666
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "In 2017, Minal Khan played lead roles as Haya in \"Beti To Main Bhi Hun\" and as Pari in \"Parchayee.\"",
+          "tier": 1,
+          "completion_tokens": 668,
+          "reasoning_tokens": 482,
+          "prompt_tokens": 517,
+          "tool_calls": 0,
+          "latency": 6.101383209228516
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "In 2017, Minal Khan played lead roles as Haya in \"Beti To Main Bhi Hun\" and as Pari in \"Parchayee.\"",
+          "tier": 2,
+          "completion_tokens": 1039,
+          "reasoning_tokens": 977,
+          "prompt_tokens": 1520,
+          "tool_calls": 1,
+          "latency": 10.997700929641724
+        }
+      },
+      "reference": "Khan's first lead role was in Urdu 1's Beti To Main Bhi Hun (2017) as Haya and followed with another lead role in Hum TV's Parchayee as Pari.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 45,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The three singles were \"Laid\" at 32, \"Race You to the Bottom\" at 19, and \"Rich Kids\" at 31.",
+          "tier": 0,
+          "completion_tokens": 35,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 213,
+          "tool_calls": 0,
+          "latency": 1.1331970691680908
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The peak Mainstream chart positions for New Medicine's singles in 2010 and 2011 were 32 for \"Laid\", 19 for \"Race You to the Bottom\", and 31 for \"Rich Kids\".",
+          "tier": 1,
+          "completion_tokens": 509,
+          "reasoning_tokens": 367,
+          "prompt_tokens": 226,
+          "tool_calls": 0,
+          "latency": 4.560795783996582
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "In 2010 and 2011, New Medicine's singles \"Laid\", \"Race You to the Bottom\", and \"Rich Kids\" peaked at positions 32, 19, and 31 on the Mainstream chart, respectively.",
+          "tier": 2,
+          "completion_tokens": 1003,
+          "reasoning_tokens": 899,
+          "prompt_tokens": 1010,
+          "tool_calls": 1,
+          "latency": 9.987260818481445
+        }
+      },
+      "reference": "\"Laid\" hit number 32, \"Race You to the Bottom\" hit number 19 and Rich Kids\" hit number 31 on the Mainstream chart.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 46,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Dwight D. Eisenhower won Wyoming with 74,573 votes (60.08%) over Adlai Stevenson's 49,554 votes (39.92%), out of 124,127 total votes cast.",
+          "tier": 0,
+          "completion_tokens": 46,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 136,
+          "tool_calls": 0,
+          "latency": 1.341247797012329
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "In the 1956 United States presidential election in Wyoming, incumbent Republican Dwight D. Eisenhower defeated Democratic candidate Adlai Stevenson with 74,573 votes (60.08%) to Stevenson's 49,554 votes (39.92%), winning the state's electoral votes.",
+          "tier": 1,
+          "completion_tokens": 349,
+          "reasoning_tokens": 192,
+          "prompt_tokens": 149,
+          "tool_calls": 0,
+          "latency": 3.359128713607788
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "In Wyoming, Dwight D. Eisenhower (incumbent Republican) won the 1956 presidential election with 74,573 votes (60.08%), defeating Democratic candidate Adlai Stevenson who received 49,554 votes (39.92%).",
+          "tier": 2,
+          "completion_tokens": 657,
+          "reasoning_tokens": 568,
+          "prompt_tokens": 836,
+          "tool_calls": 1,
+          "latency": 8.161212921142578
+        }
+      },
+      "reference": "Wyoming was won by Dwight D. Eisenhower with 60.08% of the vote, against Adlai Stevenson with 39.92% of the vote.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 47,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Hawkins placed 20th in the 10,000 m at the 2014 Commonwealth Games with a time of 29:12.52.",
+          "tier": 0,
+          "completion_tokens": 33,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 608,
+          "tool_calls": 0,
+          "latency": 0.8067388534545898
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Hawkins finished 20th in the 10,000 meters at the 2014 Commonwealth Games with a time of 29:12.52.",
+          "tier": 1,
+          "completion_tokens": 167,
+          "reasoning_tokens": 89,
+          "prompt_tokens": 621,
+          "tool_calls": 0,
+          "latency": 1.8946058750152588
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "At the 2014 Commonwealth Games, Hawkins finished 20th in the 10,000 m with a time of 29:12.52.",
+          "tier": 2,
+          "completion_tokens": 233,
+          "reasoning_tokens": 198,
+          "prompt_tokens": 839,
+          "tool_calls": 0,
+          "latency": 3.0797948837280273
+        }
+      },
+      "reference": "Hawkins competed at the 2014 Commonwealth Games held in Glasgow in the 10,000 metres, finishing 20th.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 48,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Yes, Joshua Jackson voiced Jesse Grass in an episode of The Simpsons.",
+          "tier": 0,
+          "completion_tokens": 19,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 395,
+          "tool_calls": 0,
+          "latency": 0.6928167343139648
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "Yes, Joshua Jackson voiced a character on The Simpsons.",
+          "tier": 1,
+          "completion_tokens": 198,
+          "reasoning_tokens": 112,
+          "prompt_tokens": 408,
+          "tool_calls": 0,
+          "latency": 2.433635711669922
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Yes, Joshua Jackson appeared in The Simpsons in 2000, voicing the role of Jesse Grass in the episode \"Lisa the Tree Hugger\".",
+          "tier": 2,
+          "completion_tokens": 719,
+          "reasoning_tokens": 664,
+          "prompt_tokens": 1304,
+          "tool_calls": 1,
+          "latency": 7.617363929748535
+        }
+      },
+      "reference": "In 2000, Joshua Jackson starred in The Simpsons, voicing the character of Jesse Grass in the episode \"Lisa the Tree Hugger\".",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 49,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Allkja played for Elbasani in the Albanian Second Division in the 2017–18 season.",
+          "tier": 0,
+          "completion_tokens": 25,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 254,
+          "tool_calls": 0,
+          "latency": 1.043848991394043
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "2017–18.",
+          "tier": 1,
+          "completion_tokens": 370,
+          "reasoning_tokens": 310,
+          "prompt_tokens": 267,
+          "tool_calls": 0,
+          "latency": 3.530852794647217
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Allkja played for Elbasani in the Albanian Second Division in the 2017–18 season.",
+          "tier": 2,
+          "completion_tokens": 2097,
+          "reasoning_tokens": 2043,
+          "prompt_tokens": 1124,
+          "tool_calls": 1,
+          "latency": 20.61156392097473
+        }
+      },
+      "reference": "Allkja played for Elbasani in the 2017–18 Albanian Second Division.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 50,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Marcos Acuña had the most matches (109), goals (20), and assists (24) totals at Racing Club.",
+          "tier": 0,
+          "completion_tokens": 28,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 849,
+          "tool_calls": 0,
+          "latency": 0.9336471557617188
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Marcos Acuña had the most matches at Ferro Carril Oeste (117), the most goals at Racing Club (20), and the most assists at Racing Club (24).",
+          "tier": 1,
+          "completion_tokens": 1273,
+          "reasoning_tokens": 1187,
+          "prompt_tokens": 861,
+          "tool_calls": 0,
+          "latency": 10.170517921447754
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "Marcos Acuña had the most matches (117) at Ferro Carril Oeste, and the most goals (20) and assists (24) at Racing Club.",
+          "tier": 2,
+          "completion_tokens": 8217,
+          "reasoning_tokens": 7896,
+          "prompt_tokens": 3822,
+          "tool_calls": 2,
+          "latency": 75.872389793396
+        }
+      },
+      "reference": "At Ferro, Acuña played a total of 117 matches, with 5 goals and 23 assists.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 51,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "Yes, Bujumbura has two museums.",
+          "tier": 0,
+          "completion_tokens": 13,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 155,
+          "tool_calls": 0,
+          "latency": 0.7130439281463623
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "Yes, Bujumbura has two museums.",
+          "tier": 1,
+          "completion_tokens": 160,
+          "reasoning_tokens": 84,
+          "prompt_tokens": 168,
+          "tool_calls": 0,
+          "latency": 1.6745641231536865
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "Yes, Bujumbura has two museums.",
+          "tier": 2,
+          "completion_tokens": 533,
+          "reasoning_tokens": 490,
+          "prompt_tokens": 833,
+          "tool_calls": 1,
+          "latency": 6.054376125335693
+        }
+      },
+      "reference": "The Living Museum of Bujumbura and the Geological Museum of Burundi are located in Bujumbura.",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 52,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Owen McDonnell's first role for something made by RTE was Sergeant Jack Driscoll in Single-Handed from 2007–10.",
+          "tier": 0,
+          "completion_tokens": 32,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 521,
+          "tool_calls": 0,
+          "latency": 1.2429637908935547
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Owen McDonnell's first role for something made by RTÉ was Sergeant Jack Driscoll in \"Single-Handed\" (2007–10).",
+          "tier": 1,
+          "completion_tokens": 423,
+          "reasoning_tokens": 354,
+          "prompt_tokens": 534,
+          "tool_calls": 0,
+          "latency": 3.755354881286621
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Owen McDonnell's first role for something made by RTE was Sergeant Jack Driscoll in Single-Handed.",
+          "tier": 2,
+          "completion_tokens": 2229,
+          "reasoning_tokens": 2069,
+          "prompt_tokens": 2379,
+          "tool_calls": 1,
+          "latency": 22.514236211776733
+        }
+      },
+      "reference": "Owen McDonnell played Sergeant Jack Driscoll in RTÉ's Single-Handed (2007-10).",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 53,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "In 2015, Fofana ran the 60 m hurdles in 7.75 at the European Indoor Championships in Prague, Czech Republic; in 2016, he ran the 110 m hurdles in 13.52 at the European Championships in Amsterdam, Netherlands.",
+          "tier": 0,
+          "completion_tokens": 59,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 349,
+          "tool_calls": 0,
+          "latency": 1.3477897644042969
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "In 2015, Fofana ran the 60 m hurdles in 7.75 seconds at the European Indoor Championships in Prague, Czech Republic; in 2016, he ran the 110 m hurdles in 13.52 seconds at the European Championships in Amsterdam, Netherlands.",
+          "tier": 1,
+          "completion_tokens": 224,
+          "reasoning_tokens": 103,
+          "prompt_tokens": 362,
+          "tool_calls": 0,
+          "latency": 2.412277936935425
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "In 2015, Fofana ran the 60 m hurdles in Prague, Czech Republic with a time of 7.75; in 2016, he ran the 110 m hurdles in Amsterdam, Netherlands with a time of 13.52.",
+          "tier": 2,
+          "completion_tokens": 573,
+          "reasoning_tokens": 486,
+          "prompt_tokens": 1261,
+          "tool_calls": 1,
+          "latency": 6.332018136978149
+        }
+      },
+      "reference": "Hassane Fofana finished in 13.52 in the 110 meters hurdles (Amsterdam 2016) and in 7.75 in the 60 meters hurdles (Prague 2015).",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 54,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The three largest ethnic groups are Chinese with 37355, European with 32905, and Filipino with 12975.",
+          "tier": 0,
+          "completion_tokens": 28,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 351,
+          "tool_calls": 0,
+          "latency": 1.1489810943603516
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The three largest ethnic groups in Vancouver Kingsway (2016) are Chinese (37,355), European (32,905), and Filipino (12,975).",
+          "tier": 1,
+          "completion_tokens": 169,
+          "reasoning_tokens": 69,
+          "prompt_tokens": 364,
+          "tool_calls": 0,
+          "latency": 2.1340348720550537
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The three largest ethnic groups are Chinese (37,355), European (32,905), and Filipino (12,975).",
+          "tier": 2,
+          "completion_tokens": 1548,
+          "reasoning_tokens": 1440,
+          "prompt_tokens": 604,
+          "tool_calls": 0,
+          "latency": 14.616044044494629
+        }
+      },
+      "reference": "The three largest ethnic groups are Chinese (36%), European (31.7%) and Filipino (12.5%).",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 55,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The minimum prize was $730,725 by Mark Newhouse, and the maximum prize was $10,000,000 by Martin Jacobson; Mark Newhouse won the least.",
+          "tier": 0,
+          "completion_tokens": 38,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 357,
+          "tool_calls": 0,
+          "latency": 1.1161019802093506
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The minimum prize was $730,725 earned by Mark Newhouse, and the maximum prize was $10,000,000 earned by Martin Jacobson.",
+          "tier": 1,
+          "completion_tokens": 460,
+          "reasoning_tokens": 361,
+          "prompt_tokens": 370,
+          "tool_calls": 0,
+          "latency": 4.404528856277466
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The minimum prize was 730725, the maximum prize was 10000000, and Mark Newhouse won the least.",
+          "tier": 2,
+          "completion_tokens": 891,
+          "reasoning_tokens": 796,
+          "prompt_tokens": 1344,
+          "tool_calls": 1,
+          "latency": 9.324345827102661
+        }
+      },
+      "reference": "The final table's minimum prize was $730,725 which was earned by Mark Newhouse and the maximum was $10,000,000.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 56,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Giourkas Seitaridis appeared for Panathinaikos in the Alpha Ethniki during the 2003–04 season.",
+          "tier": 0,
+          "completion_tokens": 29,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 1018,
+          "tool_calls": 0,
+          "latency": 0.8943898677825928
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Giourkas Seitaridis played for Panathinaikos in the Alpha Ethniki during the 2003–04 season.",
+          "tier": 1,
+          "completion_tokens": 276,
+          "reasoning_tokens": 172,
+          "prompt_tokens": 1031,
+          "tool_calls": 0,
+          "latency": 3.2270562648773193
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "For the 2003–04 season, Giourkas Seitaridis appeared for Panathinaikos in the Alpha Ethniki.",
+          "tier": 2,
+          "completion_tokens": 945,
+          "reasoning_tokens": 878,
+          "prompt_tokens": 1313,
+          "tool_calls": 0,
+          "latency": 8.56534194946289
+        }
+      },
+      "reference": "In the 2003–04 season, Giourkas Seitaridis appeared in Alpha Ethniki with Panathinaikos.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 57,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "214 workers (124 cultivators + 90 agricultural labourers).",
+          "tier": 0,
+          "completion_tokens": 17,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 578,
+          "tool_calls": 0,
+          "latency": 0.8811588287353516
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "214",
+          "tier": 1,
+          "completion_tokens": 159,
+          "reasoning_tokens": 120,
+          "prompt_tokens": 591,
+          "tool_calls": 0,
+          "latency": 1.8314988613128662
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "214 workers in Main work were engaged as cultivators and Agricultural Labourers.",
+          "tier": 2,
+          "completion_tokens": 587,
+          "reasoning_tokens": 452,
+          "prompt_tokens": 1669,
+          "tool_calls": 1,
+          "latency": 6.756518840789795
+        }
+      },
+      "reference": "Workers engaged in Main Work were 124 cultivators and 90 Agricultural labourers.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 58,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Sampson starred as “Ozzy” in the TV show \"The Walking Dead\" in 2019, appearing in 2 episodes.",
+          "tier": 0,
+          "completion_tokens": 31,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 603,
+          "tool_calls": 0,
+          "latency": 1.1879169940948486
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Sampson starred as Ozzy in 2019 on the television show The Walking Dead.",
+          "tier": 1,
+          "completion_tokens": 226,
+          "reasoning_tokens": 116,
+          "prompt_tokens": 616,
+          "tool_calls": 0,
+          "latency": 2.8174877166748047
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "In 2019, Sampson starred as Ozzy on The Walking Dead.",
+          "tier": 2,
+          "completion_tokens": 221,
+          "reasoning_tokens": 200,
+          "prompt_tokens": 820,
+          "tool_calls": 0,
+          "latency": 3.1547598838806152
+        }
+      },
+      "reference": "In 2019, Sampson starred as “Ozzy” in the series The Walking Dead.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 59,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "The winner was Hillary Clinton (Democratic) and the runner up was Donald Trump (Republican).",
+          "tier": 0,
+          "completion_tokens": 21,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 318,
+          "tool_calls": 0,
+          "latency": 1.0927720069885254
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The winner was Hillary Clinton and the runner-up was Donald Trump.",
+          "tier": 1,
+          "completion_tokens": 191,
+          "reasoning_tokens": 100,
+          "prompt_tokens": 331,
+          "tool_calls": 0,
+          "latency": 3.4009439945220947
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "",
+          "tier": 2,
+          "completion_tokens": 2464,
+          "reasoning_tokens": 2408,
+          "prompt_tokens": 1179,
+          "tool_calls": 2,
+          "latency": 25.054348707199097
+        }
+      },
+      "reference": "The 2016 United States presidential election in New Jersey was won by Hillary Clinton with 55.5% of the vote over Donald Trump's 41.35%.",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 60,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "In 2007, Shelly Blond voiced Cinderella in Snow White: The Sequel, and in 2014, she voiced Audrey Glamour in Moomins on the Riviera.",
+          "tier": 0,
+          "completion_tokens": 43,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 149,
+          "tool_calls": 0,
+          "latency": 0.8599328994750977
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "In 2007, Shelly Blond voiced Cinderella in Snow White: The Sequel, and in 2014, she voiced Audrey Glamour in Moomins on the Riviera.",
+          "tier": 1,
+          "completion_tokens": 179,
+          "reasoning_tokens": 83,
+          "prompt_tokens": 162,
+          "tool_calls": 0,
+          "latency": 2.135209083557129
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "In 2007, Shelly Blond provided the voice of Cinderella in \"Snow White: The Sequel\", and in 2014, she provided the voice of Audrey Glamour in \"Moomins on the Riviera\".",
+          "tier": 2,
+          "completion_tokens": 698,
+          "reasoning_tokens": 616,
+          "prompt_tokens": 366,
+          "tool_calls": 0,
+          "latency": 6.977593898773193
+        }
+      },
+      "reference": "Shelley Blond is the voice of Cinderella in Snow White: The Sequel, and Audrey Glamour in the 2014 film Moomins on the Riviera.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 61,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The Democratic Party of Côte d'Ivoire – African Democratic Rally won the election by 134 seats.",
+          "tier": 0,
+          "completion_tokens": 25,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 154,
+          "tool_calls": 0,
+          "latency": 0.8689661026000977
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The Democratic Party of Côte d'Ivoire – African Democratic Rally won the election by 134 seats.",
+          "tier": 1,
+          "completion_tokens": 545,
+          "reasoning_tokens": 434,
+          "prompt_tokens": 167,
+          "tool_calls": 0,
+          "latency": 5.345876932144165
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The Democratic Party of Côte d'Ivoire – African Democratic Rally won the election by 134 seats.",
+          "tier": 2,
+          "completion_tokens": 2341,
+          "reasoning_tokens": 2181,
+          "prompt_tokens": 1403,
+          "tool_calls": 2,
+          "latency": 24.458640813827515
+        }
+      },
+      "reference": "The result was a victory for the Democratic Party of Côte d'Ivoire – African Democratic Rally, which won 148 of the 175 seats.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 62,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Thunder had a cameo in the 2011 show Padam Padam as Yang Kang-woo.",
+          "tier": 0,
+          "completion_tokens": 25,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 253,
+          "tool_calls": 0,
+          "latency": 0.8089511394500732
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Thunder made a cameo appearance as Yang Kang-woo in the 2011 drama Padam Padam.",
+          "tier": 1,
+          "completion_tokens": 236,
+          "reasoning_tokens": 147,
+          "prompt_tokens": 266,
+          "tool_calls": 0,
+          "latency": 2.8915510177612305
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "In the 2011 movie Padam Padam, Thunder made a cameo appearance as the character Yang Kang-woo.",
+          "tier": 2,
+          "completion_tokens": 1060,
+          "reasoning_tokens": 973,
+          "prompt_tokens": 1026,
+          "tool_calls": 1,
+          "latency": 11.667649030685425
+        }
+      },
+      "reference": "In 2011, Thunder had a cameo role in Padam Padam, where he played the role of Yang Kang-woo.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 63,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The total number of houses was 585, and the male population was 1486 while the female population was 1398.",
+          "tier": 0,
+          "completion_tokens": 29,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 215,
+          "tool_calls": 0,
+          "latency": 0.8694820404052734
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The total number of houses in Bhandal Bet is 585, with a male population of 1,486 and a female population of 1,398.",
+          "tier": 1,
+          "completion_tokens": 256,
+          "reasoning_tokens": 133,
+          "prompt_tokens": 228,
+          "tool_calls": 0,
+          "latency": 2.9101450443267822
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The total number of houses was 585, the male population was 1486, and the female population was 1398.",
+          "tier": 2,
+          "completion_tokens": 1638,
+          "reasoning_tokens": 1437,
+          "prompt_tokens": 434,
+          "tool_calls": 0,
+          "latency": 15.450915098190308
+        }
+      },
+      "reference": "Bhandal Bet has a total number of 585 houses and a population of 2,884 of which include 1,486 males and 1,398 females.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 64,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "\"A View from the Bridge\" won the Tony Awards for Best Revival of a Play and Best Direction of a Play.",
+          "tier": 0,
+          "completion_tokens": 27,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 408,
+          "tool_calls": 0,
+          "latency": 1.2533671855926514
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "\"A View from the Bridge\" won the Tony Awards for Best Revival of a Play and Best Direction of a Play.",
+          "tier": 1,
+          "completion_tokens": 342,
+          "reasoning_tokens": 264,
+          "prompt_tokens": 421,
+          "tool_calls": 0,
+          "latency": 3.7162251472473145
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The Tony Award categories that \"A View from the Bridge\" won are \"Best Revival of a Play\" and \"Best Direction of a Play\".",
+          "tier": 2,
+          "completion_tokens": 2791,
+          "reasoning_tokens": 2731,
+          "prompt_tokens": 1349,
+          "tool_calls": 1,
+          "latency": 28.5589120388031
+        }
+      },
+      "reference": "A View from the Bridge won the Tony Award for Best Revival of a Play and Ivo van Hove won the Tony Award for Best Direction of a Play.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 65,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Pierre Bertho earned all of the total valid votes, or 100%.",
+          "tier": 0,
+          "completion_tokens": 19,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 168,
+          "tool_calls": 0,
+          "latency": 1.026364803314209
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Pierre Bertho earned 322/409 of the total votes.",
+          "tier": 1,
+          "completion_tokens": 523,
+          "reasoning_tokens": 439,
+          "prompt_tokens": 181,
+          "tool_calls": 0,
+          "latency": 5.147469758987427
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Pierre Bertho earned approximately 0.7873 of the total votes.",
+          "tier": 2,
+          "completion_tokens": 4681,
+          "reasoning_tokens": 4452,
+          "prompt_tokens": 1823,
+          "tool_calls": 3,
+          "latency": 51.672205209732056
+        }
+      },
+      "reference": "Pierre Bertho of the Popular Republican Movement was the candidate elected with 644 of the 818 votes casted.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 66,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "The Koumi Line has 31 stations: Kobuchizawa, Kai-Koizumi, Kai-Ōizumi, Kiyosato, Nobeyama, Shinano-Kawakami, Saku-Hirose, Saku-Uminokuchi, Umijiri, Matsubarako, Koumi, Managashi, Takaiwa, Yachiho, Kaize, Haguroshita, Aonuma, Usuda, Tatsuokajō, Ōtabe, Nakagomi, Namezu, Kita-Nakagomi, Iwamurada, Sakudaira, Nakasato, Misato, Mitsuoka, Otome, Higashi-Komoro, and Komoro.",
+          "tier": 0,
+          "completion_tokens": 152,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 1147,
+          "tool_calls": 0,
+          "latency": 1.7040431499481201
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "The Koumi Line has 31 stations: Kobuchizawa, Kai-Koizumi, Kai-Ōizumi, Kiyosato, Nobeyama, Shinano-Kawakami, Saku-Hirose, Saku-Uminokuchi, Umijiri, Matsubarako, Koumi, Managashi, Takaiwa, Yachiho, Kaize, Haguroshita, Aonuma, Usuda, Tatsuokajō, Ōtabe, Nakagomi, Namezu, Kita-Nakagomi, Iwamurada, Sakudaira, Nakasato, Misato, Mitsuoka, Otome, Higashi-Komoro, and Komoro.",
+          "tier": 1,
+          "completion_tokens": 1856,
+          "reasoning_tokens": 1591,
+          "prompt_tokens": 1160,
+          "tool_calls": 0,
+          "latency": 14.648848056793213
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "The Koumi Line has 31 stations: Kobuchizawa, Kai-Koizumi, Kai-Ōizumi, Kiyosato, Nobeyama, Shinano-Kawakami, Saku-Hirose, Saku-Uminokuchi, Umijiri, Matsubarako, Koumi, Managashi, Takaiwa, Yachiho, Kaize, Haguroshita, Aonuma, Usuda, Tatsuokajō, Ōtabe, Nakagomi, Namezu, Kita-Nakagomi, Iwamurada, Sakudaira, Nakasato, Misato, Mitsuoka, Otome, Higashi-Komoro, 小諸.",
+          "tier": 2,
+          "completion_tokens": 6006,
+          "reasoning_tokens": 5803,
+          "prompt_tokens": 4529,
+          "tool_calls": 2,
+          "latency": 56.3976845741272
+        }
+      },
+      "reference": "Koumi Line has 31 stations including Kobuchizawa Station in Hokuto, Yamanashi and Komoro Station in Komoro, Nagano.",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 67,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Alessandra Negrini played Clara in the 1993 film \"Olho no Olho\".",
+          "tier": 0,
+          "completion_tokens": 22,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 633,
+          "tool_calls": 0,
+          "latency": 1.1500639915466309
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "In 1993, Alessandra Negrini played the role of Clara in the television production \"Olho no Olho\".",
+          "tier": 1,
+          "completion_tokens": 254,
+          "reasoning_tokens": 178,
+          "prompt_tokens": 646,
+          "tool_calls": 0,
+          "latency": 2.872812032699585
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "In 1993, Alessandra Negrini played the role of Clara in the movie \"Olho no Olho\".",
+          "tier": 2,
+          "completion_tokens": 236,
+          "reasoning_tokens": 190,
+          "prompt_tokens": 850,
+          "tool_calls": 0,
+          "latency": 3.494400978088379
+        }
+      },
+      "reference": "Alessandra Negrini played the role of Clara in Olho no Olho (1993).",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 68,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The latest IETF standards documentation is RFC 7440, released in January 2015.",
+          "tier": 0,
+          "completion_tokens": 22,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 446,
+          "tool_calls": 0,
+          "latency": 1.0196871757507324
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The latest IETF standards documentation in the table is RFC 7440 (TFTP Windowsize Option), released in January 2015.",
+          "tier": 1,
+          "completion_tokens": 414,
+          "reasoning_tokens": 328,
+          "prompt_tokens": 459,
+          "tool_calls": 0,
+          "latency": 4.277476787567139
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The latest IETF standards documentation is RFC 7440 \"TFTP Windowsize Option\" released in January 2015.",
+          "tier": 2,
+          "completion_tokens": 853,
+          "reasoning_tokens": 824,
+          "prompt_tokens": 677,
+          "tool_calls": 0,
+          "latency": 9.005125284194946
+        }
+      },
+      "reference": "The TFTP Windowsize Option (RFC 7440) was published in January 2015.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 69,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Labour held the 1940 Bow and Bromley election seat with 95.8% of the votes.",
+          "tier": 0,
+          "completion_tokens": 25,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 180,
+          "tool_calls": 0,
+          "latency": 1.163341999053955
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "95.8%",
+          "tier": 1,
+          "completion_tokens": 314,
+          "reasoning_tokens": 218,
+          "prompt_tokens": 193,
+          "tool_calls": 0,
+          "latency": 3.5377988815307617
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "95.8%",
+          "tier": 2,
+          "completion_tokens": 906,
+          "reasoning_tokens": 870,
+          "prompt_tokens": 903,
+          "tool_calls": 1,
+          "latency": 10.17419981956482
+        }
+      },
+      "reference": "On a reduced turnout, Key held the 1940 Bow and Bromley by-election seat for Labour with 95.8% of the votes.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 70,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Judith Flanagan Kennedy defeated Edward J. Clancy Jr. by 27 votes.",
+          "tier": 0,
+          "completion_tokens": 21,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 170,
+          "tool_calls": 0,
+          "latency": 1.0725691318511963
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "27 votes.",
+          "tier": 1,
+          "completion_tokens": 143,
+          "reasoning_tokens": 101,
+          "prompt_tokens": 183,
+          "tool_calls": 0,
+          "latency": 1.8456830978393555
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Judith Flanagan Kennedy defeated Edward J. Clancy Jr. by 27 votes in 2009.",
+          "tier": 2,
+          "completion_tokens": 448,
+          "reasoning_tokens": 376,
+          "prompt_tokens": 898,
+          "tool_calls": 1,
+          "latency": 6.683730840682983
+        }
+      },
+      "reference": "In 2009, Clancy was defeated by Judith Flanagan Kennedy by a total of 8,043 votes to 8,016.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 71,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "She competed in Brazil Belém in late May and Brazil São Paulo in early June, and in late May she achieved 6.88 m in the long jump.",
+          "tier": 0,
+          "completion_tokens": 36,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 242,
+          "tool_calls": 0,
+          "latency": 0.8832700252532959
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Keila Costa competed in Brazil Belém on May 20, 2007, and Brazil São Paulo on June 7, 2013; in late May she achieved a long jump of 6.88 meters (wind: -0.1 m/s).",
+          "tier": 1,
+          "completion_tokens": 454,
+          "reasoning_tokens": 318,
+          "prompt_tokens": 255,
+          "tool_calls": 0,
+          "latency": 4.5882179737091064
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "In late May, Keila Costa competed in Belém, Brazil, with a long jump of 6.88 m (wind: -0.1 m/s); in early June, she competed in São Paulo, Brazil, with a triple jump of 14.58 m (wind: +2.0 m/s).",
+          "tier": 2,
+          "completion_tokens": 1798,
+          "reasoning_tokens": 1650,
+          "prompt_tokens": 1115,
+          "tool_calls": 1,
+          "latency": 17.1829731464386
+        }
+      },
+      "reference": "On 20 May 2007, Keila Costa jumped 6.88 metres in Belém, and also participated in São Paulo on 7 June 2013.",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 72,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Morgan appeared in Supernatural from 2005–2007 and in Grey's Anatomy from 2006–2009.",
+          "tier": 0,
+          "completion_tokens": 28,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 713,
+          "tool_calls": 0,
+          "latency": 1.1377618312835693
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "Supernatural",
+          "tier": 1,
+          "completion_tokens": 555,
+          "reasoning_tokens": 440,
+          "prompt_tokens": 726,
+          "tool_calls": 0,
+          "latency": 5.602940082550049
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "Supernatural.",
+          "tier": 2,
+          "completion_tokens": 3867,
+          "reasoning_tokens": 3779,
+          "prompt_tokens": 1981,
+          "tool_calls": 1,
+          "latency": 39.1133770942688
+        }
+      },
+      "reference": "In 2005 and 2006, Morgan simultaneously appeared in three television series: in the series Supernatural as John Winchester, in a recurring role in Grey's Anatomy as Denny Duquette, and as Judah Botwin in two episodes of the series Weeds.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 73,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Yes, she reprised the role of Annabeth Chase in 2010's Percy Jackson & the Olympians: The Lightning Thief and 2013's Percy Jackson: Sea of Monsters.",
+          "tier": 0,
+          "completion_tokens": 43,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 523,
+          "tool_calls": 0,
+          "latency": 1.0430803298950195
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Yes, she reprised the role of Annabeth Chase in two Percy Jackson films.",
+          "tier": 1,
+          "completion_tokens": 235,
+          "reasoning_tokens": 159,
+          "prompt_tokens": 536,
+          "tool_calls": 0,
+          "latency": 2.7515900135040283
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Yes, she reprised the role of Annabeth Chase in both \"Percy Jackson & the Olympians: The Lightning Thief\" (2010) and \"Percy Jackson: Sea of Monsters\" (2013).",
+          "tier": 2,
+          "completion_tokens": 925,
+          "reasoning_tokens": 760,
+          "prompt_tokens": 1576,
+          "tool_calls": 1,
+          "latency": 10.91615104675293
+        }
+      },
+      "reference": "In 2013, Daddario reprised her role as Annabeth Chase in the film Percy Jackson: Sea of Monsters, which is the sequel to Percy Jackson & the Olympians: The Lightning Thief.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 74,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Declan O'Scanlon Jr. received 25.6%, Caroline Casagrande received 25.5%, Mike Panter received 25%, and Amy Mallet received 23.9% of the vote.",
+          "tier": 0,
+          "completion_tokens": 48,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 185,
+          "tool_calls": 0,
+          "latency": 1.2220771312713623
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Declan O'Scanlon Jr. received 25.6%, Caroline Casagrande received 25.5%, Mike Panter received 25%, and Amy Mallet received 23.9% of the vote.",
+          "tier": 1,
+          "completion_tokens": 420,
+          "reasoning_tokens": 307,
+          "prompt_tokens": 198,
+          "tool_calls": 0,
+          "latency": 4.086436033248901
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Declan O'Scanlon Jr. received 25.6% of the vote, Caroline Casagrande received 25.5%, Mike Panter received 25.0%, and Amy Mallet received 23.9%.",
+          "tier": 2,
+          "completion_tokens": 585,
+          "reasoning_tokens": 495,
+          "prompt_tokens": 960,
+          "tool_calls": 1,
+          "latency": 7.321949243545532
+        }
+      },
+      "reference": "O'Scanlon, Casagrande, Panter and Mallet received 25.6%, 25.5%, 25.0% and 23.9% of the vote.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 75,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Raghava Lawrence acted in Speed Dancer (1999), but the table lists no films for 2000.",
+          "tier": 0,
+          "completion_tokens": 27,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 432,
+          "tool_calls": 0,
+          "latency": 1.3891499042510986
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Raghava Lawrence acted in \"Unnai Kodu Ennai Tharuven\" and \"Parthen Rasithen\" in 2000.",
+          "tier": 1,
+          "completion_tokens": 218,
+          "reasoning_tokens": 145,
+          "prompt_tokens": 445,
+          "tool_calls": 0,
+          "latency": 2.5347981452941895
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Raghava Lawrence acted in the films \"Unnai Kodu Ennai Tharuven\" and \"Parthen Rasithen\" in 2000.",
+          "tier": 2,
+          "completion_tokens": 1207,
+          "reasoning_tokens": 1154,
+          "prompt_tokens": 1381,
+          "tool_calls": 1,
+          "latency": 13.38242769241333
+        }
+      },
+      "reference": "Raghava Lawrence acted in Unnai Kodu Ennai Tharuven (2000) and in Parthen Rasithen (2000).",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 76,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "The U Too began broadcasting on channel 26.2 with 480i definition.",
+          "tier": 0,
+          "completion_tokens": 20,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 222,
+          "tool_calls": 0,
+          "latency": 1.052361011505127
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "The U Too began broadcasting on channel 26.2 in 480i definition.",
+          "tier": 1,
+          "completion_tokens": 213,
+          "reasoning_tokens": 132,
+          "prompt_tokens": 235,
+          "tool_calls": 0,
+          "latency": 2.459818124771118
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "The U Too began broadcasting on channel 26.2 with a 480i definition.",
+          "tier": 2,
+          "completion_tokens": 245,
+          "reasoning_tokens": 200,
+          "prompt_tokens": 450,
+          "tool_calls": 0,
+          "latency": 3.202709913253784
+        }
+      },
+      "reference": "The U Too began broadcasting on WMEU-CD simulcast channel 26.2 in 16:9 standard definition.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 77,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "The two heaviest ships were HMS Audacity (11000 GRT) which was sunk, and Corilla (8096 GRT) which was damaged.",
+          "tier": 0,
+          "completion_tokens": 35,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 235,
+          "tool_calls": 0,
+          "latency": 1.2564849853515625
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "The two heaviest ships Gerhard Bigalk attacked were the HMS Audacity, which was sunk, and the Corilla, which was damaged.",
+          "tier": 1,
+          "completion_tokens": 386,
+          "reasoning_tokens": 299,
+          "prompt_tokens": 248,
+          "tool_calls": 0,
+          "latency": 4.1835691928863525
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "The two heaviest ships attacked by Gerhard Bigalk were HMS Audacity, which was sunk, and Corilla, which was damaged.",
+          "tier": 2,
+          "completion_tokens": 624,
+          "reasoning_tokens": 560,
+          "prompt_tokens": 466,
+          "tool_calls": 0,
+          "latency": 6.441247940063477
+        }
+      },
+      "reference": "Gerhard Bigalk damaged one ship of 8,096 GRT, and sunk one warship of 11,000 tons.",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 78,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Baby D released \"(Everybody's Got to Learn Sometime) I Need Your Loving\" in 1995, and \"So Pure\" and \"Take Me to Heaven\" in 1996, all from the album Deliverance.",
+          "tier": 0,
+          "completion_tokens": 50,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 601,
+          "tool_calls": 0,
+          "latency": 1.3774909973144531
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "In 1995, Baby D released \"(Everybody's Got to Learn Sometime) I Need Your Loving\", and in 1996, they released \"So Pure\" and \"Take Me to Heaven\", all from the album Deliverance.",
+          "tier": 1,
+          "completion_tokens": 325,
+          "reasoning_tokens": 218,
+          "prompt_tokens": 614,
+          "tool_calls": 0,
+          "latency": 3.3591420650482178
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Baby D released \"(Everybody's Got to Learn Sometime) I Need Your Loving\" in 1995, and \"So Pure\" and \"Take Me to Heaven\" in 1996, all from the album Deliverance.",
+          "tier": 2,
+          "completion_tokens": 806,
+          "reasoning_tokens": 722,
+          "prompt_tokens": 1875,
+          "tool_calls": 1,
+          "latency": 9.193687200546265
+        }
+      },
+      "reference": "Baby D's single \"(Everybody's Got to Learn Sometime) I Need Your Loving\" was released in 1995 and \"So Pure\" and \"Take Me to Heaven\" in 1996, all from the album Deliverance.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 79,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Patricia Routledge did not win any awards for producing \"Keeping Up Appearances\"; she won the British Comedy Award for Best TV Comedy Actress for her performance in the show.",
+          "tier": 0,
+          "completion_tokens": 37,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 260,
+          "tool_calls": 0,
+          "latency": 1.413153886795044
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Patricia Routledge did not win any awards for producing Keeping Up Appearances based on the given table; she won a British Comedy Award for Best TV Comedy Actress for her performance in the show.",
+          "tier": 1,
+          "completion_tokens": 678,
+          "reasoning_tokens": 539,
+          "prompt_tokens": 273,
+          "tool_calls": 0,
+          "latency": 7.113261938095093
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Patricia Routledge won the British Comedy Award for Best TV Comedy Actress in 1991 for \"Keeping Up Appearances\".",
+          "tier": 2,
+          "completion_tokens": 2031,
+          "reasoning_tokens": 1932,
+          "prompt_tokens": 1607,
+          "tool_calls": 1,
+          "latency": 22.436429977416992
+        }
+      },
+      "reference": "For Keeping Up Appearances, Patricia Routledge was nominated for the BAFTA TV Award for Best Light Entertainment Performance in 1992 and 1993.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 80,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Yes, George Rose won a Drama Desk Award for Outstanding Featured Actor in a Musical for My Fair Lady in 1976.",
+          "tier": 0,
+          "completion_tokens": 28,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 343,
+          "tool_calls": 0,
+          "latency": 1.1247198581695557
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Yes, George Rose won Drama Desk Awards for Outstanding Featured Actor in 1976 and 1979.",
+          "tier": 1,
+          "completion_tokens": 337,
+          "reasoning_tokens": 247,
+          "prompt_tokens": 356,
+          "tool_calls": 0,
+          "latency": 3.6156697273254395
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Yes, George Rose won awards for Featured Actor: his 1976 Drama Desk Award for Outstanding Featured Actor in a Musical (My Fair Lady) and his 1979 Drama Desk Award for Outstanding Featured Actor in a Play (The Kingfisher).",
+          "tier": 2,
+          "completion_tokens": 776,
+          "reasoning_tokens": 697,
+          "prompt_tokens": 1239,
+          "tool_calls": 1,
+          "latency": 8.469526052474976
+        }
+      },
+      "reference": "In 1979, George Rose won the Drama Desk Award for Outstanding Featured Actor in a Play for The Kingfisher.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 81,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Amber Kuo was nominated for Best Actress at the 45th Golden Bell Awards for her role in The Year of Happiness and Love.",
+          "tier": 0,
+          "completion_tokens": 30,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 188,
+          "tool_calls": 0,
+          "latency": 0.8215749263763428
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Amber Kuo received a nomination for Best Actress at the 45th Golden Bell Awards for starring in The Year of Happiness and Love.",
+          "tier": 1,
+          "completion_tokens": 180,
+          "reasoning_tokens": 114,
+          "prompt_tokens": 201,
+          "tool_calls": 0,
+          "latency": 2.519362688064575
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Amber Kuo was nominated for Best Actress at the 45th Golden Bell Awards for her role in The Year of Happiness and Love.",
+          "tier": 2,
+          "completion_tokens": 947,
+          "reasoning_tokens": 788,
+          "prompt_tokens": 909,
+          "tool_calls": 1,
+          "latency": 11.056925058364868
+        }
+      },
+      "reference": "Amber Kuo was nominated in 2010 for Best Actress at the 45th Golden Bell Awards for her role in The Happy Times of That Year.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 82,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "ANA flew its last flight of the Airbus A321-100 in 2008.",
+          "tier": 0,
+          "completion_tokens": 21,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 627,
+          "tool_calls": 0,
+          "latency": 0.9317598342895508
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "2008",
+          "tier": 1,
+          "completion_tokens": 294,
+          "reasoning_tokens": 205,
+          "prompt_tokens": 640,
+          "tool_calls": 0,
+          "latency": 3.2868759632110596
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "ANA flew its last flight of the Airbus A321-100 in 2008.",
+          "tier": 2,
+          "completion_tokens": 139,
+          "reasoning_tokens": 117,
+          "prompt_tokens": 860,
+          "tool_calls": 0,
+          "latency": 2.2924468517303467
+        }
+      },
+      "reference": "ANA flew its last flight of an Airbus A321-100, in 2008.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 83,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Margaret Qualley played Mary Dalton in Native Son directed by Rashid Johnson.",
+          "tier": 0,
+          "completion_tokens": 18,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 342,
+          "tool_calls": 0,
+          "latency": 1.149811029434204
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "Margaret Qualley",
+          "tier": 1,
+          "completion_tokens": 881,
+          "reasoning_tokens": 810,
+          "prompt_tokens": 355,
+          "tool_calls": 0,
+          "latency": 9.197691202163696
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "Mary Dalton",
+          "tier": 2,
+          "completion_tokens": 3363,
+          "reasoning_tokens": 3333,
+          "prompt_tokens": 1194,
+          "tool_calls": 1,
+          "latency": 34.869670152664185
+        }
+      },
+      "reference": "In 2019, Qualley played Mary Dalton in Rashid Johnson's of Native Son.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 84,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Andy Gross appeared as a ventriloquist in Beverly Hills, 90210, Las Vegas, and After Judgment.",
+          "tier": 0,
+          "completion_tokens": 27,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 265,
+          "tool_calls": 0,
+          "latency": 0.9200429916381836
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Andy Gross appeared as a ventriloquist in the television series Beverly Hills, 90210 (1995) and After Judgment (2008–2009).",
+          "tier": 1,
+          "completion_tokens": 1175,
+          "reasoning_tokens": 863,
+          "prompt_tokens": 278,
+          "tool_calls": 0,
+          "latency": 10.974555730819702
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Andy Gross appeared as a ventriloquist in the television series Beverly Hills, 90210 and After Judgment.",
+          "tier": 2,
+          "completion_tokens": 1003,
+          "reasoning_tokens": 956,
+          "prompt_tokens": 1050,
+          "tool_calls": 1,
+          "latency": 12.146195650100708
+        }
+      },
+      "reference": "Andy Gross acted as ventriloquist in television series such as Beverly Hills, 90210, Las Vegas and After Judgment.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 85,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "Olivia Cooke starred as Meg Demoys, Nancy Linnet, Emma Decody, Becky Sharp, and as the voice of the Loch Ness Monster.",
+          "tier": 0,
+          "completion_tokens": 32,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 185,
+          "tool_calls": 0,
+          "latency": 0.9642758369445801
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Olivia Cooke starred as Meg Demoys, Nancy Linnet, Emma Decody, Loch Ness Monster, and Becky Sharp.",
+          "tier": 1,
+          "completion_tokens": 532,
+          "reasoning_tokens": 412,
+          "prompt_tokens": 198,
+          "tool_calls": 0,
+          "latency": 5.892436265945435
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Olivia Cooke starred as Meg Demoys, Nancy Linnet, Emma Decody, Loch Ness Monster, and Becky Sharp.",
+          "tier": 2,
+          "completion_tokens": 1845,
+          "reasoning_tokens": 1682,
+          "prompt_tokens": 881,
+          "tool_calls": 1,
+          "latency": 21.826740980148315
+        }
+      },
+      "reference": "Olivia Cooke played the role of Emma Decody in Bates Motel from 2013 to 2017, and in 2018 starred as Becky Sharp in Vanity Fair.",
+      "oracle_path": "cot",
+      "oracle_correct": true
+    },
+    {
+      "id": 86,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Hattangad acted in the Marathi shows Char Divas Sasuche, Vahinisaheb, and Honar Sun Me Hya Gharchi.",
+          "tier": 0,
+          "completion_tokens": 37,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 244,
+          "tool_calls": 0,
+          "latency": 1.2469160556793213
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Hattangad acted in the Marathi language shows \"Char Divas Sasuche\", \"Vahinisaheb\", and \"Honar Sun Me Hya Gharchi\".",
+          "tier": 1,
+          "completion_tokens": 917,
+          "reasoning_tokens": 759,
+          "prompt_tokens": 257,
+          "tool_calls": 0,
+          "latency": 8.569960117340088
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Hattangad acted in Char Divas Sasuche, Vahinisaheb, and Honar Sun Me Hya Gharchi.",
+          "tier": 2,
+          "completion_tokens": 1223,
+          "reasoning_tokens": 1172,
+          "prompt_tokens": 1013,
+          "tool_calls": 1,
+          "latency": 15.573705911636353
+        }
+      },
+      "reference": "Hattangadi acted in the Marathi Char Divas Sasuche on ETV Marathi, Vahinisaheb and Honar Sun Me Hya Gharchi on Zee Marathi",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 87,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Patti Murin played the Ensemble in Mirette and Lysistrata Jones in Transport Group Theatre Company's production, and Daphne in Fly By Night Off-Broadway.",
+          "tier": 0,
+          "completion_tokens": 39,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 578,
+          "tool_calls": 0,
+          "latency": 1.2908999919891357
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Patti Murin played the Ensemble in Mirette, Lysistrata Jones in the Transport Group production, and Daphne in Fly By Night off-Broadway.",
+          "tier": 1,
+          "completion_tokens": 1703,
+          "reasoning_tokens": 1564,
+          "prompt_tokens": 591,
+          "tool_calls": 0,
+          "latency": 16.57444667816162
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Patti Murin played the Off-Broadway roles of Ensemble, Lysistrata Jones, and Daphne.",
+          "tier": 2,
+          "completion_tokens": 2093,
+          "reasoning_tokens": 2066,
+          "prompt_tokens": 802,
+          "tool_calls": 0,
+          "latency": 19.367337942123413
+        }
+      },
+      "reference": "Patti Murin played the Off-Broadway roles of Ensemble in Mirette at the York Theatre Company and Daphne in Fly By Night at Playwrightd Horizons.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 88,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "In 2014, Talitha Bateman played a Cheerleader in \"Maker Shack Agency,\" and in 2015, she played Scarlett Kincaid in \"Hart of Dixie.\"",
+          "tier": 0,
+          "completion_tokens": 43,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 222,
+          "tool_calls": 0,
+          "latency": 1.2181990146636963
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "In 2014, Talitha Bateman played a Cheerleader in \"Maker Shack Agency\" (episode \"Pilot\"), and in 2015, she played Scarlett Kincaid in \"Hart of Dixie\" (3 episodes).",
+          "tier": 1,
+          "completion_tokens": 323,
+          "reasoning_tokens": 194,
+          "prompt_tokens": 235,
+          "tool_calls": 0,
+          "latency": 3.3397061824798584
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Talitha Bateman played the role of Cheerleader in 2014 and Scarlett Kincaid in 2015.",
+          "tier": 2,
+          "completion_tokens": 596,
+          "reasoning_tokens": 543,
+          "prompt_tokens": 957,
+          "tool_calls": 1,
+          "latency": 7.714468002319336
+        }
+      },
+      "reference": "Talitha Bateman appeared in the pilot episode of Maker Shack Agency in 2014 and played as Scarlett Kincaid in three episodes of Hart of Dixie in 2015.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 89,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Julie Warner played Rose Pinchbinder in the 2009 episode \"Keeping Tabs\" of True Jackson, VP.",
+          "tier": 0,
+          "completion_tokens": 28,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 682,
+          "tool_calls": 0,
+          "latency": 0.9070899486541748
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Rose Pinchbinder in \"True Jackson, VP\".",
+          "tier": 1,
+          "completion_tokens": 261,
+          "reasoning_tokens": 180,
+          "prompt_tokens": 695,
+          "tool_calls": 0,
+          "latency": 3.2048208713531494
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Julie Warner played the role of Rose Pinchbinder in a single episode of True Jackson, VP in 2009.",
+          "tier": 2,
+          "completion_tokens": 401,
+          "reasoning_tokens": 372,
+          "prompt_tokens": 899,
+          "tool_calls": 0,
+          "latency": 5.233296871185303
+        }
+      },
+      "reference": "In 2009, Julie Warner played Rose Pinchbinder in the TV show True Jackson, VP in the episode \"Keeping Tabs\".",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 90,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Dr. Yasin Said Numan was Speaker until 1993, and Sheikh Abdullah ibn Husayn al-Ahmar replaced him.",
+          "tier": 0,
+          "completion_tokens": 30,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 150,
+          "tool_calls": 0,
+          "latency": 1.0249619483947754
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Dr. Yasin Said Numan was Speaker until 1993, and he was replaced by Sheikh Abdullah ibn Husayn al-Ahmar.",
+          "tier": 1,
+          "completion_tokens": 303,
+          "reasoning_tokens": 215,
+          "prompt_tokens": 163,
+          "tool_calls": 0,
+          "latency": 3.0861337184906006
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Dr. Yasin Said Numan was the Speaker of the House of Representatives of Yemen until 1993, and he was replaced by Sheikh Abdullah ibn Husayn al-Ahmar.",
+          "tier": 2,
+          "completion_tokens": 806,
+          "reasoning_tokens": 765,
+          "prompt_tokens": 374,
+          "tool_calls": 0,
+          "latency": 8.586772203445435
+        }
+      },
+      "reference": "In Yemen, Numan was the Speaker of Parliament, until the election of 1993 when he was replaced by Abdullah ibn Husayn al-Ahmar.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 91,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "God's Army 2: States of Grace (2005) was directed by Richard Dutcher, who also directed Brigham City (2001) and God's Army (2000).",
+          "tier": 0,
+          "completion_tokens": 42,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 935,
+          "tool_calls": 0,
+          "latency": 1.2065961360931396
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "God's Army 2: States of Grace was directed by Richard Dutcher, who also directed Brigham City and God's Army.",
+          "tier": 1,
+          "completion_tokens": 245,
+          "reasoning_tokens": 141,
+          "prompt_tokens": 948,
+          "tool_calls": 0,
+          "latency": 2.6777820587158203
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "God's Army 2: States of Grace was directed by Richard Dutcher, who also directed God's Army and Brigham City.",
+          "tier": 2,
+          "completion_tokens": 849,
+          "reasoning_tokens": 817,
+          "prompt_tokens": 1171,
+          "tool_calls": 0,
+          "latency": 9.576151132583618
+        }
+      },
+      "reference": "God's Army 2: States of Grace (2005) – A sequel to God's Army by Richard Dutcher and Brigham City (2001) was also directed by Dutcher.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 92,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Brooks Ashmanskas appeared as Alan in God of Carnage in 2012 at the Huntington Theatre Company.",
+          "tier": 0,
+          "completion_tokens": 26,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 914,
+          "tool_calls": 0,
+          "latency": 1.1149418354034424
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Brooks Ashmanskas appeared as Alan in the 2012 production of God of Carnage at the Huntington Theatre Company.",
+          "tier": 1,
+          "completion_tokens": 115,
+          "reasoning_tokens": 54,
+          "prompt_tokens": 927,
+          "tool_calls": 0,
+          "latency": 1.6124622821807861
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Brooks Ashmanskas appeared as Alan in the 2012 production of \"God of Carnage\".",
+          "tier": 2,
+          "completion_tokens": 366,
+          "reasoning_tokens": 323,
+          "prompt_tokens": 2325,
+          "tool_calls": 1,
+          "latency": 5.31402325630188
+        }
+      },
+      "reference": "Brooks Ashmanskas appeared in God of Carnage in 2012 as Alan.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 93,
+      "paths": {
+        "direct": {
+          "correct": false,
+          "processed_prediction": "Brandt played Fatima Tazi, Naevia, Camille Jordanson, Valerie Khoury, Adriana, Violet, and Cassie in 2011.",
+          "tier": 0,
+          "completion_tokens": 37,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 484,
+          "tool_calls": 0,
+          "latency": 1.034857988357544
+        },
+        "cot": {
+          "correct": false,
+          "processed_prediction": "Brandt played the roles of Fatima Tazi, Naevia, Camille Jordanson, Valerie Khoury, Adriana, Violet, and Cassie in 2011.",
+          "tier": 1,
+          "completion_tokens": 567,
+          "reasoning_tokens": 350,
+          "prompt_tokens": 497,
+          "tool_calls": 0,
+          "latency": 5.289858102798462
+        },
+        "sql": {
+          "correct": false,
+          "processed_prediction": "In 2011, Brandt played the roles of Fatima Tazi, Naevia, Camille Jordanson, Valerie Khoury, Adriana, Violet, and Cassie.",
+          "tier": 2,
+          "completion_tokens": 723,
+          "reasoning_tokens": 664,
+          "prompt_tokens": 1489,
+          "tool_calls": 1,
+          "latency": 8.002070188522339
+        }
+      },
+      "reference": "In 2011, Lesley-Ann Brandt appeared in A Beautiful Soul as Angela Barry.",
+      "oracle_path": null,
+      "oracle_correct": false
+    },
+    {
+      "id": 94,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Aguilera won the Best Female Pop Vocal Performance Grammy in 2004 for the song \"Beautiful\".",
+          "tier": 0,
+          "completion_tokens": 24,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 577,
+          "tool_calls": 0,
+          "latency": 0.9493629932403564
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Christina Aguilera won the Grammy Award for Best Female Pop Vocal Performance in 2004 for the song \"Beautiful\".",
+          "tier": 1,
+          "completion_tokens": 121,
+          "reasoning_tokens": 68,
+          "prompt_tokens": 590,
+          "tool_calls": 0,
+          "latency": 1.8447480201721191
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Aguilera won the Grammy Award for Best Female Pop Vocal Performance for the song \"Beautiful\" in 2004.",
+          "tier": 2,
+          "completion_tokens": 193,
+          "reasoning_tokens": 165,
+          "prompt_tokens": 810,
+          "tool_calls": 0,
+          "latency": 2.494580030441284
+        }
+      },
+      "reference": "In 2004, Aguilera won a Grammy Award for the Best Female Pop Vocal Performance for \"Beautiful\".",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 95,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "CJ Baran produced \"Emotion\" and \"Let's Get Lost\" for the album E-MO-TION.",
+          "tier": 0,
+          "completion_tokens": 27,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 475,
+          "tool_calls": 0,
+          "latency": 1.4370920658111572
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "CJ Baran produced \"Emotion\" and \"Let's Get Lost\" for Carly Rae Jepsen's album \"E-MO-TION\".",
+          "tier": 1,
+          "completion_tokens": 476,
+          "reasoning_tokens": 367,
+          "prompt_tokens": 488,
+          "tool_calls": 0,
+          "latency": 4.874783992767334
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "CJ Baran produced the songs \"Emotion\" and \"Let's Get Lost\" for Carly Rae Jepsen's album \"E-MO-TION\".",
+          "tier": 2,
+          "completion_tokens": 2465,
+          "reasoning_tokens": 2407,
+          "prompt_tokens": 1471,
+          "tool_calls": 1,
+          "latency": 27.67170286178589
+        }
+      },
+      "reference": "CJ Baran wrote and produced the songs \"Emotion\" and \"Let's Get Lost\" of Carly Rae Jepsen's album E-MO-TION.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 96,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Kapoor & Sons won the Diversity Award at the Indian Film Festival of Melbourne in 2016 and was nominated for Best Supporting Actor at the Filmfare Awards in 2017.",
+          "tier": 0,
+          "completion_tokens": 39,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 613,
+          "tool_calls": 0,
+          "latency": 1.7420470714569092
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Kapoor & Sons won the Diversity Award at the Indian Film Festival of Melbourne (2016) and was nominated for Best Supporting Actor at the Filmfare Awards (2017).",
+          "tier": 1,
+          "completion_tokens": 335,
+          "reasoning_tokens": 248,
+          "prompt_tokens": 626,
+          "tool_calls": 0,
+          "latency": 4.246274948120117
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Kapoor & Sons won the Indian Film Festival of Melbourne Diversity Award and was nominated for the Filmfare Awards Best Supporting Actor.",
+          "tier": 2,
+          "completion_tokens": 391,
+          "reasoning_tokens": 339,
+          "prompt_tokens": 1770,
+          "tool_calls": 1,
+          "latency": 5.562503099441528
+        }
+      },
+      "reference": "Kapoor & Sons earned Khan the Diversity Award at the Indian Film Festival of Melbourne and a nomination for Best Supporting Actor at the Filmfare Awards.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 97,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "In 2005, she appeared in Nuvvostanante Nenoddantana and Okkade, and in 2006, she appeared in Bangaram.",
+          "tier": 0,
+          "completion_tokens": 39,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 425,
+          "tool_calls": 0,
+          "latency": 1.2065579891204834
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "In 2005, Santhoshi appeared in the Telugu films \"Nuvvostanante Nenoddantana\" and \"Okkade,\" and in 2006, she appeared in the Telugu film \"Bangaram.\"",
+          "tier": 1,
+          "completion_tokens": 184,
+          "reasoning_tokens": 78,
+          "prompt_tokens": 438,
+          "tool_calls": 0,
+          "latency": 2.156296968460083
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "In 2005 and 2006, Santhoshi appeared in the Telugu language films Nuvvostanante Nenoddantana, Okkade, and Bangaram.",
+          "tier": 2,
+          "completion_tokens": 1091,
+          "reasoning_tokens": 1017,
+          "prompt_tokens": 1385,
+          "tool_calls": 1,
+          "latency": 12.357170104980469
+        }
+      },
+      "reference": "Santhoshi appeared in Telugu films such as Nuvvostanante Nenoddantana (2005), Okkade (2005), and Bangaram (2006).",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 98,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Yes, Oklahoma has an indoor football team, the Oklahoma Defenders.",
+          "tier": 0,
+          "completion_tokens": 17,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 146,
+          "tool_calls": 0,
+          "latency": 0.8070330619812012
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Yes, the Oklahoma Defenders are an indoor football team.",
+          "tier": 1,
+          "completion_tokens": 120,
+          "reasoning_tokens": 55,
+          "prompt_tokens": 159,
+          "tool_calls": 0,
+          "latency": 2.030553102493286
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Yes, Oklahoma has one indoor football team, the Oklahoma Defenders.",
+          "tier": 2,
+          "completion_tokens": 445,
+          "reasoning_tokens": 408,
+          "prompt_tokens": 820,
+          "tool_calls": 1,
+          "latency": 6.185153245925903
+        }
+      },
+      "reference": "The Oklahoma Defenders are an indoor football team that plays in the CPIFL in Tulsa.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    },
+    {
+      "id": 99,
+      "paths": {
+        "direct": {
+          "correct": true,
+          "processed_prediction": "Conor Dwyer finished 4th with a time of 3:44.01, and Connor Jaeger finished 5th with a time of 3:44.16.",
+          "tier": 0,
+          "completion_tokens": 41,
+          "reasoning_tokens": 0,
+          "prompt_tokens": 287,
+          "tool_calls": 0,
+          "latency": 0.9231421947479248
+        },
+        "cot": {
+          "correct": true,
+          "processed_prediction": "Conor Dwyer finished 4th with a time of 3:44.01, and Connor Jaeger finished 5th with a time of 3:44.16.",
+          "tier": 1,
+          "completion_tokens": 558,
+          "reasoning_tokens": 389,
+          "prompt_tokens": 300,
+          "tool_calls": 0,
+          "latency": 5.564652919769287
+        },
+        "sql": {
+          "correct": true,
+          "processed_prediction": "Conor Dwyer finished 4th with a time of 3:44.01, and Connor Jaeger finished 5th with a time of 3:44.16.",
+          "tier": 2,
+          "completion_tokens": 436,
+          "reasoning_tokens": 361,
+          "prompt_tokens": 1149,
+          "tool_calls": 1,
+          "latency": 5.605505704879761
+        }
+      },
+      "reference": "Conor Dwyer (3:44.01) and fellow American Connor Jaeger (3:44.16) finished off the podium in fourth and fifth respectively, separated by a 0.15-second margin.",
+      "oracle_path": "direct",
+      "oracle_correct": true
+    }
+  ]
+}

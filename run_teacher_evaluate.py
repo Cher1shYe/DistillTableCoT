@@ -35,14 +35,28 @@ sys.path.insert(0, ROOT)
 
 from datasets import load_dataset
 
-from configs import TASK_CONFIGS, TASK_TEST_CONFIGS, COT_SYSTEM_PROMPT
-from utils import format_table, call_deepseek_api, table_to_sqlite, execute_sql
+from configs import TASK_CONFIGS, TASK_TEST_CONFIGS, COT_SYSTEM_PROMPT, DIRECT_SYSTEM_PROMPT
+from utils import (
+    format_table, call_deepseek_api, table_to_sqlite, execute_sql,
+    DEEPSEEK_CHAT_MODEL,
+)
 
 
 def extract_sql(text):
     """从模型输出中提取 ```sql ... ``` 代码块 (镜像 run_inference.py 同名函数)。"""
     match = re.search(r"```sql\s*(.*?)\s*```", text, re.DOTALL | re.IGNORECASE)
     return match.group(1).strip() if match else None
+
+
+def _accumulate_usage(total, usage):
+    """把单次调用的 usage 累加进 total（R1 多轮时统计整条轨迹的 token 成本）。"""
+    if not usage:
+        return total
+    for k in ("prompt_tokens", "completion_tokens", "reasoning_tokens"):
+        v = usage.get(k)
+        if v is not None:
+            total[k] = total.get(k, 0) + v
+    return total
 
 
 def teacher_cot_predictions(task_name, split, num_samples,
@@ -103,11 +117,16 @@ def teacher_cot_predictions(task_name, split, num_samples,
             "id": i,
             "original_dataset_id": str(sample.get("original_dataset_id", sample.get("id", "N/A"))),
             "task": task_name,
-            "model": "teacher_deepseek",
+            "model": "teacher_deepseek_r1",
             "mode": "CoT",
-            "prediction": final_prediction,
+            "prediction": str(final_prediction),
             "processed_prediction": processed_pred,
             "reference": reference_label,
+            # === R1 新增字段 ===
+            "reasoning": getattr(final_prediction, "reasoning", ""),   # R1 思维链，蒸馏目标
+            "usage": getattr(final_prediction, "usage", None),         # token 成本
+            "latency": getattr(final_prediction, "latency", 0.0),      # 延迟成本
+            "tool_calls": 0,                                           # CoT 路径无工具调用
             # 单轮无 turn_history, 显式留空键以便下游统一访问
             "turn_details": [],
         })
@@ -120,6 +139,89 @@ def teacher_cot_predictions(task_name, split, num_samples,
 
     print(f"\n✅ {len(results_to_save)} 条 teacher CoT 结果保存至: {output_path}")
     print("   下一步: python3 scripts/batch_eval_qwen3.py")
+
+
+def teacher_direct_predictions(task_name, split, num_samples,
+                               out_name, output_dir="outputs"):
+    """
+    Direct baseline (cost-aware Path 1)：单轮直接作答、不展示推理。
+
+    关键：用 V3 (deepseek-chat) 而非 R1 (deepseek-reasoner)。
+    因为 R1 物理上关不掉推理（每次都吐 reasoning_content），用 R1 跑出来的
+    "Direct" 其实是藏着推理的 CoT —— 成本阶梯被压平，且 oracle 会把"靠隐藏推理
+    才答对"的题误标成 Direct 可解，导致学生真做无推理 Direct 时答不出来。
+    用 V3 才是诚实的"无刻意推理"信号，也是真实的成本下界。
+
+    prompt 复用 TASK_CONFIGS[task]["user_prompt_template"]（含表格+问题+答案格式，
+    不含 schema），system 用 DIRECT_SYSTEM_PROMPT。
+    """
+    if task_name not in TASK_CONFIGS:
+        print(f"错误: 任务 '{task_name}' 未在 TASK_CONFIGS 中定义。")
+        return
+
+    print(f"--- Teacher Direct baseline (V3) 开始: task={task_name}, split={split}, n={num_samples} ---")
+
+    config = TASK_CONFIGS[task_name]
+    try:
+        dataset = load_dataset(config["dataset_name"], split=split)
+    except Exception as e:
+        print(f"❌ 数据集加载失败: {e}")
+        return
+
+    if num_samples > len(dataset):
+        num_samples = len(dataset)
+    dataset = dataset.select(range(num_samples))
+
+    results_to_save = []
+
+    for i, sample in enumerate(tqdm.tqdm(dataset, desc=f"teacher-direct(V3) → {task_name}")):
+        raw_table = sample.get('table') or sample.get('table_content') or sample.get('table_text')
+        table_str = format_table(raw_table, task_name=task_name)
+        question = sample.get('question') or sample.get('statement', '')
+
+        prompt = config["user_prompt_template"].format(
+            table=table_str, question=question, statement=question,
+        )
+        messages = [
+            {"role": "system", "content": DIRECT_SYSTEM_PROMPT},
+            {"role": "user", "content": prompt},
+        ]
+        # V3：非推理模型；答案短，max_tokens 给小一点更省更快
+        final_prediction = call_deepseek_api(messages, model=DEEPSEEK_CHAT_MODEL, max_tokens=1024)
+
+        postprocess_func = config["postprocess_func"]
+        reference_label = sample[config["target_field"]]
+        try:
+            processed_pred, _ = postprocess_func(final_prediction, reference_label)
+        except Exception as e:
+            print(f"⚠️ 后处理失败 (sample {i}): {e}")
+            processed_pred = final_prediction
+
+        results_to_save.append({
+            "id": i,
+            "original_dataset_id": str(sample.get("original_dataset_id", sample.get("id", "N/A"))),
+            "task": task_name,
+            "model": "teacher_deepseek_v3",   # Direct 用 V3，与其它 R1 路径区分
+            "mode": "Direct",
+            "prediction": str(final_prediction),
+            "processed_prediction": processed_pred,
+            "reference": reference_label,
+            # === cost 字段 ===
+            "reasoning": getattr(final_prediction, "reasoning", ""),   # V3 无推理，恒为空
+            "usage": getattr(final_prediction, "usage", None),         # 只含 answer token，成本下界
+            "latency": getattr(final_prediction, "latency", 0.0),
+            "tool_calls": 0,                                           # Direct 无工具调用
+            "turn_details": [],
+        })
+
+    task_output_dir = os.path.join(output_dir, task_name)
+    os.makedirs(task_output_dir, exist_ok=True)
+    output_path = os.path.join(task_output_dir, out_name)
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(results_to_save, f, ensure_ascii=False, indent=4)
+
+    print(f"\n✅ {len(results_to_save)} 条 teacher Direct(V3) 结果保存至: {output_path}")
+    print("   下一步: python3 scripts/cost_aware_oracle.py --task " + task_name)
 
 
 def teacher_agent_predictions(task_name, split, num_samples,
@@ -166,6 +268,10 @@ def teacher_agent_predictions(task_name, split, num_samples,
         final_prediction = ""
         mode = "SQL"
         turn_history = []
+        # === R1 成本累加器（整条轨迹）===
+        total_usage = {}      # prompt/completion/reasoning tokens 累加
+        total_latency = 0.0   # 所有轮 + 回退的耗时之和
+        tool_calls = 0        # 实际执行 SQL 的次数（= cost-aware 的 tool_calls）
 
         # --- SQL Agent 多轮循环 (镜像 run_inference.py L114-L164) ---
         if conn is not None:
@@ -196,7 +302,17 @@ def teacher_agent_predictions(task_name, split, num_samples,
                     {"role": "user", "content": current_user_prompt},
                 ]
                 response = call_deepseek_api(messages)
-                turn_history.append({"turn": turn, "prompt": current_user_prompt, "response": response})
+                # 显式落盘每轮的推理链与成本，整条 R1 轨迹无损保留
+                turn_history.append({
+                    "turn": turn,
+                    "prompt": current_user_prompt,
+                    "response": response.content,
+                    "reasoning": getattr(response, "reasoning", ""),
+                    "usage": getattr(response, "usage", None),
+                    "latency": getattr(response, "latency", 0.0),
+                })
+                total_usage = _accumulate_usage(total_usage, getattr(response, "usage", None))
+                total_latency += getattr(response, "latency", 0.0)
 
                 if "Final Answer:" in response:
                     final_prediction = response
@@ -204,6 +320,7 @@ def teacher_agent_predictions(task_name, split, num_samples,
 
                 sql_query = extract_sql(response)
                 if sql_query:
+                    tool_calls += 1   # 实际向 SQLite 发起了一次执行
                     success, db_feedback = execute_sql(conn, sql_query)
                     last_sql = sql_query
                     last_feedback = db_feedback
@@ -230,6 +347,9 @@ def teacher_agent_predictions(task_name, split, num_samples,
                 {"role": "user", "content": cot_prompt},
             ]
             final_prediction = call_deepseek_api(cot_messages)
+            # 回退调用的成本同样计入整条轨迹
+            total_usage = _accumulate_usage(total_usage, getattr(final_prediction, "usage", None))
+            total_latency += getattr(final_prediction, "latency", 0.0)
 
         # --- 后处理 ---
         postprocess_func = config["postprocess_func"]
@@ -244,11 +364,17 @@ def teacher_agent_predictions(task_name, split, num_samples,
             "id": i,
             "original_dataset_id": str(sample.get("original_dataset_id", sample.get("id", "N/A"))),
             "task": task_name,
-            "model": "teacher_deepseek",
+            "model": "teacher_deepseek_r1",
             "mode": mode,
-            "prediction": final_prediction,
+            "prediction": str(final_prediction),
             "processed_prediction": processed_pred,
             "reference": reference_label,   # 保留原始 reference 以便 batch_eval 重清洗
+            # === R1 新增字段 ===
+            # reasoning: 产出最终答案那次调用的思维链（完整逐轮 reasoning 见 turn_details）
+            "reasoning": getattr(final_prediction, "reasoning", ""),
+            "usage": (total_usage or None),     # 整条轨迹的 token 成本累加
+            "latency": total_latency,           # 整条轨迹的延迟之和
+            "tool_calls": tool_calls,           # SQL 执行次数
             "turn_details": turn_history,
         })
 
@@ -269,19 +395,24 @@ def main():
     parser.add_argument("--task", type=str, required=True,
                         choices=["wikitableqa", "tabfact", "fetaqa", "hitab"])
     parser.add_argument("--inference_mode", type=str, default="mixed_agent",
-                        choices=["mixed_agent", "sql_agent", "cot"],
+                        choices=["mixed_agent", "sql_agent", "cot", "direct"],
                         help="mixed_agent = SQL+CoT 回退 (= run_inference.py 默认行为); "
                              "sql_agent  = 关闭 CoT 回退 (= run_inference.py --pure_sql); "
                              "cot        = 标准 CoT baseline, 用 TASK_TEST_CONFIGS 的 prompt、"
-                             "无 system, 单轮调用 (与 run_baseline.py --inference_mode cot 同款)")
+                             "无 system, 单轮调用 (与 run_baseline.py --inference_mode cot 同款); "
+                             "direct     = cost-aware Direct 路径, 用 V3(deepseek-chat) 单轮直接作答、"
+                             "不推理 (R1 关不掉推理, 故 Direct 专用 V3)")
     parser.add_argument("--split", type=str, default="test",
                         help="数据切片，默认 test (与学生模型评估一致)")
     parser.add_argument("--num_samples", type=int, default=100)
     parser.add_argument("--max_turns", type=int, default=5)
     parser.add_argument("--max_empty", type=int, default=2)
     parser.add_argument("--output_dir", type=str, default="outputs")
+    parser.add_argument("--version", type=int, default=1,
+                        help="R1 数据版本号，用于默认输出文件名 R1_prediction_<mode>_v<version>.json")
     parser.add_argument("--out_name", type=str, default=None,
-                        help="自定义输出文件名；默认 predictions_teacher_deepseek_<mode>.json")
+                        help="自定义输出文件名；默认 R1_prediction_<mode>_v<version>.json，"
+                             "与旧的 V3 数据 predictions_teacher_deepseek_<mode>.json 分开存放")
     args = parser.parse_args()
 
     if not os.environ.get("DEEPSEEK_API_KEY"):
@@ -289,13 +420,23 @@ def main():
         print("    请先 export DEEPSEEK_API_KEY=sk-xxx 再跑。")
         return
 
-    out_name = args.out_name or f"predictions_teacher_deepseek_{args.inference_mode}.json"
+    # R1 数据与旧 V3 数据分开命名：R1_prediction_<mode>_v<version>.json
+    out_name = args.out_name or f"R1_prediction_{args.inference_mode}_v{args.version}.json"
     if not out_name.endswith(".json"):
         out_name += ".json"
 
     if args.inference_mode == "cot":
         # max_turns / max_empty 对 CoT 模式无意义, 静默忽略 (argparse 仍允许传)
         teacher_cot_predictions(
+            task_name=args.task,
+            split=args.split,
+            num_samples=args.num_samples,
+            out_name=out_name,
+            output_dir=args.output_dir,
+        )
+    elif args.inference_mode == "direct":
+        # Direct 走 V3 (deepseek-chat)，单轮不推理；max_turns / max_empty 同样无意义
+        teacher_direct_predictions(
             task_name=args.task,
             split=args.split,
             num_samples=args.num_samples,

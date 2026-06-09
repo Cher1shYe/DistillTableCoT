@@ -1,0 +1,1902 @@
+[
+    {
+        "id": 0,
+        "original_dataset_id": "nu-0",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Italy",
+        "processed_prediction": "Italy",
+        "reference": "['Italy']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 345,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 1.2145709991455078,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 1,
+        "original_dataset_id": "nu-1",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 100000",
+        "processed_prediction": "100000",
+        "reference": "['100,000']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 312,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9487228393554688,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 2,
+        "original_dataset_id": "nu-2",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 17 years (from 1936/37 to 1953/54)",
+        "processed_prediction": "17 years",
+        "reference": "['17 years']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 678,
+            "completion_tokens": 20,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9760761260986328,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 3,
+        "original_dataset_id": "nu-3",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1995-01-26",
+        "processed_prediction": "1995-01-26",
+        "reference": "['January 26, 1995']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 1831,
+            "completion_tokens": 10,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8004128932952881,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 4,
+        "original_dataset_id": "nu-4",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 14",
+        "processed_prediction": "14",
+        "reference": "['17']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 767,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.730816125869751,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 5,
+        "original_dataset_id": "nu-5",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: World Junior Championships",
+        "processed_prediction": "World Junior Championships",
+        "reference": "['World Junior Championships']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 322,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.5748012065887451,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 6,
+        "original_dataset_id": "nu-6",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 16",
+        "processed_prediction": "16",
+        "reference": "['15']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 471,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8879590034484863,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 7,
+        "original_dataset_id": "nu-7",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 363",
+        "processed_prediction": "363",
+        "reference": "['363']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 751,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6029291152954102,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 8,
+        "original_dataset_id": "nu-8",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1977–1978, 1982–1985",
+        "processed_prediction": "1977–1978, 1982–1985",
+        "reference": "['1982-1985']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 398,
+            "completion_tokens": 16,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8326570987701416,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 9,
+        "original_dataset_id": "nu-9",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 2000",
+        "processed_prediction": "2000",
+        "reference": "['2000']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 657,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.069828987121582,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 10,
+        "original_dataset_id": "nu-10",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1970-1972",
+        "processed_prediction": "1970-1972",
+        "reference": "['2004', '2005', '2006']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 1922,
+            "completion_tokens": 9,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9873268604278564,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 11,
+        "original_dataset_id": "nu-11",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: John",
+        "processed_prediction": "John",
+        "reference": "['John']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 335,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8464970588684082,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 12,
+        "original_dataset_id": "nu-12",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 440",
+        "processed_prediction": "440",
+        "reference": "['440']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 956,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9176480770111084,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 13,
+        "original_dataset_id": "nu-13",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 8",
+        "processed_prediction": "8",
+        "reference": "['7']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 337,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8145530223846436,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 14,
+        "original_dataset_id": "nu-14",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: space",
+        "processed_prediction": "space",
+        "reference": "['space']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 2023,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8720171451568604,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 15,
+        "original_dataset_id": "nu-15",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 82",
+        "processed_prediction": "82",
+        "reference": "['68']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 584,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8587479591369629,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 16,
+        "original_dataset_id": "nu-16",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Tomomi Manako",
+        "processed_prediction": "Tomomi Manako",
+        "reference": "['Tomomi Manako']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 630,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9440140724182129,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 17,
+        "original_dataset_id": "nu-17",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 6",
+        "processed_prediction": "6",
+        "reference": "['5']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 498,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7119481563568115,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 18,
+        "original_dataset_id": "nu-18",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Vidant Bertie Hospital",
+        "processed_prediction": "Vidant Bertie Hospital",
+        "reference": "['Vidant Bertie Hospital']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 3338,
+            "completion_tokens": 8,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7008321285247803,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 19,
+        "original_dataset_id": "nu-19",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 492111",
+        "processed_prediction": "492111",
+        "reference": "['492,111']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 754,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9352319240570068,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 20,
+        "original_dataset_id": "nu-20",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1",
+        "processed_prediction": "1",
+        "reference": "['1']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 995,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7588610649108887,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 21,
+        "original_dataset_id": "nu-21",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Brazil",
+        "processed_prediction": "Brazil",
+        "reference": "['Brazil']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 305,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9158308506011963,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 22,
+        "original_dataset_id": "nu-22",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 7",
+        "processed_prediction": "7",
+        "reference": "['7']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 474,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.024548053741455,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 23,
+        "original_dataset_id": "nu-23",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Ragamuffin",
+        "processed_prediction": "Ragamuffin",
+        "reference": "['Brindabella']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 477,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8663427829742432,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 24,
+        "original_dataset_id": "nu-24",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: GL-B-6",
+        "processed_prediction": "GL-B-6",
+        "reference": "['GL-B-6']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 226,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7631590366363525,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 25,
+        "original_dataset_id": "nu-25",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 9",
+        "processed_prediction": "9",
+        "reference": "['3']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 538,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0959649085998535,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 26,
+        "original_dataset_id": "nu-26",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 22",
+        "processed_prediction": "22",
+        "reference": "['20']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 572,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7033059597015381,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 27,
+        "original_dataset_id": "nu-27",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Simon Makienok Christoffersen (10)",
+        "processed_prediction": "Simon Makienok Christoffersen",
+        "reference": "['Simon Makienok Christoffersen']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 1295,
+            "completion_tokens": 13,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1260552406311035,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 28,
+        "original_dataset_id": "nu-28",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 9",
+        "processed_prediction": "9",
+        "reference": "['9']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 752,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9085018634796143,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 29,
+        "original_dataset_id": "nu-29",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1",
+        "processed_prediction": "1",
+        "reference": "['1']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 578,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0265610218048096,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 30,
+        "original_dataset_id": "nu-30",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 42, 43",
+        "processed_prediction": "42, 43",
+        "reference": "['Pennsylvania Avenue Metro Extra Line']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 7358,
+            "completion_tokens": 8,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1597821712493896,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 31,
+        "original_dataset_id": "nu-31",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: DW Stadium",
+        "processed_prediction": "DW Stadium",
+        "reference": "['DW Stadium']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 440,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8602471351623535,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 32,
+        "original_dataset_id": "nu-32",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 2",
+        "processed_prediction": "2",
+        "reference": "['2']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 275,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9992680549621582,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 33,
+        "original_dataset_id": "nu-33",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1914–15",
+        "processed_prediction": "1914–15",
+        "reference": "['1914-15']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 303,
+            "completion_tokens": 8,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8384199142456055,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 34,
+        "original_dataset_id": "nu-34",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Jahaira Novgorodova, Natalia Melckenberger, Carmen Jenockova, Mariesea Mnesiču, Patricia Valiahmetova, Anastasija Larkova",
+        "processed_prediction": "Jahaira Novgorodova, Natalia Melckenberger, Carmen Jenockova, Mariesea Mnesiču, Patricia Valiahmetova, Anastasija Larkova",
+        "reference": "['Jahaira Novgorodova', 'Carmen Jenockova', 'Mariesea Mnesiču', 'Patricia Valiahmetova', 'Anastasija Larkova']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 2855,
+            "completion_tokens": 40,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1082139015197754,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 35,
+        "original_dataset_id": "nu-35",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 0",
+        "processed_prediction": "0",
+        "reference": "['0']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 215,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9728169441223145,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 36,
+        "original_dataset_id": "nu-36",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 4",
+        "processed_prediction": "4",
+        "reference": "['4']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 763,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.622838020324707,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 37,
+        "original_dataset_id": "nu-37",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 0",
+        "processed_prediction": "0",
+        "reference": "['10']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 246,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7371759414672852,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 38,
+        "original_dataset_id": "nu-38",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 2",
+        "processed_prediction": "2",
+        "reference": "['2']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 477,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6225810050964355,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 39,
+        "original_dataset_id": "nu-39",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 2005",
+        "processed_prediction": "2005",
+        "reference": "['2005']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 347,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.47220301628112793,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 40,
+        "original_dataset_id": "nu-40",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 6",
+        "processed_prediction": "6",
+        "reference": "['5']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 666,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.2223291397094727,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 41,
+        "original_dataset_id": "nu-41",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Eric Wynalda",
+        "processed_prediction": "Eric Wynalda",
+        "reference": "['Clint Dempsey']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 291,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0675950050354004,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 42,
+        "original_dataset_id": "nu-42",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Strasbourg Cathedral",
+        "processed_prediction": "Strasbourg Cathedral",
+        "reference": "[\"St. Mary's Church\"]",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 611,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9044818878173828,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 43,
+        "original_dataset_id": "nu-43",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Independent",
+        "processed_prediction": "Independent",
+        "reference": "['Independent']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 2746,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 0.959165096282959,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 44,
+        "original_dataset_id": "nu-44",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1992",
+        "processed_prediction": "1992",
+        "reference": "['1992']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 4007,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0231881141662598,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 45,
+        "original_dataset_id": "nu-45",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 504000",
+        "processed_prediction": "504000",
+        "reference": "['504,000']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 316,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0264010429382324,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 46,
+        "original_dataset_id": "nu-46",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 10",
+        "processed_prediction": "10",
+        "reference": "['20']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 918,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8668739795684814,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 47,
+        "original_dataset_id": "nu-47",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 6",
+        "processed_prediction": "6",
+        "reference": "['7']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 397,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9382240772247314,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 48,
+        "original_dataset_id": "nu-48",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Chile, Ecuador",
+        "processed_prediction": "Chile, Ecuador",
+        "reference": "['Chile', 'Ecuador']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 310,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.823235034942627,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 49,
+        "original_dataset_id": "nu-49",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 2",
+        "processed_prediction": "2",
+        "reference": "['1']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 1236,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8001010417938232,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 50,
+        "original_dataset_id": "nu-50",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Carlin",
+        "processed_prediction": "Carlin",
+        "reference": "['Carlin']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 541,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6650152206420898,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 51,
+        "original_dataset_id": "nu-51",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 10",
+        "processed_prediction": "10",
+        "reference": "['10']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 373,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.877551794052124,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 52,
+        "original_dataset_id": "nu-52",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Yankton",
+        "processed_prediction": "Yankton",
+        "reference": "['Yankton']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 248,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0771150588989258,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 53,
+        "original_dataset_id": "nu-53",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1935",
+        "processed_prediction": "1935",
+        "reference": "['1935']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 893,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9568750858306885,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 54,
+        "original_dataset_id": "nu-54",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: David Russell",
+        "processed_prediction": "David Russell",
+        "reference": "['David Russell']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 299,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.5422341823577881,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 55,
+        "original_dataset_id": "nu-55",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: World Championships",
+        "processed_prediction": "World Championships",
+        "reference": "['World Championships']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 332,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8150708675384521,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 56,
+        "original_dataset_id": "nu-56",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 460252",
+        "processed_prediction": "460252",
+        "reference": "['460,252']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 747,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.85422682762146,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 57,
+        "original_dataset_id": "nu-57",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Mig-15",
+        "processed_prediction": "Mig-15",
+        "reference": "['Mig-15']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 454,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7790629863739014,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 58,
+        "original_dataset_id": "nu-58",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Esther Shahamorov",
+        "processed_prediction": "Esther Shahamorov",
+        "reference": "['Esther Shahamorov']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 652,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6901211738586426,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 59,
+        "original_dataset_id": "nu-59",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: No",
+        "processed_prediction": "No",
+        "reference": "['no']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 1065,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 0.941171407699585,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 60,
+        "original_dataset_id": "nu-60",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Giant Slalom",
+        "processed_prediction": "Giant Slalom",
+        "reference": "['Giant Slalom']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 572,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0872538089752197,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 61,
+        "original_dataset_id": "nu-61",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: S",
+        "processed_prediction": "S",
+        "reference": "['S']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 209,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8211419582366943,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 62,
+        "original_dataset_id": "nu-62",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Ph.D",
+        "processed_prediction": "Ph.D",
+        "reference": "['Ph.D']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 401,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9397838115692139,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 63,
+        "original_dataset_id": "nu-63",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: None",
+        "processed_prediction": "None",
+        "reference": "['18']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 668,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 0.740429162979126,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 64,
+        "original_dataset_id": "nu-64",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 5",
+        "processed_prediction": "5",
+        "reference": "['5']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 661,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.2217168807983398,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 65,
+        "original_dataset_id": "nu-65",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Alissa Joanndova",
+        "processed_prediction": "Alissa Joanndova",
+        "reference": "['Alissa Joanndova']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 2852,
+            "completion_tokens": 8,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0890908241271973,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 66,
+        "original_dataset_id": "nu-66",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 2010-09-06",
+        "processed_prediction": "2010-09-06",
+        "reference": "['December 6, 2010']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 238,
+            "completion_tokens": 10,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9037759304046631,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 67,
+        "original_dataset_id": "nu-67",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1",
+        "processed_prediction": "1",
+        "reference": "['1']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 676,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.003830909729004,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 68,
+        "original_dataset_id": "nu-68",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 19",
+        "processed_prediction": "19",
+        "reference": "['18']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 841,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7491409778594971,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 69,
+        "original_dataset_id": "nu-69",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Justiciar",
+        "processed_prediction": "Justiciar",
+        "reference": "['Justiciar']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 256,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6873979568481445,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 70,
+        "original_dataset_id": "nu-70",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Karolína Plíšková",
+        "processed_prediction": "Karolína Plíšková",
+        "reference": "['Karolína Plíšková']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 680,
+            "completion_tokens": 10,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8880770206451416,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 71,
+        "original_dataset_id": "nu-71",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 2",
+        "processed_prediction": "2",
+        "reference": "['2']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 301,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6577858924865723,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 72,
+        "original_dataset_id": "nu-72",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 2002",
+        "processed_prediction": "2002",
+        "reference": "['2003']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 375,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9055290222167969,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 73,
+        "original_dataset_id": "nu-73",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 9",
+        "processed_prediction": "9",
+        "reference": "['9']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 249,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6590242385864258,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 74,
+        "original_dataset_id": "nu-74",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 3",
+        "processed_prediction": "3",
+        "reference": "['3']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 331,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.718620777130127,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 75,
+        "original_dataset_id": "nu-75",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 2",
+        "processed_prediction": "2",
+        "reference": "['4']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 447,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8137567043304443,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 76,
+        "original_dataset_id": "nu-76",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1938",
+        "processed_prediction": "1938",
+        "reference": "['1926']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 511,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8776628971099854,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 77,
+        "original_dataset_id": "nu-77",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 736",
+        "processed_prediction": "736",
+        "reference": "['736']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 337,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8483269214630127,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 78,
+        "original_dataset_id": "nu-78",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Mike Conway",
+        "processed_prediction": "Mike Conway",
+        "reference": "['Mike Conway']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 1078,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9123833179473877,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 79,
+        "original_dataset_id": "nu-79",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Athens, Greece",
+        "processed_prediction": "Athens, Greece",
+        "reference": "['Athens, Greece']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 335,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8546130657196045,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 80,
+        "original_dataset_id": "nu-80",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 3",
+        "processed_prediction": "3",
+        "reference": "['3']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 399,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.788848876953125,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 81,
+        "original_dataset_id": "nu-81",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 3",
+        "processed_prediction": "3",
+        "reference": "['5']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 2825,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7085697650909424,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 82,
+        "original_dataset_id": "nu-82",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1",
+        "processed_prediction": "1",
+        "reference": "['1']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 385,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.991840124130249,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 83,
+        "original_dataset_id": "nu-83",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Doriano Romboni",
+        "processed_prediction": "Doriano Romboni",
+        "reference": "['Doriano Romboni']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 700,
+            "completion_tokens": 8,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9090769290924072,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 84,
+        "original_dataset_id": "nu-84",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Wigan Warriors",
+        "processed_prediction": "Wigan Warriors",
+        "reference": "['Wigan Warriors']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 443,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0216748714447021,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 85,
+        "original_dataset_id": "nu-85",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 14",
+        "processed_prediction": "14",
+        "reference": "['14']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 494,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8254477977752686,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 86,
+        "original_dataset_id": "nu-86",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 4",
+        "processed_prediction": "4",
+        "reference": "['4']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 706,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8939657211303711,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 87,
+        "original_dataset_id": "nu-87",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1965-1970",
+        "processed_prediction": "1965-1970",
+        "reference": "['1965-1970']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 656,
+            "completion_tokens": 9,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7738819122314453,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 88,
+        "original_dataset_id": "nu-88",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Russia",
+        "processed_prediction": "Russia",
+        "reference": "['Russia']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 580,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8280460834503174,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 89,
+        "original_dataset_id": "nu-89",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 2",
+        "processed_prediction": "2",
+        "reference": "['2']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 255,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.0310120582580566,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 90,
+        "original_dataset_id": "nu-90",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 3",
+        "processed_prediction": "3",
+        "reference": "['2']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 627,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1131649017333984,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 91,
+        "original_dataset_id": "nu-91",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Canada",
+        "processed_prediction": "Canada",
+        "reference": "['USA']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 393,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8539810180664062,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 92,
+        "original_dataset_id": "nu-92",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Yes",
+        "processed_prediction": "Yes",
+        "reference": "['Yes']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 304,
+            "completion_tokens": 4,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6828539371490479,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 93,
+        "original_dataset_id": "nu-93",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 1928",
+        "processed_prediction": "1928",
+        "reference": "['1928']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 508,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7600748538970947,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 94,
+        "original_dataset_id": "nu-94",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 8",
+        "processed_prediction": "8",
+        "reference": "['11']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 1078,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.9284441471099854,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 95,
+        "original_dataset_id": "nu-95",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: 24",
+        "processed_prediction": "24",
+        "reference": "['22']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 349,
+            "completion_tokens": 5,
+            "reasoning_tokens": null
+        },
+        "latency": 0.8297989368438721,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 96,
+        "original_dataset_id": "nu-96",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: $1.56 billion",
+        "processed_prediction": "1.56 billion",
+        "reference": "['$1.56 billion']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 378,
+            "completion_tokens": 8,
+            "reasoning_tokens": null
+        },
+        "latency": 0.7632620334625244,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 97,
+        "original_dataset_id": "nu-97",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: October 2011",
+        "processed_prediction": "October 2011",
+        "reference": "['October 2011']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 220,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6411809921264648,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 98,
+        "original_dataset_id": "nu-98",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Mike Imrie",
+        "processed_prediction": "Mike Imrie",
+        "reference": "['Mike Imrie']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 808,
+            "completion_tokens": 6,
+            "reasoning_tokens": null
+        },
+        "latency": 1.1396632194519043,
+        "tool_calls": 0,
+        "turn_details": []
+    },
+    {
+        "id": 99,
+        "original_dataset_id": "nu-99",
+        "task": "wikitableqa",
+        "model": "teacher_deepseek_v3",
+        "mode": "Direct",
+        "prediction": "Final Answer: Chester Township, Ohio",
+        "processed_prediction": "Chester Township, Ohio",
+        "reference": "['Chester Township, Ohio']",
+        "reasoning": "",
+        "usage": {
+            "prompt_tokens": 306,
+            "completion_tokens": 7,
+            "reasoning_tokens": null
+        },
+        "latency": 0.6828782558441162,
+        "tool_calls": 0,
+        "turn_details": []
+    }
+]

@@ -2,6 +2,7 @@
 import os
 import ast
 import re
+import time
 import sqlite3
 import pandas as pd
 from datetime import datetime
@@ -441,44 +442,97 @@ def parse_date_string(date_str):
             
     return None
 
-# def call_deepseek_api(prompt):
-#     """调用 DeepSeek API 并返回结果"""
-#     if client is None: return "[API_CLIENT_NOT_INITIALIZED]"
-#     try:
-#         response = client.chat.completions.create(
-#             model="deepseek-chat",
-#             messages=[{"role": "user", "content": prompt}],
-#             temperature=0.0,
-#             max_tokens=1500
-#         )
-#         return response.choices[0].message.content
-#     except Exception as e:
-#         return f"[API_ERROR: {e}]"
-    
-def call_deepseek_api(prompt_or_messages):
+# DeepSeek-R1 的 API 模型名（V3 时代用的是 "deepseek-chat"）
+DEEPSEEK_REASONER_MODEL = "deepseek-reasoner"
+# V3：非推理模型，用于 cost-aware 的 Direct 路径（无 reasoning_content，成本最低档）
+DEEPSEEK_CHAT_MODEL = "deepseek-chat"
+
+
+class APIResult(str):
     """
-    调用 DeepSeek API。
-    支持传入字符串 (Prompt) 或 消息列表 (Messages)。
+    DeepSeek-R1 (deepseek-reasoner) 的调用结果。
+
+    本身是一个 str，其字符串值 == 模型最终答案 message.content，
+    因此所有把返回值当字符串用的旧代码（如 `"Final Answer:" in resp`、
+    `extract_sql(resp)`、`postprocess_func(resp, ...)`）无需改动即可继续工作。
+    额外通过属性携带 R1 的推理链与成本元数据：
+        .content   最终答案文本（与 str 值相同）
+        .reasoning message.reasoning_content —— R1 的思维链，蒸馏要的就是它
+        .usage     dict: prompt_tokens / completion_tokens / reasoning_tokens
+        .latency   本次调用耗时（秒），用于 cost-aware 的 latency 指标
+        .error     调用失败时存异常信息，否则为 None
     """
-    if client is None: 
-        return "[API_CLIENT_NOT_INITIALIZED]"
-    
+    def __new__(cls, content="", reasoning="", usage=None, latency=0.0, error=None):
+        text = content if content is not None else ""
+        obj = super().__new__(cls, text)
+        obj.content = text
+        obj.reasoning = reasoning or ""
+        obj.usage = usage
+        obj.latency = latency
+        obj.error = error
+        return obj
+
+
+def call_deepseek_api(prompt_or_messages, model=DEEPSEEK_REASONER_MODEL,
+                      max_tokens=8192, max_retries=3, retry_backoff=2.0):
+    """
+    调用 DeepSeek-R1 (deepseek-reasoner)。支持字符串 (Prompt) 或消息列表 (Messages)。
+    返回 APIResult（str 子类，见上）。
+
+    与 V3 (deepseek-chat) 的关键差异：
+      1. 单独接住 reasoning_content：R1 把思维链放在 message.reasoning_content，
+         最终答案放在 message.content。只取 content 会把 R1 最值钱的推理链全丢掉。
+      2. 不传 temperature/top_p：reasoner 不支持采样参数，传了也被忽略。
+      3. max_tokens 默认 8192：R1 reasoning 动辄几千 token，1500 会被截断。
+      4. 顺带记录 usage（含 reasoning_tokens）和 latency，直接喂给 cost-aware 指标。
+
+    注意：使用 DeepSeek 官方 API 时无需手动套用 R1 的 <think> chat template，
+    服务端会自动处理，思维链通过 message.reasoning_content 返回。多轮场景下不要把
+    reasoning_content 放回 messages（API 会报错）；拼接历史的责任在调用方。
+    """
+    if client is None:
+        return APIResult("[API_CLIENT_NOT_INITIALIZED]", error="client_not_initialized")
+
     # 自动转换格式：如果传入的是字符串，则包装成标准 messages 格式
     if isinstance(prompt_or_messages, str):
         messages = [{"role": "user", "content": prompt_or_messages}]
     else:
         messages = prompt_or_messages
 
-    try:
-        response = client.chat.completions.create(
-            model="deepseek-chat",
-            messages=messages,
-            temperature=0.0, # Agent 任务通常需要高确定性
-            max_tokens=1500
-        )
-        return response.choices[0].message.content
-    except Exception as e:
-        return f"[API_ERROR: {e}]"
+    last_err = None
+    for attempt in range(max_retries):
+        t0 = time.time()
+        try:
+            response = client.chat.completions.create(
+                model=model,
+                messages=messages,
+                max_tokens=max_tokens,
+                # 不传 temperature / top_p：deepseek-reasoner 不支持采样参数
+            )
+            msg = response.choices[0].message
+
+            usage = None
+            if getattr(response, "usage", None) is not None:
+                u = response.usage
+                details = getattr(u, "completion_tokens_details", None)
+                usage = {
+                    "prompt_tokens": getattr(u, "prompt_tokens", None),
+                    "completion_tokens": getattr(u, "completion_tokens", None),  # 含 reasoning
+                    "reasoning_tokens": getattr(details, "reasoning_tokens", None) if details else None,
+                }
+
+            return APIResult(
+                content=msg.content or "",
+                reasoning=getattr(msg, "reasoning_content", "") or "",
+                usage=usage,
+                latency=time.time() - t0,
+            )
+        except Exception as e:
+            last_err = e
+            if attempt < max_retries - 1:
+                time.sleep(retry_backoff * (attempt + 1))  # 线性退避，应对限流/瞬时错误
+
+    return APIResult(f"[API_ERROR: {last_err}]", error=str(last_err))
 
 
 def call_gpt4o_api(prompt_or_messages):
