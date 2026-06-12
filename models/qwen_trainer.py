@@ -228,9 +228,17 @@ class QwenDistillTrainer:
 
         # self.simplest_test()
 
-        # 开始训练
+        # 开始训练 (output_dir 里已有 checkpoint 时自动续训，Colab 断线重跑不从头开始；
+        # 配置 resume_from_checkpoint: false 可强制从头)
+        last_ckpt = None
+        if self.config['training'].get('resume_from_checkpoint', True):
+            from transformers.trainer_utils import get_last_checkpoint
+            if os.path.isdir(training_args.output_dir):
+                last_ckpt = get_last_checkpoint(training_args.output_dir)
+            if last_ckpt:
+                print(f"Resuming from checkpoint: {last_ckpt}")
         print("Starting training...")
-        trainer.train()
+        trainer.train(resume_from_checkpoint=last_ckpt)
         
         # 保存最终模型
         final_output_dir = os.path.join(self.config['training']['output_dir'], "final_model")

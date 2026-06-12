@@ -1,0 +1,106 @@
+{
+  "hitab": {
+    "basic": {
+      "n": 89,
+      "task_accuracy": 0.02247191011235955,
+      "avg_output_tokens": 767.5280898876405,
+      "avg_tool_calls": 0.0
+    },
+    "cot": {
+      "n": 89,
+      "task_accuracy": 0.07865168539325842,
+      "avg_output_tokens": 393.87640449438203,
+      "avg_tool_calls": 0.0
+    },
+    "agent": {
+      "n": 89,
+      "task_accuracy": 0.5056179775280899,
+      "avg_output_tokens": 725.5393258426966,
+      "avg_tool_calls": 2.5168539325842696
+    },
+    "mixed": {
+      "n": 89,
+      "task_accuracy": 0.7303370786516854,
+      "avg_output_tokens": 614.6179775280899,
+      "avg_tool_calls": 1.8651685393258426
+    }
+  },
+  "fetaqa": {
+    "basic": {
+      "n": 89,
+      "task_accuracy": 0.5842696629213483,
+      "avg_output_tokens": 718.5842696629213,
+      "avg_tool_calls": 0.0
+    },
+    "cot": {
+      "n": 89,
+      "task_accuracy": 0.8539325842696629,
+      "avg_output_tokens": 305.438202247191,
+      "avg_tool_calls": 0.0
+    },
+    "agent": {
+      "n": 89,
+      "task_accuracy": 0.6629213483146067,
+      "avg_output_tokens": 618.0449438202247,
+      "avg_tool_calls": 3.606741573033708
+    },
+    "mixed": {
+      "n": 89,
+      "task_accuracy": 0.8089887640449438,
+      "avg_output_tokens": 430.87640449438203,
+      "avg_tool_calls": 2.0
+    }
+  },
+  "tabfact": {
+    "basic": {
+      "n": 95,
+      "task_accuracy": 0.7263157894736842,
+      "avg_output_tokens": 756.7473684210527,
+      "avg_tool_calls": 0.0
+    },
+    "cot": {
+      "n": 95,
+      "task_accuracy": 0.7368421052631579,
+      "avg_output_tokens": 275.5157894736842,
+      "avg_tool_calls": 0.0
+    },
+    "agent": {
+      "n": 95,
+      "task_accuracy": 0.7789473684210526,
+      "avg_output_tokens": 1032.0736842105264,
+      "avg_tool_calls": 4.08421052631579
+    },
+    "mixed": {
+      "n": 95,
+      "task_accuracy": 0.8210526315789474,
+      "avg_output_tokens": 816.2526315789473,
+      "avg_tool_calls": 3.136842105263158
+    }
+  },
+  "wikitableqa": {
+    "basic": {
+      "n": 91,
+      "task_accuracy": 0.3956043956043956,
+      "avg_output_tokens": 661.6923076923077,
+      "avg_tool_calls": 0.0
+    },
+    "cot": {
+      "n": 91,
+      "task_accuracy": 0.5824175824175825,
+      "avg_output_tokens": 324.6703296703297,
+      "avg_tool_calls": 0.0
+    },
+    "agent": {
+      "n": 91,
+      "task_accuracy": 0.5164835164835165,
+      "avg_output_tokens": 1025.1538461538462,
+      "avg_tool_calls": 3.010989010989011
+    },
+    "mixed": {
+      "n": 91,
+      "task_accuracy": 0.6373626373626373,
+      "avg_output_tokens": 933.4835164835165,
+      "avg_tool_calls": 2.098901098901099
+    }
+  }
+}
