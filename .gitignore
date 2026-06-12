@@ -18,6 +18,4 @@ outputs/models_qwen3-4b_v3
 # 排除本地下载的数据集
 local_datasets/
 
-# 排除notebook文件
-
-*.ipynb
+CLAUDE.md
