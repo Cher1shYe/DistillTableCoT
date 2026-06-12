@@ -19,8 +19,13 @@
 输入评估集 = scripts/build_route_sft.py 产出的 jsonl (含 input/oracle_path/reference/paths_correct)，
 通常用 test 版 (v1)。
 
-⚠️ MVP 简化: 不真执行 SQL (学生 SQL 能力弱、且真执行需 agent loop)，
-   SQL 路径直接取学生生成的 <ANSWER>。真执行版留作后续 (--exec_sql TODO)。
+SQL 真执行 (--exec_sql)：
+    默认不执行 (沿用 MVP 简化，SQL 路径直接取学生生成的 <ANSWER>，模型在脑内编执行结果)。
+    加 --exec_sql 后改为：生成到 </SQL> 截停 → 在该题的 SQLite 表上真执行
+    (复用 utils.table_to_sqlite/execute_sql，与 teacher 数据生成同一套) →
+    把真实结果注入 <EXECUTION_RESULT> → 模型续写 <ANSWER>。
+    表数据按 task+id 从原数据集加载 (--exec_split 对应评估集的 split，v1=test)。
+    此时 tool_calls = 实际执行次数 (0/1)，而非"是否选了 SQL 路径"。
 
 用法:
     # LoRA adapter (训练产物 final_model 里有 adapter_config.json → 自动识别)
@@ -173,12 +178,14 @@ def load_train_priors(train_files):
 
 
 @torch.no_grad()
-def generate(model, tokenizer, prompt_text, max_new_tokens):
+def generate(model, tokenizer, prompt_text, max_new_tokens, stop_strings=None):
     inputs = tokenizer(prompt_text, return_tensors="pt", add_special_tokens=False).to(model.device)
+    extra = {"stop_strings": stop_strings, "tokenizer": tokenizer} if stop_strings else {}
     out = model.generate(
         **inputs, max_new_tokens=max_new_tokens,
         do_sample=False,                          # 贪心，评估可复现
         pad_token_id=tokenizer.pad_token_id,
+        **extra,
     )
     gen_ids = out[0][inputs["input_ids"].shape[1]:]
     n_out = int((gen_ids != tokenizer.pad_token_id).sum().item())
@@ -186,34 +193,103 @@ def generate(model, tokenizer, prompt_text, max_new_tokens):
     return text, n_out
 
 
+def load_tables(task, split, ids):
+    """按 run_teacher_evaluate 同样的方式加载原数据集，返回 id->raw_table (id=样本序号)。"""
+    from datasets import load_dataset
+    from configs import TASK_CONFIGS
+    ds = load_dataset(TASK_CONFIGS[task]["dataset_name"], split=split)
+    max_id = max(ids)
+    tables = {}
+    for i, sample in enumerate(ds):
+        if i in ids:
+            tables[i] = (sample.get("table") or sample.get("table_content")
+                         or sample.get("table_text"))
+        if i >= max_id:
+            break
+    return tables
+
+
+def exec_sql_and_continue(model, tokenizer, prompt_text, gen_head,
+                          raw_table, task, max_new_tokens):
+    """对截停在 </SQL> 的生成结果真执行 SQL，把结果注入 <EXECUTION_RESULT> 后续写。
+
+    返回 (assembled_text, n_continue_tokens, tool_calls)。
+    """
+    from utils import table_to_sqlite, execute_sql
+
+    m = re.search(r"<SQL>\s*(.*?)\s*</SQL>", gen_head, re.DOTALL | re.IGNORECASE)
+    sql = m.group(1).strip() if m else None
+    tool_calls = 0
+    if sql is None:
+        feedback = "SQL Error: no <SQL> block found."
+    elif raw_table is None:
+        feedback = "SQL Error: table unavailable."
+    else:
+        conn, _ = table_to_sqlite(raw_table, task_name=task)
+        if conn is None:
+            feedback = "SQL Error: failed to build database."
+        else:
+            tool_calls = 1
+            _, feedback = execute_sql(conn, sql)
+            conn.close()
+
+    # 截到 </SQL> 为止，丢掉模型可能已经"脑补"的执行结果
+    end = gen_head.lower().find("</sql>")
+    head = gen_head[:end + len("</SQL>")] if end >= 0 else gen_head
+    ctx = head + f"\n<EXECUTION_RESULT>\n{feedback}\n</EXECUTION_RESULT>\n"
+    cont, n_cont = generate(model, tokenizer, prompt_text + ctx, max_new_tokens)
+    return ctx + cont, n_cont, tool_calls
+
+
 def mean(xs):
     return sum(xs) / len(xs) if xs else 0.0
 
 
 def evaluate(model, tokenizer, samples, max_new_tokens,
-             route_mode="free", route_temperature=1.0, priors=None):
+             route_mode="free", route_temperature=1.0, priors=None,
+             exec_sql=False, tables=None):
     """逐样本生成 + 解析 + 判对，返回 per-sample 明细。
 
     route_mode != free 时：先用三次 forward 给路由打分并按模式选路，
     再把 '<ROUTE>X</ROUTE>' 强制作为前缀让模型贪心生成后续轨迹。
+    exec_sql 时：生成在 </SQL> 截停，真执行后注入结果再续写 (见模块 docstring)。
     """
+    stops = ["</SQL>"] if exec_sql else None
     rows = []
     for s in tqdm.tqdm(samples, desc="eval-route"):
         task = s.get("task", "")
         rouge_threshold = 0.3 if task == "fetaqa" else None
+        raw_table = (tables or {}).get(task, {}).get(s.get("id"))
+        real_tc = None  # exec_sql 时的真实执行次数
 
         prompt_text = build_prompt_text(tokenizer, s["input"])
         if route_mode == "free":
-            gen_text, n_out = generate(model, tokenizer, prompt_text, max_new_tokens)
+            gen_text, n_out = generate(model, tokenizer, prompt_text, max_new_tokens,
+                                       stop_strings=stops)
+            if exec_sql and re.search(r"<SQL>", gen_text, re.IGNORECASE):
+                gen_text, n_cont, real_tc = exec_sql_and_continue(
+                    model, tokenizer, prompt_text, gen_text,
+                    raw_table, task, max_new_tokens)
+                n_out += n_cont
+            elif exec_sql:
+                real_tc = 0
             pred_route, pred_answer = parse_output(gen_text)
         else:
             lps = route_logprobs(model, tokenizer, prompt_text)
             log_prior = (priors or {}).get(task)
             pred_route = choose_route(lps, route_mode, route_temperature, log_prior)
             prefix = f"<ROUTE>{ROUTE_NAME[pred_route]}</ROUTE>\n"
-            gen_text, n_gen = generate(model, tokenizer, prompt_text + prefix, max_new_tokens)
-            gen_text = prefix + gen_text
+            gen_text, n_gen = generate(model, tokenizer, prompt_text + prefix,
+                                       max_new_tokens, stop_strings=stops)
             n_out = n_gen + len(tokenizer(prefix, add_special_tokens=False)["input_ids"])
+            if exec_sql and pred_route == "sql":
+                gen_text, n_cont, real_tc = exec_sql_and_continue(
+                    model, tokenizer, prompt_text + prefix, gen_text,
+                    raw_table, task, max_new_tokens)
+                n_out += n_cont
+            elif exec_sql:
+                real_tc = 0
+            gen_text = prefix + gen_text
             _, pred_answer = parse_output(gen_text)
 
         correct = is_match(pred_answer, s.get("reference"), rouge_threshold=rouge_threshold)
@@ -231,7 +307,7 @@ def evaluate(model, tokenizer, samples, max_new_tokens,
             "oracle_path": oracle_path,
             "oracle_solvable": bool(oracle_solvable),
             "output_tokens": n_out,
-            "tool_calls": 1 if pred_route == "sql" else 0,
+            "tool_calls": real_tc if real_tc is not None else (1 if pred_route == "sql" else 0),
             "raw_output": gen_text[:1000],
         })
     return rows
@@ -297,6 +373,10 @@ def main():
                              for t in ("hitab", "fetaqa", "tabfact", "wikitableqa")],
                     help="adjusted 模式用来估计训练先验的 jsonl")
     ap.add_argument("--seed", type=int, default=42, help="sample 模式的随机种子")
+    ap.add_argument("--exec_sql", action="store_true",
+                    help="SQL 路径真执行：</SQL> 截停 → SQLite 执行 → 注入结果 → 续写答案")
+    ap.add_argument("--exec_split", default="test",
+                    help="exec_sql 加载表数据用的 split (评估 v1 文件 → test)")
     args = ap.parse_args()
     random.seed(args.seed)
 
@@ -323,12 +403,21 @@ def main():
         for t, p in priors.items():
             print(f"训练先验 {t}: " + " ".join(f"{r}={math.exp(v):.0%}" for r, v in p.items()))
 
+    tables = None
+    if args.exec_sql:
+        tables = {}
+        for task, samples in by_task.items():
+            ids = {s.get("id") for s in samples}
+            print(f"📊 加载表数据 {task} (split={args.exec_split}, n={len(ids)}) ...")
+            tables[task] = load_tables(task, args.exec_split, ids)
+
     all_rows = []
     summaries = []
     for task, samples in by_task.items():
         rows = evaluate(model, tokenizer, samples, args.max_new_tokens,
                         route_mode=args.route_mode,
-                        route_temperature=args.route_temperature, priors=priors)
+                        route_temperature=args.route_temperature, priors=priors,
+                        exec_sql=args.exec_sql, tables=tables)
         summaries.append(report(rows, f"task={task}"))
         all_rows.extend(rows)
 
