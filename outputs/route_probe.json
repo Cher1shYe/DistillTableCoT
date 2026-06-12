@@ -1,0 +1,4370 @@
+[
+ {
+  "id": 0,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17480145166189232,
+   "cot": -2.4248788302788853,
+   "sql": -2.683262911202746
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 1,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18415183833985793,
+   "cot": -2.4342284123667923,
+   "sql": -2.565868051529833
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 2,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18394294080292184,
+   "cot": -2.4340105002752352,
+   "sql": -2.565652210517783
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 3,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20599589936000484,
+   "cot": -2.3310946145193157,
+   "sql": -2.4626017154350848
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 4,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1948467639658702,
+   "cot": -2.3198899017525036,
+   "sql": -2.5803046680493935
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 5,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2394135430786264,
+   "cot": -1.9894484259384626,
+   "sql": -2.621634897259355
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 6,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2082694913119667,
+   "cot": -2.2083092913544533,
+   "sql": -2.5920170308036177
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 7,
+  "task": "hitab",
+  "oracle_path": "sql",
+  "logprob": {
+   "direct": -0.19481827294748655,
+   "cot": -2.3198537816770113,
+   "sql": -2.57879020436485
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 8,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.21442203097808488,
+   "cot": -2.089462635711243,
+   "sql": -2.7210789394121093
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 9,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.230810567016988,
+   "cot": -1.9808410393325175,
+   "sql": -2.736791196030026
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 10,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2396241717679004,
+   "cot": -1.9896690826954,
+   "sql": -2.620960717811613
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 11,
+  "task": "hitab",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.1912081089271851,
+   "cot": -2.1912554486789304,
+   "sql": -2.8242665199995827
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 12,
+  "task": "hitab",
+  "oracle_path": "sql",
+  "logprob": {
+   "direct": -0.19103337785645635,
+   "cot": -2.191075204450499,
+   "sql": -2.823358920949431
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 13,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18305112383382038,
+   "cot": -2.4331270421689624,
+   "sql": -2.5654216311822893
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 14,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20486685595392373,
+   "cot": -2.3299175482579813,
+   "sql": -2.4602125623214306
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 15,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20507501019437768,
+   "cot": -2.33013152847343,
+   "sql": -2.460608143835998
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 16,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18296518855981958,
+   "cot": -2.4330240462586517,
+   "sql": -2.5660077084758086
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 17,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18275795722593102,
+   "cot": -2.557824011782941,
+   "sql": -2.4425074899045285
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 18,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1723614904118449,
+   "cot": -2.5474365893405775,
+   "sql": -2.554621491677608
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 19,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.15413924715130634,
+   "cot": -2.6542489432376897,
+   "sql": -2.6619350024393498
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 20,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1540248667593005,
+   "cot": -2.6541104253801677,
+   "sql": -2.6606028050910027
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 21,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.27176195115339397,
+   "cot": -2.146831387977727,
+   "sql": -2.1635876308464503
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 22,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24368686609477663,
+   "cot": -2.243756168787513,
+   "sql": -2.257116882214177
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 23,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.19100594176939012,
+   "cot": -2.1910583923745435,
+   "sql": -2.8194482511025853
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 26,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.21702474298990637,
+   "cot": -2.342099186148971,
+   "sql": -2.3473797253313933
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 27,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2056551121954726,
+   "cot": -2.4557139848511724,
+   "sql": -2.33701430893052
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 28,
+  "task": "hitab",
+  "oracle_path": "sql",
+  "logprob": {
+   "direct": -0.19902826779798488,
+   "cot": -2.199095484558711,
+   "sql": -2.70433611124281
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 31,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17445005412423598,
+   "cot": -2.4244890197951463,
+   "sql": -2.682149946984282
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 32,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18376721372669635,
+   "cot": -2.433818218995839,
+   "sql": -2.5675082730695067
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 33,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.14763438648537885,
+   "cot": -2.522685048979838,
+   "sql": -2.9017501752223325
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 34,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1956000882086073,
+   "cot": -2.320712674929382,
+   "sql": -2.577461953729653
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 35,
+  "task": "hitab",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.18373753093601408,
+   "cot": -2.4337940193991017,
+   "sql": -2.5631956282204555
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 36,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1662828323460417,
+   "cot": -2.4163594212741373,
+   "sql": -2.79608275341252
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 37,
+  "task": "hitab",
+  "oracle_path": "sql",
+  "logprob": {
+   "direct": -0.2453979100696415,
+   "cot": -2.1204651565831227,
+   "sql": -2.3766849907742653
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 38,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1863284405774266,
+   "cot": -2.31140541692821,
+   "sql": -2.6913714531337973
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 39,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.186783358148773,
+   "cot": -2.3118606771613486,
+   "sql": -2.69280558747505
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 40,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20892435288828892,
+   "cot": -2.2089929553621914,
+   "sql": -2.591057298472151
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 41,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17573276027178508,
+   "cot": -2.425843111795075,
+   "sql": -2.6870704251878124
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 42,
+  "task": "hitab",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.16638059655315374,
+   "cot": -2.4164262972535653,
+   "sql": -2.7965627948051406
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 43,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17455646178837014,
+   "cot": -2.424607869328611,
+   "sql": -2.679538913700526
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 45,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20948180442610465,
+   "cot": -2.209557409523768,
+   "sql": -2.6028651826145506
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 46,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17273050500557474,
+   "cot": -2.547780869498638,
+   "sql": -2.566352242148241
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 47,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24238835202368136,
+   "cot": -2.2424253208682785,
+   "sql": -2.263746935170275
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 48,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20507161263776652,
+   "cot": -2.3301148397422367,
+   "sql": -2.46245840091251
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 49,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1859696781278899,
+   "cot": -2.3110296683335037,
+   "sql": -2.69018973540733
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 51,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.19575237978710902,
+   "cot": -2.3208048303995383,
+   "sql": -2.577256803239834
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 52,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2602362031616394,
+   "cot": -2.010273216711539,
+   "sql": -2.3925942112482517
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 53,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18647087957810982,
+   "cot": -2.3115226000736584,
+   "sql": -2.6927883786738676
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 58,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2084990136320357,
+   "cot": -2.208556887884697,
+   "sql": -2.588583023944011
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 59,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.16625812430197584,
+   "cot": -2.416310545122542,
+   "sql": -2.7967155879778147
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 60,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1660930931547,
+   "cot": -2.4161454394907196,
+   "sql": -2.7960208536114806
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 61,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1744758619905724,
+   "cot": -2.424528118926901,
+   "sql": -2.679696726891052
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 62,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1476356822422531,
+   "cot": -2.5227111536205484,
+   "sql": -2.9015161613842793
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 63,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.14764946591117223,
+   "cot": -2.5227086514696566,
+   "sql": -2.901331425497119
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 64,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1479030089508342,
+   "cot": -2.522969957519308,
+   "sql": -2.901704341506047
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 65,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24865647985598116,
+   "cot": -1.9986999007069244,
+   "sql": -2.5052740170995094
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 66,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2237445408552503,
+   "cot": -2.098822351485069,
+   "sql": -2.6055120606088167
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 67,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.22360306918835704,
+   "cot": -2.0987037360755494,
+   "sql": -2.606842903762299
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 68,
+  "task": "hitab",
+  "oracle_path": "sql",
+  "logprob": {
+   "direct": -0.1960463208561123,
+   "cot": -2.321132415797365,
+   "sql": -2.576654751924252
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 69,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24944804378765184,
+   "cot": -1.9995149326186947,
+   "sql": -2.5054831165234646
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 70,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.23343892099501318,
+   "cot": -2.108497257133422,
+   "sql": -2.48894956226286
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 72,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2236688267298632,
+   "cot": -2.098767035074161,
+   "sql": -2.604469346807491
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 73,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1091133748145694,
+   "cot": -2.8591889058188826,
+   "sql": -3.1126378465887683
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 74,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.164356319599392,
+   "cot": -2.539480676660787,
+   "sql": -2.6708576906430608
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 75,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20711105943109942,
+   "cot": -2.332197661088685,
+   "sql": -2.4659607901476193
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 76,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2589205191951578,
+   "cot": -2.134019487659316,
+   "sql": -2.2689131084389373
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 77,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2741267952842463,
+   "cot": -2.0241937585524283,
+   "sql": -2.283248729247134
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 78,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.09653406427901245,
+   "cot": -3.0965731119058546,
+   "sql": -3.100345479567295
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 79,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.14737507540792194,
+   "cot": -2.52246140891657,
+   "sql": -2.904438515455695
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 80,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.21943090762124484,
+   "cot": -2.219519729291278,
+   "sql": -2.4789406396394043
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 81,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.23088286722281737,
+   "cot": -2.2310085204680945,
+   "sql": -2.3663687640673743
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 82,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.23075646029224117,
+   "cot": -2.230883231093685,
+   "sql": -2.365478999518018
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 83,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.21963013600907288,
+   "cot": -2.2197413369885908,
+   "sql": -2.4770460886375076
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 84,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1960905033824929,
+   "cot": -2.3212156203298946,
+   "sql": -2.580157277894614
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 85,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.19592334266189937,
+   "cot": -2.3210484894116234,
+   "sql": -2.579782683696976
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 86,
+  "task": "hitab",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.20849755287667904,
+   "cot": -2.2085665426675405,
+   "sql": -2.5909632968068763
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 87,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.21945586731726507,
+   "cot": -2.219567291735075,
+   "sql": -2.48183104513555
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 88,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.21931232404176626,
+   "cot": -2.219411009327814,
+   "sql": -2.4809750354343123
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 89,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.21803778032938226,
+   "cot": -2.3431150844480726,
+   "sql": -2.349309393161093
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 90,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18387011882771276,
+   "cot": -2.4339574506411736,
+   "sql": -2.5655586563698307
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 91,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2179139971630093,
+   "cot": -2.3430014779305566,
+   "sql": -2.3492367111985004
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 92,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.12176272151407375,
+   "cot": -2.871859782833326,
+   "sql": -2.8765382917549687
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 93,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.16360239592449943,
+   "cot": -2.5386575435331906,
+   "sql": -2.6721844785024587
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 94,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17417022484494282,
+   "cot": -2.4242182947800757,
+   "sql": -2.6815581823811954
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 95,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.16399951010589575,
+   "cot": -2.5390408002904223,
+   "sql": -2.6704942659644075
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 96,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18370635684505032,
+   "cot": -2.4338318016316407,
+   "sql": -2.5700659199437723
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 97,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.19575937049694403,
+   "cot": -2.3208243818571646,
+   "sql": -2.5828547995097324
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 98,
+  "task": "hitab",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.19572445684821105,
+   "cot": -2.3207766987889045,
+   "sql": -2.582471562831415
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 99,
+  "task": "hitab",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1743013403158784,
+   "cot": -2.424399489274947,
+   "sql": -2.6859870935586514
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 0,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.06732956056185913,
+   "cot": -3.4424148585630974,
+   "sql": -3.445395513593212
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 1,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.09114638385904072,
+   "cot": -3.0911914066275585,
+   "sql": -3.2199454670374053
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 2,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08083145101932132,
+   "cot": -3.205882903347174,
+   "sql": -3.3332898126959662
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 3,
+  "task": "fetaqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.15161261847993046,
+   "cot": -2.401652567580186,
+   "sql": -3.030529549356743
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "cot"
+ },
+ {
+  "id": 4,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1385807649811568,
+   "cot": -2.638626093215862,
+   "sql": -2.8918445341878396
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 5,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.14587589862412642,
+   "cot": -2.64598438781195,
+   "sql": -2.7747097068649964
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 7,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.13146321392423488,
+   "cot": -2.6315290896745864,
+   "sql": -3.0110766315920046
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "cot"
+ },
+ {
+  "id": 9,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1022581338031614,
+   "cot": -2.977296823806455,
+   "sql": -3.1050033873068514
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 10,
+  "task": "fetaqa",
+  "oracle_path": "sql",
+  "logprob": {
+   "direct": -0.10848902014015493,
+   "cot": -2.9835551566891354,
+   "sql": -2.986634030351297
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 11,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.12226705744842548,
+   "cot": -2.872311707699282,
+   "sql": -2.8752155821134693
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 12,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10871359713962647,
+   "cot": -2.983759744915915,
+   "sql": -2.9869741444354077
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 13,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08820081767544252,
+   "cot": -2.9632315582521187,
+   "sql": -3.465586904297197
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 14,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.11706998618001307,
+   "cot": -2.7421337236401087,
+   "sql": -3.119391824354352
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 16,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.09695532928583361,
+   "cot": -2.971990934920541,
+   "sql": -3.2245641151585005
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 17,
+  "task": "fetaqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.10864423588463978,
+   "cot": -2.983751756627953,
+   "sql": -2.987108521637765
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 18,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10928228215516356,
+   "cot": -2.859316814925478,
+   "sql": -3.1119677531296475
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 19,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.13159596744685587,
+   "cot": -2.631682390170681,
+   "sql": -3.011972353908277
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "cot"
+ },
+ {
+  "id": 20,
+  "task": "fetaqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.10282422056775431,
+   "cot": -2.977932799226892,
+   "sql": -3.1088008565325254
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 21,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1774938085213762,
+   "cot": -2.302519438073432,
+   "sql": -2.8070854239358596
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "cot"
+ },
+ {
+  "id": 22,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.11207251858240852,
+   "cot": -2.7371073939689268,
+   "sql": -3.2410434009839264
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 23,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08534964013682611,
+   "cot": -3.210416663282558,
+   "sql": -3.213086422559172
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 24,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.14623004922987093,
+   "cot": -2.646312463738468,
+   "sql": -2.7782005512135584
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 25,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.12537554026039288,
+   "cot": -2.5004260388977855,
+   "sql": -3.3783945509112527
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "cot"
+ },
+ {
+  "id": 26,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.07644059301219386,
+   "cot": -3.2014764519699384,
+   "sql": -3.454747323430638
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 27,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.07637280300855309,
+   "cot": -3.201457937097075,
+   "sql": -3.4535724365214264
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 28,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1204299723690383,
+   "cot": -2.620458425686593,
+   "sql": -3.2477751255009935
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "cot"
+ },
+ {
+  "id": 31,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08087497281621836,
+   "cot": -3.2059149443412025,
+   "sql": -3.333466950643924
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 33,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.09666342941272887,
+   "cot": -3.096773132992894,
+   "sql": -3.1001644616608246
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 34,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.07584038163463447,
+   "cot": -3.3259365415929096,
+   "sql": -3.328191840284944
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 35,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.12247660597802223,
+   "cot": -2.8726004193490553,
+   "sql": -2.875990157761862
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 36,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10368906616599816,
+   "cot": -2.8537189946173385,
+   "sql": -3.2302922213339116
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 37,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.11522366678696017,
+   "cot": -2.8652698965197487,
+   "sql": -2.9946507952590764
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 38,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.07151168025552579,
+   "cot": -3.3215632070819083,
+   "sql": -3.448237084430275
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 39,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.12291444435118137,
+   "cot": -2.7479801114786824,
+   "sql": -3.0006864857168694
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 40,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08560002344074746,
+   "cot": -3.2106645953917905,
+   "sql": -3.2132167737527197
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 41,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.0908359256818585,
+   "cot": -3.090875383114053,
+   "sql": -3.217991047797568
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 42,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.06339147750628626,
+   "cot": -3.438515387821326,
+   "sql": -3.565467198084889
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 43,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08166876422859559,
+   "cot": -3.0817279722245985,
+   "sql": -3.458716075277607
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 44,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.06779347817928283,
+   "cot": -3.3178522465768765,
+   "sql": -3.5712626396361884
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 45,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10853977953718186,
+   "cot": -2.983599300392598,
+   "sql": -2.9874657642631064
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 46,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1026954434921663,
+   "cot": -2.9777802125026938,
+   "sql": -3.1064810422831215
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 47,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10851507509039493,
+   "cot": -2.983555314807745,
+   "sql": -2.985684181945544
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 48,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.09901774957916132,
+   "cot": -2.849056953685249,
+   "sql": -3.350543637800911
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 49,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10231920863009236,
+   "cot": -2.9773939797405546,
+   "sql": -3.105518218088946
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 50,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18637558762065964,
+   "cot": -2.311428902442458,
+   "sql": -2.691970509852581
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "cot"
+ },
+ {
+  "id": 52,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10400507275448945,
+   "cot": -2.854043703167008,
+   "sql": -3.231490357572511
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 54,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.12258622694139376,
+   "cot": -2.7476324939234473,
+   "sql": -3.0018796277363435
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 55,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17729869357594907,
+   "cot": -2.1773159489275713,
+   "sql": -3.0562574962496
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "cot"
+ },
+ {
+  "id": 56,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.12207098115982262,
+   "cot": -2.8721815266399062,
+   "sql": -2.8778276047378313
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 57,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17024221925476013,
+   "cot": -2.295384395703877,
+   "sql": -2.9252154808746127
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "cot"
+ },
+ {
+  "id": 58,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08205772245150911,
+   "cot": -3.08208500605906,
+   "sql": -3.459912025677113
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 59,
+  "task": "fetaqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.10950484701038476,
+   "cot": -2.8595889678358617,
+   "sql": -3.1133513130876054
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 60,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.06732023603649395,
+   "cot": -3.4423615858786434,
+   "sql": -3.446373572604898
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 61,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.12295676921326049,
+   "cot": -2.748096442645192,
+   "sql": -3.0042979429947536
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 62,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08637107302490676,
+   "cot": -3.336436971177136,
+   "sql": -3.0897827129729194
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 63,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10267428339750495,
+   "cot": -2.977784143461122,
+   "sql": -3.1057884910464963
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 64,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.09200657193059669,
+   "cot": -2.9670571003703117,
+   "sql": -3.343662666964974
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 65,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.16414314581993494,
+   "cot": -2.539302202708768,
+   "sql": -2.671020024262816
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 67,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10939961482586114,
+   "cot": -2.85944437682474,
+   "sql": -3.1131504582895104
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 68,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10271237526671939,
+   "cot": -2.9777358666201508,
+   "sql": -3.106863197561779
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 69,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.13843096604500715,
+   "cot": -2.638571488784237,
+   "sql": -2.8931691176080676
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 70,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.13821101817893577,
+   "cot": -2.6383514216945514,
+   "sql": -2.892905743567553
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 71,
+  "task": "fetaqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.09660703290637684,
+   "cot": -3.0966412825382577,
+   "sql": -3.0989376287707273
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 72,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1091749311226522,
+   "cot": -2.8592190672261495,
+   "sql": -3.1136394843324524
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 73,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.15182830900153022,
+   "cot": -2.401862372390042,
+   "sql": -3.0305467573421083
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "cot"
+ },
+ {
+  "id": 74,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10944264255635971,
+   "cot": -2.859567513850834,
+   "sql": -3.114259539304385
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 75,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.07245229690806809,
+   "cot": -3.197503562971633,
+   "sql": -3.5742463413030237
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 76,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.09090307450549062,
+   "cot": -3.0909384342853627,
+   "sql": -3.219134449984722
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 78,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08637261206445146,
+   "cot": -3.0864314921991536,
+   "sql": -3.340261265656409
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 79,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.09092715569704524,
+   "cot": -3.0910361814403586,
+   "sql": -3.2188104349279456
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 80,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1254517587567534,
+   "cot": -2.6255747898321715,
+   "sql": -3.126991721939703
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "cot"
+ },
+ {
+  "id": 81,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.07648109935217917,
+   "cot": -3.2015475860926017,
+   "sql": -3.4539693250508208
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 82,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.14122487441363774,
+   "cot": -2.516260263827917,
+   "sql": -3.020294097966598
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "cot"
+ },
+ {
+  "id": 83,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10224983356022221,
+   "cot": -2.977324358837677,
+   "sql": -3.104161453239385
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 84,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.07662389863537555,
+   "cot": -3.20165476588204,
+   "sql": -3.4535665428809352
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 85,
+  "task": "fetaqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.07644913610261028,
+   "cot": -3.2015007300092293,
+   "sql": -3.4536909508447025
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 86,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.0922955960490981,
+   "cot": -2.9673604511215217,
+   "sql": -3.3439157718337356
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 87,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08620963743373977,
+   "cot": -3.086274976764571,
+   "sql": -3.3382129791159514
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 88,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.05958777272610405,
+   "cot": -3.5596278746254484,
+   "sql": -3.562090463261711
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 89,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1090981255498491,
+   "cot": -2.859143729441712,
+   "sql": -3.1139854856992315
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 90,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08552058427653719,
+   "cot": -3.2105862961286675,
+   "sql": -3.2136683775131587
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 91,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.09708811943164619,
+   "cot": -2.9721100313140596,
+   "sql": -3.2243955861299582
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 92,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08811030651088458,
+   "cot": -2.9631316596105535,
+   "sql": -3.464967304237689
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 94,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.0862570856641014,
+   "cot": -3.0863556146741757,
+   "sql": -3.339834294974935
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 95,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08612589582054397,
+   "cot": -3.086186400115821,
+   "sql": -3.3390341300723776
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 96,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08618468461872908,
+   "cot": -3.0863648306940377,
+   "sql": -3.3395470792556807
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 97,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.09208159052138853,
+   "cot": -2.967147801561623,
+   "sql": -3.344620433136697
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 98,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.09196233308205137,
+   "cot": -2.9670719994953743,
+   "sql": -3.343347894505996
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 99,
+  "task": "fetaqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10238908600854302,
+   "cot": -2.9775118712727817,
+   "sql": -3.1054342970905964
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 0,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.15329308749983284,
+   "cot": -2.27833306641287,
+   "sql": -3.2792771947638357
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 1,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.15324833768681856,
+   "cot": -2.278299089578013,
+   "sql": -3.2789927285762133
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 2,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.16659030236723993,
+   "cot": -2.166620849168794,
+   "sql": -3.2923080694226883
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 3,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18686218504353747,
+   "cot": -2.0618967997193067,
+   "sql": -3.1876309505655627
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 4,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.1842097627345538,
+   "cot": -2.1842514253753507,
+   "sql": -2.9360106383851416
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 5,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.15336413542331684,
+   "cot": -2.2784162730804383,
+   "sql": -3.2795255542823725
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 6,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1718760420876606,
+   "cot": -2.1719157676548093,
+   "sql": -3.17293063324405
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 7,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.14602239000782902,
+   "cot": -2.3960568854918165,
+   "sql": -3.1469272976019056
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 9,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17091774830055328,
+   "cot": -2.2959644771062813,
+   "sql": -2.922826605797127
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 10,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24338643228111323,
+   "cot": -1.7434260832706059,
+   "sql": -3.245080813532695
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 11,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.2777169641958608,
+   "cot": -1.6527353519313692,
+   "sql": -3.029559093381067
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 12,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.29735934710060974,
+   "cot": -1.547403453332663,
+   "sql": -3.173800256688992
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 13,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.21784660189268834,
+   "cot": -1.8428918108056678,
+   "sql": -3.344310040169148
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 15,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.266405939652941,
+   "cot": -1.6414452777617043,
+   "sql": -3.2673113966748133
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 16,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.271847128526133,
+   "cot": -1.6468698970966216,
+   "sql": -3.1486916090634622
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 17,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2228238430247984,
+   "cot": -1.8478630768358926,
+   "sql": -3.223456775212071
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 18,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.22265781444411914,
+   "cot": -1.8476989257605965,
+   "sql": -3.223965976331783
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 19,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2100049101541117,
+   "cot": -1.9600355612437852,
+   "sql": -3.0883543214640667
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 20,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1869748680446719,
+   "cot": -2.062004327088289,
+   "sql": -3.187916308457716
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 21,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.18712426700267315,
+   "cot": -2.0621470206779122,
+   "sql": -3.1880703204415113
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 22,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.2921575901059441,
+   "cot": -1.6671960342009697,
+   "sql": -2.7951730149379728
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 23,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24368369562716907,
+   "cot": -1.743713974225102,
+   "sql": -3.2452849380933912
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 24,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17206503432521458,
+   "cot": -2.1721110330036026,
+   "sql": -3.1737338620550872
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 25,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20394808042919976,
+   "cot": -1.9539772265311512,
+   "sql": -3.204943156586978
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 26,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.18735097321405192,
+   "cot": -2.06237363748005,
+   "sql": -3.1883531487346772
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 27,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2344122675649487,
+   "cot": -1.8594572530118967,
+   "sql": -2.986060684662334
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 28,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24911205457647156,
+   "cot": -1.7491465798457284,
+   "sql": -3.12600658856627
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 29,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17210088652882405,
+   "cot": -2.1721460805401875,
+   "sql": -3.1739068326514825
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 30,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.23863097992216353,
+   "cot": -1.7386821490549664,
+   "sql": -3.3650481148147264
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 32,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24313707577653076,
+   "cot": -1.743169306380878,
+   "sql": -3.2442840871917724
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 33,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24847869510654164,
+   "cot": -1.7485071409396369,
+   "sql": -3.1243157429858
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 35,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2434447702817124,
+   "cot": -1.7434914096911598,
+   "sql": -3.244955585166281
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 36,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2094486799301194,
+   "cot": -1.959482311202919,
+   "sql": -3.0870395615938833
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 37,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.22227522588536885,
+   "cot": -1.8473072031738411,
+   "sql": -3.223519975763338
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 38,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.22235976082311026,
+   "cot": -1.847388147051788,
+   "sql": -3.223193771194019
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 39,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.21579319166744426,
+   "cot": -1.9658223378201,
+   "sql": -2.9688007752256453
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 40,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.16688182882853653,
+   "cot": -2.1669156537623167,
+   "sql": -3.2928524029898654
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 41,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.24885645477479557,
+   "cot": -1.748885749871988,
+   "sql": -3.125305309826217
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 42,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17208868237457864,
+   "cot": -2.1721271264732422,
+   "sql": -3.1730068241822664
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 43,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.22255739514503148,
+   "cot": -1.847586034622509,
+   "sql": -3.2237695191724924
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 44,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.22270666045778853,
+   "cot": -1.8477274174201739,
+   "sql": -3.223648812765532
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 45,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.2281878731632787,
+   "cot": -1.8532170043490623,
+   "sql": -3.104585258208317
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 46,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.22270673490038462,
+   "cot": -1.847727774986197,
+   "sql": -3.224089967803593
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 47,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.19267863008963104,
+   "cot": -2.0677014583116033,
+   "sql": -3.0690909120976357
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 48,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.22825588221030557,
+   "cot": -1.853281258453535,
+   "sql": -3.1048531806454776
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 49,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.22838708735162072,
+   "cot": -1.8534128659030102,
+   "sql": -3.1045259843940585
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 50,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18189829563266358,
+   "cot": -2.056943534412312,
+   "sql": -3.3075176923784966
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 51,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.24875394982473154,
+   "cot": -1.7487888326777465,
+   "sql": -3.124581110148938
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 52,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20934233037587546,
+   "cot": -1.9593881353603138,
+   "sql": -3.085466226249082
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 53,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.27176204306169893,
+   "cot": -1.6467962256219835,
+   "sql": -3.1475648011592057
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 54,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2091456052162357,
+   "cot": -1.959197400161429,
+   "sql": -3.085181768756229
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 55,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1986545023733015,
+   "cot": -1.948705790708118,
+   "sql": -3.324281613031417
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 56,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.24859762171172406,
+   "cot": -1.7486313571816936,
+   "sql": -3.124443764026182
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 57,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20953936828300357,
+   "cot": -1.9595700491945536,
+   "sql": -3.0859592550032175
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 58,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.2434186486661929,
+   "cot": -1.7434567202471953,
+   "sql": -3.2441159407135274
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 59,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20929795466963697,
+   "cot": -1.9593441470660764,
+   "sql": -3.085863908274405
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 60,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.27791532862147506,
+   "cot": -1.6529493322896087,
+   "sql": -3.029665000752175
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 61,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.24886934435699004,
+   "cot": -1.7489026774946979,
+   "sql": -3.1249577965518256
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 62,
+  "task": "tabfact",
+  "oracle_path": "sql",
+  "logprob": {
+   "direct": -0.2281231132656103,
+   "cot": -1.8531500092631177,
+   "sql": -3.104947673413335
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 63,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.2548277376426995,
+   "cot": -1.7548453803319717,
+   "sql": -3.006177100680361
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 64,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.27202445247257856,
+   "cot": -1.6470627772123407,
+   "sql": -3.1483479211401573
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 65,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24909239996441102,
+   "cot": -1.7491282215678439,
+   "sql": -3.1258041433911785
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 66,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.243721693567295,
+   "cot": -1.743755458826854,
+   "sql": -3.2451394192812586
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 67,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.23427090026689257,
+   "cot": -1.859294890653473,
+   "sql": -2.986236768121671
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 68,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.2283299116534181,
+   "cot": -1.8533481354388641,
+   "sql": -3.1048221037344774
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 69,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.27190074299142,
+   "cot": -1.6469254486164573,
+   "sql": -3.148147272537244
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 70,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24305967956456698,
+   "cot": -1.7430840723918664,
+   "sql": -3.243564595521093
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 71,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.19425015097431242,
+   "cot": -1.9442942125097034,
+   "sql": -3.4448008179278986
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 72,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.19876746800809997,
+   "cot": -1.9488024699912785,
+   "sql": -3.324726591747094
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 73,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2178660181707528,
+   "cot": -1.842910765072702,
+   "sql": -3.3439825424093215
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 74,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.19857408073607985,
+   "cot": -1.9486205562707255,
+   "sql": -3.3242315258494273
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 75,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2175333795739789,
+   "cot": -1.8425673237165938,
+   "sql": -3.343690436470297
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 76,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.21316245177558812,
+   "cot": -1.8382033097464046,
+   "sql": -3.4638876636513487
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 77,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.19441513679021227,
+   "cot": -1.9444553838789034,
+   "sql": -3.4448520164610272
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 79,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.2032278771853271,
+   "cot": -1.9532663808849975,
+   "sql": -3.2041086805829764
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 80,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.19907741227598308,
+   "cot": -1.949105619603415,
+   "sql": -3.32517372355278
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 81,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.1822861729028773,
+   "cot": -2.057307362015763,
+   "sql": -3.3079762421998566
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 82,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2040363101091316,
+   "cot": -1.9540523286045755,
+   "sql": -3.204807097266439
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 83,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.22268934525800432,
+   "cot": -1.8477066750460835,
+   "sql": -3.2235169505333943
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 84,
+  "task": "tabfact",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.1821887788728418,
+   "cot": -2.0572142594205616,
+   "sql": -3.307925307133246
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 85,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.22280955299220295,
+   "cot": -1.847831129498445,
+   "sql": -3.2235500404331106
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 86,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.22295263395017173,
+   "cot": -1.8479832403363616,
+   "sql": -3.2238743785210318
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 87,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24351680263407616,
+   "cot": -1.7435389751649382,
+   "sql": -3.244534206096887
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 88,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18227252349379341,
+   "cot": -2.0572963947947756,
+   "sql": -3.3082205300183887
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 89,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2385041847028333,
+   "cot": -1.7385568587314992,
+   "sql": -3.3645551587187583
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 90,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.22785802114844955,
+   "cot": -1.8528984768736336,
+   "sql": -3.103838793579598
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 91,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1482475843595239,
+   "cot": -2.273312804268244,
+   "sql": -3.398848468693359
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 92,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18168051467046098,
+   "cot": -2.056747671721496,
+   "sql": -3.3078388370004177
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 93,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2094301279876163,
+   "cot": -1.9594707475807809,
+   "sql": -3.086569514714938
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 94,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1988300976154278,
+   "cot": -1.948882458751541,
+   "sql": -3.324723913681737
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 95,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20927664554892544,
+   "cot": -1.9593228081157577,
+   "sql": -3.0854667441399215
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 96,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.16195279327621392,
+   "cot": -2.1620175810539877,
+   "sql": -3.412383341653367
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 97,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18177156125693728,
+   "cot": -2.056839105694962,
+   "sql": -3.3079508694281685
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 98,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20913863118175868,
+   "cot": -1.959190724135624,
+   "sql": -3.0854962146313483
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 99,
+  "task": "tabfact",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17190769298304076,
+   "cot": -2.171928643669162,
+   "sql": -3.172703540389193
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 0,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18342512602066563,
+   "cot": -2.183450338177863,
+   "sql": -2.9370246200833208
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 1,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.15842892026057598,
+   "cot": -2.4084963754248747,
+   "sql": -2.9135616094026773
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 2,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.19512778350781446,
+   "cot": -2.320208424842349,
+   "sql": -2.573943928533481
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 4,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.32467063970761956,
+   "cot": -1.5747005903176614,
+   "sql": -2.70480819691511
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 5,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10812045125658187,
+   "cot": -2.9831594169513664,
+   "sql": -2.985243915623414
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 6,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.21580675115319536,
+   "cot": -1.965857696599869,
+   "sql": -2.9682994362779027
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 7,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.14796751575704548,
+   "cot": -2.5230195491622,
+   "sql": -2.9027791798707767
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 9,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1773535731363154,
+   "cot": -2.302377697614247,
+   "sql": -2.8055132424005933
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 10,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.21549179988414835,
+   "cot": -1.965469955483968,
+   "sql": -2.9692681708938835
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 11,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.16989687868090186,
+   "cot": -2.2949422515844162,
+   "sql": -2.9261824795135
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 12,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.22331568374602284,
+   "cot": -2.0983741241379903,
+   "sql": -2.6059453390571434
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 13,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.20555972575857595,
+   "cot": -2.080597752603353,
+   "sql": -2.83374597983493
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 14,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.13094361122057308,
+   "cot": -2.6309666629990716,
+   "sql": -3.0076660533254653
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 15,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.26944970433169146,
+   "cot": -1.769478552372675,
+   "sql": -2.7723457305964985
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 16,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.12271325983101633,
+   "cot": -2.7477754325827846,
+   "sql": -3.002890004276196
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 17,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.16675117081877033,
+   "cot": -2.166799419327617,
+   "sql": -3.2943851587633617
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 18,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18339826127839842,
+   "cot": -2.1834406837051574,
+   "sql": -2.9359936209921216
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 19,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.19613675462846913,
+   "cot": -2.3212062063121266,
+   "sql": -2.5778403153399267
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 20,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.22239179782127394,
+   "cot": -1.9724296309850615,
+   "sql": -2.8499256301638525
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 21,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.16524401608489825,
+   "cot": -2.415294991569226,
+   "sql": -2.7943108531067082
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 22,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1716383090324598,
+   "cot": -2.1716804484194654,
+   "sql": -3.1728822526265503
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 23,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.14097612991008646,
+   "cot": -2.5159981236247404,
+   "sql": -3.0212466669236164
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 24,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10240279808931518,
+   "cot": -2.9774719291363,
+   "sql": -3.109594934836423
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 26,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.20925656308554608,
+   "cot": -1.9593286371350587,
+   "sql": -3.08699920679328
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 27,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.13161691976529255,
+   "cot": -2.6316738105788318,
+   "sql": -3.010246938797536
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 28,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1986242364446298,
+   "cot": -2.0736584636661064,
+   "sql": -2.9514904478028257
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 29,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2222705481049161,
+   "cot": -1.9723074424937295,
+   "sql": -2.851190125346875
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 30,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.05094017076817181,
+   "cot": -5.051317854584795,
+   "sql": -4.077878117507225
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 31,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.11497617246777736,
+   "cot": -2.865032430031988,
+   "sql": -3.006119554068846
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 32,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17710812119594266,
+   "cot": -2.1771396364770226,
+   "sql": -3.054312286307777
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 34,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1516429333414635,
+   "cot": -2.4016709320931113,
+   "sql": -3.0288369302688807
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 35,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24032713239103032,
+   "cot": -1.865380878992255,
+   "sql": -2.868639787916436
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 36,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.29097872805414227,
+   "cot": -1.6659944038256072,
+   "sql": -2.793765567468654
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 38,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.22207648441144556,
+   "cot": -1.972125641895218,
+   "sql": -2.849984446263079
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 39,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.14741109156898347,
+   "cot": -2.5224548552059787,
+   "sql": -2.9003853538006297
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 40,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.20554996873988785,
+   "cot": -2.080592152781719,
+   "sql": -2.833137838987568
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 41,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.12915648342607255,
+   "cot": -2.7542332362527304,
+   "sql": -2.891111020088829
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 43,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17415963012581415,
+   "cot": -2.424234028700994,
+   "sql": -2.6814936049477183
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 44,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1775823828038483,
+   "cot": -2.302615045442508,
+   "sql": -2.8058446844916034
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 45,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.15586880988030316,
+   "cot": -2.530928248708733,
+   "sql": -2.786444334060434
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 47,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.2338866017635155,
+   "cot": -1.8589290241652634,
+   "sql": -2.9855883880882175
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 48,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2036165740225897,
+   "cot": -1.9536764598919945,
+   "sql": -3.2043783130025076
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 49,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.2690200777233258,
+   "cot": -1.7690002896506485,
+   "sql": -2.771442943228976
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 50,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.14083970951787705,
+   "cot": -2.515879628836956,
+   "sql": -3.019271904689049
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 51,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.21511901824214874,
+   "cot": -1.9652028035197873,
+   "sql": -2.969242381899676
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 52,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.09086481068993635,
+   "cot": -3.09093069391929,
+   "sql": -3.21797279042039
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 53,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.14769047200161367,
+   "cot": -2.522716399519595,
+   "sql": -2.900672136170215
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 54,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.11519043428006626,
+   "cot": -2.865219334554695,
+   "sql": -2.9930050953003047
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 55,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10881198792981195,
+   "cot": -2.858856556193132,
+   "sql": -3.110911778776426
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 56,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1961738908944426,
+   "cot": -2.321242806221562,
+   "sql": -2.576357245849067
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 57,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.19850740886795393,
+   "cot": -2.0735418742242473,
+   "sql": -2.9524205018406064
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 58,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1382085216807809,
+   "cot": -2.638242480761619,
+   "sql": -2.8931317386832234
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 59,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.17029701086312343,
+   "cot": -2.2953270658808833,
+   "sql": -2.923385833001703
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 60,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.13850560647688326,
+   "cot": -2.638550398267398,
+   "sql": -2.895061872466613
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 61,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2220653183626382,
+   "cot": -1.9720679111137542,
+   "sql": -2.8543420915189017
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 62,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.14043921073357524,
+   "cot": -2.5154750324418274,
+   "sql": -3.018368118251601
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 64,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.26869329740111425,
+   "cot": -1.7687064400442978,
+   "sql": -2.7722919455509327
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 65,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.12255268520630125,
+   "cot": -2.7475991232895467,
+   "sql": -3.000104489525256
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 67,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.24090170734871208,
+   "cot": -1.865973110780942,
+   "sql": -2.867937267682464
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 68,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.24053814946364582,
+   "cot": -1.865554808609886,
+   "sql": -2.868696305373305
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 69,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08512017668726912,
+   "cot": -3.2101711000070736,
+   "sql": -3.212168257476378
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 70,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1152229647027525,
+   "cot": -2.8653186478027237,
+   "sql": -2.9928642099607714
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 71,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2275003162203575,
+   "cot": -1.852539296548457,
+   "sql": -3.104961081679903
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 72,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.20811151841417086,
+   "cot": -2.2081692139227016,
+   "sql": -2.5874450196324688
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 73,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.19061494630136622,
+   "cot": -2.1906807325958653,
+   "sql": -2.8185421113175835
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 74,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1579237056025704,
+   "cot": -2.2829799556548096,
+   "sql": -3.1615222005329997
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 75,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.2611224581778515,
+   "cot": -1.7611564319358877,
+   "sql": -2.8887572999356053
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 76,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.19463090451881726,
+   "cot": -2.319833732600273,
+   "sql": -2.576942675686041
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 77,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10932561315462408,
+   "cot": -2.859402768297514,
+   "sql": -3.1144442360655376
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 78,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.13128585826416383,
+   "cot": -2.6313338236523123,
+   "sql": -3.0131747847790393
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 79,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.08069511713506472,
+   "cot": -3.3307535353555977,
+   "sql": -3.2087257113412306
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 80,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.25415715390681726,
+   "cot": -1.7541819788252724,
+   "sql": -3.006675275767975
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 81,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.2153451522517571,
+   "cot": -1.9653628843170736,
+   "sql": -2.9674594279949815
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 82,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.18334591210214057,
+   "cot": -2.1833788131552865,
+   "sql": -2.935946521905862
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 83,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.10914260814615773,
+   "cot": -2.859199044530669,
+   "sql": -3.1129905832017357
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 84,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.12935864672908792,
+   "cot": -2.754451148140106,
+   "sql": -2.892310439908215
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 85,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.21557153981439114,
+   "cot": -1.9656129937288824,
+   "sql": -2.9679780554802164
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 86,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.2091520114281593,
+   "cot": -1.959204312241127,
+   "sql": -3.0862692437603982
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 87,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20813581110633095,
+   "cot": -2.2081844768745214,
+   "sql": -2.59203522603093
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 88,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.12523086344799594,
+   "cot": -2.625295398139315,
+   "sql": -3.129058051615175
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 89,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.1634111026495475,
+   "cot": -2.2884695432076114,
+   "sql": -3.041125056493911
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 90,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.21359212594052224,
+   "cot": -2.0886541571526323,
+   "sql": -2.71952530501585
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 91,
+  "task": "wikitableqa",
+  "oracle_path": "sql",
+  "logprob": {
+   "direct": -0.19869587503580988,
+   "cot": -2.1987208041327904,
+   "sql": -2.7018231894626297
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 92,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.16359948777608224,
+   "cot": -2.2886589712866225,
+   "sql": -3.041888888611993
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 93,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.20837356000993168,
+   "cot": -2.2084757014617935,
+   "sql": -2.5874610598493746
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 94,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.24099504888499723,
+   "cot": -1.8660346251585906,
+   "sql": -2.8687847928872543
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "sql"
+ },
+ {
+  "id": 95,
+  "task": "wikitableqa",
+  "oracle_path": "cot",
+  "logprob": {
+   "direct": -0.19225659629205438,
+   "cot": -2.067297335152034,
+   "sql": -3.0697159218889283
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 96,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.170633619160526,
+   "cot": -2.2957110274037404,
+   "sql": -2.930186111927469
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 97,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.07637970770383617,
+   "cot": -3.201425423357705,
+   "sql": -3.4542702216817815
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 98,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.13830368111757707,
+   "cot": -2.6383380868173845,
+   "sql": -2.89417415385833
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ },
+ {
+  "id": 99,
+  "task": "wikitableqa",
+  "oracle_path": "direct",
+  "logprob": {
+   "direct": -0.07612969640547362,
+   "cot": -3.4512150242235293,
+   "sql": -3.2030858903463013
+  },
+  "greedy_route": "direct",
+  "adjusted_route": "direct"
+ }
+]

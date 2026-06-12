@@ -20,7 +20,11 @@ student-oracle 版 (用学生自己跑的三路径) 复用同一脚本，把输�
 
 防塌缩 (--direct_keep_ratio)：
     简单数据集里 direct 可能占 70%+，全喂进去会让 router 退化成"无脑 DIRECT"。
-    用 --direct_keep_ratio 0.5 随机下采样 direct 样本，平衡路径分布。
+    --direct_keep_ratio 0.5 表示只保留 50% 的 direct 题继续用 direct 监督；
+    超出部分的题 **不删除**，改用该题其他答对路径的轨迹做监督 (优先 sql，最稀缺；
+    其次 cot)；若该题只有 direct 答对则无法改挂、仍留 direct。
+    总数据量不变。jsonl 里 oracle_path 仍是真 oracle (评估口径不变)，
+    train_route 是实际监督路径。
 
 输出: outputs/<task>/route_sft_v<version>.jsonl   (每行一个训练样本)
 
@@ -162,7 +166,8 @@ def main():
     ap.add_argument("--files", nargs="*", default=None,
                     help="显式 label=path 覆盖默认文件名，如 direct=... cot=... sql=...")
     ap.add_argument("--direct_keep_ratio", type=float, default=1.0,
-                    help="随机保留 direct 样本的比例 (防塌缩)，默认 1.0 不下采样")
+                    help="保留多少比例的 direct 题继续用 direct 监督；超出部分改挂到"
+                         "该题其他答对的路径 (优先 sql 其次 cot)，不删数据。默认 1.0 不调整")
     ap.add_argument("--max_reasoning_chars", type=int, default=4000,
                     help="截断 cot 的 R1 推理链字符数 (≈1000 token)，0=不截断")
     ap.add_argument("--seed", type=int, default=42)
@@ -225,14 +230,14 @@ def main():
         if inp is None:
             no_input += 1
             continue
-        target = build_target(oracle_path, recs, args.max_reasoning_chars)
 
         samples.append({
             "id": sid,
             "task": args.task,
             "oracle_path": oracle_path,
+            "train_route": oracle_path,     # 实际监督路径，下面可能被改挂
             "input": inp,
-            "target": target,
+            "target": None,                 # 路由确定后统一构建
             # 调试/评估用的元信息（训练时只取 input/target；评估 (e) 用 reference/paths_correct）
             "reference": recs[oracle_path].get("reference"),
             "paths_correct": {l: (l in correct) for l in ("direct", "cot", "sql")},
@@ -240,20 +245,37 @@ def main():
                 "completion_tokens": completion_tokens(recs[oracle_path]),
                 "tool_calls": recs[oracle_path].get("tool_calls") or 0,
             },
+            "_recs": recs,                  # 临时字段，落盘前删除
         })
         route_dist[oracle_path] += 1
 
-    # ---- 可选：下采样 direct 防塌缩 ----
+    # ---- 可选：改挂超额 direct 防塌缩 (不删数据) ----
     if args.direct_keep_ratio < 1.0:
         directs = [s for s in samples if s["oracle_path"] == "direct"]
-        others = [s for s in samples if s["oracle_path"] != "direct"]
         keep_k = int(round(len(directs) * args.direct_keep_ratio))
-        random.shuffle(directs)
-        directs = directs[:keep_k]
-        samples = others + directs
-        random.shuffle(samples)
-        route_dist["direct"] = len(directs)
-        print(f"\n⚖️  下采样 direct: {route_dist['direct']} 条保留 (ratio={args.direct_keep_ratio})")
+        # 可改挂 = 该题还有别的路径答对；挂到当前更稀缺的那条 (动态平衡 sql/cot)
+        movable = [s for s in directs
+                   if s["paths_correct"]["sql"] or s["paths_correct"]["cot"]]
+        random.shuffle(movable)
+        cnt = {r: sum(1 for s in samples if s["oracle_path"] == r) for r in ("sql", "cot")}
+        moved = {"sql": 0, "cot": 0}
+        for s in movable[:max(0, len(directs) - keep_k)]:
+            options = [r for r in ("sql", "cot") if s["paths_correct"][r]]
+            new_route = min(options, key=lambda r: cnt[r])
+            s["train_route"] = new_route
+            cnt[new_route] += 1
+            moved[new_route] += 1
+        stuck = (len(directs) - keep_k) - sum(moved.values())
+        print(f"\n⚖️  改挂超额 direct (ratio={args.direct_keep_ratio}): "
+              f"→sql {moved['sql']} 条, →cot {moved['cot']} 条"
+              + (f", {stuck} 条仅 direct 可解无法改挂" if stuck > 0 else ""))
+
+    # ---- 按最终监督路径构建 target ----
+    route_dist = {"direct": 0, "cot": 0, "sql": 0}
+    for s in samples:
+        s["target"] = build_target(s["train_route"], s.pop("_recs"),
+                                   args.max_reasoning_chars)
+        route_dist[s["train_route"]] += 1
 
     # ---- 落盘 jsonl ----
     out_name = args.out_name or f"route_sft_v{args.version}.jsonl"

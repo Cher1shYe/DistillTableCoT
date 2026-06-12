@@ -33,9 +33,12 @@
 """
 import argparse
 import json
+import math
 import os
+import random
 import re
 import sys
+from collections import Counter, defaultdict
 
 import torch
 import tqdm
@@ -46,6 +49,8 @@ sys.path.insert(0, ROOT)
 from utils_train.eval_utils import is_match
 
 ROUTES = ("direct", "cot", "sql")
+ROUTE_NAME = {"direct": "DIRECT", "cot": "COT", "sql": "SQL"}
+ROUTE_TEXT = {r: f"<ROUTE>{ROUTE_NAME[r]}" for r in ROUTES}
 
 
 def load_model(model_path, base_model, dtype):
@@ -109,6 +114,65 @@ def parse_output(text):
 
 
 @torch.no_grad()
+def route_logprobs(model, tokenizer, prompt_text):
+    """对三个候选路由各做一次 forward，算 '<ROUTE>X' 这段 token 的总 logprob。"""
+    prompt_ids = tokenizer(prompt_text, add_special_tokens=False)["input_ids"]
+    out = {}
+    for r in ROUTES:
+        cand_ids = tokenizer(ROUTE_TEXT[r], add_special_tokens=False)["input_ids"]
+        ids = torch.tensor([prompt_ids + cand_ids], device=model.device)
+        logits = model(ids).logits[0]
+        lp = 0.0
+        for i, tid in enumerate(cand_ids):
+            lp += torch.log_softmax(logits[len(prompt_ids) + i - 1].float(), dim=-1)[tid].item()
+        out[r] = lp
+    return out
+
+
+def choose_route(lps, mode, temperature=1.0, log_prior=None):
+    """根据三路 logprob 选路由。
+
+    greedy   : argmax (模型有逐题判别力时才会分化)
+    sample   : 按概率采样 (温度可调；只随机化路由，执行仍贪心)
+    adjusted : 减去训练先验的 log 频率再 argmax (类不平衡的 logit 校正)
+    """
+    if mode == "adjusted" and log_prior:
+        adj = {r: lps[r] - log_prior.get(r, 0.0) for r in ROUTES}
+        return max(adj, key=adj.get)
+    if mode == "sample":
+        vals = [lps[r] / temperature for r in ROUTES]
+        m = max(vals)
+        ps = [math.exp(v - m) for v in vals]
+        x = random.random() * sum(ps)
+        cum = 0.0
+        for r, p in zip(ROUTES, ps):
+            cum += p
+            if x <= cum:
+                return r
+        return ROUTES[-1]
+    return max(lps, key=lps.get)
+
+
+def load_train_priors(train_files):
+    """从训练 jsonl 估计各任务的路由 log 频率 (adjusted 模式用)。"""
+    cnt = defaultdict(Counter)
+    for fp in train_files:
+        if not os.path.exists(fp):
+            continue
+        with open(fp, encoding="utf-8") as f:
+            for line in f:
+                if line.strip():
+                    s = json.loads(line)
+                    route = s.get("train_route") or s.get("oracle_path")
+                    cnt[s.get("task", "?")][route] += 1
+    priors = {}
+    for task, c in cnt.items():
+        n = sum(c.values())
+        priors[task] = {r: math.log(max(c.get(r, 1), 1) / n) for r in ROUTES}
+    return priors
+
+
+@torch.no_grad()
 def generate(model, tokenizer, prompt_text, max_new_tokens):
     inputs = tokenizer(prompt_text, return_tensors="pt", add_special_tokens=False).to(model.device)
     out = model.generate(
@@ -126,16 +190,31 @@ def mean(xs):
     return sum(xs) / len(xs) if xs else 0.0
 
 
-def evaluate(model, tokenizer, samples, max_new_tokens):
-    """逐样本生成 + 解析 + 判对，返回 per-sample 明细。"""
+def evaluate(model, tokenizer, samples, max_new_tokens,
+             route_mode="free", route_temperature=1.0, priors=None):
+    """逐样本生成 + 解析 + 判对，返回 per-sample 明细。
+
+    route_mode != free 时：先用三次 forward 给路由打分并按模式选路，
+    再把 '<ROUTE>X</ROUTE>' 强制作为前缀让模型贪心生成后续轨迹。
+    """
     rows = []
     for s in tqdm.tqdm(samples, desc="eval-route"):
         task = s.get("task", "")
         rouge_threshold = 0.3 if task == "fetaqa" else None
 
         prompt_text = build_prompt_text(tokenizer, s["input"])
-        gen_text, n_out = generate(model, tokenizer, prompt_text, max_new_tokens)
-        pred_route, pred_answer = parse_output(gen_text)
+        if route_mode == "free":
+            gen_text, n_out = generate(model, tokenizer, prompt_text, max_new_tokens)
+            pred_route, pred_answer = parse_output(gen_text)
+        else:
+            lps = route_logprobs(model, tokenizer, prompt_text)
+            log_prior = (priors or {}).get(task)
+            pred_route = choose_route(lps, route_mode, route_temperature, log_prior)
+            prefix = f"<ROUTE>{ROUTE_NAME[pred_route]}</ROUTE>\n"
+            gen_text, n_gen = generate(model, tokenizer, prompt_text + prefix, max_new_tokens)
+            gen_text = prefix + gen_text
+            n_out = n_gen + len(tokenizer(prefix, add_special_tokens=False)["input_ids"])
+            _, pred_answer = parse_output(gen_text)
 
         correct = is_match(pred_answer, s.get("reference"), rouge_threshold=rouge_threshold)
         oracle_path = s.get("oracle_path")
@@ -207,7 +286,19 @@ def main():
     ap.add_argument("--dtype", default="bfloat16")
     ap.add_argument("--limit", type=int, default=0, help="只评前 N 条 (调试用)，0=全部")
     ap.add_argument("--out_name", default="route_eval.json")
+    ap.add_argument("--route_mode", default="free",
+                    choices=["free", "greedy", "sample", "adjusted"],
+                    help="free=模型自由生成(默认)；其余三种=先给三路打分选路由再强制前缀执行："
+                         "greedy=argmax / sample=按概率采样 / adjusted=减训练先验后argmax")
+    ap.add_argument("--route_temperature", type=float, default=1.0,
+                    help="sample 模式的路由采样温度")
+    ap.add_argument("--train_files", nargs="*",
+                    default=[f"outputs/{t}/route_sft_v2.jsonl"
+                             for t in ("hitab", "fetaqa", "tabfact", "wikitableqa")],
+                    help="adjusted 模式用来估计训练先验的 jsonl")
+    ap.add_argument("--seed", type=int, default=42, help="sample 模式的随机种子")
     args = ap.parse_args()
+    random.seed(args.seed)
 
     # 加载评估样本 (按 task 分组)
     by_task = {}
@@ -226,10 +317,18 @@ def main():
 
     model, tokenizer = load_model(args.model_path, args.base_model, args.dtype)
 
+    priors = None
+    if args.route_mode == "adjusted":
+        priors = load_train_priors(args.train_files)
+        for t, p in priors.items():
+            print(f"训练先验 {t}: " + " ".join(f"{r}={math.exp(v):.0%}" for r, v in p.items()))
+
     all_rows = []
     summaries = []
     for task, samples in by_task.items():
-        rows = evaluate(model, tokenizer, samples, args.max_new_tokens)
+        rows = evaluate(model, tokenizer, samples, args.max_new_tokens,
+                        route_mode=args.route_mode,
+                        route_temperature=args.route_temperature, priors=priors)
         summaries.append(report(rows, f"task={task}"))
         all_rows.extend(rows)
 
