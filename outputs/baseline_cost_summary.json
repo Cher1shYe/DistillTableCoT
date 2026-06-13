@@ -14,7 +14,7 @@
     },
     "agent": {
       "n": 89,
-      "task_accuracy": 0.5056179775280899,
+      "task_accuracy": 0.5168539325842697,
       "avg_output_tokens": 725.5393258426966,
       "avg_tool_calls": 2.5168539325842696
     },
@@ -28,25 +28,25 @@
   "fetaqa": {
     "basic": {
       "n": 89,
-      "task_accuracy": 0.5842696629213483,
+      "task_accuracy": 0.6179775280898876,
       "avg_output_tokens": 718.5842696629213,
       "avg_tool_calls": 0.0
     },
     "cot": {
       "n": 89,
-      "task_accuracy": 0.8539325842696629,
+      "task_accuracy": 0.8764044943820225,
       "avg_output_tokens": 305.438202247191,
       "avg_tool_calls": 0.0
     },
     "agent": {
       "n": 89,
-      "task_accuracy": 0.6629213483146067,
+      "task_accuracy": 0.6853932584269663,
       "avg_output_tokens": 618.0449438202247,
       "avg_tool_calls": 3.606741573033708
     },
     "mixed": {
       "n": 89,
-      "task_accuracy": 0.8089887640449438,
+      "task_accuracy": 0.8539325842696629,
       "avg_output_tokens": 430.87640449438203,
       "avg_tool_calls": 2.0
     }

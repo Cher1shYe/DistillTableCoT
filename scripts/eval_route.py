@@ -51,7 +51,7 @@ import tqdm
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 
-from utils_train.eval_utils import is_match
+from utils_train.route_scoring import score_answer
 
 ROUTES = ("direct", "cot", "sql")
 ROUTE_NAME = {"direct": "DIRECT", "cot": "COT", "sql": "SQL"}
@@ -91,6 +91,23 @@ def load_model(model_path, base_model, dtype):
 def build_prompt_text(tokenizer, user_content):
     """与训练 (RouteSFTDataset) 一致：enable_thinking=False + add_generation_prompt。"""
     msgs = [{"role": "user", "content": user_content}]
+    try:
+        return tokenizer.apply_chat_template(
+            msgs, tokenize=False, add_generation_prompt=True, enable_thinking=False)
+    except TypeError:
+        return tokenizer.apply_chat_template(
+            msgs, tokenize=False, add_generation_prompt=True)
+
+
+# 未微调基座的 direct 对照：用与 teacher direct 同样的指令，让基座"直接作答不推理"，
+# 输入用 route-SFT 完全相同的 input (表格+schema+问题)，保证只有"是否蒸馏"这一个变量。
+BASE_DIRECT_SYSTEM = ("You read tables and answer questions directly, "
+                      "with no explanation or reasoning. Output exactly 'Final Answer: <answer>'.")
+
+
+def build_base_direct_prompt(tokenizer, user_content):
+    msgs = [{"role": "system", "content": BASE_DIRECT_SYSTEM},
+            {"role": "user", "content": user_content}]
     try:
         return tokenizer.apply_chat_template(
             msgs, tokenize=False, add_generation_prompt=True, enable_thinking=False)
@@ -258,9 +275,27 @@ def evaluate(model, tokenizer, samples, max_new_tokens,
     rows = []
     for s in tqdm.tqdm(samples, desc="eval-route"):
         task = s.get("task", "")
-        rouge_threshold = 0.3 if task == "fetaqa" else None
         raw_table = (tables or {}).get(task, {}).get(s.get("id"))
         real_tc = None  # exec_sql 时的真实执行次数
+
+        if route_mode == "base_direct":
+            # 未微调基座 + direct 指令，强制 direct 路径 (零蒸馏对照)
+            prompt_text = build_base_direct_prompt(tokenizer, s["input"])
+            gen_text, n_out = generate(model, tokenizer, prompt_text, max_new_tokens)
+            pred_route = "direct"
+            _, pred_answer = parse_output(gen_text)
+            correct = score_answer(task, pred_answer, s.get("reference"))
+            oracle_path = s.get("oracle_path")
+            pc = s.get("paths_correct", {})
+            rows.append({
+                "id": s.get("id"), "task": task, "pred_route": pred_route,
+                "pred_answer": pred_answer, "reference": s.get("reference"),
+                "correct": bool(correct), "oracle_path": oracle_path,
+                "oracle_solvable": any(pc.get(r) for r in ROUTES),
+                "output_tokens": n_out, "tool_calls": 0,
+                "raw_output": gen_text[:1000],
+            })
+            continue
 
         prompt_text = build_prompt_text(tokenizer, s["input"])
         if route_mode == "free":
@@ -292,7 +327,7 @@ def evaluate(model, tokenizer, samples, max_new_tokens,
             gen_text = prefix + gen_text
             _, pred_answer = parse_output(gen_text)
 
-        correct = is_match(pred_answer, s.get("reference"), rouge_threshold=rouge_threshold)
+        correct = score_answer(task, pred_answer, s.get("reference"))
         oracle_path = s.get("oracle_path")
         pc = s.get("paths_correct", {})
         oracle_solvable = any(pc.get(r) for r in ROUTES)
@@ -363,9 +398,9 @@ def main():
     ap.add_argument("--limit", type=int, default=0, help="只评前 N 条 (调试用)，0=全部")
     ap.add_argument("--out_name", default="route_eval.json")
     ap.add_argument("--route_mode", default="free",
-                    choices=["free", "greedy", "sample", "adjusted"],
-                    help="free=模型自由生成(默认)；其余三种=先给三路打分选路由再强制前缀执行："
-                         "greedy=argmax / sample=按概率采样 / adjusted=减训练先验后argmax")
+                    choices=["free", "greedy", "sample", "adjusted", "base_direct"],
+                    help="free=模型自由生成(默认)；greedy/sample/adjusted=先给三路打分选路由再强制前缀执行；"
+                         "base_direct=未微调基座+direct指令强制走direct (零蒸馏对照，--model_path 传基座)")
     ap.add_argument("--route_temperature", type=float, default=1.0,
                     help="sample 模式的路由采样温度")
     ap.add_argument("--train_files", nargs="*",

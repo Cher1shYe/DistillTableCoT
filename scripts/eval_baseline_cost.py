@@ -22,7 +22,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 
-from utils_train.eval_utils import is_match
+from utils_train.route_scoring import match_processed
 
 TASKS = ["hitab", "fetaqa", "tabfact", "wikitableqa"]
 # mode -> 预测文件名模板
@@ -51,7 +51,6 @@ def count_tokens(tok, text):
 
 def eval_one(tok, preds, eval_ids, task):
     """返回该 baseline 在评估子集上的 (rows, summary)。"""
-    rouge_threshold = 0.3 if task == "fetaqa" else None
     rows = []
     for p in preds:
         if p["id"] not in eval_ids:
@@ -63,8 +62,7 @@ def eval_one(tok, preds, eval_ids, task):
         else:
             n_tok = count_tokens(tok, p.get("prediction", ""))
             tool_calls = 0
-        correct = is_match(p.get("processed_prediction", ""), p.get("reference"),
-                           rouge_threshold=rouge_threshold)
+        correct = match_processed(task, p.get("processed_prediction", ""), p.get("reference"))
         rows.append({"id": p["id"], "correct": bool(correct),
                      "tokens": n_tok, "tool_calls": tool_calls})
     n = len(rows)
