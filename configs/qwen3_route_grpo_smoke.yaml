@@ -1,0 +1,32 @@
+# GRPO smoke test 配置：单任务 + 极小数据/group/步数，几分钟验证全流程(含 SQL 真执行)跑通。
+# 用法:
+#   python3 scripts/train_grpo.py --config configs/qwen3_route_grpo_smoke.yaml \
+#       --output_dir /content/drive/MyDrive/dtc/grpo_smoke
+# 注:为真正触发 SQL 执行路径，建议从 route-SFT 检查点热启动 (下面 sft_adapter_path)。
+#     若还没训 route-SFT，可把 sft_adapter_path 设为 "" 从基座起(管线能跑通，但基座基本不会
+#     写 <SQL>，SQL 执行分支可能不被触发)。
+
+_base_: "qwen3_route_grpo.yaml"
+
+model:
+  # 有 route-SFT 模型就热启动(强烈建议)；没有就改成 "" 从基座起
+  sft_adapter_path: "./outputs/models/Qwen3-1.7B-route-sft/final_model"
+
+data:
+  data_paths:
+    - "outputs/hitab/route_sft_v2.jsonl"   # 只用一个任务
+  max_samples: 16                           # 只取 16 条 prompt
+
+training:
+  batch_size: 4
+  gradient_accumulation_steps: 1
+  max_steps: 4                              # 训 4 步就停
+  save_steps: 4
+  save_total_limit: 1
+  logging_steps: 1
+
+grpo:
+  num_generations: 4                        # 每题采 4 条(够看组内差异，省显存)
+  max_completion_length: 384
+  max_sql_turns: 3
+  exec_sql: true                            # 保留真执行,验证 SQL rollout 这条路

@@ -1,0 +1,74 @@
+# Qwen3-1.7B cost-aware 路由 GRPO 配置 (对应 cost_aware.pdf §6.2)
+# route-SFT 学不出逐题路由 (探针组间差≈0、塌缩成全 Direct)，改用 GRPO 强化学习:
+# 奖励 accuracy 主导 —— 答错=0，答对=correct_reward-token惩罚(实际生成越多扣越多)，
+# 保证"任何答对 > 任何答错"，路由信号来自学生自身可解性，token 只做 tie-break，天然 cost-aware。
+#
+# 建议:先跑完 route-SFT，再用其 final_model 热启动 GRPO (model.sft_adapter_path)。
+# 运行:
+#   pip install "trl>=0.16.0"
+#   python3 scripts/train_grpo.py --config configs/qwen3_route_grpo.yaml
+
+_base_: "train_base.yaml"
+
+model:
+  model_name: "Qwen/Qwen3-1.7B"
+  tokenizer_name: "Qwen/Qwen3-1.7B"
+  local_path: "./origin/Qwen3-1.7B_origin"
+  torch_dtype: "bfloat16"
+  # 强烈建议从 route-SFT 检查点热启动 (已会输出 <ROUTE>/<ANSWER> 格式，GRPO 冷启动才有梯度)。
+  # 留空则从裸基座开始 (收敛更慢，可能需把 format_reward 调到 >0 引导格式)。
+  sft_adapter_path: "./outputs/models/Qwen3-1.7B-route-sft/final_model"
+
+data:
+  dataset_type: "route"
+  # 用 --all_paths 重新生成的多路径数据 (每题 direct/cot/sql 各一条，SQL 为忠实多轮 ReAct)。
+  # 生成: python3 scripts/build_route_sft.py --task <T> --version 2 --all_paths
+  data_paths:
+    - "outputs/wikitableqa/route_sft_v2.jsonl"
+    - "outputs/hitab/route_sft_v2.jsonl"
+    - "outputs/tabfact/route_sft_v2.jsonl"
+    - "outputs/fetaqa/route_sft_v2.jsonl"
+  max_samples: -1                    # >0 可只取前 N 条 prompt 做 smoke test
+
+training:
+  output_dir: "./outputs/models/Qwen3-1.7B-route-grpo/"
+  num_epochs: 1
+  batch_size: 8                      # = 每设备每步的"补全数"；须能被 num_generations 整除
+  gradient_accumulation_steps: 4     # 有效 prompt/优化步 = batch*grad_accum/num_generations
+  learning_rate: 1e-5                # RL 主调参旋钮 (LoRA 1e-6~1e-5，比 SFT 的 2e-4 小很多)
+  warmup_ratio: 0.05
+  logging_steps: 5
+  save_steps: 50
+  save_total_limit: 2
+  bf16: true
+  fp16: false
+  gradient_checkpointing: true
+  optim: "adamw_torch"               # 避免依赖 bitsandbytes；有 bnb 可换 paged_adamw_8bit
+  report_to: "tensorboard"
+  use_lora: true
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+
+grpo:
+  num_generations: 8                 # 每个 prompt 采样组大小 G (组内相对优势)
+  max_prompt_length: 1024            # input 实测最大 ~1618，过长会被左截断
+  max_completion_length: 640         # 够 direct/cot 摘要 + sql 短轨迹；越大越慢
+  temperature: 0.9                   # 采样温度，要够高才有组内多样性
+  beta: 0.04                         # KL 正则系数 (拉住别偏离参考策略太远)
+  # ---- 奖励:accuracy 绝对主导，token 只做惩罚 ----
+  correct_reward: 1.0                # 答对基础分
+  max_token_penalty: 0.3             # 答对时按"实际生成token/token_norm"扣，至多扣这么多。
+                                     # 须 < correct_reward → 答对(哪怕最贵最长)≥0.7 恒 > 答错(0)，
+                                     # 即"错了一切白搭，能答对的 route 永远胜出，不管 token"。
+                                     # 调参:想更狠压 token 就调大 (别超 correct_reward)
+  token_norm: 640                    # token 归一化基准，建议 = max_completion_length
+  format_reward: 0.0                 # 答错但格式合法时的极小分；默认 0 (严格答错归零)。
+                                     # 若 GRPO 冷启动梯度不足可设 0.02 留点信号
+  # ---- SQL 路径多轮真执行 (与教师 sql_agent 一致;经 TRL rollout_func 实现) ----
+  exec_sql: true                     # true=采样时真执行 SQL、注入真实结果再续写 (注入token不计梯度)。
+                                     # false=回退单次生成,SQL 执行结果由模型"脑补"
+  max_sql_turns: 5                   # 多轮上限 (镜像教师 max_turns)
+  max_empty: 2                       # 连续空结果早停 (镜像教师 max_empty)
+  exec_split: "train"                # 加载表数据的 split (GRPO 训 v2=train 数据 → train)
+  use_vllm: false                    # 必须 false:多轮真执行 rollout 用 HF generate (不走 vLLM)

@@ -21,11 +21,14 @@
 
 SQL 真执行 (--exec_sql)：
     默认不执行 (沿用 MVP 简化，SQL 路径直接取学生生成的 <ANSWER>，模型在脑内编执行结果)。
-    加 --exec_sql 后改为：生成到 </SQL> 截停 → 在该题的 SQLite 表上真执行
-    (复用 utils.table_to_sqlite/execute_sql，与 teacher 数据生成同一套) →
-    把真实结果注入 <EXECUTION_RESULT> → 模型续写 <ANSWER>。
+    加 --exec_sql 后改为 **多轮 ReAct 执行，与教师 sql_agent 完全对齐**：
+    每轮生成到 </SQL> 截停 → 在该题 SQLite 表上真执行 (复用 utils.table_to_sqlite/
+    execute_sql，与 teacher 数据生成同一套) → 注入真实 <EXECUTION_RESULT> → 模型续写；
+    若续写又出现新 <SQL> 则再执行一轮，直到模型写出 <ANSWER> 或到 --max_sql_turns
+    (默认 5，连续空结果 2 次早停，均镜像教师 max_turns/max_empty)。
     表数据按 task+id 从原数据集加载 (--exec_split 对应评估集的 split，v1=test)。
-    此时 tool_calls = 实际执行次数 (0/1)，而非"是否选了 SQL 路径"。
+    token 记账与教师一致：output_tokens 只累加**模型各轮生成**的 token，注入的执行结果
+    属于下一轮输入不计；tool_calls = 整条轨迹实际执行 SQL 的次数。
 
 用法:
     # LoRA adapter (训练产物 final_model 里有 adapter_config.json → 自动识别)
@@ -226,36 +229,59 @@ def load_tables(task, split, ids):
     return tables
 
 
-def exec_sql_and_continue(model, tokenizer, prompt_text, gen_head,
-                          raw_table, task, max_new_tokens):
-    """对截停在 </SQL> 的生成结果真执行 SQL，把结果注入 <EXECUTION_RESULT> 后续写。
+def exec_sql_and_continue(model, tokenizer, base_prompt, gen_head,
+                          raw_table, task, max_new_tokens,
+                          max_turns=5, max_empty=2):
+    """多轮 SQL 执行，镜像教师 sql_agent：每轮停在 </SQL> → 真执行 → 注入真实
+    <EXECUTION_RESULT> → 续写；续写又冒出新 <SQL> 就再执行一轮，直到写出 <ANSWER>
+    或到 max_turns (连续空结果 max_empty 次也早停)。
 
-    返回 (assembled_text, n_continue_tokens, tool_calls)。
+    gen_head 是首段 (已停在第一个 </SQL>)。整条轨迹用同一个 SQLite 连接。
+    返回 (assembled_text, n_continue_tokens, tool_calls)：
+      - assembled_text   : 首段之后的全部轨迹 (注入的执行结果 + 各轮续写)；
+      - n_continue_tokens: 只累加**模型续写**的 token (注入结果不计)，与教师 completion 口径一致；
+                           gen_head 自身 token 已在调用处计入，这里不重复。
+      - tool_calls       : 整条轨迹实际执行 SQL 的次数。
     """
     from utils import table_to_sqlite, execute_sql
 
-    m = re.search(r"<SQL>\s*(.*?)\s*</SQL>", gen_head, re.DOTALL | re.IGNORECASE)
-    sql = m.group(1).strip() if m else None
-    tool_calls = 0
-    if sql is None:
-        feedback = "SQL Error: no <SQL> block found."
-    elif raw_table is None:
-        feedback = "SQL Error: table unavailable."
-    else:
+    conn = None
+    if raw_table is not None:
         conn, _ = table_to_sqlite(raw_table, task_name=task)
-        if conn is None:
-            feedback = "SQL Error: failed to build database."
-        else:
-            tool_calls = 1
-            _, feedback = execute_sql(conn, sql)
-            conn.close()
 
-    # 截到 </SQL> 为止，丢掉模型可能已经"脑补"的执行结果
-    end = gen_head.lower().find("</sql>")
-    head = gen_head[:end + len("</SQL>")] if end >= 0 else gen_head
-    ctx = head + f"\n<EXECUTION_RESULT>\n{feedback}\n</EXECUTION_RESULT>\n"
-    cont, n_cont = generate(model, tokenizer, prompt_text + ctx, max_new_tokens)
-    return ctx + cont, n_cont, tool_calls
+    assembled = gen_head      # 首段已停在 </SQL>，无需再截断
+    n_cont_total = 0
+    tool_calls = 0
+    empty_count = 0
+
+    for _ in range(max_turns):
+        # 取轨迹里最后一个 (=最新、尚未执行的) SQL
+        sqls = re.findall(r"<SQL>\s*(.*?)\s*</SQL>", assembled, re.DOTALL | re.IGNORECASE)
+        sql = sqls[-1].strip() if sqls else None
+        if not sql:
+            feedback = "SQL Error: no <SQL> block found."
+        elif conn is None:
+            feedback = "SQL Error: table unavailable."
+        else:
+            tool_calls += 1
+            _, feedback = execute_sql(conn, sql)
+
+        assembled += f"\n<EXECUTION_RESULT>\n{feedback}\n</EXECUTION_RESULT>\n"
+        if "no results" in str(feedback).lower():
+            empty_count += 1
+
+        # 连续空结果到上限 → 不再停在 </SQL>，让模型基于已有结果收尾出 <ANSWER>
+        last_round = empty_count >= max_empty
+        cont, n_cont = generate(model, tokenizer, base_prompt + assembled, max_new_tokens,
+                                stop_strings=None if last_round else ["</SQL>"])
+        n_cont_total += n_cont
+        assembled += cont
+        if last_round or not re.search(r"<SQL>", cont, re.IGNORECASE):
+            break             # 续写没有新 SQL = 已收尾 (<ANSWER>)
+
+    if conn is not None:
+        conn.close()
+    return assembled, n_cont_total, tool_calls
 
 
 def mean(xs):
@@ -264,7 +290,7 @@ def mean(xs):
 
 def evaluate(model, tokenizer, samples, max_new_tokens,
              route_mode="free", route_temperature=1.0, priors=None,
-             exec_sql=False, tables=None):
+             exec_sql=False, tables=None, max_sql_turns=5):
     """逐样本生成 + 解析 + 判对，返回 per-sample 明细。
 
     route_mode != free 时：先用三次 forward 给路由打分并按模式选路，
@@ -304,7 +330,7 @@ def evaluate(model, tokenizer, samples, max_new_tokens,
             if exec_sql and re.search(r"<SQL>", gen_text, re.IGNORECASE):
                 gen_text, n_cont, real_tc = exec_sql_and_continue(
                     model, tokenizer, prompt_text, gen_text,
-                    raw_table, task, max_new_tokens)
+                    raw_table, task, max_new_tokens, max_turns=max_sql_turns)
                 n_out += n_cont
             elif exec_sql:
                 real_tc = 0
@@ -320,7 +346,7 @@ def evaluate(model, tokenizer, samples, max_new_tokens,
             if exec_sql and pred_route == "sql":
                 gen_text, n_cont, real_tc = exec_sql_and_continue(
                     model, tokenizer, prompt_text + prefix, gen_text,
-                    raw_table, task, max_new_tokens)
+                    raw_table, task, max_new_tokens, max_turns=max_sql_turns)
                 n_out += n_cont
             elif exec_sql:
                 real_tc = 0
@@ -409,9 +435,11 @@ def main():
                     help="adjusted 模式用来估计训练先验的 jsonl")
     ap.add_argument("--seed", type=int, default=42, help="sample 模式的随机种子")
     ap.add_argument("--exec_sql", action="store_true",
-                    help="SQL 路径真执行：</SQL> 截停 → SQLite 执行 → 注入结果 → 续写答案")
+                    help="SQL 路径真执行：多轮 </SQL> 截停 → SQLite 执行 → 注入结果 → 续写 (镜像教师)")
     ap.add_argument("--exec_split", default="test",
                     help="exec_sql 加载表数据用的 split (评估 v1 文件 → test)")
+    ap.add_argument("--max_sql_turns", type=int, default=5,
+                    help="exec_sql 多轮执行的最大轮数 (镜像教师 max_turns，默认 5)")
     args = ap.parse_args()
     random.seed(args.seed)
 
@@ -452,7 +480,8 @@ def main():
         rows = evaluate(model, tokenizer, samples, args.max_new_tokens,
                         route_mode=args.route_mode,
                         route_temperature=args.route_temperature, priors=priors,
-                        exec_sql=args.exec_sql, tables=tables)
+                        exec_sql=args.exec_sql, tables=tables,
+                        max_sql_turns=args.max_sql_turns)
         summaries.append(report(rows, f"task={task}"))
         all_rows.extend(rows)
 

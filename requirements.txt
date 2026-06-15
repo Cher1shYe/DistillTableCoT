@@ -18,6 +18,7 @@ accelerate>=0.20.0
 datasets>=2.10.0
 peft>=0.4.0
 bitsandbytes>=0.40.0
+trl>=0.16.0  # GRPO 路由 RL 训练 (scripts/train_grpo.py)
 pyyaml>=6.0
 tqdm>=4.60.0
 numpy>=1.21.0

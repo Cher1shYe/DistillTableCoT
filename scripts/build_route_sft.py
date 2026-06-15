@@ -88,25 +88,39 @@ def extract_final_answer(rec):
     return pp
 
 
+def _sql_in_response(response):
+    """从单轮 response 抽该轮的 SQL action (```sql ... ```)，无则 None。
+
+    教师的 response 字段就是纯 SQL 动作 (无推理散文)，推理在 reasoning 字段里。
+    """
+    m = re.search(r"```sql\s*(.*?)\s*```", response or "", re.DOTALL | re.IGNORECASE)
+    return m.group(1).strip() if m else None
+
+
 def extract_last_sql(turns):
-    """从多轮 turn_details 里取最后一个 ```sql ... ``` 代码块 (最接近最终答案那条)。"""
-    sqls = []
+    """从多轮 turn_details 取最后一个 ```sql``` 代码块 (兜底用)。"""
+    sql = None
     for t in turns:
-        m = re.search(r"```sql\s*(.*?)\s*```", t.get("response", "") or "",
-                      re.DOTALL | re.IGNORECASE)
-        if m:
-            sqls.append(m.group(1).strip())
-    return sqls[-1] if sqls else None
+        s = _sql_in_response(t.get("response"))
+        if s:
+            sql = s
+    return sql
+
+
+def _feedback_from_prompt(prompt):
+    """从单个 prompt 的 'Feedback:' 段抽执行结果 (= 上一轮 SQL 的 observation)，无则 None。"""
+    p = prompt or ""
+    if "Feedback:" in p:
+        return p.split("Feedback:")[-1].split("Check if")[0].strip()
+    return None
 
 
 def extract_last_feedback(turns):
-    """SQL 执行结果存在"下一轮 prompt 的 Feedback: 段"里，取最后一个。"""
+    """最后一个执行结果 (兜底用)。SQL 执行结果存在"下一轮 prompt 的 Feedback: 段"里。"""
     for t in reversed(turns):
-        p = t.get("prompt", "") or ""
-        if "Feedback:" in p:
-            seg = p.split("Feedback:")[-1]
-            seg = seg.split("Check if")[0].strip()
-            return seg
+        fb = _feedback_from_prompt(t.get("prompt"))
+        if fb:
+            return fb
     return None
 
 
@@ -143,15 +157,27 @@ def build_target(oracle_path, recs, max_reasoning_chars=0):
                 f"<REASONING>{reasoning}</REASONING>\n"
                 f"<ANSWER>{ans}</ANSWER>")
 
-    # sql
+    # sql：忠实重建教师的多轮 ReAct 轨迹 (教师怎么走、学生就怎么学，不再只取最后一次)。
+    #   每一轮 = <REASONING>(该轮 R1 思维链) + <SQL>(该轮 response 里的查询)
+    #            + <EXECUTION_RESULT>(该轮 SQL 执行结果，存在下一轮 prompt 的 Feedback 段)
+    #   末尾统一 <ANSWER>。标签沿用 route 格式 (eval_route 真执行就按 <SQL>/</SQL> 截停)。
+    #   reasoning 仍按 max_reasoning_chars 逐轮截断 (R1 思维链太长，1.7B 学不动)。
     s = recs["sql"]
     turns = s.get("turn_details") or []
-    sql = extract_last_sql(turns) or ""
-    feedback = extract_last_feedback(turns)
     ans = extract_final_answer(s)
-    parts = [f"<ROUTE>{name}</ROUTE>", f"<SQL>\n{sql}\n</SQL>"]
-    if feedback:
-        parts.append(f"<EXECUTION_RESULT>\n{feedback}\n</EXECUTION_RESULT>")
+    parts = [f"<ROUTE>{name}</ROUTE>"]
+    for i, t in enumerate(turns):
+        reasoning = (t.get("reasoning") or "").strip()
+        if max_reasoning_chars and len(reasoning) > max_reasoning_chars:
+            reasoning = reasoning[:max_reasoning_chars].rstrip() + " ..."
+        if reasoning:
+            parts.append(f"<REASONING>{reasoning}</REASONING>")
+        sql = _sql_in_response(t.get("response"))
+        if sql:
+            parts.append(f"<SQL>\n{sql}\n</SQL>")
+            obs = _feedback_from_prompt(turns[i + 1].get("prompt")) if i + 1 < len(turns) else None
+            if obs:
+                parts.append(f"<EXECUTION_RESULT>\n{obs}\n</EXECUTION_RESULT>")
     parts.append(f"<ANSWER>{ans}</ANSWER>")
     return "\n".join(parts)
 
@@ -165,8 +191,15 @@ def main():
     ap.add_argument("--output_dir", default="outputs")
     ap.add_argument("--files", nargs="*", default=None,
                     help="显式 label=path 覆盖默认文件名，如 direct=... cot=... sql=...")
+    ap.add_argument("--all_paths", action="store_true",
+                    help="多路径展开:每题对 direct/cot/sql 各出一条训练样本 (SFT 学'会执行三条路'，"
+                         "路由交给 GRPO 选)。开启后不做 oracle 单选/direct_keep_ratio 改挂。"
+                         "⚠️ 同一 id 会有多行，仅用于训练数据 (v2)，勿用于 v1 评估文件。")
+    ap.add_argument("--include_wrong", action="store_true",
+                    help="配合 --all_paths:连教师答错的路径也展开成训练样本 (默认只保留答对的路径，"
+                         "即拒绝采样，不让小模型模仿错误轨迹)。")
     ap.add_argument("--direct_keep_ratio", type=float, default=1.0,
-                    help="保留多少比例的 direct 题继续用 direct 监督；超出部分改挂到"
+                    help="(仅单 oracle 模式) 保留多少比例的 direct 题继续用 direct 监督；超出部分改挂到"
                          "该题其他答对的路径 (优先 sql 其次 cot)，不删数据。默认 1.0 不调整")
     ap.add_argument("--max_reasoning_chars", type=int, default=4000,
                     help="截断 cot 的 R1 推理链字符数 (≈1000 token)，0=不截断")
@@ -231,26 +264,51 @@ def main():
             no_input += 1
             continue
 
-        samples.append({
-            "id": sid,
-            "task": args.task,
-            "oracle_path": oracle_path,
-            "train_route": oracle_path,     # 实际监督路径，下面可能被改挂
-            "input": inp,
-            "target": None,                 # 路由确定后统一构建
-            # 调试/评估用的元信息（训练时只取 input/target；评估 (e) 用 reference/paths_correct）
-            "reference": recs[oracle_path].get("reference"),
-            "paths_correct": {l: (l in correct) for l in ("direct", "cot", "sql")},
-            "oracle_cost": {
-                "completion_tokens": completion_tokens(recs[oracle_path]),
-                "tool_calls": recs[oracle_path].get("tool_calls") or 0,
-            },
-            "_recs": recs,                  # 临时字段，落盘前删除
-        })
-        route_dist[oracle_path] += 1
+        paths_correct = {l: (l in correct) for l in ("direct", "cot", "sql")}
 
-    # ---- 可选：改挂超额 direct 防塌缩 (不删数据) ----
-    if args.direct_keep_ratio < 1.0:
+        if args.all_paths:
+            # 多路径展开：每条路径各出一条样本 (默认只出答对的路径，--include_wrong 则三条全出)。
+            # SFT 学"会执行三条路"，逐题选路交给 GRPO；同一 id 会有多行。
+            emit = ("direct", "cot", "sql") if args.include_wrong else correct
+            for p in emit:
+                samples.append({
+                    "id": sid,
+                    "task": args.task,
+                    "route": p,                 # 这一行训练的路径 (多路径模式主键)
+                    "correct": (p in correct),  # 该路径教师是否答对
+                    "oracle_path": oracle_path,
+                    "input": inp,
+                    "target": None,
+                    "reference": recs[p].get("reference"),
+                    "paths_correct": paths_correct,
+                    "path_cost": {              # 该路径真实成本 (供 GRPO 奖励据真数据定参)
+                        "completion_tokens": completion_tokens(recs[p]),
+                        "tool_calls": recs[p].get("tool_calls") or 0,
+                    },
+                    "_recs": recs,
+                })
+                route_dist[p] += 1
+        else:
+            samples.append({
+                "id": sid,
+                "task": args.task,
+                "oracle_path": oracle_path,
+                "train_route": oracle_path,     # 实际监督路径，下面可能被改挂
+                "input": inp,
+                "target": None,                 # 路由确定后统一构建
+                # 调试/评估用的元信息（训练时只取 input/target；评估 (e) 用 reference/paths_correct）
+                "reference": recs[oracle_path].get("reference"),
+                "paths_correct": paths_correct,
+                "oracle_cost": {
+                    "completion_tokens": completion_tokens(recs[oracle_path]),
+                    "tool_calls": recs[oracle_path].get("tool_calls") or 0,
+                },
+                "_recs": recs,                  # 临时字段，落盘前删除
+            })
+            route_dist[oracle_path] += 1
+
+    # ---- 可选：改挂超额 direct 防塌缩 (不删数据；仅单 oracle 模式) ----
+    if not args.all_paths and args.direct_keep_ratio < 1.0:
         directs = [s for s in samples if s["oracle_path"] == "direct"]
         keep_k = int(round(len(directs) * args.direct_keep_ratio))
         # 可改挂 = 该题还有别的路径答对；挂到当前更稀缺的那条 (动态平衡 sql/cot)
@@ -270,12 +328,12 @@ def main():
               f"→sql {moved['sql']} 条, →cot {moved['cot']} 条"
               + (f", {stuck} 条仅 direct 可解无法改挂" if stuck > 0 else ""))
 
-    # ---- 按最终监督路径构建 target ----
+    # ---- 按最终监督路径构建 target (单 oracle 用 train_route，多路径用 route) ----
     route_dist = {"direct": 0, "cot": 0, "sql": 0}
     for s in samples:
-        s["target"] = build_target(s["train_route"], s.pop("_recs"),
-                                   args.max_reasoning_chars)
-        route_dist[s["train_route"]] += 1
+        path = s.get("train_route") or s.get("route")
+        s["target"] = build_target(path, s.pop("_recs"), args.max_reasoning_chars)
+        route_dist[path] += 1
 
     # ---- 落盘 jsonl ----
     out_name = args.out_name or f"route_sft_v{args.version}.jsonl"
@@ -286,10 +344,16 @@ def main():
 
     # ---- 统计 ----
     total = len(samples)
+    uniq_q = len({s["id"] for s in samples})
     print(f"\n样本数 (共同 id): {n}")
     print(f"  丢弃 (三路全错, 无 oracle): {no_solution}")
     print(f"  丢弃 (sql 缺输入):          {no_input}")
-    print(f"  最终训练样本:               {total}")
+    if args.all_paths:
+        print(f"  模式: 多路径展开 (include_wrong={args.include_wrong})")
+        print(f"  覆盖题数:                   {uniq_q}")
+        print(f"  最终训练样本 (行数):         {total}  (≈{total/uniq_q:.1f} 行/题)" if uniq_q else "  0")
+    else:
+        print(f"  最终训练样本:               {total}")
     print("\n路径(ROUTE)分布：")
     for l in ("direct", "cot", "sql"):
         c = route_dist[l]
