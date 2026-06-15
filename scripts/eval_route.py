@@ -290,11 +290,12 @@ def mean(xs):
 
 def evaluate(model, tokenizer, samples, max_new_tokens,
              route_mode="free", route_temperature=1.0, priors=None,
-             exec_sql=False, tables=None, max_sql_turns=5):
+             exec_sql=False, tables=None, max_sql_turns=5, force_route=None):
     """逐样本生成 + 解析 + 判对，返回 per-sample 明细。
 
     route_mode != free 时：先用三次 forward 给路由打分并按模式选路，
     再把 '<ROUTE>X</ROUTE>' 强制作为前缀让模型贪心生成后续轨迹。
+    force_route 设为 direct/cot/sql 时：跳过路由打分，强制所有题走该路 (oracle 分析用)。
     exec_sql 时：生成在 </SQL> 截停，真执行后注入结果再续写 (见模块 docstring)。
     """
     stops = ["</SQL>"] if exec_sql else None
@@ -324,7 +325,7 @@ def evaluate(model, tokenizer, samples, max_new_tokens,
             continue
 
         prompt_text = build_prompt_text(tokenizer, s["input"])
-        if route_mode == "free":
+        if route_mode == "free" and force_route is None:
             gen_text, n_out = generate(model, tokenizer, prompt_text, max_new_tokens,
                                        stop_strings=stops)
             if exec_sql and re.search(r"<SQL>", gen_text, re.IGNORECASE):
@@ -336,9 +337,12 @@ def evaluate(model, tokenizer, samples, max_new_tokens,
                 real_tc = 0
             pred_route, pred_answer = parse_output(gen_text)
         else:
-            lps = route_logprobs(model, tokenizer, prompt_text)
-            log_prior = (priors or {}).get(task)
-            pred_route = choose_route(lps, route_mode, route_temperature, log_prior)
+            if force_route is not None:
+                pred_route = force_route          # 强制走指定路径 (oracle 分析)
+            else:
+                lps = route_logprobs(model, tokenizer, prompt_text)
+                log_prior = (priors or {}).get(task)
+                pred_route = choose_route(lps, route_mode, route_temperature, log_prior)
             prefix = f"<ROUTE>{ROUTE_NAME[pred_route]}</ROUTE>\n"
             gen_text, n_gen = generate(model, tokenizer, prompt_text + prefix,
                                        max_new_tokens, stop_strings=stops)
@@ -429,6 +433,9 @@ def main():
                          "base_direct=未微调基座+direct指令强制走direct (零蒸馏对照，--model_path 传基座)")
     ap.add_argument("--route_temperature", type=float, default=1.0,
                     help="sample 模式的路由采样温度")
+    ap.add_argument("--force_route", choices=["direct", "cot", "sql"], default=None,
+                    help="强制所有题走指定路径 (oracle 分析):跳过路由打分，直接以 <ROUTE>X> 为前缀生成。"
+                         "配合 --exec_sql 时 sql 路真执行。三条路各跑一次 → scripts/build_student_oracle.py 聚合")
     ap.add_argument("--train_files", nargs="*",
                     default=[f"outputs/{t}/route_sft_v2.jsonl"
                              for t in ("hitab", "fetaqa", "tabfact", "wikitableqa")],
@@ -481,7 +488,7 @@ def main():
                         route_mode=args.route_mode,
                         route_temperature=args.route_temperature, priors=priors,
                         exec_sql=args.exec_sql, tables=tables,
-                        max_sql_turns=args.max_sql_turns)
+                        max_sql_turns=args.max_sql_turns, force_route=args.force_route)
         summaries.append(report(rows, f"task={task}"))
         all_rows.extend(rows)
 
