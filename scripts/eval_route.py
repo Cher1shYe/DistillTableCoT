@@ -384,7 +384,10 @@ def report(rows, title):
         return None
     acc = mean([r["correct"] for r in rows])
     oracle_acc = mean([r["oracle_solvable"] for r in rows])
-    route_acc = mean([r["pred_route"] == r["oracle_path"] for r in rows])
+    # route accuracy 只在"有 oracle 路"的可解题上统计 (no-solution 题 oracle_path=None,
+    # 无正确路可对，纳入会系统性压低)
+    solvable_rows = [r for r in rows if r["oracle_path"] is not None]
+    route_acc = mean([r["pred_route"] == r["oracle_path"] for r in solvable_rows]) if solvable_rows else 0.0
     avg_tok = mean([r["output_tokens"] for r in rows])
     avg_tool = mean([r["tool_calls"] for r in rows])
 
@@ -399,7 +402,7 @@ def report(rows, title):
     print(f"\n===== {title}  (n={n}) =====")
     print(f"  task accuracy        : {acc:.1%}")
     print(f"  oracle 上界 (≥1路对)  : {oracle_acc:.1%}   → oracle gap = {oracle_acc - acc:+.1%}")
-    print(f"  route accuracy       : {route_acc:.1%}")
+    print(f"  route accuracy       : {route_acc:.1%}   (仅可解题 n={len(solvable_rows)})")
     print(f"  avg output tokens    : {avg_tok:.0f}")
     print(f"  avg tool_calls(=SQL) : {avg_tool:.2f}")
     print(f"  路由分布(预测)        : direct={dist['direct']} cot={dist['cot']} sql={dist['sql']} 未解析={n_unparsed}")

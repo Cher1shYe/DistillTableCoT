@@ -1,0 +1,98 @@
+{
+  "fetaqa": {
+    "n": 89,
+    "oracle_accuracy": 0.9775280898876404,
+    "oracle_avg_token": 100.79310344827586,
+    "oracle_route_dist": {
+      "direct": 80,
+      "cot": 5,
+      "sql": 2
+    },
+    "per_path": {
+      "direct": {
+        "acc": 0.898876404494382,
+        "avg_token": 47.38202247191011
+      },
+      "cot": {
+        "acc": 0.8314606741573034,
+        "avg_token": 407.4269662921348
+      },
+      "sql": {
+        "acc": 0.7303370786516854,
+        "avg_token": 1471.6179775280898
+      }
+    }
+  },
+  "hitab": {
+    "n": 89,
+    "oracle_accuracy": 0.797752808988764,
+    "oracle_avg_token": 258.056338028169,
+    "oracle_route_dist": {
+      "direct": 52,
+      "cot": 12,
+      "sql": 7
+    },
+    "per_path": {
+      "direct": {
+        "acc": 0.5842696629213483,
+        "avg_token": 20.303370786516854
+      },
+      "cot": {
+        "acc": 0.6067415730337079,
+        "avg_token": 588.1460674157304
+      },
+      "sql": {
+        "acc": 0.6629213483146067,
+        "avg_token": 1874.7078651685392
+      }
+    }
+  },
+  "tabfact": {
+    "n": 95,
+    "oracle_accuracy": 0.9263157894736842,
+    "oracle_avg_token": 382.0568181818182,
+    "oracle_route_dist": {
+      "direct": 55,
+      "cot": 28,
+      "sql": 5
+    },
+    "per_path": {
+      "direct": {
+        "acc": 0.5789473684210527,
+        "avg_token": 18.0
+      },
+      "cot": {
+        "acc": 0.7368421052631579,
+        "avg_token": 753.9052631578948
+      },
+      "sql": {
+        "acc": 0.7684210526315789,
+        "avg_token": 2538.178947368421
+      }
+    }
+  },
+  "wikitableqa": {
+    "n": 91,
+    "oracle_accuracy": 0.7802197802197802,
+    "oracle_avg_token": 450.16901408450707,
+    "oracle_route_dist": {
+      "direct": 40,
+      "cot": 19,
+      "sql": 12
+    },
+    "per_path": {
+      "direct": {
+        "acc": 0.43956043956043955,
+        "avg_token": 19.406593406593405
+      },
+      "cot": {
+        "acc": 0.5274725274725275,
+        "avg_token": 457.42857142857144
+      },
+      "sql": {
+        "acc": 0.5494505494505495,
+        "avg_token": 1693.6813186813188
+      }
+    }
+  }
+}

@@ -198,6 +198,10 @@ def main():
     ap.add_argument("--include_wrong", action="store_true",
                     help="配合 --all_paths:连教师答错的路径也展开成训练样本 (默认只保留答对的路径，"
                          "即拒绝采样，不让小模型模仿错误轨迹)。")
+    ap.add_argument("--keep_unsolved", action="store_true",
+                    help="(仅单 oracle 模式，给 v1 评估文件用) 保留教师三路全错的题：oracle_path=None、"
+                         "paths_correct 全 False、target=None (训练会自动跳过 target=None 的行)。"
+                         "这样评估在完整题集上跑 (含 no-solution)，与 baseline 同分母。勿用于 v2 训练数据。")
     ap.add_argument("--direct_keep_ratio", type=float, default=1.0,
                     help="(仅单 oracle 模式) 保留多少比例的 direct 题继续用 direct 监督；超出部分改挂到"
                          "该题其他答对的路径 (优先 sql 其次 cot)，不删数据。默认 1.0 不调整")
@@ -241,6 +245,7 @@ def main():
     # ---- 逐样本：算 oracle + 构造 SFT 样本 ----
     samples = []
     no_solution = 0          # 三路径全错，无 oracle
+    kept_unsolved = 0        # --keep_unsolved 下保留进评估集的 no-solution 题
     no_input = 0             # sql 路径缺 turn_details，取不到统一输入
     route_dist = {"direct": 0, "cot": 0, "sql": 0}
 
@@ -253,18 +258,38 @@ def main():
             if is_match(r.get("processed_prediction", ""), r.get("reference"),
                         rouge_threshold=rouge_threshold):
                 correct.append(l)
+        paths_correct = {l: (l in correct) for l in ("direct", "cot", "sql")}
+        inp = build_input(recs["sql"])
+
         if not correct:
             no_solution += 1
+            # 默认丢弃 (无可信 oracle 标签)；--keep_unsolved 时保留进评估集 (单 oracle 模式)
+            if not (args.keep_unsolved and not args.all_paths):
+                continue
+            if inp is None:
+                no_input += 1
+                continue
+            samples.append({
+                "id": sid,
+                "task": args.task,
+                "oracle_path": None,          # 无解 → 无 oracle 路径 (eval 里 oracle_solvable=False)
+                "train_route": None,          # 不参与训练 (target=None 会被 RouteSFTDataset 跳过)
+                "input": inp,
+                "target": None,
+                "reference": (recs["sql"].get("reference") or recs["cot"].get("reference")
+                              or recs["direct"].get("reference")),
+                "paths_correct": paths_correct,
+                "oracle_cost": None,
+                "_recs": None,                # None → build_target 阶段跳过
+            })
+            kept_unsolved += 1
             continue
 
         oracle_path = min(correct, key=lambda l: (PATH_TIER[l], completion_tokens(recs[l])))
 
-        inp = build_input(recs["sql"])
         if inp is None:
             no_input += 1
             continue
-
-        paths_correct = {l: (l in correct) for l in ("direct", "cot", "sql")}
 
         if args.all_paths:
             # 多路径展开：每条路径各出一条样本 (默认只出答对的路径，--include_wrong 则三条全出)。
@@ -332,7 +357,11 @@ def main():
     route_dist = {"direct": 0, "cot": 0, "sql": 0}
     for s in samples:
         path = s.get("train_route") or s.get("route")
-        s["target"] = build_target(path, s.pop("_recs"), args.max_reasoning_chars)
+        recs = s.pop("_recs")
+        if path is None or recs is None:   # keep_unsolved 的无解题：无监督路径，target 留空
+            s["target"] = None
+            continue
+        s["target"] = build_target(path, recs, args.max_reasoning_chars)
         route_dist[path] += 1
 
     # ---- 落盘 jsonl ----
@@ -346,7 +375,8 @@ def main():
     total = len(samples)
     uniq_q = len({s["id"] for s in samples})
     print(f"\n样本数 (共同 id): {n}")
-    print(f"  丢弃 (三路全错, 无 oracle): {no_solution}")
+    print(f"  三路全错 (no-solution):     {no_solution}"
+          + (f"  → 保留进评估集 {kept_unsolved} 条 (--keep_unsolved)" if args.keep_unsolved else "  (已丢弃)"))
     print(f"  丢弃 (sql 缺输入):          {no_input}")
     if args.all_paths:
         print(f"  模式: 多路径展开 (include_wrong={args.include_wrong})")
@@ -358,8 +388,9 @@ def main():
     for l in ("direct", "cot", "sql"):
         c = route_dist[l]
         print(f"  {l:<6}: {c:>5}  ({c/total:.1%})" if total else f"  {l:<6}: 0")
-    avg_len = sum(len(s["target"]) for s in samples) / total if total else 0
-    print(f"\ntarget 平均字符长度: {avg_len:.0f}")
+    targeted = [s for s in samples if s["target"]]
+    avg_len = sum(len(s["target"]) for s in targeted) / len(targeted) if targeted else 0
+    print(f"\ntarget 平均字符长度: {avg_len:.0f}  (有 target 的样本 {len(targeted)}/{total})")
     print(f"✅ 已保存: {out_path}")
 
 
